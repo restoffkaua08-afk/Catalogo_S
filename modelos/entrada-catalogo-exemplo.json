@@ -1,0 +1,12 @@
+{
+  "id": "H01",
+  "nome": "Nome do Modelo",
+  "tipo": "Frontend",
+  "categoria": "Cabeçalho",
+  "status": "Teste",
+  "versao": "1.0",
+  "caminho": "frontend/H01-Nome-do-Modelo/index.html",
+  "obsidian": "H01 - Nome do Modelo",
+  "descricao": "Descrição curta e objetiva do modelo.",
+  "tags": ["header", "navegação"]
+}
