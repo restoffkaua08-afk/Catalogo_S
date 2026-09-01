@@ -1,0 +1,4 @@
+<style>
+#efeito-a11{width:min(1000px,94vw);height:min(620px,72vh);border-radius:34px;background:#17191e;display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:center;padding:clamp(30px,5vw,70px)}#efeito-a11 .card{height:280px;border-radius:28px;background:linear-gradient(145deg,#20242c,#111318);border:1px solid #ffffff18;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:28px;box-shadow:0 10px 24px #0005}#efeito-a11 b{font:500 28px Georgia,serif}#efeito-a11 span{font-size:11px;color:#9da0a6;margin-top:8px}#efeito-a11 .card{transition:transform .28s ease,box-shadow .28s ease}#efeito-a11 .card:hover{transform:translateY(-14px) scale(1.015);box-shadow:0 32px 65px #000a}
+</style>
+<div id="efeito-a11"><article class="card"><b>Passe o mouse</b><span>card 01</span></article><article class="card"><b>Passe o mouse</b><span>card 02</span></article><article class="card"><b>Passe o mouse</b><span>card 03</span></article></div>

@@ -1,7 +1,0 @@
-<style>
-#efeito-a09{width:min(920px,92vw);height:min(620px,72vh);display:grid;place-items:center;position:relative}
-#efeito-a09 .surface-card{width:min(560px,86vw);min-height:330px;padding:48px;border-radius:30px;display:flex;flex-direction:column;justify-content:center;position:relative}
-#efeito-a09 .surface-card>span{font-size:10px;letter-spacing:.2em;opacity:.7}#efeito-a09 h2{font:500 clamp(32px,5vw,58px)/1 Georgia,serif;margin:14px 0}#efeito-a09 p{max-width:400px;line-height:1.6;opacity:.7}#efeito-a09 button{margin-top:24px;margin-right:8px;padding:11px 16px;border:0;border-radius:12px}
-#efeito-a09 .surface-card{background:#c7b8ff;color:#17131f;border:2px solid #ffffff77;box-shadow:inset 18px 18px 30px #ffffff55,inset -16px -20px 28px #6f5cbf35,0 18px 0 #7566b5,0 42px 65px #0007}#efeito-a09 button{background:#f5f0ff;color:#211b32}
-</style>
-<div id="efeito-a09" class="surface-stage"><div class="surface-card"><span>CLAY</span><h2>Uma superfície com identidade.</h2><p>Observe material, relevo, contorno e resposta à luz.</p><div class="surface-actions"><button>Primário</button><button>Secundário</button></div></div></div>

@@ -1,5 +1,0 @@
-<style>
-#efeito-a109{width:min(1050px,94vw);min-height:540px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(24px,5vw,72px);overflow:hidden;position:relative}#efeito-a109 .type-kicker{font-size:10px;letter-spacing:.25em;color:#757981}#efeito-a109 .type-main{font:500 clamp(58px,9vw,118px)/.88 Georgia,serif;letter-spacing:-.045em;margin:20px 0;max-width:1000px}#efeito-a109 .type-sub{font-size:14px;color:#7d8189;max-width:550px;line-height:1.7}
-#efeito-a109 .type-main{animation:a109 4s ease-in-out infinite alternate;transform-origin:left center}@keyframes a109{0%{transform:skewX(-8deg) scaleX(.88);letter-spacing:-.06em}100%{transform:skewX(4deg) scaleX(1.05);letter-spacing:.01em}}
-</style>
-<div id="efeito-a109" class="type-stage"><span class="type-kicker">TYPOGRAPHY EFFECT</span><h2 class="type-main">Criar impacto com movimento.</h2><p class="type-sub">Uma demonstração tipográfica precisa usar texto real, não formas abstratas.</p></div>

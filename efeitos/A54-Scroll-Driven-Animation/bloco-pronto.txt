@@ -1,8 +1,0 @@
-<style>
-#efeito-a54{width:min(900px,94vw);height:min(660px,76vh);position:relative;border:1px solid #ffffff18;border-radius:24px;overflow:hidden;background:#0b0c0f}#efeito-a54 .scroll-top{height:44px;display:grid;place-items:center;color:#75787f;font-size:10px;letter-spacing:.18em;border-bottom:1px solid #ffffff12}#efeito-a54 .scroll-viewport{height:calc(100% - 44px);overflow-y:auto;scroll-behavior:smooth;position:relative;scroll-snap-type:y proximity}#efeito-a54 .scroll-panel{min-height:100%;padding:56px;display:flex;flex-direction:column;justify-content:center;scroll-snap-align:start;position:relative;overflow:hidden}#efeito-a54 .p1{background:#111318}.p2{background:#18141d}.p3{background:#10191a}#efeito-a54 .scroll-panel span{font-size:12px;color:#8de8ff}#efeito-a54 .scroll-panel h2{font:500 clamp(48px,7vw,82px) Georgia;margin:8px 0}.scroll-progress{position:absolute;left:0;top:44px;width:3px;height:0;background:#8de8ff;z-index:8}
-#efeito-a54 .p2 h2{transform:scale(var(--scale,.6));opacity:var(--alpha,.2)}
-</style>
-<div id="efeito-a54" class="scroll-shell"><div class="scroll-top">ROLE DENTRO DA JANELA</div><div class="scroll-viewport"><section class="scroll-panel p1"><span>01</span><h2>Começo</h2></section><section class="scroll-panel p2"><span>02</span><h2>Movimento</h2></section><section class="scroll-panel p3"><span>03</span><h2>Destino</h2></section></div><div class="scroll-progress"></div></div>
-<script>
-const v=document.querySelector('#efeito-a54 .scroll-viewport');v.addEventListener('scroll',()=>{const max=v.scrollHeight-v.clientHeight,p=Math.min(1,v.scrollTop/max);v.style.setProperty('--scale',(.6+p*.7).toFixed(2));v.style.setProperty('--alpha',(.2+p*.8).toFixed(2))});
-</script>

@@ -1,7 +1,0 @@
-<style>
-#efeito-a110{width:min(1050px,94vw);min-height:540px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(24px,5vw,72px);overflow:hidden;position:relative}#efeito-a110 .type-kicker{font-size:10px;letter-spacing:.25em;color:#757981}#efeito-a110 .type-main{font:500 clamp(58px,9vw,118px)/.88 Georgia,serif;letter-spacing:-.045em;margin:20px 0;max-width:1000px}#efeito-a110 .type-sub{font-size:14px;color:#7d8189;max-width:550px;line-height:1.7}
-</style>
-<div id="efeito-a110" class="type-stage"><span class="type-kicker">TEXT SCRAMBLE</span><h2 class="type-main scramble" data-text="CRIAR IMPACTO">CRIAR IMPACTO</h2><p class="type-sub">O texto se reorganiza até chegar ao conteúdo final.</p></div>
-<script>
-const e=document.querySelector('#efeito-a110 .scramble'),final=e.dataset.text,chars='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';let step=0;const run=()=>{step=0;const t=setInterval(()=>{e.textContent=[...final].map((c,i)=>c===' '?c:(i<step?final[i]:chars[Math.floor(Math.random()*chars.length)])).join('');step+=.6;if(step>final.length){clearInterval(t);e.textContent=final;setTimeout(run,1300)}},55)};run();
-</script>
