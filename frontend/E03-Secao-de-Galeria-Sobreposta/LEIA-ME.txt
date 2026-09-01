@@ -1,0 +1,7 @@
+E03 — Seção de Galeria Sobreposta
+
+Abra index.html diretamente no navegador.
+
+Modelo aprovado com quatro fotografias sobrepostas, preto e branco por padrão e recuperação de cor com elevação suave no hover.
+Os cards 2 e 4 são mais estreitos; o card 2 sobrepõe 1 e 3, e o card 4 sobrepõe o 3.
+O bloco reutilizável usa URLs marcadas para substituição das quatro imagens.
