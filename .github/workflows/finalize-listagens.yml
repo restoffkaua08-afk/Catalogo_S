@@ -1,0 +1,31 @@
+name: Finalizar listagens do Catalogo S
+
+on:
+  push:
+    paths:
+      - '.github/workflows/finalize-listagens.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gerar e validar listagens
+        run: python .github/finalize-listagens.py
+      - name: Publicar resultado e limpar automacao temporaria
+        run: |
+          rm -f .github/finalize-listagens.py .github/workflows/finalize-listagens.yml
+          git config user.name "Catalogo S Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nenhuma alteracao para publicar"
+            exit 0
+          fi
+          git commit -m "Integra quatro listagens de produtos ao Catalogo S"
+          git push
