@@ -16,9 +16,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Aplicar curadoria
-        run: |
-          base64 -d .github/focus-effects.py.gz.b64 | gunzip > /tmp/focus_effects.py
-          python /tmp/focus_effects.py
+        run: python .github/focus-effects.py
       - name: Validar biblioteca ativa
         run: |
           python - <<'PY'
@@ -27,17 +25,18 @@ jobs:
           data=json.load(open(root/'dados/efeitos.json', encoding='utf-8'))
           assert data['quantidade'] == 22
           assert set(x['familia'] for x in data['itens']) == {'Fundos e telas','Ícones','Sombras','Elevação no hover'}
+          dirs=[p for p in (root/'efeitos').iterdir() if p.is_dir()]
+          assert len(dirs) == 22, len(dirs)
           for x in data['itens']:
               p=root/x['caminho']
               assert p.exists(), p
-              for name in ('bloco-pronto.html','bloco-pronto.txt'):
-                  assert (p.parent/name).exists(), (p.parent/name)
-          assert len([p for p in (root/'efeitos').iterdir() if p.is_dir()]) == 22
+              assert (p.parent/'bloco-pronto.html').exists()
+              assert (p.parent/'bloco-pronto.txt').exists()
           print('22 efeitos focados validados')
           PY
       - name: Publicar e limpar infraestrutura temporária
         run: |
-          rm -f .github/focus-effects.py.gz.b64 .github/focus-effects.trigger .github/workflows/focus-effects.yml
+          rm -f .github/focus-effects.py .github/focus-effects.py.gz.b64 .github/focus-effects.trigger .github/workflows/focus-effects.yml
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
