@@ -1,0 +1,7 @@
+I03 — Tela Inicial Central com Fundo Atmosférico
+
+Situação: Candidato
+Categoria: Tela inicial
+Subcategoria: Título central
+
+Título centralizado com imagem destacada e efeito de fundo luminoso/atmosférico.

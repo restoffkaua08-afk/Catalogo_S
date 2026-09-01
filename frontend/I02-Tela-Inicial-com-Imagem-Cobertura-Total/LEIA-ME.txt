@@ -1,0 +1,7 @@
+I02 — Tela Inicial com Imagem Cobertura Total
+
+Situação: Candidato
+Categoria: Tela inicial
+Subcategoria: Imagem em tela cheia
+
+Título à esquerda com imagem cobrindo a tela toda e contraste controlado por overlay.

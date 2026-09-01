@@ -1,0 +1,7 @@
+I05 — Tela Inicial com Mosaico de Destaques
+
+Situação: Candidato
+Categoria: Tela inicial
+Subcategoria: Vitrine / mosaico
+
+Título lateral com mosaico visual do outro lado, útil para divulgação, marketing e prestação de serviço.

@@ -1,0 +1,7 @@
+I01 — Tela Inicial Lateral com Foto Emergindo no Degradê
+
+Situação: Candidato
+Categoria: Tela inicial
+Subcategoria: Esquerda + imagem parcial
+
+Título à esquerda em fundo preto; da metade para a direita um degradê revela uma foto de fundo.

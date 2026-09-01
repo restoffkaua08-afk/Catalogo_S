@@ -1,0 +1,7 @@
+I04 — Tela Inicial Lateral com Ícone Cinético
+
+Situação: Candidato
+Categoria: Tela inicial
+Subcategoria: Texto + elemento visual
+
+Título à esquerda e grande ícone animado à direita com efeito de preenchimento e movimento.
