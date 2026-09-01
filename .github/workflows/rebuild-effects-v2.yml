@@ -1,0 +1,55 @@
+name: Rebuild contextual effects v2
+
+on:
+  push:
+    paths:
+      - '.tmp-effects-v2/trigger.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reconstruct generator
+        shell: bash
+        run: |
+          cat .tmp-effects-v2/part00.txt .tmp-effects-v2/part01.txt .tmp-effects-v2/part02.txt .tmp-effects-v2/part03.txt | base64 -d | gzip -d > /tmp/rebuild_effects_v2.py
+          python -m py_compile /tmp/rebuild_effects_v2.py
+      - name: Rebuild curated contextual library
+        run: python /tmp/rebuild_effects_v2.py
+      - name: Validate result
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+          data=json.loads(Path('dados/efeitos.json').read_text())
+          assert data['quantidade']==75, data['quantidade']
+          assert len(data['itens'])==75
+          for item in data['itens']:
+              d=Path(item['caminho']).parent
+              assert (d/'index.html').exists(), item['id']
+              assert (d/'bloco-pronto.html').exists(), item['id']
+              assert (d/'bloco-pronto.txt').exists(), item['id']
+              text=(d/'index.html').read_text()
+              assert '#030304' in text
+              assert 'Copiar código' in text
+          archived=json.loads(Path('dados/efeitos-arquivados.json').read_text())
+          assert archived['quantidade']==69
+          print('validated', len(data['itens']), 'active and', archived['quantidade'], 'archived')
+          PY
+      - name: Commit rebuilt library and remove temporary infrastructure
+        shell: bash
+        run: |
+          rm -rf .tmp-effects-v2
+          rm -f .github/workflows/rebuild-effects-v2.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Refatora biblioteca de efeitos com demonstrações contextuais"
+          git push
