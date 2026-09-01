@@ -61,6 +61,16 @@ Os registros operacionais da biblioteca ficam em:
 
 O padrão visual e as regras de validação estão documentados em `documentacao/PADRAO-VISUAL-DOS-EFEITOS.md`.
 
+## Subfiltros dos efeitos
+
+Ao clicar no filtro principal `Efeitos`, a interface mostra abaixo dele botões com as famílias já registradas nos próprios efeitos.
+
+Esses botões são gerados automaticamente a partir do campo `familia` de `dados/efeitos.js`. Assim, as categorias exibidas sempre acompanham a organização real da biblioteca e não precisam ser duplicadas manualmente no `index.html`.
+
+Ao selecionar uma família, somente os efeitos daquela categoria são exibidos. Clicar novamente na mesma família remove o subfiltro e volta a mostrar todos os efeitos.
+
+Ao sair do filtro `Efeitos`, os subfiltros são ocultados automaticamente.
+
 ## Regra de aprovação
 
 A existência de um arquivo ou demonstração no repositório não significa aprovação.
