@@ -1,0 +1,21 @@
+<style>
+#pesquisa-p03-cena{width:min(980px,94vw);height:min(560px,72vh);position:relative;overflow:hidden;border-radius:34px;background:#090b10;isolation:isolate;font-family:Arial,Helvetica,sans-serif}
+#pesquisa-p03-cena .orb{position:absolute;border-radius:50%;filter:blur(8px);opacity:.92}
+#pesquisa-p03-cena .orb-a{width:300px;height:300px;background:#4b7dff;left:-60px;top:-80px}
+#pesquisa-p03-cena .orb-b{width:250px;height:250px;background:#8f5cff;right:40px;bottom:-70px}
+#pesquisa-p03-cena .orb-c{width:180px;height:180px;background:#2fd4bd;right:28%;top:12%}
+#pesquisa-p03{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,84%);display:flex;align-items:center;gap:14px;padding:17px 19px;border-radius:20px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.26);box-shadow:0 24px 70px rgba(0,0,0,.38),inset 0 1px rgba(255,255,255,.32);backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35)}
+#pesquisa-p03 svg{width:23px;height:23px;stroke:#f0f2f6;flex:0 0 auto}
+#pesquisa-p03 input{width:100%;min-width:0;border:0;outline:0;background:transparent;color:#fff;font:500 16px/1.2 Arial,sans-serif}
+#pesquisa-p03 input::placeholder{color:rgba(255,255,255,.66)}
+#pesquisa-p03 .shortcut{flex:0 0 auto;padding:6px 9px;border-radius:8px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);color:#e4e7ec;font-size:10px}
+@media(max-width:560px){#pesquisa-p03 .shortcut{display:none}}
+</style>
+<div id="pesquisa-p03-cena">
+  <div class="orb orb-a"></div><div class="orb orb-b"></div><div class="orb orb-c"></div>
+  <label id="pesquisa-p03">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.7" aria-hidden="true"><circle cx="11" cy="11" r="6.8"></circle><path d="m16 16 4.2 4.2"></path></svg>
+    <input type="search" placeholder="Pesquisar no site" aria-label="Pesquisar">
+    <span class="shortcut">CTRL K</span>
+  </label>
+</div>
