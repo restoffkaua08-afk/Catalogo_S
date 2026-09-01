@@ -1,0 +1,8 @@
+L04 — Grade Editorial com Filtros em Drawer
+
+Situação: Candidato
+Categoria: Listagem de produtos / PLP
+Origem: Catálogo S
+Natureza: modelo novo criado para demonstração e futura validação
+
+Grade visual editorial com chips de categoria, ações rápidas no hover e painel lateral animado para filtros avançados.

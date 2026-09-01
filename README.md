@@ -35,3 +35,18 @@ A biblioteca de efeitos está reduzida a 22 candidatos, divididos somente em: Fu
 O objetivo é qualidade e utilidade, não quantidade. Os efeitos removidos permanecem recuperáveis pelo histórico Git, mas não fazem parte da biblioteca ativa.
 
 Cada efeito ativo possui `index.html`, `bloco-pronto.html` e `bloco-pronto.txt`.
+
+## Listagens de produtos
+
+A família `L` representa padrões completos de listagem de produtos / PLP para e-commerce.
+
+Existem 4 candidatos:
+
+- `L01` — Listagem MR em Grade com Filtro Compacto — adaptação standalone da listagem real do `mr-commerce-platform`.
+- `L02` — Listagem Facetada com Barra Lateral Instantânea — filtros de checkbox em sidebar e atualização imediata.
+- `L03` — Listagem Horizontal Comparativa — linhas com especificações para comparação técnica.
+- `L04` — Grade Editorial com Filtros em Drawer — cards visuais, chips e painel lateral animado.
+
+Cada candidato possui `index.html`, `bloco-pronto.html`, `bloco-pronto.txt` e `LEIA-ME.txt`. Os registros operacionais ficam em `dados/listagens.json` e `dados/listagens.js`.
+
+Os quatro permanecem como **Candidatos** e não alteram a contagem dos 6 modelos oficiais aprovados.

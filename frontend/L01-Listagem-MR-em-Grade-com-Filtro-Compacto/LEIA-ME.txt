@@ -1,0 +1,11 @@
+L01 — Listagem MR em Grade com Filtro Compacto
+
+Situação: Candidato
+Categoria: Listagem de produtos / PLP
+Origem: restoffkaua08-afk/mr-commerce-platform
+Natureza: adaptação standalone de React/Next para HTML, CSS e JavaScript autocontidos
+Arquivos de origem: web/src/app/page.tsx + web/src/app/globals.css
+
+Importante: a versão do Catálogo S é uma adaptação standalone; não deve ser descrita como cópia literal do código original.
+
+Grade de quatro colunas derivada da listagem real do projeto MR, com cards bordados, foto vertical, marca/categoria, favorito, busca, filtro compacto e elevação no hover.

@@ -12,6 +12,7 @@ A convenção existe para que catálogo visual, Obsidian, GitHub e instruções 
 - `K` — card ou bloco visual
 - `M` — modal
 - `P` — pesquisa/busca
+- `L` — listagem de produtos / PLP
 - `A` — animação ou efeito visual
 
 ## Backend e lógica
@@ -26,4 +27,4 @@ Os prefixos reservados só precisam ser usados quando surgir um modelo real.
 
 ## Regra de aprovação
 
-A criação de um identificador e de uma demonstração não torna o modelo automaticamente aprovado. Itens com situação `Candidato`, como P01–P04, só passam para o conjunto oficial após aprovação explícita de Kauã.
+A criação de um identificador e de uma demonstração não torna o modelo automaticamente aprovado. Itens com situação `Candidato`, incluindo P01–P04 e L01–L04, só passam para o conjunto oficial após aprovação explícita de Kauã.

@@ -1,0 +1,8 @@
+L03 — Listagem Horizontal Comparativa
+
+Situação: Candidato
+Categoria: Listagem de produtos / PLP
+Origem: Catálogo S
+Natureza: modelo novo criado para demonstração e futura validação
+
+Produtos apresentados em linhas horizontais com foto, resumo, especificações, preço e CTA, facilitando comparação de atributos técnicos.

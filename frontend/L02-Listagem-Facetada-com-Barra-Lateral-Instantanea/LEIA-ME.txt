@@ -1,0 +1,8 @@
+L02 — Listagem Facetada com Barra Lateral Instantânea
+
+Situação: Candidato
+Categoria: Listagem de produtos / PLP
+Origem: Catálogo S
+Natureza: modelo novo criado para demonstração e futura validação
+
+Barra lateral compacta e fixa com checkboxes de categoria e marca; a grade de produtos é atualizada instantaneamente conforme os filtros são marcados.
