@@ -1,0 +1,16 @@
+ID: P01
+Nome: Barra de Pesquisa Minimalista em Linha
+Tipo: Frontend
+Categoria: Pesquisa
+Situação: Candidato
+Versão: 0.1
+
+Campo aberto e minimalista, praticamente sem fundo, com linha inferior que reage ao foco.
+Ideal para landing pages limpas, headers editoriais e interfaces onde a busca deve existir sem dominar o layout.
+
+Arquivos:
+- index.html
+- bloco-pronto.html
+- bloco-pronto.txt
+
+A aprovação oficial depende de validação explícita de Kauã.
