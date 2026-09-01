@@ -1,0 +1,16 @@
+ID: P04
+Nome: Barra de Pesquisa Expansível
+Tipo: Frontend
+Categoria: Pesquisa
+Situação: Candidato
+Versão: 0.1
+
+Começa como um botão compacto com lupa e se expande para um campo de busca completo.
+Ideal para navbars e layouts em que a pesquisa deve existir sem ocupar espaço permanentemente.
+
+Arquivos:
+- index.html
+- bloco-pronto.html
+- bloco-pronto.txt
+
+A aprovação oficial depende de validação explícita de Kauã.
