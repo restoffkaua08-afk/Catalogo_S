@@ -1,0 +1,16 @@
+ID: P03
+Nome: Barra de Pesquisa em Vidro Fosco
+Tipo: Frontend
+Categoria: Pesquisa
+Situação: Candidato
+Versão: 0.1
+
+Barra translúcida com backdrop blur, borda iluminada e reflexo interno.
+A demonstração usa elementos coloridos atrás da barra para tornar o material de vidro visível de forma objetiva.
+
+Arquivos:
+- index.html
+- bloco-pronto.html
+- bloco-pronto.txt
+
+A aprovação oficial depende de validação explícita de Kauã.
