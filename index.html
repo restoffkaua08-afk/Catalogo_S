@@ -1,13 +1,65 @@
 <!doctype html>
 <html lang="pt-BR">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Catálogo S</title>
-<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{padding:48px;overflow-x:hidden}h1{font:500 clamp(38px,6vw,76px) Georgia,Times New Roman,serif;margin:0 0 12px}.intro{color:#aaa69e;max-width:720px;line-height:1.7;margin:0}.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}.filter-btn{color:#c9c4ba;background:#111318;border:1px solid #ffffff1c;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}.filter-btn:hover{border-color:#c59b5d;color:#f7f3e9}.filter-btn.active{background:#c59b5d;color:#090a0d;border-color:#c59b5d}nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}.card{color:inherit;text-decoration:none;background:#111318;border:1px solid #ffffff1c;padding:24px;border-radius:16px;display:flex;flex-direction:column;gap:9px;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#c59b5d}.card b{color:#d1ad73;font-size:12px;letter-spacing:.15em}.card span{font-family:Georgia,Times New Roman,serif;font-size:22px;line-height:1.15}.empty{display:none;color:#77736c;margin-top:30px}@media(max-width:600px){body{padding:28px 18px}.filters{margin-top:24px}.filter-btn{flex:1 1 calc(50% - 4px)}nav{grid-template-columns:1fr}}</style></head>
+<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{padding:48px;overflow-x:hidden}h1{font:500 clamp(38px,6vw,76px) Georgia,Times New Roman,serif;margin:0 0 12px}.intro{color:#aaa69e;max-width:720px;line-height:1.7;margin:0}.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}.filter-btn{color:#c9c4ba;background:#111318;border:1px solid #ffffff1c;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s}.filter-btn:hover{border-color:#c59b5d;color:#f7f3e9}.filter-btn.active{background:#c59b5d;color:#090a0d;border-color:#c59b5d}.effect-subfilters{display:none;flex-wrap:wrap;gap:7px;margin-top:10px;padding-top:10px;border-top:1px solid #ffffff10}.effect-subfilters.visible{display:flex}.subfilter-btn{color:#918d85;background:transparent;border:1px solid #ffffff18;border-radius:7px;padding:7px 11px;font-size:11px;font-weight:700;cursor:pointer;transition:.15s}.subfilter-btn:hover{color:#f7f3e9;border-color:#8e7046}.subfilter-btn.active{color:#d1ad73;border-color:#c59b5d;background:#c59b5d10}nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:22px}.card{color:inherit;text-decoration:none;background:#111318;border:1px solid #ffffff1c;padding:24px;border-radius:16px;display:flex;flex-direction:column;gap:9px;transition:.2s}.card:hover{transform:translateY(-3px);border-color:#c59b5d}.card b{color:#d1ad73;font-size:12px;letter-spacing:.15em}.card span{font-family:Georgia,Times New Roman,serif;font-size:22px;line-height:1.15}.empty{display:none;color:#77736c;margin-top:30px}@media(max-width:600px){body{padding:28px 18px}.filters{margin-top:24px}.filter-btn{flex:1 1 calc(50% - 4px)}.effect-subfilters{gap:6px}.subfilter-btn{flex:1 1 calc(50% - 3px);text-align:center}nav{grid-template-columns:1fr}}</style></head>
 <body><h1>Catálogo S</h1><p class="intro">Abra qualquer modelo abaixo para visualizar a demonstração e copiar o bloco pronto.</p>
 <div class="filters" aria-label="Filtros do catálogo"><button class="filter-btn" data-filter="backend" type="button">Backend</button><button class="filter-btn" data-filter="frontend" type="button">Frontend</button><button class="filter-btn" data-filter="tela" type="button">Telas</button><button class="filter-btn" data-filter="carrossel" type="button">Carrosséis</button><button class="filter-btn" data-filter="efeito" type="button">Efeitos</button></div>
+<div class="effect-subfilters" id="effect-subfilters" aria-label="Categorias de efeitos"></div>
 <nav id="catalogo" aria-label="Modelos disponíveis"></nav><p class="empty" id="empty">Nenhum modelo neste filtro ainda.</p>
 <script src="dados/catalogo.js"></script><script src="dados/efeitos.js"></script><script>
-const aprovados=(window.CATALOGO_COMPONENTES&&window.CATALOGO_COMPONENTES.itens)||[];const efeitos=(window.CATALOGO_EFEITOS&&window.CATALOGO_EFEITOS.itens)||[];const catalogo=document.getElementById('catalogo'),empty=document.getElementById('empty'),botoes=[...document.querySelectorAll('.filter-btn')];let filtroAtual=null;
-function grupo(item){const tipo=String(item.tipo||'').toLowerCase(),cat=String(item.categoria||'').toLowerCase(),id=String(item.id||'').toUpperCase();return{backend:tipo==='backend'||id.startsWith('B')||id.startsWith('API')||id.startsWith('AUTH')||id.startsWith('DB'),frontend:tipo==='frontend'&&!id.startsWith('A'),tela:cat.includes('seção')||cat.includes('secao')||cat.includes('tela')||id.startsWith('E'),carrossel:cat.includes('carrossel')||id.startsWith('C'),efeito:id.startsWith('A')||cat.includes('efeito')}}
-function render(){let base=filtroAtual==='efeito'?efeitos:aprovados;const filtrados=filtroAtual?base.filter(i=>grupo(i)[filtroAtual]):base;catalogo.innerHTML=filtrados.map(i=>`<a class="card" href="${i.caminho}"><b>${i.id}</b><span>${i.nome}</span></a>`).join('');empty.style.display=filtrados.length?'none':'block'}
-botoes.forEach(btn=>btn.addEventListener('click',()=>{const f=btn.dataset.filter;filtroAtual=filtroAtual===f?null:f;botoes.forEach(b=>b.classList.toggle('active',b.dataset.filter===filtroAtual));render()}));render();
+const aprovados=(window.CATALOGO_COMPONENTES&&window.CATALOGO_COMPONENTES.itens)||[];
+const efeitos=(window.CATALOGO_EFEITOS&&window.CATALOGO_EFEITOS.itens)||[];
+const catalogo=document.getElementById('catalogo');
+const empty=document.getElementById('empty');
+const botoes=[...document.querySelectorAll('.filter-btn')];
+const effectSubfilters=document.getElementById('effect-subfilters');
+let filtroAtual=null;
+let familiaAtual=null;
+
+function grupo(item){
+  const tipo=String(item.tipo||'').toLowerCase(),cat=String(item.categoria||'').toLowerCase(),id=String(item.id||'').toUpperCase();
+  return{
+    backend:tipo==='backend'||id.startsWith('B')||id.startsWith('API')||id.startsWith('AUTH')||id.startsWith('DB'),
+    frontend:tipo==='frontend'&&!id.startsWith('A'),
+    tela:cat.includes('seção')||cat.includes('secao')||cat.includes('tela')||id.startsWith('E'),
+    carrossel:cat.includes('carrossel')||id.startsWith('C'),
+    efeito:id.startsWith('A')||cat.includes('efeito')
+  };
+}
+
+function criarSubfiltrosDeEfeitos(){
+  const familias=[...new Set(efeitos.map(item=>String(item.familia||'').trim()).filter(Boolean))];
+  effectSubfilters.innerHTML=familias.map(familia=>`<button class="subfilter-btn" type="button" data-family="${familia.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}">${familia}</button>`).join('');
+  effectSubfilters.querySelectorAll('.subfilter-btn').forEach(btn=>btn.addEventListener('click',()=>{
+    const familia=btn.dataset.family;
+    familiaAtual=familiaAtual===familia?null:familia;
+    effectSubfilters.querySelectorAll('.subfilter-btn').forEach(b=>b.classList.toggle('active',b.dataset.family===familiaAtual));
+    render();
+  }));
+}
+
+function render(){
+  const emEfeitos=filtroAtual==='efeito';
+  effectSubfilters.classList.toggle('visible',emEfeitos);
+  if(!emEfeitos)familiaAtual=null;
+
+  let base=emEfeitos?efeitos:aprovados;
+  let filtrados=filtroAtual?base.filter(i=>grupo(i)[filtroAtual]):base;
+  if(emEfeitos&&familiaAtual)filtrados=filtrados.filter(i=>String(i.familia||'')===familiaAtual);
+
+  catalogo.innerHTML=filtrados.map(i=>`<a class="card" href="${i.caminho}"><b>${i.id}</b><span>${i.nome}</span></a>`).join('');
+  empty.style.display=filtrados.length?'none':'block';
+}
+
+botoes.forEach(btn=>btn.addEventListener('click',()=>{
+  const f=btn.dataset.filter;
+  filtroAtual=filtroAtual===f?null:f;
+  familiaAtual=null;
+  botoes.forEach(b=>b.classList.toggle('active',b.dataset.filter===filtroAtual));
+  effectSubfilters.querySelectorAll('.subfilter-btn').forEach(b=>b.classList.remove('active'));
+  render();
+}));
+
+criarSubfiltrosDeEfeitos();
+render();
 </script></body></html>
