@@ -1,0 +1,9 @@
+CATÁLOGO S
+
+Abra o arquivo index.html na raiz.
+Não é necessário instalar nada ou iniciar servidor.
+
+Modelos aprovados atuais:
+E01, C01, E02, C02, C03 e E03.
+
+O catálogo foi preparado para crescer com frontend e backend.
