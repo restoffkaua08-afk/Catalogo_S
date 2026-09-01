@@ -1,0 +1,8 @@
+<style>
+#efeito-a114{width:min(1050px,94vw);min-height:540px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(24px,5vw,72px);overflow:hidden;position:relative}#efeito-a114 .type-kicker{font-size:10px;letter-spacing:.25em;color:#757981}#efeito-a114 .type-main{font:500 clamp(58px,9vw,118px)/.88 Georgia,serif;letter-spacing:-.045em;margin:20px 0;max-width:1000px}#efeito-a114 .type-sub{font-size:14px;color:#7d8189;max-width:550px;line-height:1.7}
+#efeito-a114{width:min(900px,94vw);height:min(620px,72vh);overflow-y:auto;border:1px solid #ffffff12;border-radius:28px;background:#08090d}#efeito-a114 .text-scroll-inner{height:180%;display:flex;align-items:center;padding:50px}#efeito-a114 h2{font:500 clamp(70px,12vw,150px)/.78 Georgia;margin:0;color:transparent;-webkit-text-stroke:1px #ffffff44;background:linear-gradient(180deg,#fff 0 var(--fill,0%),transparent var(--fill,0%));-webkit-background-clip:text;background-clip:text}
+</style>
+<div id="efeito-a114" class="text-scroll"><div class="text-scroll-inner"><h2>TEXTO<br>QUE<br>PREENCHE</h2></div></div>
+<script>
+const s=document.querySelector('#efeito-a114');s.addEventListener('scroll',()=>{const p=s.scrollTop/(s.scrollHeight-s.clientHeight)*100;s.style.setProperty('--fill',p+'%')});
+</script>

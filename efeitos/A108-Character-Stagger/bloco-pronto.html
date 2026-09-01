@@ -1,0 +1,8 @@
+<style>
+#efeito-a108{width:min(1050px,94vw);min-height:540px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:clamp(24px,5vw,72px);overflow:hidden;position:relative}#efeito-a108 .type-kicker{font-size:10px;letter-spacing:.25em;color:#757981}#efeito-a108 .type-main{font:500 clamp(58px,9vw,118px)/.88 Georgia,serif;letter-spacing:-.045em;margin:20px 0;max-width:1000px}#efeito-a108 .type-sub{font-size:14px;color:#7d8189;max-width:550px;line-height:1.7}
+#efeito-a108 .char-line{font:500 clamp(72px,13vw,150px) Georgia;margin:20px 0;display:flex}#efeito-a108 .char-line i{font-style:normal;opacity:0;transform:translateY(45px);animation:a108 .55s forwards}@keyframes a108{to{opacity:1;transform:none}}
+</style>
+<div id="efeito-a108" class="type-stage"><span class="type-kicker">CHARACTER STAGGER</span><h2 class="char-line">IMPACTO</h2><p class="type-sub">Cada caractere entra em sequência.</p></div>
+<script>
+const el=document.querySelector('#efeito-a108 .char-line'),t=el.textContent;el.innerHTML=[...t].map((c,i)=>`<i style="animation-delay:${i*.08}s">${c}</i>`).join('');
+</script>

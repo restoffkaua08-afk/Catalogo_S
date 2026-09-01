@@ -1,0 +1,5 @@
+<style>
+#efeito-a117{width:min(920px,94vw);height:min(620px,72vh);position:relative;display:grid;place-items:center;overflow:hidden;border-radius:32px;background:#080a0e}#efeito-a117 .liquid-a,#efeito-a117 .liquid-b{position:absolute;border-radius:44% 56% 61% 39%/46% 34% 66% 54%;filter:blur(.2px)}#efeito-a117 .liquid-a{width:330px;height:330px;background:linear-gradient(135deg,#58dcff,#745cff);left:24%;top:20%}#efeito-a117 .liquid-b{width:280px;height:280px;background:linear-gradient(135deg,#ff5da8,#ffb857);right:22%;bottom:18%}#efeito-a117 .liquid-lens{width:260px;height:260px;border-radius:50%;position:relative;z-index:4;border:1px solid #ffffff44;background:#ffffff0b;backdrop-filter:blur(3px)}#efeito-a117>span{position:absolute;bottom:36px;font-size:10px;letter-spacing:.25em;color:#777b82}
+#efeito-a117 .liquid-a{animation:a117 5s ease-in-out infinite alternate}@keyframes a117{to{border-radius:68% 32% 40% 60%/34% 65% 35% 66%;transform:rotate(24deg) scale(1.12)}}
+</style>
+<div id="efeito-a117" class="liquid-stage"><div class="liquid-a"></div><div class="liquid-b"></div><div class="liquid-lens"></div><span>ORGANIC MOTION</span></div>
