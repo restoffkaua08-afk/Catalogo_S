@@ -1,0 +1,16 @@
+ID: P02
+Nome: Barra de Pesquisa em Bloco
+Tipo: Frontend
+Categoria: Pesquisa
+Situação: Candidato
+Versão: 0.1
+
+Barra sólida, legível e objetiva, com botão de busca dedicado.
+Ideal para catálogos, dashboards, lojas e páginas em que pesquisar é uma ação principal.
+
+Arquivos:
+- index.html
+- bloco-pronto.html
+- bloco-pronto.txt
+
+A aprovação oficial depende de validação explícita de Kauã.
