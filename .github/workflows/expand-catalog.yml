@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'Catalogo_S-repo.zip'
+      - '.github/catalog-trigger.txt'
 
 permissions:
   contents: write
