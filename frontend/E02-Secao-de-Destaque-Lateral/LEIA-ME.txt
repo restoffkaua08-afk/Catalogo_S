@@ -1,0 +1,4 @@
+E02 — Seção de Destaque Lateral
+
+Abra index.html diretamente no navegador.
+As fotografias foram substituídas por placeholders IMAGEM XX. A geometria/animação foi baseada no CSS recuperado do build publicado.

@@ -64,6 +64,7 @@
       isolation: isolate;
     }
 
+    /* Base comum: altura quase total da viewport; larguras variam por camada. */
     .photo-card {
       position: absolute;
       width: 27%;
@@ -95,6 +96,13 @@
       pointer-events: none;
     }
 
+    /*
+      Camadas solicitadas:
+      01 fica abaixo do 02
+      02 fica sobre 01 e 03
+      04 fica sobre 03
+      Pequenas diferenças verticais criam o posicionamento irregular.
+    */
     .card-01 { left: 15%; z-index: 1; width: 27%; transform: translateY(-46%); }
     .card-02 { left: 34%; z-index: 5; width: 21%; transform: translateY(-53%); }
     .card-03 { left: 52%; z-index: 2; width: 29%; transform: translateY(-44%); }
@@ -167,6 +175,8 @@
       </figure>
     </div>
   </section>
+
+
 
 <style>
 .catalog-code-area{background:#0b0d12;color:#f7f3e9;border-top:1px solid #ffffff18;padding:56px clamp(18px,5vw,72px) 72px;font-family:Arial,Helvetica,sans-serif}
