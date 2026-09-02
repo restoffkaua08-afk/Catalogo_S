@@ -1,57 +1,60 @@
 # Catálogo S
 
-Biblioteca pessoal de componentes, pesquisas e efeitos reutilizáveis.
+Biblioteca visual e instalador composável de modelos reutilizáveis de frontend e backend.
 
-## Modelos aprovados
+## Uso atual
 
-Os modelos oficialmente aprovados continuam sendo E01, C01, E02, C02, C03 e E03.
+O fluxo oficial não é mais copiar grandes blocos manualmente. Abra o terminal na pasta do projeto e execute o comando exibido na demonstração do modelo:
 
-Candidatos não entram na contagem oficial até aprovação explícita de Kauã.
+```bash
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I01
+```
 
-## Pesquisas
+Troque `I01` pelo ID desejado.
 
-A família `P` representa componentes de pesquisa.
+O instalador:
 
-Atualmente existem 4 candidatos:
+- cria os arquivos necessários;
+- usa nomes canônicos para páginas equivalentes;
+- registra o estado em `.catalogo-s/projeto.json`;
+- cria backups antes de substituir arquivos gerenciados;
+- reconcilia componentes instalados;
+- conecta integrações compatíveis automaticamente;
+- oferece `doctor` para validar o projeto.
 
-- `P01` — Barra de Pesquisa Minimalista em Linha
-- `P02` — Barra de Pesquisa em Bloco
-- `P03` — Barra de Pesquisa em Vidro Fosco
-- `P04` — Barra de Pesquisa Expansível
+## Convenções principais
 
-Cada candidato possui `index.html`, `bloco-pronto.html`, `bloco-pronto.txt` e `LEIA-ME.txt`.
+- `Ixx` → tela inicial → `index.html`
+- `Lxx` → página de produtos → `produtos.html`
+- `LGxx` → login → `login.html`
+- `Exx`, `Cxx`, `Pxx` e `Axx` → componentes repetíveis integrados ao projeto
+- `DB01` → backend/banco pareado ao `LG01`
 
-Os registros operacionais ficam em:
+A instalação de uma nova tela inicial substitui a anterior sem remover componentes já registrados. Componentes repetíveis recebem instâncias próprias em `components/catalogo-s/`.
 
-- `dados/pesquisas.json`
-- `dados/pesquisas.js`
+## Login e banco
 
-Na interface principal, o filtro `Pesquisa` mostra somente esses candidatos, mantendo-os separados dos modelos aprovados.
+`LG01` e `DB01` são pareados. O instalador pode receber qualquer um primeiro; ao encontrar os dois, reconcilia automaticamente os endpoints da tela com o backend. Credenciais reais do banco permanecem em variáveis de ambiente e nunca são gravadas no frontend.
 
-## Efeitos ativos
+## Demonstrações
 
-A biblioteca de efeitos está reduzida a 22 candidatos, divididos somente em: Fundos e telas, Ícones, Sombras e Elevação no hover.
+Todas as demonstrações seguem o mesmo padrão:
 
-O objetivo é qualidade e utilidade, não quantidade. Os efeitos removidos permanecem recuperáveis pelo histórico Git, mas não fazem parte da biblioteca ativa.
+1. preview visual;
+2. título simplificado;
+3. botão **Copiar**;
+4. um único comando de terminal.
 
-Cada efeito ativo possui `index.html`, `bloco-pronto.html` e `bloco-pronto.txt`.
+Os arquivos `bloco-pronto.*` continuam no repositório como fonte interna e auditável dos modelos, mas não são a interface principal de instalação.
 
-## Listagens de produtos
+## Status dos modelos
 
-A família `L` representa padrões completos de listagem de produtos / PLP para e-commerce.
+Os seis modelos historicamente aprovados continuam: `E01`, `C01`, `E02`, `C02`, `C03` e `E03`. Os demais mantêm seus IDs e status anteriores. A migração para o instalador não promove candidatos automaticamente.
 
-Existem 4 candidatos:
+## Documentação
 
-- `L01` — Listagem MR em Grade com Filtro Compacto — adaptação standalone da listagem real do `mr-commerce-platform`.
-- `L02` — Listagem Facetada com Barra Lateral Instantânea — filtros de checkbox em sidebar e atualização imediata.
-- `L03` — Listagem Horizontal Comparativa — linhas com especificações para comparação técnica.
-- `L04` — Grade Editorial com Filtros em Drawer — cards visuais, chips e painel lateral animado.
+- `documentacao/ARQUITETURA-INSTALADOR-TERMINAL.md` — arquitetura e contratos.
+- `documentacao/COMO-ADICIONAR-UM-MODELO.md` — padrão para novos modelos.
+- `instalador/README.md` — uso do CLI.
 
-Cada candidato possui `index.html`, `bloco-pronto.html`, `bloco-pronto.txt` e `LEIA-ME.txt`. Os registros operacionais ficam em `dados/listagens.json` e `dados/listagens.js`.
-
-Os quatro permanecem como **Candidatos** e não alteram a contagem dos 6 modelos oficiais aprovados.
-
-
-## Autenticação na Vercel
-
-O repositório inclui uma camada stateless de autenticação por e-mail para deploy na Vercel. A lista de e-mails autorizados e os segredos ficam em variáveis de ambiente, nunca no frontend. Consulte `documentacao/AUTENTICACAO-E-DEPLOY-VERCEL.md`.
+A interface pública continua hospedada na Vercel e o código fonte permanece no GitHub.
