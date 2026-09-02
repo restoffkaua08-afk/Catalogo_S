@@ -98,7 +98,6 @@ async function mudarModo(destino){
   shell.classList.remove('is-moving');
   await esperar(160);
   shell.classList.add(cadastro?'show-register':'show-login');
-  await esperar(1750);
   trocando=false;
 }
 document.getElementById('lg01-open-register').addEventListener('click',()=>mudarModo('register'));
