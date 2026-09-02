@@ -1,7 +1,10 @@
 I03 — Tela Inicial Central com Fundo Atmosférico
 
-Situação: Candidato
-Categoria: Tela inicial
-Subcategoria: Título central
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I03
 
-Título centralizado com imagem destacada e efeito de fundo luminoso/atmosférico.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

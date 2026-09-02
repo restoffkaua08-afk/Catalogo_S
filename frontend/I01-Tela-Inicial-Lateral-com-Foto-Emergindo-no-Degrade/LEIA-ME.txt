@@ -1,7 +1,10 @@
 I01 — Tela Inicial Lateral com Foto Emergindo no Degradê
 
-Situação: Candidato
-Categoria: Tela inicial
-Subcategoria: Esquerda + imagem parcial
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I01
 
-Título à esquerda em fundo preto; da metade para a direita um degradê revela uma foto de fundo.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

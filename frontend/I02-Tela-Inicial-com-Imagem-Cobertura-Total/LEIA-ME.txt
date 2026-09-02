@@ -1,7 +1,10 @@
 I02 — Tela Inicial com Imagem Cobertura Total
 
-Situação: Candidato
-Categoria: Tela inicial
-Subcategoria: Imagem em tela cheia
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I02
 
-Título à esquerda com imagem cobrindo a tela toda e contraste controlado por overlay.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

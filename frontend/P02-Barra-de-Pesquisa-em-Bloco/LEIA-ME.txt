@@ -1,16 +1,10 @@
-ID: P02
-Nome: Barra de Pesquisa em Bloco
-Tipo: Frontend
-Categoria: Pesquisa
-Situação: Candidato
-Versão: 0.1
+P02 — Barra de Pesquisa em Bloco
 
-Barra sólida, legível e objetiva, com botão de busca dedicado.
-Ideal para catálogos, dashboards, lojas e páginas em que pesquisar é uma ação principal.
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add P02
 
-Arquivos:
-- index.html
-- bloco-pronto.html
-- bloco-pronto.txt
+MODO
+Componente repetível
 
-A aprovação oficial depende de validação explícita de Kauã.
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

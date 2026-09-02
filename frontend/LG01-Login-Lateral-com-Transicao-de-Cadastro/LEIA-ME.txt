@@ -1,51 +1,10 @@
-LG01 — LOGIN LATERAL COM TRANSIÇÃO DE CADASTRO
+LG01 — Login Lateral com Transição de Cadastro
 
-Status: Candidato
-Categoria: Login
-Pareamento reservado: LG01 ↔ DB01
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add LG01
 
-USO
-1. Crie uma página separada para o login, por exemplo: login.html.
-2. Copie o conteúdo de bloco-pronto.html ou bloco-pronto.txt para essa página.
-3. Mantenha o restante do site em index.html ou altere o destino conforme sua estrutura.
+MODO
+Página canônica
 
-PONTO PRINCIPAL DE LIGAÇÃO
-Procure no JavaScript por:
-
-// ===== EDITE AQUI: TELA APÓS O LOGIN =====
-const DESTINO_APOS_LOGIN = 'index.html';
-
-Troque index.html pela página que deve abrir após autenticação bem-sucedida.
-
-BACKEND
-Os campos usados pelo modelo são:
-Login: email, senha
-Cadastro: nome, email, senha, confirmarSenha
-
-Procure por:
-
-const ENDPOINT_LOGIN = '';
-const ENDPOINT_CADASTRO = '';
-
-Enquanto os endpoints estiverem vazios, o modelo funciona apenas como demonstração visual: o cadastro simula sucesso e o login navega para DESTINO_APOS_LOGIN.
-
-Quando houver backend real, preencha os endpoints. A aplicação envia JSON por POST.
-
-IMPORTANTE
-- Não armazene senhas em JavaScript, localStorage ou arquivos públicos.
-- DB01 deverá persistir senha_hash, nunca senha em texto puro.
-- A confirmação de senha existe apenas no formulário e não deve ser gravada no banco.
-- Autenticação, hashing, validação e sessão devem ocorrer no servidor.
-
-PERSONALIZAÇÃO
-A foto é definida na variável CSS --photo no início do <style>. Troque a URL para usar outra imagem.
-A cor principal do painel é #050607 e o destaque é --accent.
-
-COMPORTAMENTO
-- Estado inicial: painel preto à esquerda e foto à direita.
-- Criar conta: foto desliza para a esquerda, painel preto para a direita e o formulário de cadastro aparece.
-- Cadastro concluído: o formulário é limpo e a composição retorna ao login.
-- Já tenho conta: retorna imediatamente ao login.
-
-RESPONSIVIDADE
-Em telas pequenas a foto vira fundo do painel para preservar legibilidade e evitar duas colunas apertadas.
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

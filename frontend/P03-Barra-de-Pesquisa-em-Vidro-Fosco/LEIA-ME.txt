@@ -1,16 +1,10 @@
-ID: P03
-Nome: Barra de Pesquisa em Vidro Fosco
-Tipo: Frontend
-Categoria: Pesquisa
-Situação: Candidato
-Versão: 0.1
+P03 — Barra de Pesquisa em Vidro Fosco
 
-Barra translúcida com backdrop blur, borda iluminada e reflexo interno.
-A demonstração usa elementos coloridos atrás da barra para tornar o material de vidro visível de forma objetiva.
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add P03
 
-Arquivos:
-- index.html
-- bloco-pronto.html
-- bloco-pronto.txt
+MODO
+Componente repetível
 
-A aprovação oficial depende de validação explícita de Kauã.
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

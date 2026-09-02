@@ -1,8 +1,10 @@
 L03 — Listagem Horizontal Comparativa
 
-Situação: Candidato
-Categoria: Listagem de produtos / PLP
-Origem: Catálogo S
-Natureza: modelo novo criado para demonstração e futura validação
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add L03
 
-Produtos apresentados em linhas horizontais com foto, resumo, especificações, preço e CTA, facilitando comparação de atributos técnicos.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

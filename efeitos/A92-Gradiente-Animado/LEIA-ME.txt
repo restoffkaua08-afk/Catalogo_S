@@ -1,0 +1,10 @@
+A92 — Gradiente Animado
+
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add A92
+
+MODO
+Componente repetível
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

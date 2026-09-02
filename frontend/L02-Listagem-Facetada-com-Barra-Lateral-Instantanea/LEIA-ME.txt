@@ -1,8 +1,10 @@
 L02 — Listagem Facetada com Barra Lateral Instantânea
 
-Situação: Candidato
-Categoria: Listagem de produtos / PLP
-Origem: Catálogo S
-Natureza: modelo novo criado para demonstração e futura validação
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add L02
 
-Barra lateral compacta e fixa com checkboxes de categoria e marca; a grade de produtos é atualizada instantaneamente conforme os filtros são marcados.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

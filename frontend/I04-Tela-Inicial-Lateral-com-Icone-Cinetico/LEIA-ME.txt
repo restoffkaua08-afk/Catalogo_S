@@ -1,7 +1,10 @@
 I04 — Tela Inicial Lateral com Ícone Cinético
 
-Situação: Candidato
-Categoria: Tela inicial
-Subcategoria: Texto + elemento visual
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I04
 
-Título à esquerda e grande ícone animado à direita com efeito de preenchimento e movimento.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

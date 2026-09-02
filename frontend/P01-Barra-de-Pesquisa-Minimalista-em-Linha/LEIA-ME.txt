@@ -1,16 +1,10 @@
-ID: P01
-Nome: Barra de Pesquisa Minimalista em Linha
-Tipo: Frontend
-Categoria: Pesquisa
-Situação: Candidato
-Versão: 0.1
+P01 — Barra de Pesquisa Minimalista em Linha
 
-Campo aberto e minimalista, praticamente sem fundo, com linha inferior que reage ao foco.
-Ideal para landing pages limpas, headers editoriais e interfaces onde a busca deve existir sem dominar o layout.
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add P01
 
-Arquivos:
-- index.html
-- bloco-pronto.html
-- bloco-pronto.txt
+MODO
+Componente repetível
 
-A aprovação oficial depende de validação explícita de Kauã.
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

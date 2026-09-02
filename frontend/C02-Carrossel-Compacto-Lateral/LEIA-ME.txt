@@ -1,4 +1,10 @@
 C02 — Carrossel Compacto Lateral
 
-Abra index.html diretamente no navegador.
-As fotografias foram substituídas por placeholders IMAGEM XX. A geometria/animação foi baseada no CSS recuperado do build publicado.
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add C02
+
+MODO
+Componente repetível
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

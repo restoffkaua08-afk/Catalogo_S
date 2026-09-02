@@ -1,7 +1,10 @@
 I05 — Tela Inicial com Mosaico de Destaques
 
-Situação: Candidato
-Categoria: Tela inicial
-Subcategoria: Vitrine / mosaico
+INSTALAÇÃO
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add I05
 
-Título lateral com mosaico visual do outro lado, útil para divulgação, marketing e prestação de serviço.
+MODO
+Página canônica
+
+O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
+Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.
