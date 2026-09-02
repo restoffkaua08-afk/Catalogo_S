@@ -5,6 +5,9 @@ on:
     paths:
       - 'tools/migrate_terminal_catalog.py'
       - 'tools/postprocess_powershell_installers.py'
+      - 'backend/DB01-Banco-do-LG01/schema.sql'
+      - 'backend/DB01-Banco-do-LG01/bloco-pronto.sql'
+      - 'instalador/templates/DB01/**'
       - '.github/workflows/migrate-terminal-catalog.yml'
   workflow_dispatch:
 
