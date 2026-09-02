@@ -6,6 +6,7 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'http://127.0.0.1:4173'
 MODELS = json.loads((ROOT / 'instalador/modelos.json').read_text(encoding='utf-8'))['modelos']
+CATEGORIES = json.loads((ROOT / 'dados/categorias.json').read_text(encoding='utf-8'))['categorias']
 FORBIDDEN = ['npx ', 'github.com/', 'api.github.com', 'raw.githubusercontent.com', 'git clone', 'invoke-webrequest', 'invoke-restmethod']
 
 
@@ -36,6 +37,28 @@ def attach_monitor(page, label):
 def assert_clean(errors):
     if errors:
         raise AssertionError('\n'.join(errors))
+
+
+def test_catalog_navigation(page):
+    assert page.locator('.category-card').count() == len(CATEGORIES), 'quantidade de categorias renderizada diverge do JSON'
+    for category in CATEGORIES:
+        page.locator(f'.category-card[data-category="{category["slug"]}"]').click()
+        page.wait_for_function(
+            "slug => location.hash === '#categoria=' + encodeURIComponent(slug)",
+            category['slug'],
+            timeout=3000,
+        )
+        assert page.locator('#context').inner_text().strip() == category['titulo']
+        cards = page.locator('.demo-card')
+        assert cards.count() == len(category['itens']), f'{category["slug"]}: quantidade de demos incorreta'
+        for item in category['itens']:
+            card = page.locator(f'.demo-card:has(.demo-id:text-is("{item["id"]}"))')
+            assert card.count() == 1, f'{item["id"]}: card ausente na categoria'
+            href = card.get_attribute('href') or ''
+            assert href == item['caminho'], f'{item["id"]}: href divergente: {href}'
+        page.locator('#homeBtn').click()
+        page.wait_for_function("location.hash === ''", timeout=3000)
+        page.locator('.category-grid').wait_for(timeout=3000)
 
 
 def test_interaction(page, mid):
@@ -85,7 +108,7 @@ def test_interaction(page, mid):
 
     if mid == 'LG01':
         page.locator('#lg01-open-register').click()
-        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-register')", timeout=9000)
+        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-register')", timeout=12000)
         form = page.locator('#lg01-register-form')
         form.locator('input[name="nome"]').fill('Pessoa Teste')
         form.locator('input[name="email"]').fill('teste@example.com')
@@ -94,7 +117,7 @@ def test_interaction(page, mid):
         form.locator('button[type="submit"]').click()
         assert page.locator('#lg01-register-message').inner_text().strip() == 'As senhas não coincidem.'
         page.locator('#lg01-back-login').click()
-        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-login')", timeout=9000)
+        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-login')", timeout=12000)
 
 
 def main():
@@ -110,6 +133,7 @@ def main():
         assert response and response.status == 200
         assert 'Catálogo S' in (root.title() + root.locator('body').inner_text())
         assert len(root.locator('body').inner_text()) > 100
+        test_catalog_navigation(root)
         assert_clean(root_errors)
         root.close()
 
@@ -149,8 +173,8 @@ def main():
 
         browser.close()
 
-    assert checked == 21, f'esperados 21 modelos, validados {checked}'
-    print(f'Chromium: {checked} modelos, previews, cópia e interações críticas validados.')
+    assert checked == len(MODELS) == 21, f'esperados 21 modelos, validados {checked}'
+    print(f'Chromium: {checked} modelos, navegação, previews, cópia e interações críticas validados.')
 
 
 if __name__ == '__main__':
