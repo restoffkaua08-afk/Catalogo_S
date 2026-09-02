@@ -17,19 +17,19 @@ $Conteudo1 = @'
 --        ↓ conexão MySQL/MariaDB
 --   DB01 (banco catalogo_login_lg01 / tabela usuarios)
 --
--- No código do LG01, edite exatamente estas duas linhas:
---   const ENDPOINT_LOGIN = '/api/login';
---   const ENDPOINT_CADASTRO = '/api/cadastro';
+-- Na integração gerada pelo Catálogo S, o LG01 usa:
+--   ENDPOINT_LOGIN = '/api/auth/login'
+--   ENDPOINT_CADASTRO = '/api/auth/cadastro'
 --
 -- O backend dessas rotas deve conectar neste banco:
 --   BANCO:  catalogo_login_lg01
 --   TABELA: usuarios
 --
 -- Contrato recebido do LG01:
---   POST /api/cadastro
+--   POST /api/auth/cadastro
 --   { nome, email, senha, confirmarSenha }
 --
---   POST /api/login
+--   POST /api/auth/login
 --   { email, senha }
 --
 -- IMPORTANTE:
