@@ -3,43 +3,25 @@
 ## Estado
 
 - Data: 2026-09-02
-- Status: arquitetura oficial para a próxima geração do Catálogo S
-- Objetivo: substituir o fluxo de copiar/colar blocos manualmente por instalação automática, composável e reversível via terminal.
+- Status: **integrada e validada** para todos os modelos existentes no repositório.
+- CLI: `instalador/catalogo-s.mjs`, schema de manifesto 2.
+- Registro: `instalador/modelos.json`.
 
-## 1. Mudança de paradigma
+## Regra central
 
-O Catálogo S deixa de entregar ao usuário apenas HTML/CSS/JS/SQL para copiar manualmente.
+> O usuário escolhe modelos. O Catálogo S resolve arquivos, nomes, slots, rotas e ligações.
 
-Cada modelo passa a entregar um **comando de instalação**. O usuário abre o terminal na pasta do projeto e executa comandos como:
+O fluxo de uso não é mais copiar HTML/CSS/JS/SQL manualmente. A demonstração entrega um comando:
 
-```text
-catalogo-s add I01
-catalogo-s add N01
-catalogo-s add LG01
-catalogo-s add DB01
+```bash
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add <ID>
 ```
 
-A forma pública final do comando pode usar um bootstrap via `npx`/GitHub enquanto o CLI não estiver publicado como pacote estável. A semântica oficial é sempre `catalogo-s add <ID>`.
+O código-fonte permanece auditável em `bloco-pronto.*`, mas funciona como payload interno do instalador.
 
-O instalador é responsável por:
+## Estado local e segurança de alterações
 
-1. detectar ou inicializar o projeto;
-2. criar o arquivo correto;
-3. gravar o código do modelo;
-4. registrar o modelo instalado;
-5. localizar modelos relacionados;
-6. criar ou atualizar links entre arquivos;
-7. reconciliar menus, rodapés, rotas, autenticação e dependências;
-8. validar o resultado;
-9. criar backup antes de substituir conteúdo existente.
-
-O usuário não deve precisar descobrir manualmente qual arquivo editar para ligar dois modelos compatíveis.
-
----
-
-## 2. Memória local do projeto
-
-Todo projeto gerenciado pelo Catálogo S terá:
+Cada projeto recebe:
 
 ```text
 .catalogo-s/
@@ -47,34 +29,11 @@ Todo projeto gerenciado pelo Catálogo S terá:
 └─ backups/
 ```
 
-`projeto.json` é a fonte de verdade local sobre o que foi instalado.
+`projeto.json` registra páginas, modelos e instâncias. O CLI cria backup antes de substituir um arquivo gerenciado cujo conteúdo mudou.
 
-Exemplo conceitual:
+## Páginas canônicas
 
-```json
-{
-  "schema": 1,
-  "modelos": {
-    "I01": { "tipo": "pagina", "papel": "inicio", "arquivo": "index.html" },
-    "SOB01": { "tipo": "pagina", "papel": "sobre", "arquivo": "sobre.html" },
-    "N01": { "tipo": "componente-global", "papel": "menu" },
-    "LG01": { "tipo": "pagina", "papel": "login", "arquivo": "login.html" },
-    "DB01": { "tipo": "backend", "papel": "auth-db", "pareadoCom": "LG01" }
-  }
-}
-```
-
-O instalador consulta primeiro esse manifesto. Se ele estiver ausente ou incompleto, pode usar marcadores Catálogo S nos arquivos para reconstruir o estado.
-
----
-
-## 3. Nomes canônicos de arquivos
-
-Modelos do mesmo papel devem convergir para o mesmo nome de arquivo. Isso permite trocar o design sem quebrar as integrações.
-
-### Páginas canônicas
-
-| Papel | Arquivo padrão |
+| Papel | Arquivo |
 |---|---|
 | início | `index.html` |
 | produtos | `produtos.html` |
@@ -82,321 +41,139 @@ Modelos do mesmo papel devem convergir para o mesmo nome de arquivo. Isso permit
 | contato | `contato.html` |
 | login | `login.html` |
 
-Um `I01`, `I02`, `I03` etc. instala/substitui o papel `inicio`, portanto trabalha com `index.html`.
+Atualmente:
 
-Um `L01`, `L02`, `L03` etc. instala/substitui o papel `produtos`, portanto trabalha com `produtos.html` quando usado como página completa.
+- `Ixx` instala/substitui `index.html`;
+- `Lxx` instala/substitui `produtos.html`;
+- `LGxx` instala/substitui `login.html`.
 
-`SOBxx`, `CTxx` e `LGxx` seguem os arquivos canônicos acima.
+Novos `SOBxx` e `CTxx` deverão seguir os nomes canônicos acima.
 
-### Arquivos técnicos canônicos
+## Identidade técnica e slots
 
-```text
-assets/
-├─ css/catalogo-s.css
-├─ js/catalogo-s.js
-└─ js/catalogo-s.config.js
-
-api/
-└─ auth/
-   ├─ login.js
-   └─ cadastro.js
-
-lib/
-└─ catalogo-s-db.js
-
-database/
-└─ schema.sql
-```
-
-Nem todo projeto terá todos esses arquivos. Eles aparecem quando um modelo realmente precisa deles.
-
----
-
-## 4. Identidade técnica das páginas
-
-Além do nome canônico, páginas criadas pelo Catálogo S recebem marcadores que não dependem do texto visível ou das classes de estilo.
-
-Exemplo:
+Páginas gerenciadas recebem identidade independente do texto visual:
 
 ```html
 <html data-catalogo-s-page="inicio" data-catalogo-s-model="I01">
 ```
 
-Seções instaladas dentro de uma página recebem:
-
-```html
-<section data-catalogo-s-section="sobre" data-catalogo-s-model="SOB01" id="sobre">
-```
-
-O instalador nunca deve depender de um título como “Sobre nós” para entender o papel da seção.
-
----
-
-## 5. Slots de composição
-
-Arquivos gerenciados recebem pontos seguros de edição.
-
-Exemplo:
+E áreas seguras de composição:
 
 ```html
 <!-- CATALOGO-S:SLOT:MENU:START -->
 <!-- CATALOGO-S:SLOT:MENU:END -->
 
-<!-- CATALOGO-S:SLOT:CONTEUDO:START -->
-<!-- CATALOGO-S:SLOT:CONTEUDO:END -->
+<!-- CATALOGO-S:SLOT:COMPONENTES:START -->
+<!-- CATALOGO-S:SLOT:COMPONENTES:END -->
 
 <!-- CATALOGO-S:SLOT:RODAPE:START -->
 <!-- CATALOGO-S:SLOT:RODAPE:END -->
 ```
 
-Esses marcadores permitem ao CLI substituir somente a área que pertence ao Catálogo S, preservando o restante do arquivo.
+O reconciliador modifica somente áreas que pertencem ao Catálogo S.
 
-Antes de qualquer substituição, o instalador cria backup em `.catalogo-s/backups/`.
+## Singleton e componentes repetíveis
 
----
+Páginas de um mesmo papel são singleton. Instalar `I02` depois de `I01`, por exemplo, troca a tela inicial canônica.
 
-## 6. Tipos de instalação
-
-### 6.1 Singleton por papel
-
-Só existe um ativo por papel no projeto.
-
-Exemplos:
-
-- tela inicial;
-- página de produtos principal;
-- login;
-- menu global;
-- rodapé global;
-- banco pareado ao login.
-
-Instalar outro modelo do mesmo papel substitui o anterior depois de criar backup e atualizar o manifesto.
-
-### 6.2 Repetível
-
-Pode haver vários no mesmo projeto.
-
-Exemplos:
-
-- carrosséis;
-- seções genéricas;
-- blocos com botão;
-- alguns efeitos;
-- galerias.
-
-O manifesto registra uma instância para cada inserção.
-
----
-
-## 7. Reconciliação automática
-
-Depois de qualquer `add`, `replace` ou `remove`, o CLI executa uma etapa de **reconciliação**.
-
-A reconciliação verifica todos os modelos instalados e atualiza dependências automaticamente.
-
-### Exemplo: menu
-
-Se `N01` estiver instalado, o CLI consulta as páginas registradas:
+`Exx`, `Cxx`, `Pxx` e `Axx` são tratados como componentes repetíveis. Cada instalação cria uma instância em:
 
 ```text
-index.html     → Início
-produtos.html  → Produtos
-sobre.html     → Sobre
-contato.html   → Contato
+components/catalogo-s/<id>-<numero>.html
 ```
 
-E gera os itens do menu automaticamente.
+As instâncias são reconciliadas no `index.html`. Trocar a tela inicial não apaga componentes já registrados.
 
-Se `sobre.html` for instalado depois do menu, o menu é regenerado sem o usuário editar HTML.
+## Reconciliação automática
 
-### Exemplo: rodapé
+Depois de cada `add` ou `reconcile`, o CLI lê o manifesto e recalcula as ligações que podem ser determinadas com segurança.
 
-Se `F01` estiver instalado, novas páginas recebem o rodapé automaticamente na próxima reconciliação.
+A ordem de instalação pode ser invertida quando o contrato permite. Uma dependência ausente fica registrada como pendente e é resolvida quando o modelo relacionado aparecer.
 
-### Exemplo: botões
+Essa mesma regra é a base para futuros menus, rodapés, Sobre, Contato e botões: esses modelos devem consultar papéis e slots, não tentar adivinhar arquivos por texto visual.
 
-Um `BTNxx` pode declarar um destino sem conhecer o caminho físico. Exemplo lógico:
+## LG01 ↔ DB01
 
-```text
-destino: contato
-```
-
-O reconciliador resolve `contato` para `contato.html` ou `#contato`, de acordo com a estrutura registrada do projeto.
-
----
-
-## 8. Login e banco de dados
-
-A ligação oficial deixa de depender de edição manual do HTML.
-
-### LG01
-
-Ao instalar `LG01`, o CLI cria:
-
-```text
-login.html
-assets/js/catalogo-s.config.js
-```
-
-A tela consulta a configuração central, em vez de exigir que o usuário procure constantes espalhadas no HTML.
-
-### DB01
-
-Ao instalar `DB01`, o CLI:
-
-1. verifica se `LG01` está instalado;
-2. valida o contrato de campos;
-3. cria `database/schema.sql`;
-4. cria o adaptador/backend previsto pelo modelo;
-5. cria/atualiza `.env.example` quando necessário;
-6. atualiza `assets/js/catalogo-s.config.js` com os endpoints corretos;
-7. registra `LG01 ↔ DB01` no manifesto;
-8. valida se as rotas e arquivos esperados existem.
-
-Fluxo:
+A autenticação usa o fluxo:
 
 ```text
 login.html
    ↓
 assets/js/catalogo-s.config.js
    ↓
-/api/auth/login + /api/auth/cadastro
+api/auth/login.js + api/auth/cadastro.js
    ↓
 lib/catalogo-s-db.js
    ↓
 database/schema.sql / banco configurado
 ```
 
-O instalador pode automatizar a ligação de arquivos, nomes de rotas e dependências locais. Credenciais reais de serviços externos ou do banco continuam sendo fornecidas pelo usuário em variáveis de ambiente; elas nunca são inventadas ou gravadas no catálogo.
+`LG01` cria a tela e a configuração compartilhada. `DB01` cria schema, adaptador e endpoints. Quando os dois estão presentes, o CLI configura os endpoints automaticamente.
 
----
+A ordem `LG01 → DB01` e `DB01 → LG01` é suportada. Credenciais reais do banco não são inventadas nem colocadas no frontend; `.env.example` apenas registra o formato esperado. Senhas são persistidas somente como hash.
 
-## 9. Contratos de modelo
+## Contratos de modelo
 
-Cada modelo passa a ter metadados de instalação, além da demonstração visual.
-
-Exemplo conceitual:
+`instalador/modelos.json` é o registro técnico usado pelo CLI. Cada entrada informa no mínimo:
 
 ```json
 {
-  "id": "LG01",
-  "tipo": "pagina",
-  "papel": "login",
-  "target": "login.html",
-  "singleton": true,
-  "fornece": ["auth-ui"],
-  "compatibilidade": {
-    "bancoPreferido": "DB01"
-  }
+  "id": "I01",
+  "nome": "...",
+  "papel": "inicio",
+  "modo": "pagina",
+  "template": ".../bloco-pronto.html",
+  "target": "index.html"
 }
 ```
 
-Exemplo DB01:
+Ou, para componente:
 
 ```json
 {
-  "id": "DB01",
-  "tipo": "backend",
-  "papel": "auth-db",
-  "singleton": true,
-  "requer": ["LG01"],
-  "pareadoCom": "LG01",
-  "grava": [
-    "database/schema.sql",
-    "api/auth/login.js",
-    "api/auth/cadastro.js",
-    "lib/catalogo-s-db.js"
-  ]
+  "id": "C01",
+  "papel": "carrossel",
+  "modo": "componente",
+  "template": ".../bloco-pronto.html",
+  "destino": "inicio"
 }
 ```
 
-O instalador usa contratos; não tenta adivinhar dependências pelo nome visual do modelo.
+Backend pode declarar arquivos adicionais e pareamentos.
 
----
-
-## 10. Comandos do CLI
-
-Interface planejada:
+## Comandos
 
 ```text
 catalogo-s init
-catalogo-s add LG01
-catalogo-s add DB01
-catalogo-s add N01
-catalogo-s remove N01
-catalogo-s replace I01 I03
+catalogo-s add <ID>
 catalogo-s list
-catalogo-s doctor
 catalogo-s reconcile
+catalogo-s doctor
 ```
 
-### `doctor`
+Durante o bootstrap público, a semântica é executada via `npx` diretamente do GitHub.
 
-Verifica:
+`doctor` verifica arquivos registrados, instâncias, configuração de login e artefatos esperados pelo backend.
 
-- arquivos canônicos ausentes;
-- manifesto divergente;
-- slots quebrados;
-- dependências ausentes;
-- links para páginas inexistentes;
-- login sem backend quando configurado como real;
-- banco incompatível com o login instalado;
-- arquivos modificados fora das áreas gerenciadas quando isso comprometer uma atualização.
+## Demonstrações
 
----
+Todas as páginas de demonstração foram padronizadas. A primeira área contém somente o preview visual. A área de instalação contém somente:
 
-## 11. Experiência no site do Catálogo S
+1. título simplificado;
+2. botão `Copiar`;
+3. bloco com o comando do modelo.
 
-A página de cada modelo deixa de priorizar “Copiar HTML”.
+Textos explicativos, status, múltiplos botões de código e instruções manuais de linkagem foram removidos das demonstrações. Informação técnica detalhada permanece na documentação e nos fontes internos.
 
-O fluxo principal passa a ser:
+## Validação
 
-1. visualizar a demonstração;
-2. ver “O que este modelo cria/altera”;
-3. copiar **um comando de terminal**;
-4. executar na raiz do projeto.
+O workflow `.github/workflows/teste-instalador.yml` valida automaticamente:
 
-Exemplo conceitual:
+- todas as demonstrações padronizadas;
+- instalação isolada de cada modelo registrado;
+- composição de páginas e componentes;
+- substituição de tela inicial preservando componentes;
+- pareamento `LG01 ↔ DB01` nas duas ordens;
+- execução pública do comando via `npx`.
 
-```text
-catalogo-s add LG01
-```
-
-Para modelos que possuem dependência, a interface mostra isso de forma curta:
-
-```text
-DB01
-Pareado: LG01
-Cria: database/schema.sql + backend de autenticação
-Integração: automática
-```
-
-O código-fonte continua existindo no repositório para auditoria e manutenção, mas deixa de ser a principal interface de instalação para o usuário final.
-
----
-
-## 12. Migração do catálogo atual
-
-A migração será feita nesta ordem:
-
-1. criar núcleo do instalador;
-2. criar manifesto/contrato de modelos;
-3. migrar `LG01` e `DB01` como prova completa de integração;
-4. migrar páginas canônicas (`Ixx`, `Lxx`, `SOBxx`, `CTxx`);
-5. migrar componentes globais (`Nxx`, `Fxx`);
-6. migrar blocos repetíveis (`Cxx`, `Exx`, `BTNxx`, `Pxx`);
-7. migrar efeitos;
-8. trocar as páginas do catálogo de “copiar código” para “copiar comando”;
-9. executar `doctor` sobre todos os modelos e cenários de ordem de instalação.
-
-Nenhum modelo antigo perde seu ID.
-
----
-
-## 13. Regra central
-
-> O usuário escolhe modelos. O Catálogo S resolve arquivos, nomes, slots, rotas e ligações.
-
-Quando uma integração puder ser determinada com segurança pelo contrato dos modelos, ela deve ser automática.
-
-Quando houver informação impossível de inferir — por exemplo uma credencial de banco, domínio externo ou chave de API — o instalador deve pedir somente esse dado específico, sem mandar o usuário editar vários arquivos manualmente.
+Novos modelos só devem entrar como instaláveis quando respeitarem esses contratos e passarem pelo mesmo conjunto de validações.
