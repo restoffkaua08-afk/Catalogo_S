@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DB01 — Banco do LG01</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.demo{min-height:100svh;padding:clamp(42px,6vw,88px) clamp(20px,5vw,72px);display:flex;align-items:center}.wrap{width:min(1320px,100%);margin:auto}.id{color:#d1ad73;font-size:12px;letter-spacing:.18em;font-weight:800}.title{font:500 clamp(38px,5vw,64px)/1 Georgia,serif;margin:9px 0 12px}.pair{color:#aaa69e;font-size:14px;margin-bottom:28px}.pair strong{color:#d1ad73}.table-shell{overflow:auto;border:1px solid rgba(255,255,255,.11);border-radius:18px;background:#101218}table{width:100%;border-collapse:collapse;min-width:920px}caption{text-align:left;padding:17px 18px;border-bottom:1px solid rgba(255,255,255,.09);color:#d8d2c8;font-size:13px}th,td{padding:15px 16px;text-align:left;border-bottom:1px solid rgba(255,255,255,.075);font-size:13px;vertical-align:top}th{color:#d1ad73;text-transform:uppercase;letter-spacing:.08em;font-size:10px;background:#0c0e13}td{color:#d8d3ca}tr:last-child td{border-bottom:0}.key{color:#f0c984;font-weight:700}.muted{color:#8f8b84}.code-screen{min-height:100svh;padding:clamp(42px,6vw,80px) clamp(20px,5vw,72px);border-top:1px solid rgba(255,255,255,.08);background:#08090c}.code-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:16px}.code-head h2{font:500 clamp(28px,4vw,42px) Georgia,serif;margin:0}.actions{display:flex;gap:8px;flex-wrap:wrap}.btn{border:1px solid rgba(255,255,255,.14);background:#171b22;color:#f7f3e9;border-radius:10px;padding:11px 14px;font-weight:700;text-decoration:none;cursor:pointer}.btn:hover{border-color:#d1ad73}.link-note{margin:0 0 18px;padding:14px 16px;border-left:3px solid #d1ad73;background:#101218;color:#c9c3b9;font-size:13px;line-height:1.6}.link-note code{color:#f0c984}pre{margin:0;min-height:520px;overflow:auto;white-space:pre;padding:20px;border:1px solid rgba(255,255,255,.10);border-radius:18px;background:#090b0f;color:#ece8dd;font:13px/1.65 Consolas,Monaco,monospace}.catalog-back-float{position:fixed;z-index:9999;left:16px;top:16px;width:46px;height:46px;border:1px solid rgba(255,255,255,.15);border-radius:50%;background:rgba(8,9,12,.64);color:#f7f3e9;display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(14px);text-decoration:none;font-size:22px}.catalog-back-float:hover{background:#d1ad73;color:#08090c}@media(max-width:700px){.demo,.code-screen{padding-left:16px;padding-right:16px}.title{font-size:38px}}
+</style>
+</head>
+<body>
+<a class="catalog-back-float" href="../../index.html#categoria=banco-de-dados" aria-label="Voltar">←</a>
+<main>
+<section class="demo">
+  <div class="wrap">
+    <div class="id">DB01 · CANDIDATO</div>
+    <h1 class="title">Banco do LG01</h1>
+    <div class="pair">Pareamento: <strong>LG01 ↔ DB01</strong> · Banco: <strong>catalogo_login_lg01</strong> · Tabela: <strong>usuarios</strong></div>
+    <div class="table-shell">
+      <table>
+        <caption>Contrato de dados da tela LG01 e estrutura persistida no DB01</caption>
+        <thead><tr><th>Campo no LG01</th><th>JSON enviado</th><th>Coluna no banco</th><th>Tipo / atributo</th><th>Chave / regra</th><th>Uso</th></tr></thead>
+        <tbody>
+          <tr><td class="muted">Gerado pelo banco</td><td>—</td><td><strong>id</strong></td><td>BIGINT UNSIGNED · AUTO_INCREMENT</td><td class="key">PRIMARY KEY</td><td>Identificador único do usuário</td></tr>
+          <tr><td>Nome</td><td><code>nome</code></td><td><strong>nome</strong></td><td>VARCHAR(120) · NOT NULL</td><td>—</td><td>Cadastro</td></tr>
+          <tr><td>E-mail</td><td><code>email</code></td><td><strong>email</strong></td><td>VARCHAR(190) · NOT NULL</td><td class="key">UNIQUE KEY</td><td>Cadastro e login</td></tr>
+          <tr><td>Senha</td><td><code>senha</code></td><td><strong>senha_hash</strong></td><td>VARCHAR(255) · NOT NULL</td><td>Não armazena senha pura</td><td>Backend gera o hash antes do INSERT</td></tr>
+          <tr><td>Confirmar senha</td><td><code>confirmarSenha</code></td><td>—</td><td>Não persistido</td><td>Validação apenas</td><td>Confirma que as senhas coincidem</td></tr>
+          <tr><td class="muted">Gerado pelo banco</td><td>—</td><td><strong>criado_em</strong></td><td>TIMESTAMP · DEFAULT CURRENT_TIMESTAMP</td><td>—</td><td>Data de criação</td></tr>
+          <tr><td class="muted">Gerado pelo banco</td><td>—</td><td><strong>atualizado_em</strong></td><td>TIMESTAMP · ON UPDATE</td><td>—</td><td>Última atualização</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<section class="code-screen">
+  <div class="wrap">
+    <div class="code-head"><h2>SQL do DB01</h2><div class="actions"><button class="btn" id="copy">Copiar SQL</button><a class="btn" href="schema.sql" target="_blank" rel="noopener">Abrir schema.sql</a><a class="btn" href="../../index.html#categoria=banco-de-dados">Voltar ao catálogo</a></div></div>
+    <p class="link-note"><strong>Ligação:</strong> o LG01 não abre o arquivo SQL diretamente. No LG01, configure <code>ENDPOINT_LOGIN</code> e <code>ENDPOINT_CADASTRO</code>; essas rotas pertencem ao backend, e o backend conecta ao banco <code>catalogo_login_lg01</code> e à tabela <code>usuarios</code>. O próprio SQL abaixo repete esse ponto no bloco destacado do topo.</p>
+    <pre id="sql">Carregando SQL...</pre>
+  </div>
+</section>
+</main>
+<script>
+const out=document.getElementById('sql');
+fetch('bloco-pronto.sql').then(r=>r.text()).then(t=>out.textContent=t).catch(()=>out.textContent='Abra schema.sql para ver o código.');
+document.getElementById('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(out.textContent);const b=document.getElementById('copy');b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar SQL',1400)}catch{const range=document.createRange();range.selectNodeContents(out);const s=getSelection();s.removeAllRanges();s.addRange(range);document.execCommand('copy');s.removeAllRanges()}});
+</script>
+</body>
+</html>
