@@ -1,0 +1,17 @@
+name: Refine demo batch
+on:
+  push:
+    paths:
+      - 'tools/refine_demo_batch.py'
+      - '.github/workflows/refine-demos.yml'
+permissions:
+  contents: write
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply audited demo refinements
+        run: python tools/refine_demo_batch.py
