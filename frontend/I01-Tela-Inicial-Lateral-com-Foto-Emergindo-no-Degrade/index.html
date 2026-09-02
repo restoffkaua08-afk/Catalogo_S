@@ -5,16 +5,163 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>I01 — Tela Inicial Lateral com Foto Emergindo no Degradê</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:52svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1100px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:14px/1.65 Consolas,Monaco,monospace;white-space:pre-wrap;word-break:break-word}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}}
+*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}
 </style>
 </head>
 <body>
 <a class="back" href="../../index.html#categoria=telas-iniciais" aria-label="Voltar">←</a>
 <section class="preview"><iframe src="bloco-pronto.html" title="Demonstração I01"></iframe></section>
-<section class="install"><div class="box"><div class="head"><h1>I01 — Tela Inicial Lateral com Foto Emergindo no Degradê</h1><button id="copy" type="button">Copiar</button></div><pre id="command">npx --yes github:restoffkaua08-afk/Catalogo_S#main add I01</pre></div></section>
+<section class="install"><div class="box"><div class="head"><h1>I01 — Tela Inicial Lateral com Foto Emergindo no Degradê</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;I01&#x27;
+$ModeloNome = &#x27;Tela Inicial Lateral com Foto Emergindo no Degradê&#x27;
+$Papel = &#x27;inicio&#x27;
+$ArquivoAlvo = &#x27;index.html&#x27;
+$ConteudoModelo = @&#x27;
+&lt;style&gt;
+#i01-hero{position:relative;isolation:isolate;height:100svh;min-height:100svh;max-height:100svh;display:grid;grid-template-columns:minmax(320px,.96fr) minmax(380px,1.04fr);background:#060708;color:#f7f2ea;overflow:hidden;font-family:Arial,Helvetica,sans-serif}#i01-hero *{box-sizing:border-box}#i01-hero .copy{display:flex;align-items:center;padding:clamp(24px,4vw,54px);position:relative;z-index:2}#i01-hero .copy-inner{max-width:620px}#i01-hero .eyebrow{display:inline-flex;gap:8px;align-items:center;padding:8px 13px;border:1px solid rgba(255,255,255,.14);border-radius:999px;background:rgba(255,255,255,.03);color:#d5c09b;font-size:11px;letter-spacing:.16em;text-transform:uppercase}#i01-hero h1{font:500 clamp(42px,5.8vw,78px) Georgia,serif;line-height:.92;margin:16px 0 14px;max-width:11ch}#i01-hero p{max-width:480px;color:#b6b0a6;font-size:17px;line-height:1.68;margin:0 0 24px}#i01-hero .actions{display:flex;gap:12px;flex-wrap:wrap}#i01-hero .btn{display:inline-flex;align-items:center;justify-content:center;min-width:160px;padding:14px 20px;border-radius:999px;text-decoration:none;font-weight:700;transition:.18s}#i01-hero .btn.primary{background:#d1ae74;color:#060708;box-shadow:0 18px 34px rgba(209,174,116,.16)}#i01-hero .btn.secondary{border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);color:#f7f2ea}#i01-hero .visual{position:relative;min-height:0;height:100%;background-image:linear-gradient(90deg,#060708 0%,#060708 7%,rgba(6,7,8,.96) 18%,rgba(6,7,8,.82) 30%,rgba(6,7,8,.48) 45%,rgba(6,7,8,.10) 60%,rgba(6,7,8,0) 74%),url(&quot;https://images.unsplash.com/photo-1517832606299-7ae9b720a186?auto=format&amp;fit=crop&amp;w=1600&amp;q=80&quot;);background-size:cover;background-position:center right}#i01-hero .glow{position:absolute;right:8%;top:12%;width:min(24vw,260px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(209,174,116,.26),rgba(209,174,116,0) 70%);filter:blur(22px)}@media(max-width:960px){#i01-hero{grid-template-columns:1fr;height:auto;min-height:100svh;max-height:none}#i01-hero .visual{min-height:42vh;height:auto}#i01-hero{min-height:auto}}&lt;/style&gt;
+&lt;section id=&quot;i01-hero&quot;&gt;&lt;div class=&quot;copy&quot;&gt;&lt;div class=&quot;copy-inner&quot;&gt;&lt;span class=&quot;eyebrow&quot;&gt;Barbearia autoral&lt;/span&gt;&lt;h1&gt;Presença forte logo na primeira dobra.&lt;/h1&gt;&lt;p&gt;Modelo ideal para marcas que precisam de leitura clara à esquerda e imagem marcante surgindo do lado direito.&lt;/p&gt;&lt;div class=&quot;actions&quot;&gt;&lt;a class=&quot;btn primary&quot; href=&quot;#&quot;&gt;Agendar horário&lt;/a&gt;&lt;a class=&quot;btn secondary&quot; href=&quot;#&quot;&gt;Conhecer serviços&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;visual&quot;&gt;&lt;div class=&quot;glow&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/section&gt;
+&#x27;@
+
+$ErrorActionPreference = &#x27;Stop&#x27;
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+
+    $backupDir = Get-FullPath &#x27;.catalogo-s/backups&#x27;
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+
+    $stamp = Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;
+    $safe = $Relative -replace &#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;, &#x27;__&#x27;
+    $destination = Join-Path $backupDir ($stamp + &#x27;__&#x27; + $safe + &#x27;.bak&#x27;)
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host &quot;[Catálogo S] backup: $Relative&quot;
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host &quot;[Catálogo S] gravado: $Relative&quot;
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = &quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;
+    $components = &quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;
+    $footer = &quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:MENU:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;, (&#x27;&lt;body$1&gt;&#x27; + &quot;`r`n&quot; + $menu)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($components + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($footer + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = &#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:END --&gt;&#x27;
+    $replacement = &quot;&lt;!-- CATALOGO-S:SLOT:$Name`:START --&gt;`r`n$Content`r`n&lt;!-- CATALOGO-S:SLOT:$Name`:END --&gt;&quot;
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath &#x27;index.html&#x27;
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;
+        Write-TextFile &#x27;index.html&#x27; (Ensure-Slots $shell) -SemBackup
+        return
+    }
+
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile &#x27;index.html&#x27; $prepared
+    }
+}
+
+function Rebuild-Components {
+    Ensure-HostPage
+    $index = Get-FullPath &#x27;index.html&#x27;
+    $html = [System.IO.File]::ReadAllText($index)
+    $html = Ensure-Slots $html
+
+    $componentDir = Get-FullPath &#x27;components/catalogo-s&#x27;
+    $sections = @()
+
+    if (Test-Path -LiteralPath $componentDir) {
+        $files = Get-ChildItem -LiteralPath $componentDir -Filter &#x27;*.html&#x27; -File | Sort-Object LastWriteTime, Name
+
+        foreach ($file in $files) {
+            $key = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $parts = $key -split &#x27;-&#x27;
+            $id = $parts[0].ToUpperInvariant()
+            $relative = &#x27;components/catalogo-s/&#x27; + $file.Name
+            $sections += &quot;&lt;section id=`&quot;catalogo-s-$key`&quot; data-catalogo-s-instance=`&quot;$key`&quot; data-catalogo-s-model=`&quot;$id`&quot; style=`&quot;width:100%;min-height:100vh;overflow:hidden`&quot;&gt;&lt;iframe src=`&quot;$relative`&quot; title=`&quot;$id`&quot; loading=`&quot;lazy`&quot; style=`&quot;display:block;width:100%;height:100vh;border:0`&quot;&gt;&lt;/iframe&gt;&lt;/section&gt;&quot;
+        }
+    }
+
+    $updated = Set-Slot $html &#x27;COMPONENTES&#x27; ($sections -join &quot;`r`n&quot;)
+    Write-TextFile &#x27;index.html&#x27; $updated
+}
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    $ConteudoModelo = Ensure-Slots $ConteudoModelo
+}
+
+Write-TextFile $ArquivoAlvo $ConteudoModelo
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    Rebuild-Components
+}
+
+if ($Papel -eq &#x27;login&#x27;) {
+    $loginApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/login.js&#x27;)
+    $cadastroApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/cadastro.js&#x27;)
+
+    $loginEndpoint = &#x27;&#x27;
+    $cadastroEndpoint = &#x27;&#x27;
+    if ($loginApi -and $cadastroApi) {
+        $loginEndpoint = &#x27;/api/auth/login&#x27;
+        $cadastroEndpoint = &#x27;/api/auth/cadastro&#x27;
+    }
+
+    $config = &quot;// Gerado localmente pelo Catálogo S.`r`nwindow.CATALOGO_S_CONFIG={auth:{afterLogin:&#x27;index.html&#x27;,loginEndpoint:&#x27;$loginEndpoint&#x27;,cadastroEndpoint:&#x27;$cadastroEndpoint&#x27;}};`r`n&quot;
+    Write-TextFile &#x27;assets/js/catalogo-s.config.js&#x27; $config
+}
+
+Write-Host &quot;&quot;
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado com sucesso.&quot;
+Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
+</pre></div></section>
 <script>
 const b=document.getElementById('copy'),c=document.getElementById('command');
-b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent.trim())}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1200)});
+b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});
 </script>
 </body>
 </html>

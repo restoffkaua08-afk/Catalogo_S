@@ -1,0 +1,256 @@
+$ModeloId = 'LG01'
+$ModeloNome = 'Login Lateral com Transição de Cadastro'
+$Papel = 'login'
+$ArquivoAlvo = 'login.html'
+$ConteudoModelo = @'
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login</title>
+<style>
+:root{
+  --bg:#050607;--ink:#f7f3e9;--muted:#98948c;--line:rgba(255,255,255,.14);--accent:#d1ad73;
+  --photo:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2200&q=88');
+  --move:2s;--move-ease:cubic-bezier(.42,0,.18,1)
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{min-height:100svh;overflow:hidden}
+.lg01{position:relative;width:100%;height:100svh;min-height:680px;overflow:hidden;background:#050607;isolation:isolate}
+.lg01-photo{position:absolute;z-index:1;top:-4vh;bottom:-4vh;left:-25vw;width:150vw;background-image:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.24)),var(--photo);background-size:cover;background-position:center;transform:translate3d(25vw,0,0) scale(1.015);transition:transform var(--move) var(--move-ease);will-change:transform;backface-visibility:hidden}
+.lg01.register-side .lg01-photo{transform:translate3d(-25vw,0,0) scale(1.015)}
+.lg01-panel{position:absolute;z-index:4;left:0;top:0;width:50vw;height:100%;background:#050607;display:flex;align-items:center;padding:clamp(34px,6vw,88px);transform:translate3d(0,0,0);transition:transform var(--move) var(--move-ease),box-shadow 1.35s ease;will-change:transform;backface-visibility:hidden;box-shadow:22px 0 46px rgba(0,0,0,.18)}
+.lg01.register-side .lg01-panel{transform:translate3d(50vw,0,0);box-shadow:-22px 0 46px rgba(0,0,0,.18)}
+.lg01-panel::before,.lg01-panel::after{content:"";position:absolute;top:0;bottom:0;width:220px;pointer-events:none;opacity:0;transition:opacity 1.3s ease}
+.lg01-panel::after{right:-220px;background:linear-gradient(90deg,#050607 0%,rgba(5,6,7,.92) 20%,rgba(5,6,7,.55) 54%,rgba(5,6,7,0) 100%);opacity:1}
+.lg01-panel::before{left:-220px;background:linear-gradient(270deg,#050607 0%,rgba(5,6,7,.92) 20%,rgba(5,6,7,.55) 54%,rgba(5,6,7,0) 100%)}
+.lg01.register-side .lg01-panel::after{opacity:0}.lg01.register-side .lg01-panel::before{opacity:1}
+.lg01-inner{position:relative;width:min(430px,100%);min-height:560px}
+.lg01-view{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;pointer-events:none;opacity:0}
+.lg01.show-login .lg01-login,.lg01.show-register .lg01-register{pointer-events:auto;opacity:1}
+.lg01.is-moving .lg01-view{pointer-events:none!important}
+.lg01-reveal{opacity:0;filter:blur(9px);transform:translate3d(0,38px,0);will-change:opacity,filter,transform}
+.lg01.show-login .lg01-login .lg01-reveal,.lg01.show-register .lg01-register .lg01-reveal{animation:lg01-rise 1.35s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 135ms)}
+@keyframes lg01-rise{0%{opacity:0;filter:blur(9px);transform:translate3d(0,38px,0)}55%{filter:blur(2px)}100%{opacity:1;filter:blur(0);transform:translate3d(0,0,0)}}
+.lg01.is-moving .lg01-reveal{animation:none!important;opacity:0!important;filter:blur(8px)!important;transform:translate3d(0,24px,0)!important;transition:opacity .68s ease,filter .68s ease,transform .68s ease}
+.lg01 h1{margin:0 0 30px;font:500 clamp(42px,5vw,68px)/.95 Georgia,serif;letter-spacing:-.035em}
+.lg01-form{display:grid;gap:13px}.lg01-field{display:grid;gap:7px}.lg01-field span{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#aaa69e}
+.lg01-input{width:100%;height:54px;border:1px solid var(--line);border-radius:13px;background:#0b0d10;color:#fff;padding:0 15px;outline:none;font-size:14px;transition:border-color .2s ease,box-shadow .2s ease}
+.lg01-input:focus{border-color:rgba(209,173,115,.72);box-shadow:0 0 0 4px rgba(209,173,115,.07)}
+.lg01-actions{display:grid;gap:10px;margin-top:5px}.lg01-btn{height:54px;border-radius:13px;border:1px solid var(--line);cursor:pointer;font-weight:800;font-size:13px;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}
+.lg01-primary{border-color:transparent;background:#f1eadf;color:#08090c}.lg01-primary:hover{transform:translateY(-2px);background:#fff}.lg01-secondary{background:transparent;color:#d7d1c8}.lg01-secondary:hover{border-color:rgba(209,173,115,.55);color:var(--accent)}
+.lg01-message{min-height:18px;margin-top:10px;color:#bdb7ad;font-size:12px}.lg01-message.error{color:#ffb6b6}
+.lg01-note{position:absolute;left:clamp(28px,4vw,56px);bottom:30px;z-index:6;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.72;transition:opacity .6s ease}.lg01.is-moving .lg01-note{opacity:0}
+@media(max-width:820px){body{overflow:auto}.lg01{min-height:100svh;height:auto}.lg01-photo{inset:0;width:100%;transform:none!important}.lg01-panel,.lg01.register-side .lg01-panel{position:relative;width:100%;min-height:100svh;padding:28px 22px;transform:none;box-shadow:none;background:rgba(5,6,7,.91);backdrop-filter:blur(7px)}.lg01-panel::before,.lg01-panel::after{display:none}.lg01-inner{margin:auto;min-height:620px}.lg01-note{display:none}}
+</style>
+<script src="assets/js/catalogo-s.config.js"></script>
+</head>
+<body>
+<main class="lg01 show-login" id="lg01">
+  <section class="lg01-photo" aria-hidden="true"></section>
+  <section class="lg01-panel" id="lg01-panel" aria-live="polite">
+    <div class="lg01-inner">
+      <div class="lg01-view lg01-login">
+        <h1 class="lg01-reveal" style="--i:0">Bem-vindo de volta.</h1>
+        <form class="lg01-form" id="lg01-login-form">
+          <label class="lg01-field lg01-reveal" style="--i:1"><span>E-mail</span><input class="lg01-input" name="email" type="email" autocomplete="email" required></label>
+          <label class="lg01-field lg01-reveal" style="--i:2"><span>Senha</span><input class="lg01-input" name="senha" type="password" autocomplete="current-password" required></label>
+          <div class="lg01-actions lg01-reveal" style="--i:3"><button class="lg01-btn lg01-primary" type="submit">Entrar</button><button class="lg01-btn lg01-secondary" id="lg01-open-register" type="button">Criar conta</button></div>
+          <div class="lg01-message lg01-reveal" style="--i:4" id="lg01-login-message"></div>
+        </form>
+      </div>
+      <div class="lg01-view lg01-register">
+        <h1 class="lg01-reveal" style="--i:0">Crie seu acesso.</h1>
+        <form class="lg01-form" id="lg01-register-form">
+          <label class="lg01-field lg01-reveal" style="--i:1"><span>Nome</span><input class="lg01-input" name="nome" type="text" autocomplete="name" required></label>
+          <label class="lg01-field lg01-reveal" style="--i:2"><span>E-mail</span><input class="lg01-input" name="email" type="email" autocomplete="email" required></label>
+          <label class="lg01-field lg01-reveal" style="--i:3"><span>Senha</span><input class="lg01-input" name="senha" type="password" autocomplete="new-password" minlength="8" required></label>
+          <label class="lg01-field lg01-reveal" style="--i:4"><span>Confirmar senha</span><input class="lg01-input" name="confirmarSenha" type="password" autocomplete="new-password" minlength="8" required></label>
+          <div class="lg01-actions lg01-reveal" style="--i:5"><button class="lg01-btn lg01-primary" type="submit">Criar conta</button><button class="lg01-btn lg01-secondary" id="lg01-back-login" type="button">Já tenho conta</button></div>
+          <div class="lg01-message lg01-reveal" style="--i:6" id="lg01-register-message"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div class="lg01-note">LG01 · Login lateral</div>
+</main>
+<script>
+// ===== EDITE AQUI: TELA APÓS O LOGIN =====
+const DESTINO_APOS_LOGIN=window.CATALOGO_S_CONFIG?.auth?.afterLogin||'index.html';
+// ===== EDITE AQUI: ENDPOINTS DO SEU BACKEND =====
+const ENDPOINT_LOGIN=window.CATALOGO_S_CONFIG?.auth?.loginEndpoint||'';
+const ENDPOINT_CADASTRO=window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint||'';
+const MODO_DEMONSTRACAO=window.self!==window.top;
+const shell=document.getElementById('lg01');
+const loginForm=document.getElementById('lg01-login-form');
+const registerForm=document.getElementById('lg01-register-form');
+const loginMessage=document.getElementById('lg01-login-message');
+const registerMessage=document.getElementById('lg01-register-message');
+const MOVE_MS=2000;
+let trocando=false;
+const esperar=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function mudarModo(destino){
+  const cadastro=destino==='register';
+  if(trocando)return;
+  if(cadastro&&shell.classList.contains('register-side'))return;
+  if(!cadastro&&!shell.classList.contains('register-side'))return;
+  trocando=true;
+  loginMessage.textContent='';registerMessage.textContent='';
+  shell.classList.add('is-moving');
+  shell.classList.remove('show-login','show-register');
+  await esperar(700);
+  shell.classList.toggle('register-side',cadastro);
+  await esperar(MOVE_MS+80);
+  shell.classList.remove('is-moving');
+  await esperar(160);
+  shell.classList.add(cadastro?'show-register':'show-login');
+  await esperar(1750);
+  trocando=false;
+}
+document.getElementById('lg01-open-register').addEventListener('click',()=>mudarModo('register'));
+document.getElementById('lg01-back-login').addEventListener('click',()=>mudarModo('login'));
+async function postJSON(url,payload){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.message||'Não foi possível concluir.');return data}
+loginForm.addEventListener('submit',async e=>{e.preventDefault();loginMessage.classList.remove('error');loginMessage.textContent='Entrando...';const payload=Object.fromEntries(new FormData(loginForm));try{if(ENDPOINT_LOGIN)await postJSON(ENDPOINT_LOGIN,payload);if(MODO_DEMONSTRACAO&&!ENDPOINT_LOGIN){loginMessage.textContent='Preview: defina o backend e o destino ao copiar o modelo.';return}location.href=DESTINO_APOS_LOGIN}catch(err){loginMessage.classList.add('error');loginMessage.textContent=err.message}});
+registerForm.addEventListener('submit',async e=>{e.preventDefault();registerMessage.classList.remove('error');const payload=Object.fromEntries(new FormData(registerForm));if(payload.senha!==payload.confirmarSenha){registerMessage.classList.add('error');registerMessage.textContent='As senhas não coincidem.';return}registerMessage.textContent='Criando conta...';try{if(ENDPOINT_CADASTRO)await postJSON(ENDPOINT_CADASTRO,payload);registerForm.reset();registerMessage.textContent='Conta criada.';await esperar(900);await mudarModo('login')}catch(err){registerMessage.classList.add('error');registerMessage.textContent=err.message}});
+</script>
+</body>
+</html>
+'@
+
+$ErrorActionPreference = 'Stop'
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+
+    $backupDir = Get-FullPath '.catalogo-s/backups'
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmssfff'
+    $safe = $Relative -replace '[\\/:*?"<>|]', '__'
+    $destination = Join-Path $backupDir ($stamp + '__' + $safe + '.bak')
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host "[Catálogo S] backup: $Relative"
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host "[Catálogo S] gravado: $Relative"
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = "<!-- CATALOGO-S:SLOT:MENU:START -->`r`n<!-- CATALOGO-S:SLOT:MENU:END -->"
+    $components = "<!-- CATALOGO-S:SLOT:COMPONENTES:START -->`r`n<!-- CATALOGO-S:SLOT:COMPONENTES:END -->"
+    $footer = "<!-- CATALOGO-S:SLOT:RODAPE:START -->`r`n<!-- CATALOGO-S:SLOT:RODAPE:END -->"
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:MENU:START') {
+        $Html = $Html -replace '(?i)<body([^>]*)>', ('<body$1>' + "`r`n" + $menu)
+    }
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:COMPONENTES:START') {
+        $Html = $Html -replace '(?i)</body>', ($components + "`r`n</body>")
+    }
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:RODAPE:START') {
+        $Html = $Html -replace '(?i)</body>', ($footer + "`r`n</body>")
+    }
+
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = '(?s)<!-- CATALOGO-S:SLOT:' + $escaped + ':START -->.*?<!-- CATALOGO-S:SLOT:' + $escaped + ':END -->'
+    $replacement = "<!-- CATALOGO-S:SLOT:$Name`:START -->`r`n$Content`r`n<!-- CATALOGO-S:SLOT:$Name`:END -->"
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath 'index.html'
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto</title></head><body></body></html>'
+        Write-TextFile 'index.html' (Ensure-Slots $shell) -SemBackup
+        return
+    }
+
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile 'index.html' $prepared
+    }
+}
+
+function Rebuild-Components {
+    Ensure-HostPage
+    $index = Get-FullPath 'index.html'
+    $html = [System.IO.File]::ReadAllText($index)
+    $html = Ensure-Slots $html
+
+    $componentDir = Get-FullPath 'components/catalogo-s'
+    $sections = @()
+
+    if (Test-Path -LiteralPath $componentDir) {
+        $files = Get-ChildItem -LiteralPath $componentDir -Filter '*.html' -File | Sort-Object LastWriteTime, Name
+
+        foreach ($file in $files) {
+            $key = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $parts = $key -split '-'
+            $id = $parts[0].ToUpperInvariant()
+            $relative = 'components/catalogo-s/' + $file.Name
+            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" style=`"display:block;width:100%;height:100vh;border:0`"></iframe></section>"
+        }
+    }
+
+    $updated = Set-Slot $html 'COMPONENTES' ($sections -join "`r`n")
+    Write-TextFile 'index.html' $updated
+}
+
+if ($Papel -eq 'inicio') {
+    $ConteudoModelo = Ensure-Slots $ConteudoModelo
+}
+
+Write-TextFile $ArquivoAlvo $ConteudoModelo
+
+if ($Papel -eq 'inicio') {
+    Rebuild-Components
+}
+
+if ($Papel -eq 'login') {
+    $loginApi = Test-Path -LiteralPath (Get-FullPath 'api/auth/login.js')
+    $cadastroApi = Test-Path -LiteralPath (Get-FullPath 'api/auth/cadastro.js')
+
+    $loginEndpoint = ''
+    $cadastroEndpoint = ''
+    if ($loginApi -and $cadastroApi) {
+        $loginEndpoint = '/api/auth/login'
+        $cadastroEndpoint = '/api/auth/cadastro'
+    }
+
+    $config = "// Gerado localmente pelo Catálogo S.`r`nwindow.CATALOGO_S_CONFIG={auth:{afterLogin:'index.html',loginEndpoint:'$loginEndpoint',cadastroEndpoint:'$cadastroEndpoint'}};`r`n"
+    Write-TextFile 'assets/js/catalogo-s.config.js' $config
+}
+
+Write-Host ""
+Write-Host "[Catálogo S] $ModeloId — $ModeloNome instalado com sucesso."
+Write-Host "[Catálogo S] Nenhum arquivo foi baixado do GitHub."

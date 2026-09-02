@@ -5,16 +5,163 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>L04 — Grade Editorial com Filtros em Drawer</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:52svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1100px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:14px/1.65 Consolas,Monaco,monospace;white-space:pre-wrap;word-break:break-word}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}}
+*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}
 </style>
 </head>
 <body>
 <a class="back" href="../../index.html#categoria=listagens" aria-label="Voltar">←</a>
 <section class="preview"><iframe src="bloco-pronto.html" title="Demonstração L04"></iframe></section>
-<section class="install"><div class="box"><div class="head"><h1>L04 — Grade Editorial com Filtros em Drawer</h1><button id="copy" type="button">Copiar</button></div><pre id="command">npx --yes github:restoffkaua08-afk/Catalogo_S#main add L04</pre></div></section>
+<section class="install"><div class="box"><div class="head"><h1>L04 — Grade Editorial com Filtros em Drawer</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;L04&#x27;
+$ModeloNome = &#x27;Grade Editorial com Filtros em Drawer&#x27;
+$Papel = &#x27;produtos&#x27;
+$ArquivoAlvo = &#x27;produtos.html&#x27;
+$ConteudoModelo = @&#x27;
+&lt;style&gt;
+#l04{--ink:#f5f1e8;--muted:#9d998f;--line:#ffffff17;--surface:#111318;--accent:#d2ad72;max-width:1360px;margin:auto;color:var(--ink);font-family:Arial,sans-serif;position:relative}#l04 *{box-sizing:border-box}#l04 .top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:20px}#l04 .chips{display:flex;gap:8px;flex-wrap:wrap}#l04 .chip,#l04 .open-filter{padding:10px 15px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);cursor:pointer}#l04 .chip.active{color:#111;background:var(--accent);border-color:var(--accent)}#l04 .open-filter{color:var(--ink);background:var(--surface)}#l04 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px 18px}#l04 .card{position:relative;min-width:0}#l04 .visual{position:relative;aspect-ratio:4/5;overflow:hidden;background:#17191e}#l04 img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .65s cubic-bezier(.2,.7,.2,1),filter .4s}#l04 .card:hover img{transform:scale(1.035);filter:brightness(.88)}#l04 .quick{position:absolute;left:14px;right:14px;bottom:14px;display:flex;gap:8px;transform:translateY(16px);opacity:0;transition:.28s}#l04 .card:hover .quick{transform:none;opacity:1}#l04 .quick button{flex:1;padding:11px;border:0;border-radius:7px;background:#f4f1e8;color:#111;font-weight:800;cursor:pointer}#l04 .info{padding:14px 2px}#l04 .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.1em}#l04 h3{margin:8px 0 8px;font:500 19px Georgia,serif}#l04 .price{font-weight:800}#l04 .card[hidden]{display:none}#l04 .scrim{position:fixed;inset:0;z-index:90;background:#0008;opacity:0;pointer-events:none;transition:.3s}#l04 .scrim.open{opacity:1;pointer-events:auto}#l04 .drawer{position:fixed;z-index:91;top:0;right:0;width:min(390px,92vw);height:100vh;padding:28px;background:#111318;border-left:1px solid var(--line);transform:translateX(102%);transition:transform .34s cubic-bezier(.2,.8,.2,1);box-shadow:-30px 0 80px #0008}#l04 .drawer.open{transform:none}#l04 .drawer-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}#l04 .drawer h3{margin:0;font:500 30px Georgia,serif}#l04 .close{width:38px;height:38px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);cursor:pointer}#l04 .facet{padding:18px 0;border-top:1px solid var(--line)}#l04 .facet b{display:block;margin-bottom:12px;font-size:11px;text-transform:uppercase;letter-spacing:.12em}#l04 .facet label{display:flex;align-items:center;gap:10px;margin:11px 0;color:var(--muted);font-size:13px}#l04 input{accent-color:var(--accent)}@media(max-width:900px){#l04 .grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:580px){#l04 .top{align-items:flex-start;flex-direction:column}#l04 .grid{grid-template-columns:1fr}}&lt;/style&gt;
+&lt;section id=&quot;l04&quot;&gt;&lt;div class=&quot;top&quot;&gt;&lt;div class=&quot;chips&quot;&gt;&lt;button class=&quot;chip active&quot; data-cat=&quot;Todos&quot;&gt;Todos&lt;/button&gt;&lt;button class=&quot;chip&quot; data-cat=&quot;Moda&quot;&gt;Moda&lt;/button&gt;&lt;button class=&quot;chip&quot; data-cat=&quot;Eletrônicos&quot;&gt;Tech&lt;/button&gt;&lt;button class=&quot;chip&quot; data-cat=&quot;Casa&quot;&gt;Casa&lt;/button&gt;&lt;/div&gt;&lt;button class=&quot;open-filter&quot; id=&quot;l04-open&quot;&gt;Filtros avançados · ☷&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;grid&quot; id=&quot;l04-grid&quot;&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Moda&quot; data-brand=&quot;Atelier&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Tênis Studio 01&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;Atelier&lt;/span&gt;&lt;span&gt;Moda&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Tênis Studio 01&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 429&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Acessórios&quot; data-brand=&quot;North&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Relógio Arc Steel&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;North&lt;/span&gt;&lt;span&gt;Acessórios&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Relógio Arc Steel&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 799&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Eletrônicos&quot; data-brand=&quot;Vertex&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Headphone Pro&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;Vertex&lt;/span&gt;&lt;span&gt;Eletrônicos&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Headphone Pro&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 649&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Casa&quot; data-brand=&quot;Forma&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Poltrona Mono&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;Forma&lt;/span&gt;&lt;span&gt;Casa&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Poltrona Mono&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 1.890&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Moda&quot; data-brand=&quot;Atelier&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Bolsa Frame&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;Atelier&lt;/span&gt;&lt;span&gt;Moda&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Bolsa Frame&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 559&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;article class=&quot;card&quot; data-cat=&quot;Eletrônicos&quot; data-brand=&quot;Vertex&quot;&gt;&lt;div class=&quot;visual&quot;&gt;&lt;img src=&quot;https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&amp;fit=crop&amp;w=900&amp;q=80&quot; alt=&quot;Câmera Compact X&quot;&gt;&lt;div class=&quot;quick&quot;&gt;&lt;button&gt;Quick view&lt;/button&gt;&lt;button&gt;♡&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;info&quot;&gt;&lt;div class=&quot;meta&quot;&gt;&lt;span&gt;Vertex&lt;/span&gt;&lt;span&gt;Eletrônicos&lt;/span&gt;&lt;/div&gt;&lt;h3&gt;Câmera Compact X&lt;/h3&gt;&lt;span class=&quot;price&quot;&gt;R$ 2.390&lt;/span&gt;&lt;/div&gt;&lt;/article&gt;&lt;/div&gt;&lt;div class=&quot;scrim&quot; id=&quot;l04-scrim&quot;&gt;&lt;/div&gt;&lt;aside class=&quot;drawer&quot; id=&quot;l04-drawer&quot;&gt;&lt;div class=&quot;drawer-head&quot;&gt;&lt;h3&gt;Filtros&lt;/h3&gt;&lt;button class=&quot;close&quot; id=&quot;l04-close&quot;&gt;×&lt;/button&gt;&lt;/div&gt;&lt;div class=&quot;facet&quot;&gt;&lt;b&gt;Marca&lt;/b&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;l04-brand&quot; value=&quot;Atelier&quot;&gt; Atelier&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;l04-brand&quot; value=&quot;Vertex&quot;&gt; Vertex&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;l04-brand&quot; value=&quot;Forma&quot;&gt; Forma&lt;/label&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; name=&quot;l04-brand&quot; value=&quot;North&quot;&gt; North&lt;/label&gt;&lt;/div&gt;&lt;div class=&quot;facet&quot;&gt;&lt;b&gt;Disponibilidade&lt;/b&gt;&lt;label&gt;&lt;input type=&quot;checkbox&quot; checked&gt; Somente em estoque&lt;/label&gt;&lt;/div&gt;&lt;/aside&gt;&lt;/section&gt;&lt;script&gt;(function(){const r=document.getElementById(&#x27;l04&#x27;),drawer=r.querySelector(&#x27;#l04-drawer&#x27;),scrim=r.querySelector(&#x27;#l04-scrim&#x27;),cards=[...r.querySelectorAll(&#x27;.card&#x27;)],chips=[...r.querySelectorAll(&#x27;.chip&#x27;)];let cat=&#x27;Todos&#x27;;function open(v){drawer.classList.toggle(&#x27;open&#x27;,v);scrim.classList.toggle(&#x27;open&#x27;,v)}function run(){const brands=[...r.querySelectorAll(&#x27;input[name=l04-brand]:checked&#x27;)].map(x=&gt;x.value);cards.forEach(c=&gt;c.hidden=!((cat===&#x27;Todos&#x27;||c.dataset.cat===cat)&amp;&amp;(!brands.length||brands.includes(c.dataset.brand))))}r.querySelector(&#x27;#l04-open&#x27;).onclick=()=&gt;open(true);r.querySelector(&#x27;#l04-close&#x27;).onclick=()=&gt;open(false);scrim.onclick=()=&gt;open(false);chips.forEach(c=&gt;c.onclick=()=&gt;{cat=c.dataset.cat;chips.forEach(x=&gt;x.classList.toggle(&#x27;active&#x27;,x===c));run()});r.querySelectorAll(&#x27;input[name=l04-brand]&#x27;).forEach(i=&gt;i.onchange=run)})();&lt;/script&gt;
+&#x27;@
+
+$ErrorActionPreference = &#x27;Stop&#x27;
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+
+    $backupDir = Get-FullPath &#x27;.catalogo-s/backups&#x27;
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+
+    $stamp = Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;
+    $safe = $Relative -replace &#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;, &#x27;__&#x27;
+    $destination = Join-Path $backupDir ($stamp + &#x27;__&#x27; + $safe + &#x27;.bak&#x27;)
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host &quot;[Catálogo S] backup: $Relative&quot;
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host &quot;[Catálogo S] gravado: $Relative&quot;
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = &quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;
+    $components = &quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;
+    $footer = &quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:MENU:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;, (&#x27;&lt;body$1&gt;&#x27; + &quot;`r`n&quot; + $menu)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($components + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($footer + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = &#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:END --&gt;&#x27;
+    $replacement = &quot;&lt;!-- CATALOGO-S:SLOT:$Name`:START --&gt;`r`n$Content`r`n&lt;!-- CATALOGO-S:SLOT:$Name`:END --&gt;&quot;
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath &#x27;index.html&#x27;
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;
+        Write-TextFile &#x27;index.html&#x27; (Ensure-Slots $shell) -SemBackup
+        return
+    }
+
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile &#x27;index.html&#x27; $prepared
+    }
+}
+
+function Rebuild-Components {
+    Ensure-HostPage
+    $index = Get-FullPath &#x27;index.html&#x27;
+    $html = [System.IO.File]::ReadAllText($index)
+    $html = Ensure-Slots $html
+
+    $componentDir = Get-FullPath &#x27;components/catalogo-s&#x27;
+    $sections = @()
+
+    if (Test-Path -LiteralPath $componentDir) {
+        $files = Get-ChildItem -LiteralPath $componentDir -Filter &#x27;*.html&#x27; -File | Sort-Object LastWriteTime, Name
+
+        foreach ($file in $files) {
+            $key = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $parts = $key -split &#x27;-&#x27;
+            $id = $parts[0].ToUpperInvariant()
+            $relative = &#x27;components/catalogo-s/&#x27; + $file.Name
+            $sections += &quot;&lt;section id=`&quot;catalogo-s-$key`&quot; data-catalogo-s-instance=`&quot;$key`&quot; data-catalogo-s-model=`&quot;$id`&quot; style=`&quot;width:100%;min-height:100vh;overflow:hidden`&quot;&gt;&lt;iframe src=`&quot;$relative`&quot; title=`&quot;$id`&quot; loading=`&quot;lazy`&quot; style=`&quot;display:block;width:100%;height:100vh;border:0`&quot;&gt;&lt;/iframe&gt;&lt;/section&gt;&quot;
+        }
+    }
+
+    $updated = Set-Slot $html &#x27;COMPONENTES&#x27; ($sections -join &quot;`r`n&quot;)
+    Write-TextFile &#x27;index.html&#x27; $updated
+}
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    $ConteudoModelo = Ensure-Slots $ConteudoModelo
+}
+
+Write-TextFile $ArquivoAlvo $ConteudoModelo
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    Rebuild-Components
+}
+
+if ($Papel -eq &#x27;login&#x27;) {
+    $loginApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/login.js&#x27;)
+    $cadastroApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/cadastro.js&#x27;)
+
+    $loginEndpoint = &#x27;&#x27;
+    $cadastroEndpoint = &#x27;&#x27;
+    if ($loginApi -and $cadastroApi) {
+        $loginEndpoint = &#x27;/api/auth/login&#x27;
+        $cadastroEndpoint = &#x27;/api/auth/cadastro&#x27;
+    }
+
+    $config = &quot;// Gerado localmente pelo Catálogo S.`r`nwindow.CATALOGO_S_CONFIG={auth:{afterLogin:&#x27;index.html&#x27;,loginEndpoint:&#x27;$loginEndpoint&#x27;,cadastroEndpoint:&#x27;$cadastroEndpoint&#x27;}};`r`n&quot;
+    Write-TextFile &#x27;assets/js/catalogo-s.config.js&#x27; $config
+}
+
+Write-Host &quot;&quot;
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado com sucesso.&quot;
+Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
+</pre></div></section>
 <script>
 const b=document.getElementById('copy'),c=document.getElementById('command');
-b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent.trim())}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1200)});
+b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});
 </script>
 </body>
 </html>

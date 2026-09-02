@@ -1,10 +1,17 @@
 P02 — Barra de Pesquisa em Bloco
 
-INSTALAÇÃO
-npx --yes github:restoffkaua08-afk/Catalogo_S#main add P02
+INSTALAÇÃO PÚBLICA
+Abra a demonstração do modelo, copie o bloco PowerShell completo e cole no PowerShell aberto na raiz do projeto.
+
+O script exibido na demonstração é autocontido:
+- contém o payload necessário do modelo;
+- não usa npx;
+- não consulta o GitHub;
+- não exige acesso ao repositório do Catálogo S;
+- cria backup antes de substituir arquivos existentes.
+
+ARQUIVO AUDITÁVEL
+instalar.ps1
 
 MODO
 Componente repetível
-
-O Catálogo S cria os arquivos, registra o modelo em .catalogo-s/projeto.json e executa a reconciliação automática.
-Os arquivos bloco-pronto.* permanecem como fonte interna do modelo e não precisam ser copiados manualmente.

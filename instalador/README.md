@@ -1,13 +1,21 @@
-# Instalador do Catálogo S
+# Instalação do Catálogo S
 
-Status: **integrado**.
+## Fluxo público
 
-Todos os modelos existentes são instalados pelo mesmo comando:
+A instalação pública não depende mais do GitHub nem de `npx`.
 
-```bash
-npx --yes github:restoffkaua08-afk/Catalogo_S#main add <ID>
-```
+Cada demonstração contém um bloco **PowerShell autocontido** com todo o payload necessário para instalar aquele modelo. O usuário copia o bloco inteiro e cola no PowerShell aberto na raiz do projeto.
 
-O CLI cria `.catalogo-s/projeto.json`, mantém backups, usa nomes canônicos de páginas e reconcilia automaticamente componentes e integrações compatíveis. Telas iniciais usam `index.html`, listagens usam `produtos.html`, login usa `login.html`, e componentes repetíveis são registrados em `components/catalogo-s/`.
+O script:
+- cria os arquivos do modelo localmente;
+- cria backups em `.catalogo-s/backups/` antes de substituir arquivos;
+- mantém componentes repetíveis em `components/catalogo-s/`;
+- recompõe os componentes ao trocar a tela inicial;
+- conecta `LG01` e `DB01` quando os dois existem;
+- não baixa nenhum arquivo do repositório durante a instalação.
 
-Comandos: `init`, `add <ID>`, `list`, `reconcile` e `doctor`.
+Cada modelo também guarda a mesma versão auditável em `instalar.ps1`.
+
+## Ferramentas internas
+
+`instalador/catalogo-s.mjs` e `instalador/modelos.json` permanecem como ferramentas internas de desenvolvimento, contrato e testes do Catálogo S. Eles não são requisito para quem instala um modelo pelo site.

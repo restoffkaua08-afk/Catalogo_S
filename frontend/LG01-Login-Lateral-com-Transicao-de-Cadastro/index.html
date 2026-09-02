@@ -5,16 +5,272 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>LG01 — Login Lateral com Transição de Cadastro</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:52svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1100px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:14px/1.65 Consolas,Monaco,monospace;white-space:pre-wrap;word-break:break-word}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}}
+*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}
 </style>
 </head>
 <body>
 <a class="back" href="../../index.html#categoria=login" aria-label="Voltar">←</a>
 <section class="preview"><iframe src="bloco-pronto.html" title="Demonstração LG01"></iframe></section>
-<section class="install"><div class="box"><div class="head"><h1>LG01 — Login Lateral com Transição de Cadastro</h1><button id="copy" type="button">Copiar</button></div><pre id="command">npx --yes github:restoffkaua08-afk/Catalogo_S#main add LG01</pre></div></section>
+<section class="install"><div class="box"><div class="head"><h1>LG01 — Login Lateral com Transição de Cadastro</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;LG01&#x27;
+$ModeloNome = &#x27;Login Lateral com Transição de Cadastro&#x27;
+$Papel = &#x27;login&#x27;
+$ArquivoAlvo = &#x27;login.html&#x27;
+$ConteudoModelo = @&#x27;
+&lt;!doctype html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;
+&lt;title&gt;Login&lt;/title&gt;
+&lt;style&gt;
+:root{
+  --bg:#050607;--ink:#f7f3e9;--muted:#98948c;--line:rgba(255,255,255,.14);--accent:#d1ad73;
+  --photo:url(&#x27;https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=2200&amp;q=88&#x27;);
+  --move:2s;--move-ease:cubic-bezier(.42,0,.18,1)
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{min-height:100svh;overflow:hidden}
+.lg01{position:relative;width:100%;height:100svh;min-height:680px;overflow:hidden;background:#050607;isolation:isolate}
+.lg01-photo{position:absolute;z-index:1;top:-4vh;bottom:-4vh;left:-25vw;width:150vw;background-image:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.24)),var(--photo);background-size:cover;background-position:center;transform:translate3d(25vw,0,0) scale(1.015);transition:transform var(--move) var(--move-ease);will-change:transform;backface-visibility:hidden}
+.lg01.register-side .lg01-photo{transform:translate3d(-25vw,0,0) scale(1.015)}
+.lg01-panel{position:absolute;z-index:4;left:0;top:0;width:50vw;height:100%;background:#050607;display:flex;align-items:center;padding:clamp(34px,6vw,88px);transform:translate3d(0,0,0);transition:transform var(--move) var(--move-ease),box-shadow 1.35s ease;will-change:transform;backface-visibility:hidden;box-shadow:22px 0 46px rgba(0,0,0,.18)}
+.lg01.register-side .lg01-panel{transform:translate3d(50vw,0,0);box-shadow:-22px 0 46px rgba(0,0,0,.18)}
+.lg01-panel::before,.lg01-panel::after{content:&quot;&quot;;position:absolute;top:0;bottom:0;width:220px;pointer-events:none;opacity:0;transition:opacity 1.3s ease}
+.lg01-panel::after{right:-220px;background:linear-gradient(90deg,#050607 0%,rgba(5,6,7,.92) 20%,rgba(5,6,7,.55) 54%,rgba(5,6,7,0) 100%);opacity:1}
+.lg01-panel::before{left:-220px;background:linear-gradient(270deg,#050607 0%,rgba(5,6,7,.92) 20%,rgba(5,6,7,.55) 54%,rgba(5,6,7,0) 100%)}
+.lg01.register-side .lg01-panel::after{opacity:0}.lg01.register-side .lg01-panel::before{opacity:1}
+.lg01-inner{position:relative;width:min(430px,100%);min-height:560px}
+.lg01-view{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;pointer-events:none;opacity:0}
+.lg01.show-login .lg01-login,.lg01.show-register .lg01-register{pointer-events:auto;opacity:1}
+.lg01.is-moving .lg01-view{pointer-events:none!important}
+.lg01-reveal{opacity:0;filter:blur(9px);transform:translate3d(0,38px,0);will-change:opacity,filter,transform}
+.lg01.show-login .lg01-login .lg01-reveal,.lg01.show-register .lg01-register .lg01-reveal{animation:lg01-rise 1.35s cubic-bezier(.16,1,.3,1) both;animation-delay:calc(var(--i,0) * 135ms)}
+@keyframes lg01-rise{0%{opacity:0;filter:blur(9px);transform:translate3d(0,38px,0)}55%{filter:blur(2px)}100%{opacity:1;filter:blur(0);transform:translate3d(0,0,0)}}
+.lg01.is-moving .lg01-reveal{animation:none!important;opacity:0!important;filter:blur(8px)!important;transform:translate3d(0,24px,0)!important;transition:opacity .68s ease,filter .68s ease,transform .68s ease}
+.lg01 h1{margin:0 0 30px;font:500 clamp(42px,5vw,68px)/.95 Georgia,serif;letter-spacing:-.035em}
+.lg01-form{display:grid;gap:13px}.lg01-field{display:grid;gap:7px}.lg01-field span{font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#aaa69e}
+.lg01-input{width:100%;height:54px;border:1px solid var(--line);border-radius:13px;background:#0b0d10;color:#fff;padding:0 15px;outline:none;font-size:14px;transition:border-color .2s ease,box-shadow .2s ease}
+.lg01-input:focus{border-color:rgba(209,173,115,.72);box-shadow:0 0 0 4px rgba(209,173,115,.07)}
+.lg01-actions{display:grid;gap:10px;margin-top:5px}.lg01-btn{height:54px;border-radius:13px;border:1px solid var(--line);cursor:pointer;font-weight:800;font-size:13px;transition:transform .2s ease,background .2s ease,border-color .2s ease,color .2s ease}
+.lg01-primary{border-color:transparent;background:#f1eadf;color:#08090c}.lg01-primary:hover{transform:translateY(-2px);background:#fff}.lg01-secondary{background:transparent;color:#d7d1c8}.lg01-secondary:hover{border-color:rgba(209,173,115,.55);color:var(--accent)}
+.lg01-message{min-height:18px;margin-top:10px;color:#bdb7ad;font-size:12px}.lg01-message.error{color:#ffb6b6}
+.lg01-note{position:absolute;left:clamp(28px,4vw,56px);bottom:30px;z-index:6;color:rgba(255,255,255,.42);font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.72;transition:opacity .6s ease}.lg01.is-moving .lg01-note{opacity:0}
+@media(max-width:820px){body{overflow:auto}.lg01{min-height:100svh;height:auto}.lg01-photo{inset:0;width:100%;transform:none!important}.lg01-panel,.lg01.register-side .lg01-panel{position:relative;width:100%;min-height:100svh;padding:28px 22px;transform:none;box-shadow:none;background:rgba(5,6,7,.91);backdrop-filter:blur(7px)}.lg01-panel::before,.lg01-panel::after{display:none}.lg01-inner{margin:auto;min-height:620px}.lg01-note{display:none}}
+&lt;/style&gt;
+&lt;script src=&quot;assets/js/catalogo-s.config.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;main class=&quot;lg01 show-login&quot; id=&quot;lg01&quot;&gt;
+  &lt;section class=&quot;lg01-photo&quot; aria-hidden=&quot;true&quot;&gt;&lt;/section&gt;
+  &lt;section class=&quot;lg01-panel&quot; id=&quot;lg01-panel&quot; aria-live=&quot;polite&quot;&gt;
+    &lt;div class=&quot;lg01-inner&quot;&gt;
+      &lt;div class=&quot;lg01-view lg01-login&quot;&gt;
+        &lt;h1 class=&quot;lg01-reveal&quot; style=&quot;--i:0&quot;&gt;Bem-vindo de volta.&lt;/h1&gt;
+        &lt;form class=&quot;lg01-form&quot; id=&quot;lg01-login-form&quot;&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:1&quot;&gt;&lt;span&gt;E-mail&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; required&gt;&lt;/label&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:2&quot;&gt;&lt;span&gt;Senha&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;senha&quot; type=&quot;password&quot; autocomplete=&quot;current-password&quot; required&gt;&lt;/label&gt;
+          &lt;div class=&quot;lg01-actions lg01-reveal&quot; style=&quot;--i:3&quot;&gt;&lt;button class=&quot;lg01-btn lg01-primary&quot; type=&quot;submit&quot;&gt;Entrar&lt;/button&gt;&lt;button class=&quot;lg01-btn lg01-secondary&quot; id=&quot;lg01-open-register&quot; type=&quot;button&quot;&gt;Criar conta&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;lg01-message lg01-reveal&quot; style=&quot;--i:4&quot; id=&quot;lg01-login-message&quot;&gt;&lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;lg01-view lg01-register&quot;&gt;
+        &lt;h1 class=&quot;lg01-reveal&quot; style=&quot;--i:0&quot;&gt;Crie seu acesso.&lt;/h1&gt;
+        &lt;form class=&quot;lg01-form&quot; id=&quot;lg01-register-form&quot;&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:1&quot;&gt;&lt;span&gt;Nome&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;nome&quot; type=&quot;text&quot; autocomplete=&quot;name&quot; required&gt;&lt;/label&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:2&quot;&gt;&lt;span&gt;E-mail&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;email&quot; type=&quot;email&quot; autocomplete=&quot;email&quot; required&gt;&lt;/label&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:3&quot;&gt;&lt;span&gt;Senha&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;senha&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; minlength=&quot;8&quot; required&gt;&lt;/label&gt;
+          &lt;label class=&quot;lg01-field lg01-reveal&quot; style=&quot;--i:4&quot;&gt;&lt;span&gt;Confirmar senha&lt;/span&gt;&lt;input class=&quot;lg01-input&quot; name=&quot;confirmarSenha&quot; type=&quot;password&quot; autocomplete=&quot;new-password&quot; minlength=&quot;8&quot; required&gt;&lt;/label&gt;
+          &lt;div class=&quot;lg01-actions lg01-reveal&quot; style=&quot;--i:5&quot;&gt;&lt;button class=&quot;lg01-btn lg01-primary&quot; type=&quot;submit&quot;&gt;Criar conta&lt;/button&gt;&lt;button class=&quot;lg01-btn lg01-secondary&quot; id=&quot;lg01-back-login&quot; type=&quot;button&quot;&gt;Já tenho conta&lt;/button&gt;&lt;/div&gt;
+          &lt;div class=&quot;lg01-message lg01-reveal&quot; style=&quot;--i:6&quot; id=&quot;lg01-register-message&quot;&gt;&lt;/div&gt;
+        &lt;/form&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+  &lt;div class=&quot;lg01-note&quot;&gt;LG01 · Login lateral&lt;/div&gt;
+&lt;/main&gt;
+&lt;script&gt;
+// ===== EDITE AQUI: TELA APÓS O LOGIN =====
+const DESTINO_APOS_LOGIN=window.CATALOGO_S_CONFIG?.auth?.afterLogin||&#x27;index.html&#x27;;
+// ===== EDITE AQUI: ENDPOINTS DO SEU BACKEND =====
+const ENDPOINT_LOGIN=window.CATALOGO_S_CONFIG?.auth?.loginEndpoint||&#x27;&#x27;;
+const ENDPOINT_CADASTRO=window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint||&#x27;&#x27;;
+const MODO_DEMONSTRACAO=window.self!==window.top;
+const shell=document.getElementById(&#x27;lg01&#x27;);
+const loginForm=document.getElementById(&#x27;lg01-login-form&#x27;);
+const registerForm=document.getElementById(&#x27;lg01-register-form&#x27;);
+const loginMessage=document.getElementById(&#x27;lg01-login-message&#x27;);
+const registerMessage=document.getElementById(&#x27;lg01-register-message&#x27;);
+const MOVE_MS=2000;
+let trocando=false;
+const esperar=ms=&gt;new Promise(resolve=&gt;setTimeout(resolve,ms));
+async function mudarModo(destino){
+  const cadastro=destino===&#x27;register&#x27;;
+  if(trocando)return;
+  if(cadastro&amp;&amp;shell.classList.contains(&#x27;register-side&#x27;))return;
+  if(!cadastro&amp;&amp;!shell.classList.contains(&#x27;register-side&#x27;))return;
+  trocando=true;
+  loginMessage.textContent=&#x27;&#x27;;registerMessage.textContent=&#x27;&#x27;;
+  shell.classList.add(&#x27;is-moving&#x27;);
+  shell.classList.remove(&#x27;show-login&#x27;,&#x27;show-register&#x27;);
+  await esperar(700);
+  shell.classList.toggle(&#x27;register-side&#x27;,cadastro);
+  await esperar(MOVE_MS+80);
+  shell.classList.remove(&#x27;is-moving&#x27;);
+  await esperar(160);
+  shell.classList.add(cadastro?&#x27;show-register&#x27;:&#x27;show-login&#x27;);
+  await esperar(1750);
+  trocando=false;
+}
+document.getElementById(&#x27;lg01-open-register&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;mudarModo(&#x27;register&#x27;));
+document.getElementById(&#x27;lg01-back-login&#x27;).addEventListener(&#x27;click&#x27;,()=&gt;mudarModo(&#x27;login&#x27;));
+async function postJSON(url,payload){const r=await fetch(url,{method:&#x27;POST&#x27;,headers:{&#x27;Content-Type&#x27;:&#x27;application/json&#x27;},body:JSON.stringify(payload)});const data=await r.json().catch(()=&gt;({}));if(!r.ok)throw new Error(data.message||&#x27;Não foi possível concluir.&#x27;);return data}
+loginForm.addEventListener(&#x27;submit&#x27;,async e=&gt;{e.preventDefault();loginMessage.classList.remove(&#x27;error&#x27;);loginMessage.textContent=&#x27;Entrando...&#x27;;const payload=Object.fromEntries(new FormData(loginForm));try{if(ENDPOINT_LOGIN)await postJSON(ENDPOINT_LOGIN,payload);if(MODO_DEMONSTRACAO&amp;&amp;!ENDPOINT_LOGIN){loginMessage.textContent=&#x27;Preview: defina o backend e o destino ao copiar o modelo.&#x27;;return}location.href=DESTINO_APOS_LOGIN}catch(err){loginMessage.classList.add(&#x27;error&#x27;);loginMessage.textContent=err.message}});
+registerForm.addEventListener(&#x27;submit&#x27;,async e=&gt;{e.preventDefault();registerMessage.classList.remove(&#x27;error&#x27;);const payload=Object.fromEntries(new FormData(registerForm));if(payload.senha!==payload.confirmarSenha){registerMessage.classList.add(&#x27;error&#x27;);registerMessage.textContent=&#x27;As senhas não coincidem.&#x27;;return}registerMessage.textContent=&#x27;Criando conta...&#x27;;try{if(ENDPOINT_CADASTRO)await postJSON(ENDPOINT_CADASTRO,payload);registerForm.reset();registerMessage.textContent=&#x27;Conta criada.&#x27;;await esperar(900);await mudarModo(&#x27;login&#x27;)}catch(err){registerMessage.classList.add(&#x27;error&#x27;);registerMessage.textContent=err.message}});
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+&#x27;@
+
+$ErrorActionPreference = &#x27;Stop&#x27;
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+
+    $backupDir = Get-FullPath &#x27;.catalogo-s/backups&#x27;
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+
+    $stamp = Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;
+    $safe = $Relative -replace &#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;, &#x27;__&#x27;
+    $destination = Join-Path $backupDir ($stamp + &#x27;__&#x27; + $safe + &#x27;.bak&#x27;)
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host &quot;[Catálogo S] backup: $Relative&quot;
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host &quot;[Catálogo S] gravado: $Relative&quot;
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = &quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;
+    $components = &quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;
+    $footer = &quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:MENU:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;, (&#x27;&lt;body$1&gt;&#x27; + &quot;`r`n&quot; + $menu)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($components + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($footer + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = &#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:END --&gt;&#x27;
+    $replacement = &quot;&lt;!-- CATALOGO-S:SLOT:$Name`:START --&gt;`r`n$Content`r`n&lt;!-- CATALOGO-S:SLOT:$Name`:END --&gt;&quot;
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath &#x27;index.html&#x27;
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;
+        Write-TextFile &#x27;index.html&#x27; (Ensure-Slots $shell) -SemBackup
+        return
+    }
+
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile &#x27;index.html&#x27; $prepared
+    }
+}
+
+function Rebuild-Components {
+    Ensure-HostPage
+    $index = Get-FullPath &#x27;index.html&#x27;
+    $html = [System.IO.File]::ReadAllText($index)
+    $html = Ensure-Slots $html
+
+    $componentDir = Get-FullPath &#x27;components/catalogo-s&#x27;
+    $sections = @()
+
+    if (Test-Path -LiteralPath $componentDir) {
+        $files = Get-ChildItem -LiteralPath $componentDir -Filter &#x27;*.html&#x27; -File | Sort-Object LastWriteTime, Name
+
+        foreach ($file in $files) {
+            $key = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $parts = $key -split &#x27;-&#x27;
+            $id = $parts[0].ToUpperInvariant()
+            $relative = &#x27;components/catalogo-s/&#x27; + $file.Name
+            $sections += &quot;&lt;section id=`&quot;catalogo-s-$key`&quot; data-catalogo-s-instance=`&quot;$key`&quot; data-catalogo-s-model=`&quot;$id`&quot; style=`&quot;width:100%;min-height:100vh;overflow:hidden`&quot;&gt;&lt;iframe src=`&quot;$relative`&quot; title=`&quot;$id`&quot; loading=`&quot;lazy`&quot; style=`&quot;display:block;width:100%;height:100vh;border:0`&quot;&gt;&lt;/iframe&gt;&lt;/section&gt;&quot;
+        }
+    }
+
+    $updated = Set-Slot $html &#x27;COMPONENTES&#x27; ($sections -join &quot;`r`n&quot;)
+    Write-TextFile &#x27;index.html&#x27; $updated
+}
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    $ConteudoModelo = Ensure-Slots $ConteudoModelo
+}
+
+Write-TextFile $ArquivoAlvo $ConteudoModelo
+
+if ($Papel -eq &#x27;inicio&#x27;) {
+    Rebuild-Components
+}
+
+if ($Papel -eq &#x27;login&#x27;) {
+    $loginApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/login.js&#x27;)
+    $cadastroApi = Test-Path -LiteralPath (Get-FullPath &#x27;api/auth/cadastro.js&#x27;)
+
+    $loginEndpoint = &#x27;&#x27;
+    $cadastroEndpoint = &#x27;&#x27;
+    if ($loginApi -and $cadastroApi) {
+        $loginEndpoint = &#x27;/api/auth/login&#x27;
+        $cadastroEndpoint = &#x27;/api/auth/cadastro&#x27;
+    }
+
+    $config = &quot;// Gerado localmente pelo Catálogo S.`r`nwindow.CATALOGO_S_CONFIG={auth:{afterLogin:&#x27;index.html&#x27;,loginEndpoint:&#x27;$loginEndpoint&#x27;,cadastroEndpoint:&#x27;$cadastroEndpoint&#x27;}};`r`n&quot;
+    Write-TextFile &#x27;assets/js/catalogo-s.config.js&#x27; $config
+}
+
+Write-Host &quot;&quot;
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado com sucesso.&quot;
+Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
+</pre></div></section>
 <script>
 const b=document.getElementById('copy'),c=document.getElementById('command');
-b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent.trim())}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1200)});
+b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});
 </script>
 </body>
 </html>

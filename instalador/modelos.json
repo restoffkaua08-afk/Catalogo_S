@@ -1,6 +1,7 @@
 {
-  "schema": 2,
+  "schema": 3,
   "geradoEm": "2026-09-02",
+  "instalacaoPublica": "powershell-autocontido",
   "modelos": {
     "C01": {
       "id": "C01",
@@ -9,6 +10,7 @@
       "papel": "carrossel",
       "modo": "componente",
       "template": "frontend/C01-Carrossel-de-Destaques/bloco-pronto.html",
+      "instaladorPublico": "frontend/C01-Carrossel-de-Destaques/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -19,6 +21,7 @@
       "papel": "carrossel",
       "modo": "componente",
       "template": "frontend/C02-Carrossel-Compacto-Lateral/bloco-pronto.html",
+      "instaladorPublico": "frontend/C02-Carrossel-Compacto-Lateral/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -29,6 +32,7 @@
       "papel": "carrossel",
       "modo": "componente",
       "template": "frontend/C03-Carrossel-Orbital-3D/bloco-pronto.html",
+      "instaladorPublico": "frontend/C03-Carrossel-Orbital-3D/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -40,6 +44,7 @@
       "modo": "banco",
       "pareadoCom": "LG01",
       "schemaTemplate": "backend/DB01-Banco-do-LG01/schema.sql",
+      "instaladorPublico": "backend/DB01-Banco-do-LG01/instalar.ps1",
       "arquivos": [
         {
           "origem": "instalador/templates/DB01/lib/catalogo-s-db.js",
@@ -62,6 +67,7 @@
       "papel": "secao",
       "modo": "componente",
       "template": "frontend/E01-Secao-de-Navegacao-Visual/bloco-pronto.html",
+      "instaladorPublico": "frontend/E01-Secao-de-Navegacao-Visual/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -72,6 +78,7 @@
       "papel": "secao",
       "modo": "componente",
       "template": "frontend/E02-Secao-de-Destaque-Lateral/bloco-pronto.html",
+      "instaladorPublico": "frontend/E02-Secao-de-Destaque-Lateral/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -82,6 +89,7 @@
       "papel": "secao",
       "modo": "componente",
       "template": "frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html",
+      "instaladorPublico": "frontend/E03-Secao-de-Galeria-Sobreposta/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -92,6 +100,7 @@
       "papel": "inicio",
       "modo": "pagina",
       "template": "frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/bloco-pronto.html",
+      "instaladorPublico": "frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/instalar.ps1",
       "target": "index.html",
       "rotulo": "Início"
     },
@@ -102,6 +111,7 @@
       "papel": "inicio",
       "modo": "pagina",
       "template": "frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/bloco-pronto.html",
+      "instaladorPublico": "frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1",
       "target": "index.html",
       "rotulo": "Início"
     },
@@ -112,6 +122,7 @@
       "papel": "inicio",
       "modo": "pagina",
       "template": "frontend/I03-Tela-Inicial-Central-com-Fundo-Atmosferico/bloco-pronto.html",
+      "instaladorPublico": "frontend/I03-Tela-Inicial-Central-com-Fundo-Atmosferico/instalar.ps1",
       "target": "index.html",
       "rotulo": "Início"
     },
@@ -122,6 +133,7 @@
       "papel": "inicio",
       "modo": "pagina",
       "template": "frontend/I04-Tela-Inicial-Lateral-com-Icone-Cinetico/bloco-pronto.html",
+      "instaladorPublico": "frontend/I04-Tela-Inicial-Lateral-com-Icone-Cinetico/instalar.ps1",
       "target": "index.html",
       "rotulo": "Início"
     },
@@ -132,6 +144,7 @@
       "papel": "inicio",
       "modo": "pagina",
       "template": "frontend/I05-Tela-Inicial-com-Mosaico-de-Destaques/bloco-pronto.html",
+      "instaladorPublico": "frontend/I05-Tela-Inicial-com-Mosaico-de-Destaques/instalar.ps1",
       "target": "index.html",
       "rotulo": "Início"
     },
@@ -142,6 +155,7 @@
       "papel": "produtos",
       "modo": "pagina",
       "template": "frontend/L01-Listagem-MR-em-Grade-com-Filtro-Compacto/bloco-pronto.html",
+      "instaladorPublico": "frontend/L01-Listagem-MR-em-Grade-com-Filtro-Compacto/instalar.ps1",
       "target": "produtos.html",
       "rotulo": "Produtos"
     },
@@ -152,6 +166,7 @@
       "papel": "produtos",
       "modo": "pagina",
       "template": "frontend/L02-Listagem-Facetada-com-Barra-Lateral-Instantanea/bloco-pronto.html",
+      "instaladorPublico": "frontend/L02-Listagem-Facetada-com-Barra-Lateral-Instantanea/instalar.ps1",
       "target": "produtos.html",
       "rotulo": "Produtos"
     },
@@ -162,6 +177,7 @@
       "papel": "produtos",
       "modo": "pagina",
       "template": "frontend/L03-Listagem-Horizontal-Comparativa/bloco-pronto.html",
+      "instaladorPublico": "frontend/L03-Listagem-Horizontal-Comparativa/instalar.ps1",
       "target": "produtos.html",
       "rotulo": "Produtos"
     },
@@ -172,6 +188,7 @@
       "papel": "produtos",
       "modo": "pagina",
       "template": "frontend/L04-Grade-Editorial-com-Filtros-em-Drawer/bloco-pronto.html",
+      "instaladorPublico": "frontend/L04-Grade-Editorial-com-Filtros-em-Drawer/instalar.ps1",
       "target": "produtos.html",
       "rotulo": "Produtos"
     },
@@ -182,6 +199,7 @@
       "papel": "login",
       "modo": "pagina",
       "template": "frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/bloco-pronto.html",
+      "instaladorPublico": "frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1",
       "target": "login.html",
       "rotulo": "Login"
     },
@@ -192,6 +210,7 @@
       "papel": "pesquisa",
       "modo": "componente",
       "template": "frontend/P01-Barra-de-Pesquisa-Minimalista-em-Linha/bloco-pronto.html",
+      "instaladorPublico": "frontend/P01-Barra-de-Pesquisa-Minimalista-em-Linha/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -202,6 +221,7 @@
       "papel": "pesquisa",
       "modo": "componente",
       "template": "frontend/P02-Barra-de-Pesquisa-em-Bloco/bloco-pronto.html",
+      "instaladorPublico": "frontend/P02-Barra-de-Pesquisa-em-Bloco/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -212,6 +232,7 @@
       "papel": "pesquisa",
       "modo": "componente",
       "template": "frontend/P03-Barra-de-Pesquisa-em-Vidro-Fosco/bloco-pronto.html",
+      "instaladorPublico": "frontend/P03-Barra-de-Pesquisa-em-Vidro-Fosco/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     },
@@ -222,6 +243,7 @@
       "papel": "pesquisa",
       "modo": "componente",
       "template": "frontend/P04-Barra-de-Pesquisa-Expansivel/bloco-pronto.html",
+      "instaladorPublico": "frontend/P04-Barra-de-Pesquisa-Expansivel/instalar.ps1",
       "destino": "inicio",
       "altura": "100vh"
     }
