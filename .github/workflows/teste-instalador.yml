@@ -114,6 +114,17 @@ jobs:
           mkdir -p "$PROJETO"
           cd "$PROJETO"
 
+          check() {
+            local label="$1"
+            shift
+            echo "[CHECK] $label"
+            if ! "$@"; then
+              echo "[FALHA] $label"
+              exit 1
+            fi
+            echo "[OK] $label"
+          }
+
           pwsh -NoProfile -File "$ROOT/frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/C01-Carrossel-de-Destaques/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/E01-Secao-de-Navegacao-Visual/instalar.ps1"
@@ -122,18 +133,18 @@ jobs:
           pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
 
-          grep -q 'data-catalogo-s-model="C01"' index.html
-          grep -q 'data-catalogo-s-model="E01"' index.html
-          grep -q 'data-catalogo-s-model="P01"' index.html
-          test -f produtos.html
-          test -f login.html
-          test -f database/schema.sql
-          grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
+          check 'C01 presente no index' grep -q 'data-catalogo-s-model="C01"' index.html
+          check 'E01 presente no index' grep -q 'data-catalogo-s-model="E01"' index.html
+          check 'P01 presente no index' grep -q 'data-catalogo-s-model="P01"' index.html
+          check 'produtos.html criado' test -f produtos.html
+          check 'login.html criado' test -f login.html
+          check 'database/schema.sql criado' test -f database/schema.sql
+          check 'endpoint de login conectado' grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
 
           pwsh -NoProfile -File "$ROOT/frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1"
-          grep -q 'data-catalogo-s-model="C01"' index.html
-          grep -q 'data-catalogo-s-model="E01"' index.html
-          grep -q 'data-catalogo-s-model="P01"' index.html
+          check 'C01 preservado após I02' grep -q 'data-catalogo-s-model="C01"' index.html
+          check 'E01 preservado após I02' grep -q 'data-catalogo-s-model="E01"' index.html
+          check 'P01 preservado após I02' grep -q 'data-catalogo-s-model="P01"' index.html
 
       - name: Testa DB01 antes do LG01 sem GitHub
         shell: bash
