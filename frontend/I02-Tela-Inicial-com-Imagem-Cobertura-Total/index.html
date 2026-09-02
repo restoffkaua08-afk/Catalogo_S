@@ -131,6 +131,13 @@ function Rebuild-Components {
     Write-TextFile &#x27;index.html&#x27; $updated
 }
 
+# Normaliza páginas que no catálogo são armazenadas como fragmentos visuais.
+# Isso garante um &lt;body&gt; real para receber os slots locais do Catálogo S.
+if ($ConteudoModelo -notmatch &#x27;(?i)&lt;body(?:\s|&gt;)&#x27;) {
+    $tituloSeguro = [System.Net.WebUtility]::HtmlEncode($ModeloNome)
+    $ConteudoModelo = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;&#x27; + $tituloSeguro + &#x27;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&#x27; + $ConteudoModelo + &#x27;&lt;/body&gt;&lt;/html&gt;&#x27;
+}
+
 if ($Papel -eq &#x27;inicio&#x27;) {
     $ConteudoModelo = Ensure-Slots $ConteudoModelo
 }
