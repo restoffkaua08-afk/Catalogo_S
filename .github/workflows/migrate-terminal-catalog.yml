@@ -28,7 +28,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add frontend efeitos backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md documentacao/COMO-ADICIONAR-UM-MODELO.md
+          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md documentacao/COMO-ADICIONAR-UM-MODELO.md
           if git diff --cached --quiet; then
             echo "Nenhuma alteração pendente."
             exit 0
