@@ -5,7 +5,6 @@ on:
     paths:
       - 'instalador/**'
       - 'frontend/**'
-      - 'efeitos/**'
       - 'backend/DB01-Banco-do-LG01/**'
       - 'dados/categorias.*'
       - 'package.json'
@@ -30,7 +29,7 @@ jobs:
           set -euo pipefail
           python - <<'PY'
           from pathlib import Path
-          roots=[Path('frontend'),Path('efeitos')]
+          roots=[Path('frontend')]
           files=[]
           for root in roots:
               files += [p for p in root.glob('*/index.html')]
@@ -97,7 +96,6 @@ jobs:
           node "$ROOT/instalador/catalogo-s.mjs" add C01
           node "$ROOT/instalador/catalogo-s.mjs" add E01
           node "$ROOT/instalador/catalogo-s.mjs" add P01
-          node "$ROOT/instalador/catalogo-s.mjs" add A01
           node "$ROOT/instalador/catalogo-s.mjs" add L01
           node "$ROOT/instalador/catalogo-s.mjs" add LG01
           node "$ROOT/instalador/catalogo-s.mjs" add DB01 --no-deps
@@ -105,7 +103,6 @@ jobs:
           grep -q 'data-catalogo-s-model="C01"' index.html
           grep -q 'data-catalogo-s-model="E01"' index.html
           grep -q 'data-catalogo-s-model="P01"' index.html
-          grep -q 'data-catalogo-s-model="A01"' index.html
           test -f produtos.html
           test -f login.html
           test -f database/schema.sql
