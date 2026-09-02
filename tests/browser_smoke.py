@@ -48,7 +48,13 @@ def test_catalog_navigation(page):
             arg=category['slug'],
             timeout=3000,
         )
-        assert page.locator('#context').inner_text().strip() == category['titulo']
+        page.wait_for_function(
+            "title => document.querySelector('#context')?.textContent.trim() === title && document.querySelector('.category-head h1')?.textContent.trim() === title",
+            arg=category['titulo'],
+            timeout=3000,
+        )
+        assert (page.locator('#context').text_content() or '').strip() == category['titulo']
+        assert (page.locator('.category-head h1').text_content() or '').strip() == category['titulo']
         cards = page.locator('.demo-card')
         assert cards.count() == len(category['itens']), f'{category["slug"]}: quantidade de demos incorreta'
         for item in category['itens']:
