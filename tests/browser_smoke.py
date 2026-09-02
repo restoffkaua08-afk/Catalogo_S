@@ -45,14 +45,14 @@ def test_catalog_navigation(page):
         page.locator(f'.category-card[data-category="{category["slug"]}"]').click()
         page.wait_for_function(
             "slug => location.hash === '#categoria=' + encodeURIComponent(slug)",
-            category['slug'],
+            arg=category['slug'],
             timeout=3000,
         )
         assert page.locator('#context').inner_text().strip() == category['titulo']
         cards = page.locator('.demo-card')
         assert cards.count() == len(category['itens']), f'{category["slug"]}: quantidade de demos incorreta'
         for item in category['itens']:
-            card = page.locator(f'.demo-card:has(.demo-id:text-is("{item["id"]}"))')
+            card = page.locator('.demo-card').filter(has=page.locator('.demo-id', has_text=item['id']))
             assert card.count() == 1, f'{item["id"]}: card ausente na categoria'
             href = card.get_attribute('href') or ''
             assert href == item['caminho'], f'{item["id"]}: href divergente: {href}'
