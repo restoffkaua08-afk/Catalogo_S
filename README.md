@@ -50,3 +50,8 @@ Existem 4 candidatos:
 Cada candidato possui `index.html`, `bloco-pronto.html`, `bloco-pronto.txt` e `LEIA-ME.txt`. Os registros operacionais ficam em `dados/listagens.json` e `dados/listagens.js`.
 
 Os quatro permanecem como **Candidatos** e não alteram a contagem dos 6 modelos oficiais aprovados.
+
+
+## Autenticação na Vercel
+
+O repositório inclui uma camada stateless de autenticação por e-mail para deploy na Vercel. A lista de e-mails autorizados e os segredos ficam em variáveis de ambiente, nunca no frontend. Consulte `documentacao/AUTENTICACAO-E-DEPLOY-VERCEL.md`.
