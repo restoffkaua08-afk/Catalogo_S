@@ -1,4 +1,5 @@
 name: Teste integral do Catálogo S
+# Gate de estabilidade: esta suíte deve rodar sobre o estado já regenerado do catálogo.
 
 on:
   push:
