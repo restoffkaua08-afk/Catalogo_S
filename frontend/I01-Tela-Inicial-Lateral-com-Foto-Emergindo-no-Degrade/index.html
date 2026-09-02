@@ -7,10 +7,14 @@
 <style>
 *{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#050607}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}
 </style>
+<style id="catalogo-preview-stability">
+.preview{height:auto!important;min-height:100svh;overflow:visible!important}
+.preview iframe{display:block;width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+</style>
 </head>
 <body>
 <a class="back" href="../../index.html#categoria=telas-iniciais" aria-label="Voltar">←</a>
-<section class="preview"><iframe src="bloco-pronto.html" title="Demonstração I01"></iframe></section>
+<section class="preview"><iframe src="bloco-pronto.html" title="Demonstração I01" scrolling="no"></iframe></section>
 <section class="install"><div class="box"><div class="head"><h1>I01 — Tela Inicial Lateral com Foto Emergindo no Degradê</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;I01&#x27;
 $ModeloNome = &#x27;Tela Inicial Lateral com Foto Emergindo no Degradê&#x27;
 $Papel = &#x27;inicio&#x27;
@@ -122,7 +126,7 @@ function Rebuild-Components {
             $parts = $key -split &#x27;-&#x27;
             $id = $parts[0].ToUpperInvariant()
             $relative = &#x27;components/catalogo-s/&#x27; + $file.Name
-            $sections += &quot;&lt;section id=`&quot;catalogo-s-$key`&quot; data-catalogo-s-instance=`&quot;$key`&quot; data-catalogo-s-model=`&quot;$id`&quot; style=`&quot;width:100%;min-height:100vh;overflow:hidden`&quot;&gt;&lt;iframe src=`&quot;$relative`&quot; title=`&quot;$id`&quot; loading=`&quot;lazy`&quot; style=`&quot;display:block;width:100%;height:100vh;border:0`&quot;&gt;&lt;/iframe&gt;&lt;/section&gt;&quot;
+            $sections += &quot;&lt;section id=`&quot;catalogo-s-$key`&quot; data-catalogo-s-instance=`&quot;$key`&quot; data-catalogo-s-model=`&quot;$id`&quot; style=`&quot;width:100%;min-height:100vh;overflow:hidden`&quot;&gt;&lt;iframe src=`&quot;$relative`&quot; title=`&quot;$id`&quot; loading=`&quot;lazy`&quot; scrolling=`&quot;no`&quot; style=`&quot;display:block;width:100%;height:100vh;border:0;overflow:hidden`&quot;&gt;&lt;/iframe&gt;&lt;/section&gt;&quot;
         }
     }
 
@@ -134,7 +138,7 @@ function Rebuild-Components {
 # Isso garante um &lt;body&gt; real para receber os slots locais do Catálogo S.
 if ($ConteudoModelo -notmatch &#x27;(?i)&lt;body(?:\s|&gt;)&#x27;) {
     $tituloSeguro = [System.Net.WebUtility]::HtmlEncode($ModeloNome)
-    $ConteudoModelo = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;&#x27; + $tituloSeguro + &#x27;&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&#x27; + $ConteudoModelo + &#x27;&lt;/body&gt;&lt;/html&gt;&#x27;
+    $ConteudoModelo = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;&#x27; + $tituloSeguro + &#x27;&lt;/title&gt;&lt;style&gt;html,body{margin:0;min-height:100%;overflow-x:hidden}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&#x27; + $ConteudoModelo + &#x27;&lt;/body&gt;&lt;/html&gt;&#x27;
 }
 
 if ($Papel -eq &#x27;inicio&#x27;) {
@@ -169,6 +173,52 @@ Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
 <script>
 const b=document.getElementById('copy'),c=document.getElementById('command');
 b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});
+</script>
+<script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
 </script>
 </body>
 </html>

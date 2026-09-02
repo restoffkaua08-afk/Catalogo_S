@@ -110,7 +110,7 @@ function Rebuild-Components {
             $parts = $key -split '-'
             $id = $parts[0].ToUpperInvariant()
             $relative = 'components/catalogo-s/' + $file.Name
-            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" style=`"display:block;width:100%;height:100vh;border:0`"></iframe></section>"
+            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" scrolling=`"no`" style=`"display:block;width:100%;height:100vh;border:0;overflow:hidden`"></iframe></section>"
         }
     }
 
@@ -122,7 +122,7 @@ function Rebuild-Components {
 # Isso garante um <body> real para receber os slots locais do Catálogo S.
 if ($ConteudoModelo -notmatch '(?i)<body(?:\s|>)') {
     $tituloSeguro = [System.Net.WebUtility]::HtmlEncode($ModeloNome)
-    $ConteudoModelo = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + $tituloSeguro + '</title></head><body>' + $ConteudoModelo + '</body></html>'
+    $ConteudoModelo = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + $tituloSeguro + '</title><style>html,body{margin:0;min-height:100%;overflow-x:hidden}</style></head><body>' + $ConteudoModelo + '</body></html>'
 }
 
 if ($Papel -eq 'inicio') {

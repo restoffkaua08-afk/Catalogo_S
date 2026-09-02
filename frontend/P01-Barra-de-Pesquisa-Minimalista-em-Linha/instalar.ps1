@@ -125,7 +125,7 @@ function Rebuild-Components {
             $parts = $key -split '-'
             $id = $parts[0].ToUpperInvariant()
             $relative = 'components/catalogo-s/' + $file.Name
-            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" style=`"display:block;width:100%;height:100vh;border:0`"></iframe></section>"
+            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" scrolling=`"no`" style=`"display:block;width:100%;height:100vh;border:0;overflow:hidden`"></iframe></section>"
         }
     }
 
@@ -149,7 +149,9 @@ do {
     $numero++
 } while (Test-Path -LiteralPath $full)
 
-Write-TextFile $relative $ConteudoModelo -SemBackup
+# O componente é salvo em um documento isolado para o iframe não herdar margem padrão do navegador.
+$DocumentoComponente = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>html,body{margin:0;min-height:100%;overflow-x:hidden}</style></head><body>' + $ConteudoModelo + '</body></html>'
+Write-TextFile $relative $DocumentoComponente -SemBackup
 Rebuild-Components
 
 Write-Host ""
