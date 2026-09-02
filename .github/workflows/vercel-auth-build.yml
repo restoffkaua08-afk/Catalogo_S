@@ -1,0 +1,62 @@
+name: Build Vercel Auth
+on:
+  push:
+    branches: [feature/vercel-auth]
+    paths:
+      - 'tools/vercel_auth_generator.py'
+      - '.github/workflows/vercel-auth-build.yml'
+permissions:
+  contents: write
+jobs:
+  build-auth:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: feature/vercel-auth
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Generate authentication layer
+        run: python tools/vercel_auth_generator.py
+      - name: Install and validate
+        run: |
+          set -e
+          npm install --ignore-scripts --no-audit --no-fund
+          node --check middleware.js
+          node --check lib/auth.js
+          node --check auth-controls.js
+          for f in api/auth/*.js; do node --check "$f"; done
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          json.load(open('package.json', encoding='utf-8'))
+          json.load(open('vercel.json', encoding='utf-8'))
+          assert Path('login.html').is_file()
+          assert Path('documentacao/AUTENTICACAO-E-DEPLOY-VERCEL.md').is_file()
+          assert 'auth-controls.js' in Path('index.html').read_text(encoding='utf-8')
+          assert 'AUTHORIZED_EMAILS' in Path('.env.example').read_text(encoding='utf-8')
+          print('structure ok')
+          PY
+          AUTH_SECRET='validation-secret' AUTHORIZED_EMAILS='teste@example.com' node --input-type=module <<'NODE'
+          import { signPayload, verifyPayload, authorizedEmailSet } from './lib/auth.js';
+          const exp=Math.floor(Date.now()/1000)+60;
+          const token=await signPayload({typ:'session',email:'teste@example.com',exp},process.env.AUTH_SECRET);
+          const payload=await verifyPayload(token,process.env.AUTH_SECRET,'session');
+          if(!payload || payload.email!=='teste@example.com') throw new Error('token validation failed');
+          if(!authorizedEmailSet().has('teste@example.com')) throw new Error('allowlist validation failed');
+          console.log('auth helpers ok');
+          NODE
+      - name: Commit clean implementation
+        run: |
+          set -e
+          rm -f tools/vercel_auth_generator.py .github/workflows/vercel-auth-build.yml
+          git config user.name 'Catalogo S Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          git commit -m 'Adiciona autenticação por e-mail pronta para Vercel'
+          git push origin HEAD:feature/vercel-auth
