@@ -1,0 +1,39 @@
+name: Audit Round 3
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'tools/audit_round3_generator.py'
+      - '.github/workflows/audit-round3.yml'
+permissions:
+  contents: write
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate refined demos
+        run: python tools/audit_round3_generator.py
+      - name: Validate generated files
+        run: |
+          set -e
+          for p in A94-Fundo-com-Glow-Radial A95-Orbes-de-Gradiente-em-Movimento A96-Gradient-Noise A99-Film-Grain-Noise A104-Grid-Background; do
+            test -f "efeitos/$p/index.html"
+            test -f "efeitos/$p/bloco-pronto.html"
+            test -f "efeitos/$p/bloco-pronto.txt"
+            ! grep -q 'Design que cria atmosfera' "efeitos/$p/bloco-pronto.html"
+          done
+      - name: Commit refined demos and clean temporary files
+        run: |
+          rm -f tools/audit_round3_generator.py .github/workflows/audit-round3.yml
+          git config user.name 'Catalogo S Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Refina fundos A94 A95 A96 A99 A104'
+          git push
