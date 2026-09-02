@@ -6,6 +6,7 @@ on:
       - 'instalador/**'
       - 'frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/**'
       - 'backend/DB01-Banco-do-LG01/**'
+      - 'package.json'
       - '.github/workflows/teste-instalador.yml'
   workflow_dispatch:
 
@@ -66,3 +67,16 @@ jobs:
           grep -q "loginEndpoint:\"/api/auth/login\"" assets/js/catalogo-s.config.js
           grep -q '"estadoIntegracao": "conectado"' .catalogo-s/projeto.json
           node "$ROOT/instalador/catalogo-s.mjs" doctor
+
+      - name: Testa comando público via npx e GitHub
+        shell: bash
+        run: |
+          set -euo pipefail
+          PROJETO="$RUNNER_TEMP/projeto-npx"
+          mkdir -p "$PROJETO"
+          cd "$PROJETO"
+
+          npx --yes github:restoffkaua08-afk/Catalogo_S#main add LG01
+          test -f login.html
+          test -f .catalogo-s/projeto.json
+          grep -q 'data-catalogo-s-model="LG01"' login.html
