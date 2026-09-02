@@ -1,35 +1,42 @@
-# Arquitetura de instalação por terminal — Catálogo S
+# Arquitetura de instalação PowerShell autocontida — Catálogo S
 
 ## Estado
 
 - Data: 2026-09-02
-- Status: **integrada e validada** para todos os modelos existentes no repositório.
-- CLI: `instalador/catalogo-s.mjs`, schema de manifesto 2.
-- Registro: `instalador/modelos.json`.
+- Status: arquitetura pública migrada para PowerShell autocontido.
+- Dependência pública do GitHub: nenhuma.
+- Dependência pública de `npx`: nenhuma.
+- Payload auditável por modelo: `instalar.ps1`.
 
 ## Regra central
 
-> O usuário escolhe modelos. O Catálogo S resolve arquivos, nomes, slots, rotas e ligações.
+> A demonstração precisa carregar tudo que o computador precisa para instalar o modelo.
 
-O fluxo de uso não é mais copiar HTML/CSS/JS/SQL manualmente. A demonstração entrega um comando:
+O usuário não recebe um comando que baixa o Catálogo S. Ele recebe o script completo. Por isso, tornar o repositório privado não quebra instalações copiadas do site.
 
-```bash
-npx --yes github:restoffkaua08-afk/Catalogo_S#main add <ID>
-```
-
-O código-fonte permanece auditável em `bloco-pronto.*`, mas funciona como payload interno do instalador.
-
-## Estado local e segurança de alterações
-
-Cada projeto recebe:
+## Fluxo
 
 ```text
-.catalogo-s/
-├─ projeto.json
-└─ backups/
+Demonstração na Vercel
+        ↓
+Copiar código PowerShell
+        ↓
+PowerShell aberto na raiz do projeto
+        ↓
+script autocontido
+        ↓
+arquivos locais do modelo
 ```
 
-`projeto.json` registra páginas, modelos e instâncias. O CLI cria backup antes de substituir um arquivo gerenciado cujo conteúdo mudou.
+Nenhuma etapa exige autenticação no GitHub.
+
+## Backups
+
+Antes de substituir um arquivo existente, o instalador cria cópia em:
+
+```text
+.catalogo-s/backups/
+```
 
 ## Páginas canônicas
 
@@ -47,17 +54,9 @@ Atualmente:
 - `Lxx` instala/substitui `produtos.html`;
 - `LGxx` instala/substitui `login.html`.
 
-Novos `SOBxx` e `CTxx` deverão seguir os nomes canônicos acima.
+## Slots
 
-## Identidade técnica e slots
-
-Páginas gerenciadas recebem identidade independente do texto visual:
-
-```html
-<html data-catalogo-s-page="inicio" data-catalogo-s-model="I01">
-```
-
-E áreas seguras de composição:
+Telas iniciais recebem slots locais:
 
 ```html
 <!-- CATALOGO-S:SLOT:MENU:START -->
@@ -70,115 +69,61 @@ E áreas seguras de composição:
 <!-- CATALOGO-S:SLOT:RODAPE:END -->
 ```
 
-O reconciliador modifica somente áreas que pertencem ao Catálogo S.
-
-## Singleton e componentes repetíveis
-
-Páginas de um mesmo papel são singleton. Instalar `I02` depois de `I01`, por exemplo, troca a tela inicial canônica.
-
-`Exx`, `Cxx` e `Pxx` são tratados como componentes repetíveis. Cada instalação cria uma instância em:
+`Exx`, `Cxx` e `Pxx` são componentes repetíveis. Cada execução cria:
 
 ```text
 components/catalogo-s/<id>-<numero>.html
 ```
 
-As instâncias são reconciliadas no `index.html`. Trocar a tela inicial não apaga componentes já registrados.
-
-## Reconciliação automática
-
-Depois de cada `add` ou `reconcile`, o CLI lê o manifesto e recalcula as ligações que podem ser determinadas com segurança.
-
-A ordem de instalação pode ser invertida quando o contrato permite. Uma dependência ausente fica registrada como pendente e é resolvida quando o modelo relacionado aparecer.
-
-Essa mesma regra é a base para futuros menus, rodapés, Sobre, Contato e botões: esses modelos devem consultar papéis e slots, não tentar adivinhar arquivos por texto visual.
+O script recompõe o slot `COMPONENTES` usando os arquivos locais. Assim, substituir `I01` por `I02`, por exemplo, não exige consultar manifesto remoto nem recuperar componentes do GitHub.
 
 ## LG01 ↔ DB01
 
-A autenticação usa o fluxo:
+`LG01` usa:
 
 ```text
-login.html
-   ↓
 assets/js/catalogo-s.config.js
-   ↓
-api/auth/login.js + api/auth/cadastro.js
-   ↓
-lib/catalogo-s-db.js
-   ↓
-database/schema.sql / banco configurado
 ```
 
-`LG01` cria a tela e a configuração compartilhada. `DB01` cria schema, adaptador e endpoints. Quando os dois estão presentes, o CLI configura os endpoints automaticamente.
+Ao instalar `LG01`, o script verifica se os endpoints do `DB01` já existem. Ao instalar `DB01`, o script grava a configuração com os endpoints. Portanto as duas ordens continuam possíveis.
 
-A ordem `LG01 → DB01` e `DB01 → LG01` é suportada. Credenciais reais do banco não são inventadas nem colocadas no frontend; `.env.example` apenas registra o formato esperado. Senhas são persistidas somente como hash.
+O `DB01` inclui no próprio script:
 
-## Contratos de modelo
+- `database/schema.sql`;
+- `lib/catalogo-s-db.js`;
+- `api/auth/login.js`;
+- `api/auth/cadastro.js`;
+- atualização de `.env.example`.
 
-`instalador/modelos.json` é o registro técnico usado pelo CLI. Cada entrada informa no mínimo:
+Dependências npm do backend podem ser instaladas pelo próprio script, mas isso não envolve o GitHub.
 
-```json
-{
-  "id": "I01",
-  "nome": "...",
-  "papel": "inicio",
-  "modo": "pagina",
-  "template": ".../bloco-pronto.html",
-  "target": "index.html"
-}
-```
+## Regra para todos os modelos
 
-Ou, para componente:
-
-```json
-{
-  "id": "C01",
-  "papel": "carrossel",
-  "modo": "componente",
-  "template": ".../bloco-pronto.html",
-  "destino": "inicio"
-}
-```
-
-Backend pode declarar arquivos adicionais e pareamentos.
-
-## Comandos
+Cada pasta de modelo deve possuir:
 
 ```text
-catalogo-s init
-catalogo-s add <ID>
-catalogo-s list
-catalogo-s reconcile
-catalogo-s doctor
+bloco-pronto.*
+index.html
+instalar.ps1
+LEIA-ME.txt
 ```
 
-Durante o bootstrap público, a semântica é executada via `npx` diretamente do GitHub.
+`index.html` precisa mostrar o conteúdo completo de `instalar.ps1` e oferecer um único botão de cópia.
 
-`doctor` verifica arquivos registrados, instâncias, configuração de login e artefatos esperados pelo backend.
+## Ferramentas internas
 
-## Demonstrações
-
-Todas as páginas de demonstração foram padronizadas. A primeira área contém somente o preview visual. A área de instalação contém somente:
-
-1. título simplificado;
-2. botão `Copiar`;
-3. bloco com o comando do modelo.
-
-Textos explicativos, status, múltiplos botões de código e instruções manuais de linkagem foram removidos das demonstrações. Informação técnica detalhada permanece na documentação e nos fontes internos.
+O CLI Node anterior pode permanecer no repositório como ferramenta interna de contrato e regressão. Ele não faz parte do caminho de instalação pública e não deve aparecer como instrução nas demonstrações.
 
 ## Validação
 
-O workflow `.github/workflows/teste-instalador.yml` valida automaticamente:
+A CI deve rejeitar qualquer modelo ativo quando:
 
-- todas as demonstrações padronizadas;
-- instalação isolada de cada modelo registrado;
-- composição de páginas e componentes;
-- substituição de tela inicial preservando componentes;
-- pareamento `LG01 ↔ DB01` nas duas ordens;
-- execução pública do comando via `npx`.
-
-Novos modelos só devem entrar como instaláveis quando respeitarem esses contratos e passarem pelo mesmo conjunto de validações.
-
+- faltar `instalar.ps1`;
+- faltar bloco de código ou botão de cópia na demonstração;
+- o script público contiver `npx`, `git clone` ou URL/chamada para o GitHub;
+- o script não puder ser executado em um projeto temporário;
+- a página do modelo não exibir exatamente o mesmo script salvo em `instalar.ps1`.
 
 ## Remoção da família de efeitos
 
-Em 2026-09-02, a categoria `Fundos e telas` e toda a família `Axx` foram removidas do catálogo ativo, do registro do instalador e do código-fonte atual. Esses modelos não seguiam o padrão adotado de construção composável por páginas, seções, componentes funcionais e integrações. O histórico Git permanece como única fonte de recuperação.
+A família `Axx` permanece removida. Os IDs não serão reutilizados.
