@@ -66,15 +66,15 @@ jobs:
         run: |
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE"
-          python - <<'PY' > "$RUNNER_TEMP/modelos.tsv"
+          python - <<'PY' > "$RUNNER_TEMP/modelos.txt"
           from pathlib import Path
           import json
           data=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))['modelos']
           for m in data.values():
-              print('\t'.join([m['id'],m['modo'],m.get('target',''),m['instaladorPublico']]))
+              print('|'.join([m['id'],m['modo'],m.get('target',''),m['instaladorPublico']]))
           PY
 
-          while IFS=$'\t' read -r id mode target script; do
+          while IFS='|' read -r id mode target script; do
             projeto="$RUNNER_TEMP/publico-${id,,}"
             rm -rf "$projeto"
             mkdir -p "$projeto"
@@ -100,7 +100,7 @@ jobs:
                 test -f "$projeto/lib/catalogo-s-db.js"
                 ;;
             esac
-          done < "$RUNNER_TEMP/modelos.tsv"
+          done < "$RUNNER_TEMP/modelos.txt"
 
       - name: Testa composição só com scripts copiados
         shell: bash
