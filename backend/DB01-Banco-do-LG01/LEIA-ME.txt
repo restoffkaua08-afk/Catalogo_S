@@ -1,0 +1,30 @@
+DB01 — Banco do LG01
+
+Pareamento: LG01 ↔ DB01
+Banco: catalogo_login_lg01
+Tabela: usuarios
+Compatibilidade: MySQL 8+ / MariaDB 10.5+
+
+Fluxo correto:
+LG01 (login.html) -> backend/API -> DB01 (MySQL/MariaDB)
+
+O HTML NÃO deve abrir ou conectar diretamente ao arquivo .sql.
+
+No LG01, configure:
+const ENDPOINT_LOGIN = '/api/login';
+const ENDPOINT_CADASTRO = '/api/cadastro';
+
+O backend deve:
+- POST /api/cadastro: receber nome, email, senha, confirmarSenha; validar; gerar hash da senha; inserir nome, email e senha_hash.
+- POST /api/login: receber email e senha; buscar o usuário por email; comparar a senha com senha_hash.
+
+Mapeamento:
+- nome -> usuarios.nome
+- email -> usuarios.email
+- senha -> hash no backend -> usuarios.senha_hash
+- confirmarSenha -> apenas validação; não armazenar
+
+Arquivos:
+- schema.sql: schema executável.
+- bloco-pronto.sql: mesma versão pronta para copiar.
+- index.html: demonstração técnica do modelo.
