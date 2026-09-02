@@ -56,6 +56,7 @@ const DESTINO_APOS_LOGIN = 'index.html';
 const ENDPOINT_LOGIN = '';
 const ENDPOINT_CADASTRO = '';
 
+const MODO_DEMONSTRACAO=window.self!==window.top;
 const shell=document.getElementById('lg01');
 const loginForm=document.getElementById('lg01-login-form');
 const registerForm=document.getElementById('lg01-register-form');
@@ -65,7 +66,7 @@ function registerMode(active){shell.classList.toggle('is-register',active);login
 document.getElementById('lg01-open-register').addEventListener('click',()=>registerMode(true));
 document.getElementById('lg01-back-login').addEventListener('click',()=>registerMode(false));
 async function postJSON(url,payload){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.message||'Não foi possível concluir.');return data}
-loginForm.addEventListener('submit',async e=>{e.preventDefault();loginMessage.classList.remove('error');loginMessage.textContent='Entrando...';const payload=Object.fromEntries(new FormData(loginForm));try{if(ENDPOINT_LOGIN)await postJSON(ENDPOINT_LOGIN,payload);location.href=DESTINO_APOS_LOGIN}catch(err){loginMessage.classList.add('error');loginMessage.textContent=err.message}});
+loginForm.addEventListener('submit',async e=>{e.preventDefault();loginMessage.classList.remove('error');loginMessage.textContent='Entrando...';const payload=Object.fromEntries(new FormData(loginForm));try{if(ENDPOINT_LOGIN)await postJSON(ENDPOINT_LOGIN,payload);if(MODO_DEMONSTRACAO&&!ENDPOINT_LOGIN){loginMessage.textContent='Preview: defina o backend e o destino ao copiar o modelo.';return}location.href=DESTINO_APOS_LOGIN}catch(err){loginMessage.classList.add('error');loginMessage.textContent=err.message}});
 registerForm.addEventListener('submit',async e=>{e.preventDefault();registerMessage.classList.remove('error');const payload=Object.fromEntries(new FormData(registerForm));if(payload.senha!==payload.confirmarSenha){registerMessage.classList.add('error');registerMessage.textContent='As senhas não coincidem.';return}registerMessage.textContent='Criando conta...';try{if(ENDPOINT_CADASTRO)await postJSON(ENDPOINT_CADASTRO,payload);registerForm.reset();registerMessage.textContent='Conta criada.';setTimeout(()=>registerMode(false),700)}catch(err){registerMessage.classList.add('error');registerMessage.textContent=err.message}});
 </script>
 </body>
