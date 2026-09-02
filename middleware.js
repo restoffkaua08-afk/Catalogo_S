@@ -1,6 +1,8 @@
 import { next } from '@vercel/functions';
 import { COOKIE_NAMES, getCookie, json, verifyPayload } from './lib/auth.js';
 
+export const config = { runtime: 'nodejs' };
+
 function isPublicPath(pathname) {
   if (pathname === '/login.html') return true;
   if (pathname === '/favicon.ico' || pathname === '/robots.txt') return true;
