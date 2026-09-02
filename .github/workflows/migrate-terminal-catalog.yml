@@ -5,6 +5,8 @@ on:
     paths:
       - 'tools/migrate_terminal_catalog.py'
       - 'tools/postprocess_powershell_installers.py'
+      - 'frontend/**/bloco-pronto.html'
+      - 'frontend/**/bloco-pronto.txt'
       - 'backend/DB01-Banco-do-LG01/schema.sql'
       - 'backend/DB01-Banco-do-LG01/bloco-pronto.sql'
       - 'instalador/templates/DB01/**'
