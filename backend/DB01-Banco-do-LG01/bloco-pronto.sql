@@ -56,21 +56,22 @@ CREATE TABLE IF NOT EXISTS usuarios (
   COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
--- CONSULTAS QUE O BACKEND DO LG01 DEVE USAR
--- Os sinais ? representam parâmetros enviados pelo backend.
+-- EXEMPLOS PARA O BACKEND DO LG01
+-- NÃO são executados por este arquivo; copie-os para consultas
+-- parametrizadas/prepared statements no backend.
 -- ============================================================
 
 -- CADASTRO
 -- LG01.nome  -> usuarios.nome
 -- LG01.email -> usuarios.email
 -- LG01.senha -> backend gera hash -> usuarios.senha_hash
-INSERT INTO usuarios (nome, email, senha_hash)
-VALUES (?, ?, ?);
+-- INSERT INTO usuarios (nome, email, senha_hash)
+-- VALUES (?, ?, ?);
 
 -- LOGIN
 -- LG01.email localiza o usuário.
 -- Depois o backend compara LG01.senha com usuarios.senha_hash.
-SELECT id, nome, email, senha_hash
-FROM usuarios
-WHERE email = ?
-LIMIT 1;
+-- SELECT id, nome, email, senha_hash
+-- FROM usuarios
+-- WHERE email = ?
+-- LIMIT 1;
