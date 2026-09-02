@@ -76,7 +76,7 @@ O reconciliador modifica somente áreas que pertencem ao Catálogo S.
 
 Páginas de um mesmo papel são singleton. Instalar `I02` depois de `I01`, por exemplo, troca a tela inicial canônica.
 
-`Exx`, `Cxx`, `Pxx` e `Axx` são tratados como componentes repetíveis. Cada instalação cria uma instância em:
+`Exx`, `Cxx` e `Pxx` são tratados como componentes repetíveis. Cada instalação cria uma instância em:
 
 ```text
 components/catalogo-s/<id>-<numero>.html
@@ -177,3 +177,8 @@ O workflow `.github/workflows/teste-instalador.yml` valida automaticamente:
 - execução pública do comando via `npx`.
 
 Novos modelos só devem entrar como instaláveis quando respeitarem esses contratos e passarem pelo mesmo conjunto de validações.
+
+
+## Remoção da família de efeitos
+
+Em 2026-09-02, a categoria `Fundos e telas` e toda a família `Axx` foram removidas do catálogo ativo, do registro do instalador e do código-fonte atual. Esses modelos não seguiam o padrão adotado de construção composável por páginas, seções, componentes funcionais e integrações. O histórico Git permanece como única fonte de recuperação.

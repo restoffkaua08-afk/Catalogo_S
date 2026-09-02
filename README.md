@@ -27,7 +27,7 @@ O instalador:
 - `Ixx` → tela inicial → `index.html`
 - `Lxx` → página de produtos → `produtos.html`
 - `LGxx` → login → `login.html`
-- `Exx`, `Cxx`, `Pxx` e `Axx` → componentes repetíveis integrados ao projeto
+- `Exx`, `Cxx` e `Pxx` → componentes repetíveis integrados ao projeto
 - `DB01` → backend/banco pareado ao `LG01`
 
 A instalação de uma nova tela inicial substitui a anterior sem remover componentes já registrados. Componentes repetíveis recebem instâncias próprias em `components/catalogo-s/`.

@@ -43,3 +43,8 @@ A migração de conteúdo foi aplicada pelo commit `5c467ace5580a6931b570c6252db
 O workflow integral foi definido no commit `42539fee28eadf89e323deaacc611581ea6ad68a` e terminou com sucesso.
 
 A documentação normativa foi atualizada posteriormente para refletir o estado integrado da arquitetura.
+
+
+## Ajuste posterior — família Axx removida
+
+Após a validação inicial de 43 modelos, os 22 modelos `Axx` de efeitos foram retirados por decisão de arquitetura. O registro operacional passa a conter 21 modelos. A categoria `Fundos e telas`, seus dados, documentação específica e fontes atuais foram removidos; o histórico Git preserva as versões anteriores.

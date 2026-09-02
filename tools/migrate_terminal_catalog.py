@@ -8,7 +8,7 @@ COMMAND='npx --yes github:restoffkaua08-afk/Catalogo_S#main add {id}'
 
 CATEGORY_BY_PREFIX={
     'LG':'login','DB':'banco-de-dados','I':'telas-iniciais','C':'carrosseis',
-    'E':'telas','L':'listagens','P':'pesquisa','A':'fundos-e-telas'
+    'E':'telas','L':'listagens','P':'pesquisa'
 }
 ROLE_BY_PREFIX={
     'I':('pagina','inicio','index.html'),
@@ -17,7 +17,6 @@ ROLE_BY_PREFIX={
     'E':('componente','secao',''),
     'C':('componente','carrossel',''),
     'P':('componente','pesquisa',''),
-    'A':('componente','efeito',''),
 }
 
 def model_id(folder:Path):
@@ -131,7 +130,7 @@ def docs():
     (ROOT/'documentacao/COMO-ADICIONAR-UM-MODELO.md').write_text('''# Como adicionar um modelo ao Catálogo S\n\nTodo modelo precisa de ID estável, `bloco-pronto.html`, `index.html` de demonstração e contrato no instalador. O código apresentado ao usuário é sempre um comando `catalogo-s add <ID>`, nunca um bloco manual para colar em arquivos.\n\nPáginas usam nomes canônicos; componentes repetíveis são adicionados ao manifesto e reconciliados no slot `CATALOGO-S:SLOT:COMPONENTES`; integrações entre modelos devem ser resolvidas pelo CLI.\n''',encoding='utf-8')
 
 folders=[]
-for base in (ROOT/'frontend',ROOT/'efeitos'):
+for base in (ROOT/'frontend',):
     if base.exists():
         for folder in sorted(p for p in base.iterdir() if p.is_dir()):
             block=folder/'bloco-pronto.html'
