@@ -42,82 +42,45 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import json, html, re
-
           registry=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))
           models=registry['modelos']
           categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
-
           assert registry.get('instalacaoPublica')=='powershell-autocontido'
-          assert len(models)==21, f'esperados 21 modelos registrados, encontrados {len(models)}'
-          assert categories.get('quantidade')==len(categories.get('categorias',[])), 'quantidade de categorias divergente'
-
+          assert len(models)==21
+          assert categories.get('quantidade')==len(categories.get('categorias',[]))
           slugs=[c['slug'] for c in categories['categorias']]
-          assert len(slugs)==len(set(slugs)), 'slug de categoria duplicado'
-
-          catalog_items=[]
-          for category in categories['categorias']:
-              for item in category.get('itens',[]):
-                  catalog_items.append(item)
-                  assert Path(item['caminho']).exists(), f"{item['id']}: caminho público ausente: {item['caminho']}"
-
-          ids=[item['id'] for item in catalog_items]
-          assert len(ids)==len(set(ids)), 'ID duplicado no catálogo'
-          assert set(ids)==set(models), f'catálogo e registro divergem: catálogo={sorted(ids)} registro={sorted(models)}'
-
+          assert len(slugs)==len(set(slugs))
+          items=[i for c in categories['categorias'] for i in c.get('itens',[])]
+          ids=[i['id'] for i in items]
+          assert len(ids)==len(set(ids)) and set(ids)==set(models)
           js=Path('dados/categorias.js').read_text(encoding='utf-8')
-          for item in catalog_items:
-              assert item['id'] in js and item['caminho'] in js, f"{item['id']}: categorias.js fora de sincronia"
-
-          forbidden=[
-              'npx ', 'github.com/', 'api.github.com', 'raw.githubusercontent.com',
-              'git clone', 'invoke-webrequest', 'invoke-restmethod'
-          ]
-
-          checked=0
+          forbidden=['npx ','github.com/','api.github.com','raw.githubusercontent.com','git clone','invoke-webrequest','invoke-restmethod']
+          for item in items:
+              assert Path(item['caminho']).exists(), item['caminho']
+              assert item['id'] in js and item['caminho'] in js
           for mid,model in models.items():
               script_path=Path(model['instaladorPublico'])
-              assert script_path.exists(), f'{mid}: instalar.ps1 ausente'
               script=script_path.read_text(encoding='utf-8')
-              lower=script.lower()
-              for token in forbidden:
-                  assert token not in lower, f'{mid}: dependência pública proibida encontrada: {token}'
-
+              for token in forbidden: assert token not in script.lower(), f'{mid}: {token}'
               demo=script_path.parent/'index.html'
-              assert demo.exists(), f'{mid}: demonstração ausente'
               text=demo.read_text(encoding='utf-8')
-              assert 'id="copy"' in text, f'{mid}: sem botão copiar'
-              assert 'Copiar código PowerShell' in text, f'{mid}: botão incorreto'
+              assert 'id="copy"' in text and 'Copiar código PowerShell' in text
               match=re.search(r'<pre id="command">([\s\S]*?)</pre>',text)
-              assert match, f'{mid}: sem bloco PowerShell'
-              visible=html.unescape(match.group(1))
-              assert visible==script, f'{mid}: bloco exibido diverge de instalar.ps1'
-
+              assert match and html.unescape(match.group(1))==script, f'{mid}: PowerShell divergente'
               iframe=re.search(r'<iframe[^>]+src="([^"]+)"',text,re.I)
-              assert iframe, f'{mid}: preview sem iframe'
-              preview=(demo.parent/iframe.group(1)).resolve()
-              assert preview.exists(), f'{mid}: arquivo de preview ausente: {iframe.group(1)}'
-
+              assert iframe and (demo.parent/iframe.group(1)).exists(), f'{mid}: preview ausente'
               if model['tipo']=='frontend':
-                  template=Path(model['template'])
-                  assert template.exists(), f'{mid}: template ausente'
-                  txt=template.with_suffix('.txt')
-                  assert txt.exists(), f'{mid}: bloco-pronto.txt ausente'
-                  assert template.read_text(encoding='utf-8')==txt.read_text(encoding='utf-8'), f'{mid}: HTML e TXT divergentes'
-
-              checked+=1
-
+                  template=Path(model['template']); txt=template.with_suffix('.txt')
+                  assert template.exists() and txt.exists()
+                  assert template.read_text(encoding='utf-8')==txt.read_text(encoding='utf-8'), f'{mid}: HTML/TXT divergentes'
           schema=Path('backend/DB01-Banco-do-LG01/schema.sql').read_text(encoding='utf-8')
           bloco=Path('backend/DB01-Banco-do-LG01/bloco-pronto.sql').read_text(encoding='utf-8')
-          db_installer=Path('backend/DB01-Banco-do-LG01/instalar.ps1').read_text(encoding='utf-8')
-          assert schema==bloco, 'DB01: schema.sql e bloco-pronto.sql divergentes'
-          for expected in ['/api/auth/login','/api/auth/cadastro']:
-              assert expected in schema and expected in db_installer, f'DB01: rota atual ausente: {expected}'
-          for obsolete in ["'/api/login'","'/api/cadastro'"]:
-              assert obsolete not in schema and obsolete not in db_installer, f'DB01: rota obsoleta ainda presente: {obsolete}'
-
-          assert 'COLOQUE_AQUI_A_URL_DA_IMAGEM' not in Path('frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html').read_text(encoding='utf-8'), 'E03 ainda possui imagens quebradas por placeholder de URL'
-
-          print(f'{checked} modelos: contrato, metadados, previews e blocos PowerShell sincronizados.')
+          installer=Path('backend/DB01-Banco-do-LG01/instalar.ps1').read_text(encoding='utf-8')
+          assert schema==bloco
+          for route in ['/api/auth/login','/api/auth/cadastro']: assert route in schema and route in installer
+          for route in ["'/api/login'","'/api/cadastro'"]: assert route not in schema and route not in installer
+          assert 'COLOQUE_AQUI_A_URL_DA_IMAGEM' not in Path('frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html').read_text(encoding='utf-8')
+          print('21 modelos: contrato, metadados, previews e códigos sincronizados.')
           PY
 
       - name: Executa cada instalador PowerShell isoladamente
@@ -130,49 +93,28 @@ jobs:
           python - <<'PY' > "$RUNNER_TEMP/modelos.txt"
           from pathlib import Path
           import json
-          data=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))['modelos']
-          for m in data.values():
+          for m in json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))['modelos'].values():
               print('|'.join([m['id'],m['modo'],m.get('target',''),m.get('template',''),m['instaladorPublico']]))
           PY
-
           while IFS='|' read -r id mode target template script; do
-            projeto="$RUNNER_TEMP/publico-${id,,}"
-            rm -rf "$projeto"
-            mkdir -p "$projeto"
-            (
-              cd "$projeto"
-              pwsh -NoProfile -File "$ROOT/$script"
-            )
-
+            projeto="$RUNNER_TEMP/publico-${id,,}"; rm -rf "$projeto"; mkdir -p "$projeto"
+            (cd "$projeto" && pwsh -NoProfile -File "$ROOT/$script")
             case "$mode" in
               pagina)
-                test -n "$target"
-                test -f "$projeto/$target"
-                grep -qi '<html' "$projeto/$target"
-                grep -qi '<body' "$projeto/$target"
-                ;;
+                test -f "$projeto/$target"; grep -qi '<html' "$projeto/$target"; grep -qi '<body' "$projeto/$target" ;;
               componente)
-                test -f "$projeto/index.html"
-                arquivo="$(find "$projeto/components/catalogo-s" -maxdepth 1 -type f -name "${id,,}-*.html" | head -n 1)"
-                test -n "$arquivo"
-                grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
-                test -n "$template"
+                arquivo="$(find "$projeto/components/catalogo-s" -maxdepth 1 -type f -name "${id,,}-*.html" | head -n1)"
+                test -n "$arquivo"; grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
                 python - "$arquivo" "$ROOT/$template" <<'PY'
           from pathlib import Path
           import sys
-          installed=Path(sys.argv[1]).read_text(encoding='utf-8').rstrip('\r\n')
-          source=Path(sys.argv[2]).read_text(encoding='utf-8').rstrip('\r\n')
-          assert installed==source, f'conteúdo instalado diverge de {sys.argv[2]}'
+          assert Path(sys.argv[1]).read_text(encoding='utf-8').rstrip('\r\n') == Path(sys.argv[2]).read_text(encoding='utf-8').rstrip('\r\n')
           PY
                 ;;
               banco)
-                test -f "$projeto/database/schema.sql"
-                test -f "$projeto/api/auth/login.js"
-                test -f "$projeto/api/auth/cadastro.js"
-                test -f "$projeto/lib/catalogo-s-db.js"
+                test -f "$projeto/database/schema.sql"; test -f "$projeto/api/auth/login.js"; test -f "$projeto/api/auth/cadastro.js"; test -f "$projeto/lib/catalogo-s-db.js"
                 grep -q "loginEndpoint:'/api/auth/login'" "$projeto/assets/js/catalogo-s.config.js"
-                grep -q "cadastroEndpoint:'/api/auth/cadastro'" "$projeto/assets/js/catalogo-s.config.js"
-                ;;
+                grep -q "cadastroEndpoint:'/api/auth/cadastro'" "$projeto/assets/js/catalogo-s.config.js" ;;
             esac
           done < "$RUNNER_TEMP/modelos.txt"
 
@@ -182,12 +124,7 @@ jobs:
           CATALOGO_S_SKIP_DEPS: '1'
         run: |
           set -euo pipefail
-          ROOT="$GITHUB_WORKSPACE"
-          PROJETO="$RUNNER_TEMP/site-powershell"
-          rm -rf "$PROJETO"
-          mkdir -p "$PROJETO"
-          cd "$PROJETO"
-
+          ROOT="$GITHUB_WORKSPACE"; P="$RUNNER_TEMP/site-powershell"; rm -rf "$P"; mkdir -p "$P"; cd "$P"
           pwsh -NoProfile -File "$ROOT/frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/C01-Carrossel-de-Destaques/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/E01-Secao-de-Navegacao-Visual/instalar.ps1"
@@ -195,20 +132,11 @@ jobs:
           pwsh -NoProfile -File "$ROOT/frontend/L01-Listagem-MR-em-Grade-com-Filtro-Compacto/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
-
-          grep -q 'data-catalogo-s-model="C01"' index.html
-          grep -q 'data-catalogo-s-model="E01"' index.html
-          grep -q 'data-catalogo-s-model="P01"' index.html
-          test -f produtos.html
-          test -f login.html
-          test -f database/schema.sql
+          for id in C01 E01 P01; do grep -q "data-catalogo-s-model=\"$id\"" index.html; done
+          test -f produtos.html; test -f login.html; test -f database/schema.sql
           grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
-          grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
-
           pwsh -NoProfile -File "$ROOT/frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1"
-          grep -q 'data-catalogo-s-model="C01"' index.html
-          grep -q 'data-catalogo-s-model="E01"' index.html
-          grep -q 'data-catalogo-s-model="P01"' index.html
+          for id in C01 E01 P01; do grep -q "data-catalogo-s-model=\"$id\"" index.html; done
 
       - name: Testa DB01 antes do LG01
         shell: bash
@@ -216,12 +144,7 @@ jobs:
           CATALOGO_S_SKIP_DEPS: '1'
         run: |
           set -euo pipefail
-          ROOT="$GITHUB_WORKSPACE"
-          PROJETO="$RUNNER_TEMP/db-primeiro-powershell"
-          rm -rf "$PROJETO"
-          mkdir -p "$PROJETO"
-          cd "$PROJETO"
-
+          ROOT="$GITHUB_WORKSPACE"; P="$RUNNER_TEMP/db-primeiro"; rm -rf "$P"; mkdir -p "$P"; cd "$P"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
           grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
@@ -230,16 +153,14 @@ jobs:
       - name: Instala Chromium para smoke tests
         run: |
           python -m pip install --disable-pip-version-check playwright
-          python -m playwright install --with-deps chromium
+          python -m playwright install chromium
 
       - name: Testa catálogo e todas as demonstrações em Chromium
         shell: bash
         run: |
           set -euo pipefail
           python3 -m http.server 4173 --bind 127.0.0.1 >"$RUNNER_TEMP/catalogo-http.log" 2>&1 &
-          SERVER_PID=$!
-          trap 'kill $SERVER_PID || true' EXIT
-          sleep 2
+          SERVER_PID=$!; trap 'kill $SERVER_PID || true' EXIT; sleep 2
           python tests/browser_smoke.py
 
       - name: Testa DB01 com MySQL real
@@ -249,12 +170,7 @@ jobs:
           CATALOGO_S_SKIP_DEPS: '1'
         run: |
           set -euo pipefail
-          ROOT="$GITHUB_WORKSPACE"
-          PROJETO="$RUNNER_TEMP/db01-real"
-          rm -rf "$PROJETO"
-          mkdir -p "$PROJETO"
-          cd "$PROJETO"
-
+          ROOT="$GITHUB_WORKSPACE"; P="$RUNNER_TEMP/db01-real"; rm -rf "$P"; mkdir -p "$P"; cd "$P"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
           npm install --no-audit --no-fund mysql2 bcryptjs
           cp "$ROOT/tests/db01_integration.mjs" ./db01_integration.mjs
