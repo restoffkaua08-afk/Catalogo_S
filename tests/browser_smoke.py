@@ -85,20 +85,25 @@ def test_interaction(page, mid):
 
     if mid == 'L01':
         page.locator('#l01-q').fill('Headphone')
-        assert page.locator('#l01-count').inner_text().strip() == '1 produtos'
+        page.wait_for_function("document.querySelectorAll('#l01-grid .card:not([hidden])').length === 1")
+        assert page.locator('#l01-grid .card:not([hidden])').count() == 1
+        assert (page.locator('#l01-count').text_content() or '').strip() == '1 produtos'
         page.locator('#l01-filter').click()
         page.locator('#l01-panel.open').wait_for(timeout=2000)
         return
 
     if mid == 'L02':
         page.locator('input[name="l02-cat"][value="Moda"]').check()
-        assert page.locator('#l02-count').inner_text().strip() == '2 resultados'
+        page.wait_for_function("document.querySelectorAll('#l02 .product:not([hidden])').length === 2")
+        assert (page.locator('#l02-count').text_content() or '').strip() == '2 resultados'
         page.locator('#l02-clear').click()
-        assert page.locator('#l02-count').inner_text().strip() == '6 resultados'
+        page.wait_for_function("document.querySelectorAll('#l02 .product:not([hidden])').length === 6")
+        assert (page.locator('#l02-count').text_content() or '').strip() == '6 resultados'
         return
 
     if mid == 'L03':
         page.locator('.chip[data-cat="Gaming"]').click()
+        page.wait_for_function("document.querySelectorAll('#l03-rows .row:not([hidden])').length === 1")
         assert page.locator('#l03-rows .row:not([hidden])').count() == 1
         page.locator('#l03-sort').select_option('price-desc')
         return
@@ -107,6 +112,7 @@ def test_interaction(page, mid):
         page.locator('#l04-open').click()
         page.locator('#l04-drawer.open').wait_for(timeout=2000)
         page.locator('input[name="l04-brand"][value="Vertex"]').check()
+        page.wait_for_function("document.querySelectorAll('#l04-grid .card:not([hidden])').length === 2")
         assert page.locator('#l04-grid .card:not([hidden])').count() == 2
         page.locator('#l04-close').click()
         page.wait_for_function("!document.querySelector('#l04-drawer').classList.contains('open')")
@@ -121,7 +127,7 @@ def test_interaction(page, mid):
         form.locator('input[name="senha"]').fill('SenhaTeste123')
         form.locator('input[name="confirmarSenha"]').fill('SenhaTeste456')
         form.locator('button[type="submit"]').click()
-        assert page.locator('#lg01-register-message').inner_text().strip() == 'As senhas não coincidem.'
+        assert (page.locator('#lg01-register-message').text_content() or '').strip() == 'As senhas não coincidem.'
         page.locator('#lg01-back-login').click()
         page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-login')", timeout=12000)
 
