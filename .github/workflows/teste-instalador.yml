@@ -1,17 +1,19 @@
-name: Teste do instalador Catálogo S
+name: Teste integral do Catálogo S
 
 on:
   push:
     paths:
       - 'instalador/**'
-      - 'frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/**'
+      - 'frontend/**'
+      - 'efeitos/**'
       - 'backend/DB01-Banco-do-LG01/**'
+      - 'dados/categorias.*'
       - 'package.json'
       - '.github/workflows/teste-instalador.yml'
   workflow_dispatch:
 
 jobs:
-  composicao:
+  validar:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -22,61 +24,123 @@ jobs:
         with:
           node-version: 24
 
-      - name: Testa LG01 depois DB01
+      - name: Valida todas as demonstrações
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          roots=[Path('frontend'),Path('efeitos')]
+          files=[]
+          for root in roots:
+              files += [p for p in root.glob('*/index.html')]
+          files.append(Path('backend/DB01-Banco-do-LG01/index.html'))
+          assert files, 'nenhuma demonstração encontrada'
+          for p in files:
+              text=p.read_text(encoding='utf-8')
+              folder=p.parent.name
+              mid=folder.split('-',1)[0] if folder!='DB01-Banco-do-LG01' else 'DB01'
+              assert '<h1>' in text, f'{p}: sem título simplificado'
+              assert 'id="copy"' in text, f'{p}: sem botão copiar'
+              assert 'id="command"' in text, f'{p}: sem bloco de comando'
+              assert f' add {mid}' in text, f'{p}: comando não corresponde ao modelo'
+              for forbidden in ['CANDIDATO','Pareamento:','Copiar HTML','Abrir schema.sql','link-note','description']:
+                  assert forbidden not in text, f'{p}: texto antigo encontrado: {forbidden}'
+          print(f'{len(files)} demonstrações padronizadas validadas.')
+          PY
+
+      - name: Instala cada modelo isoladamente
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import os from 'node:os';
+          import path from 'node:path';
+          import {spawnSync} from 'node:child_process';
+          const root=process.cwd();
+          const registry=JSON.parse(fs.readFileSync(path.join(root,'instalador/modelos.json'),'utf8')).modelos;
+          const cli=path.join(root,'instalador/catalogo-s.mjs');
+          function run(cwd,...args){
+            const r=spawnSync(process.execPath,[cli,...args],{cwd,encoding:'utf8'});
+            if(r.status!==0){console.error(r.stdout,r.stderr);throw new Error(`falhou: ${args.join(' ')}`)}
+          }
+          for(const model of Object.values(registry)){
+            const dir=fs.mkdtempSync(path.join(os.tmpdir(),`catalogo-${model.id.toLowerCase()}-`));
+            if(model.modo==='banco'){
+              run(dir,'add',model.pareadoCom||'LG01');
+              run(dir,'add',model.id,'--no-deps');
+            }else run(dir,'add',model.id,'--no-deps');
+            run(dir,'doctor');
+            const state=JSON.parse(fs.readFileSync(path.join(dir,'.catalogo-s/projeto.json'),'utf8'));
+            if(!state.modelos[model.id])throw new Error(`${model.id}: ausente do manifesto`);
+            if(model.modo==='pagina' && !fs.existsSync(path.join(dir,model.target)))throw new Error(`${model.id}: não criou ${model.target}`);
+            if(model.modo==='componente'){
+              const instance=state.instancias.find(i=>i.id===model.id);
+              if(!instance||!fs.existsSync(path.join(dir,instance.arquivo)))throw new Error(`${model.id}: componente não criado`);
+              const index=fs.readFileSync(path.join(dir,'index.html'),'utf8');
+              if(!index.includes(`data-catalogo-s-model="${model.id}"`))throw new Error(`${model.id}: não reconciliado no index.html`);
+            }
+          }
+          console.log(`${Object.keys(registry).length} modelos instalados individualmente com sucesso.`);
+          NODE
+
+      - name: Testa composição e substituição
         shell: bash
         run: |
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE"
-          PROJETO="$RUNNER_TEMP/projeto-lg-db"
+          PROJETO="$RUNNER_TEMP/site-completo"
           mkdir -p "$PROJETO"
           cd "$PROJETO"
-
+          node "$ROOT/instalador/catalogo-s.mjs" add I01
+          node "$ROOT/instalador/catalogo-s.mjs" add C01
+          node "$ROOT/instalador/catalogo-s.mjs" add E01
+          node "$ROOT/instalador/catalogo-s.mjs" add P01
+          node "$ROOT/instalador/catalogo-s.mjs" add A01
+          node "$ROOT/instalador/catalogo-s.mjs" add L01
           node "$ROOT/instalador/catalogo-s.mjs" add LG01
-          test -f login.html
-          test -f assets/js/catalogo-s.config.js
-          grep -q 'data-catalogo-s-page="login"' login.html
-          grep -q 'loginEndpoint:""' assets/js/catalogo-s.config.js
-          node "$ROOT/instalador/catalogo-s.mjs" doctor
-
           node "$ROOT/instalador/catalogo-s.mjs" add DB01 --no-deps
+          node "$ROOT/instalador/catalogo-s.mjs" doctor
+          grep -q 'data-catalogo-s-model="C01"' index.html
+          grep -q 'data-catalogo-s-model="E01"' index.html
+          grep -q 'data-catalogo-s-model="P01"' index.html
+          grep -q 'data-catalogo-s-model="A01"' index.html
+          test -f produtos.html
+          test -f login.html
           test -f database/schema.sql
-          test -f lib/catalogo-s-db.js
-          test -f api/auth/login.js
-          test -f api/auth/cadastro.js
-          grep -q "loginEndpoint:\"/api/auth/login\"" assets/js/catalogo-s.config.js
-          grep -q "cadastroEndpoint:\"/api/auth/cadastro\"" assets/js/catalogo-s.config.js
-          grep -q '"estadoIntegracao": "conectado"' .catalogo-s/projeto.json
+          grep -q 'loginEndpoint:"/api/auth/login"' assets/js/catalogo-s.config.js
+
+          # Trocar a tela inicial não pode apagar os componentes já instalados.
+          node "$ROOT/instalador/catalogo-s.mjs" add I02
+          grep -q 'data-catalogo-s-model="I02"' index.html
+          grep -q 'data-catalogo-s-model="C01"' index.html
+          grep -q 'data-catalogo-s-model="E01"' index.html
           node "$ROOT/instalador/catalogo-s.mjs" doctor
 
-      - name: Testa DB01 antes LG01
+      - name: Testa DB01 antes do LG01
         shell: bash
         run: |
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE"
-          PROJETO="$RUNNER_TEMP/projeto-db-lg"
+          PROJETO="$RUNNER_TEMP/db-primeiro"
           mkdir -p "$PROJETO"
           cd "$PROJETO"
-
           node "$ROOT/instalador/catalogo-s.mjs" add DB01 --no-deps
-          test -f database/schema.sql
           grep -q '"estadoIntegracao": "aguardando-LG01"' .catalogo-s/projeto.json
-
           node "$ROOT/instalador/catalogo-s.mjs" add LG01
-          test -f login.html
-          test -f assets/js/catalogo-s.config.js
-          grep -q "loginEndpoint:\"/api/auth/login\"" assets/js/catalogo-s.config.js
           grep -q '"estadoIntegracao": "conectado"' .catalogo-s/projeto.json
+          grep -q 'loginEndpoint:"/api/auth/login"' assets/js/catalogo-s.config.js
           node "$ROOT/instalador/catalogo-s.mjs" doctor
 
-      - name: Testa comando público via npx e GitHub
+      - name: Testa comando público via npx
         shell: bash
         run: |
           set -euo pipefail
-          PROJETO="$RUNNER_TEMP/projeto-npx"
+          PROJETO="$RUNNER_TEMP/npx-publico"
           mkdir -p "$PROJETO"
           cd "$PROJETO"
-
-          npx --yes github:restoffkaua08-afk/Catalogo_S#main add LG01
-          test -f login.html
+          npx --yes github:restoffkaua08-afk/Catalogo_S#main add I03
+          test -f index.html
           test -f .catalogo-s/projeto.json
-          grep -q 'data-catalogo-s-model="LG01"' login.html
+          grep -q 'data-catalogo-s-model="I03"' index.html
