@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Acesso · Catálogo S</title>
+<style>
+:root{--bg:#050608;--surface:rgba(16,18,22,.56);--ink:#f7f3e9;--muted:#9e9a92;--gold:#d1ad73;--line:rgba(255,255,255,.13);--danger:#ffb7b7}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif}body{min-height:100svh;overflow:hidden}.scene{position:relative;min-height:100svh;display:grid;place-items:center;padding:24px;isolation:isolate;background:radial-gradient(circle at 50% 120%,rgba(209,173,115,.11),transparent 38%),linear-gradient(180deg,#07080a,#030405)}.grid{position:absolute;inset:0;z-index:-5;background-image:linear-gradient(rgba(255,255,255,.032) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.032) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(circle at center,#000 28%,transparent 82%)}.beam{position:absolute;z-index:-4;width:min(540px,70vw);height:150%;left:50%;top:-25%;transform:translateX(-50%) rotate(9deg);background:linear-gradient(90deg,transparent,rgba(209,173,115,.035),rgba(255,255,255,.045),rgba(209,173,115,.035),transparent);filter:blur(12px)}.orb{position:absolute;z-index:-3;border-radius:50%;border:1px solid rgba(209,173,115,.16);box-shadow:0 0 100px rgba(209,173,115,.05),inset 0 0 80px rgba(255,255,255,.025)}.o1{width:min(720px,82vw);aspect-ratio:1;left:-26%;top:-34%}.o2{width:min(560px,70vw);aspect-ratio:1;right:-22%;bottom:-30%}.gold-glow{position:absolute;z-index:-2;width:300px;height:300px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(209,173,115,.18),transparent 68%);filter:blur(45px)}.card{position:relative;width:min(430px,100%);padding:34px;border:1px solid rgba(255,255,255,.17);border-radius:28px;background:linear-gradient(145deg,rgba(255,255,255,.095),rgba(255,255,255,.035));backdrop-filter:blur(22px) saturate(1.18);-webkit-backdrop-filter:blur(22px) saturate(1.18);box-shadow:0 34px 90px rgba(0,0,0,.48),inset 0 1px rgba(255,255,255,.12)}.brand{display:flex;justify-content:center;margin-bottom:28px}.logo{position:relative;width:92px;height:92px;border-radius:26px;display:grid;place-items:center;font:700 25px/1 Georgia,serif;letter-spacing:.16em;color:#fff;background:linear-gradient(145deg,rgba(209,173,115,.24),rgba(255,255,255,.035));border:1px solid rgba(209,173,115,.42);box-shadow:0 18px 50px rgba(0,0,0,.36),inset 0 1px rgba(255,255,255,.16)}.logo::after{content:"";position:absolute;inset:8px;border:1px solid rgba(255,255,255,.08);border-radius:20px}.eyebrow{text-align:center;color:var(--gold);font-size:10px;font-weight:800;letter-spacing:.20em;text-transform:uppercase}.step h1{margin:11px 0 9px;text-align:center;font:500 38px/1 Georgia,serif}.lead{margin:0 auto 26px;text-align:center;color:var(--muted);font-size:14px;line-height:1.65;max-width:330px}.field{display:block;margin-bottom:12px}.field span{display:block;margin:0 0 8px 3px;color:#aaa69e;font-size:10px;font-weight:800;letter-spacing:.13em;text-transform:uppercase}.input-wrap{position:relative}.input{width:100%;height:54px;padding:0 16px;border-radius:15px;border:1px solid var(--line);outline:none;background:rgba(2,3,5,.48);color:#fff;font:500 15px Arial,sans-serif;transition:.2s}.input:focus{border-color:rgba(209,173,115,.65);box-shadow:0 0 0 4px rgba(209,173,115,.08)}.input::placeholder{color:#666b72}.code-input{text-align:center;font-size:25px;letter-spacing:.34em;padding-left:calc(16px + .34em);font-variant-numeric:tabular-nums}.button{width:100%;height:54px;border:0;border-radius:15px;cursor:pointer;background:linear-gradient(135deg,#f2e8d5,#d1ad73);color:#090a0c;font-weight:800;font-size:14px;transition:transform .18s,box-shadow .18s,opacity .18s;box-shadow:0 16px 34px rgba(209,173,115,.14)}.button:hover{transform:translateY(-2px);box-shadow:0 20px 42px rgba(209,173,115,.20)}.button:disabled{cursor:not-allowed;opacity:.55;transform:none}.message{min-height:20px;margin:14px 0 0;text-align:center;color:var(--danger);font-size:12px;line-height:1.5}.message.ok{color:#d7c39d}.code-meta{text-align:center;color:#8e8a82;font-size:12px;line-height:1.6;margin:-8px 0 20px}.code-meta b{color:#d8d2c7;font-weight:700}.links{display:flex;justify-content:center;gap:18px;margin-top:18px}.link{appearance:none;border:0;background:none;color:#8e8a82;font-size:12px;cursor:pointer;padding:4px}.link:hover{color:var(--gold)}.step[hidden]{display:none}.spinner{display:inline-block;width:13px;height:13px;margin-right:8px;vertical-align:-2px;border-radius:50%;border:2px solid rgba(9,10,12,.28);border-top-color:#090a0c;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}@media(max-width:520px){.scene{padding:16px}.card{padding:28px 20px;border-radius:24px}.logo{width:82px;height:82px;border-radius:23px}.step h1{font-size:33px}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}</style>
+</head>
+<body>
+<main class="scene">
+  <div class="grid"></div><div class="beam"></div><div class="orb o1"></div><div class="orb o2"></div><div class="gold-glow"></div>
+  <section class="card" aria-labelledby="access-title">
+    <div class="brand"><div class="logo" aria-label="CLS">CLS</div></div>
+    <div class="step" id="email-step">
+      <div class="eyebrow">Catálogo S</div>
+      <h1 id="access-title">Acesso privado</h1>
+      <p class="lead">Digite o e-mail autorizado para receber um código de acesso único.</p>
+      <form id="email-form">
+        <label class="field"><span>E-mail</span><div class="input-wrap"><input class="input" id="email" type="email" autocomplete="email" placeholder="voce@email.com" required></div></label>
+        <button class="button" id="send-btn" type="submit">Receber código</button>
+      </form>
+      <p class="message" id="email-message" aria-live="polite"></p>
+    </div>
+    <div class="step" id="code-step" hidden>
+      <div class="eyebrow">Código de acesso</div>
+      <h1>Confirme sua entrada</h1>
+      <p class="code-meta">Enviamos 6 números para <b id="masked-email"></b>.</p>
+      <form id="code-form">
+        <label class="field"><span>Código</span><input class="input code-input" id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" required></label>
+        <button class="button" id="verify-btn" type="submit">Entrar</button>
+      </form>
+      <p class="message" id="code-message" aria-live="polite"></p>
+      <div class="links"><button class="link" id="change-email" type="button">Trocar e-mail</button><button class="link" id="resend" type="button">Reenviar código</button></div>
+    </div>
+  </section>
+</main>
+<script>
+const emailStep=document.getElementById('email-step'),codeStep=document.getElementById('code-step'),emailForm=document.getElementById('email-form'),codeForm=document.getElementById('code-form'),emailInput=document.getElementById('email'),codeInput=document.getElementById('code'),sendBtn=document.getElementById('send-btn'),verifyBtn=document.getElementById('verify-btn'),emailMessage=document.getElementById('email-message'),codeMessage=document.getElementById('code-message'),maskedEmail=document.getElementById('masked-email'),changeEmail=document.getElementById('change-email'),resend=document.getElementById('resend');let activeEmail='';
+function targetPath(){const q=new URLSearchParams(location.search).get('next');if(!q||!q.startsWith('/')||q.startsWith('//')||q.startsWith('/login.html'))return '/';return q}
+function maskEmail(email){const [name,domain]=email.split('@');if(!domain)return email;const visible=name.length<=2?name[0]:(name.slice(0,2));return visible+'••••@'+domain}
+function setLoading(btn,loading,label){btn.disabled=loading;btn.innerHTML=loading?'<span class="spinner"></span>Aguarde':label}
+function showMessage(el,text,ok=false){el.textContent=text||'';el.classList.toggle('ok',ok)}
+async function api(path,body){const res=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});let data={};try{data=await res.json()}catch{}return {res,data}}
+async function requestCode(email){setLoading(sendBtn,true,'Receber código');showMessage(emailMessage,'');try{const {res,data}=await api('/api/auth/request-code',{email});if(!res.ok){showMessage(emailMessage,data.message||'Não foi possível enviar o código.');return false}activeEmail=data.email||email;maskedEmail.textContent=maskEmail(activeEmail);emailStep.hidden=true;codeStep.hidden=false;codeInput.value='';codeInput.focus();showMessage(codeMessage,'Código enviado.',true);return true}catch{showMessage(emailMessage,'Falha de conexão. Tente novamente.');return false}finally{setLoading(sendBtn,false,'Receber código')}}
+emailForm.addEventListener('submit',async e=>{e.preventDefault();const email=emailInput.value.trim();if(email)await requestCode(email)});
+codeInput.addEventListener('input',()=>{codeInput.value=codeInput.value.replace(/\D/g,'').slice(0,6)});
+codeForm.addEventListener('submit',async e=>{e.preventDefault();const code=codeInput.value.replace(/\D/g,'');if(code.length!==6){showMessage(codeMessage,'Digite os 6 números do código.');return}setLoading(verifyBtn,true,'Entrar');showMessage(codeMessage,'');try{const {res,data}=await api('/api/auth/verify',{code});if(!res.ok){showMessage(codeMessage,data.message||'Código inválido.');if(data.code==='EXPIRED'||data.code==='TOO_MANY_ATTEMPTS')resend.focus();return}location.replace(targetPath())}catch{showMessage(codeMessage,'Falha de conexão. Tente novamente.')}finally{setLoading(verifyBtn,false,'Entrar')}});
+changeEmail.addEventListener('click',()=>{codeStep.hidden=true;emailStep.hidden=false;codeMessage.textContent='';emailInput.focus()});
+resend.addEventListener('click',async()=>{if(!activeEmail)return;showMessage(codeMessage,'');const original=sendBtn;try{resend.disabled=true;const {res,data}=await api('/api/auth/request-code',{email:activeEmail});if(!res.ok){showMessage(codeMessage,data.message||'Não foi possível reenviar.');return}showMessage(codeMessage,'Novo código enviado.',true);codeInput.value='';codeInput.focus()}catch{showMessage(codeMessage,'Falha de conexão. Tente novamente.')}finally{resend.disabled=false}});
+(async()=>{try{const res=await fetch('/api/auth/session',{cache:'no-store'});if(res.ok)location.replace(targetPath())}catch{}})();
+</script>
+</body>
+</html>
