@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "modelos": {
+    "LG01": {
+      "id": "LG01",
+      "nome": "Login Lateral com Transição de Cadastro",
+      "tipo": "pagina",
+      "papel": "login",
+      "singleton": true,
+      "target": "login.html",
+      "template": "frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/bloco-pronto.html",
+      "fornece": ["auth-ui"],
+      "compatibilidade": {
+        "bancoPreferido": "DB01"
+      }
+    },
+    "DB01": {
+      "id": "DB01",
+      "nome": "Banco do LG01",
+      "tipo": "backend",
+      "papel": "auth-db",
+      "singleton": true,
+      "pareadoCom": "LG01",
+      "requer": ["LG01"],
+      "schemaTemplate": "backend/DB01-Banco-do-LG01/schema.sql",
+      "grava": [
+        "database/schema.sql",
+        "lib/catalogo-s-db.js",
+        "api/auth/login.js",
+        "api/auth/cadastro.js",
+        ".env.example"
+      ],
+      "fornece": ["auth-db", "auth-api"]
+    }
+  }
+}
