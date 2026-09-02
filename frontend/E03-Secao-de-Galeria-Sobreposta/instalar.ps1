@@ -9,10 +9,10 @@ $ConteudoModelo = @'
   </div>
 
   <div class="team-gallery" aria-label="Galeria demonstrativa">
-    <figure class="photo-card card-01"><img src="COLOQUE_AQUI_A_URL_DA_IMAGEM_01" alt="Imagem 1"></figure>
-    <figure class="photo-card card-02"><img src="COLOQUE_AQUI_A_URL_DA_IMAGEM_02" alt="Imagem 2"></figure>
-    <figure class="photo-card card-03"><img src="COLOQUE_AQUI_A_URL_DA_IMAGEM_03" alt="Imagem 3"></figure>
-    <figure class="photo-card card-04"><img src="COLOQUE_AQUI_A_URL_DA_IMAGEM_04" alt="Imagem 4"></figure>
+    <figure class="photo-card card-01"><div class="photo-placeholder" aria-label="Imagem 1">IMAGEM 01</div></figure>
+    <figure class="photo-card card-02"><div class="photo-placeholder" aria-label="Imagem 2">IMAGEM 02</div></figure>
+    <figure class="photo-card card-03"><div class="photo-placeholder" aria-label="Imagem 3">IMAGEM 03</div></figure>
+    <figure class="photo-card card-04"><div class="photo-placeholder" aria-label="Imagem 4">IMAGEM 04</div></figure>
   </div>
 </section>
 </div>
@@ -26,7 +26,7 @@ $ConteudoModelo = @'
 #catalogo-e03 .team-intro p{color:var(--muted);max-width:390px;margin:30px 0 0;font-size:12px;line-height:1.75}
 #catalogo-e03 .team-gallery{min-height:100vh;position:relative;overflow:hidden;isolation:isolate}
 #catalogo-e03 .photo-card{position:absolute;width:27%;height:calc(100vh - 24px);min-height:560px;top:50%;border:0;border-radius:0;padding:0;margin:0;overflow:hidden;background:#0a0b0b;pointer-events:auto;cursor:default;box-shadow:0 22px 58px rgba(0,0,0,.36);transition:transform 1.25s cubic-bezier(.16,1,.3,1),box-shadow 1.25s cubic-bezier(.16,1,.3,1),z-index 0s}
-#catalogo-e03 .photo-card img{display:block;width:100%;height:100%;object-fit:cover;filter:grayscale(1) saturate(0) contrast(1.07) brightness(.88);transform:scale(1.002);transition:filter 1.05s cubic-bezier(.16,1,.3,1),transform 1.25s cubic-bezier(.16,1,.3,1);user-select:none;pointer-events:none}
+#catalogo-e03 .photo-placeholder{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(145deg,#1b1e24,#0b0d11 56%,#302719);color:#d1ad73;font:700 11px Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;filter:grayscale(1) saturate(0) contrast(1.07) brightness(.88);transform:scale(1.002);transition:filter 1.05s cubic-bezier(.16,1,.3,1),transform 1.25s cubic-bezier(.16,1,.3,1);user-select:none;pointer-events:none}
 #catalogo-e03 .card-01{left:15%;z-index:1;width:27%;transform:translateY(-46%)}
 #catalogo-e03 .card-02{left:34%;z-index:5;width:21%;transform:translateY(-53%)}
 #catalogo-e03 .card-03{left:52%;z-index:2;width:29%;transform:translateY(-44%)}
@@ -36,9 +36,9 @@ $ConteudoModelo = @'
 #catalogo-e03 .card-02:hover{transform:translateY(calc(-53% - 4px)) scale(1.002)}
 #catalogo-e03 .card-03:hover{transform:translateY(calc(-44% - 4px)) scale(1.002)}
 #catalogo-e03 .card-04:hover{transform:translateY(calc(-50% - 4px)) scale(1.002)}
-#catalogo-e03 .photo-card:hover img{filter:grayscale(0) saturate(1.35) contrast(1.03) brightness(1.05);transform:scale(1.006)}
+#catalogo-e03 .photo-card:hover .photo-placeholder{filter:grayscale(0) saturate(1.35) contrast(1.03) brightness(1.05);transform:scale(1.006)}
 @media(max-width:900px){#catalogo-e03 .team-model{grid-template-columns:1fr}#catalogo-e03 .team-intro{min-height:auto;border-right:0;border-bottom:1px solid var(--line);padding:70px 24px 45px}#catalogo-e03 .team-intro h1{font-size:clamp(58px,15vw,90px)}#catalogo-e03 .team-gallery{min-height:620px;overflow-x:auto;overflow-y:hidden}#catalogo-e03 .photo-card{width:250px;height:570px;min-height:0}#catalogo-e03 .card-01{left:24px}#catalogo-e03 .card-02{left:205px;width:215px}#catalogo-e03 .card-03{left:375px}#catalogo-e03 .card-04{left:555px;right:auto;width:215px}#catalogo-e03 .team-gallery:after{content:"";position:absolute;left:794px;width:24px;height:1px}}
-@media(prefers-reduced-motion:reduce){#catalogo-e03 .photo-card,#catalogo-e03 .photo-card img{transition:none}}
+@media(prefers-reduced-motion:reduce){#catalogo-e03 .photo-card,#catalogo-e03 .photo-placeholder{transition:none}}
 </style>
 '@
 
