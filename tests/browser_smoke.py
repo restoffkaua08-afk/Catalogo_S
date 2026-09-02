@@ -26,7 +26,7 @@ def attach_monitor(page, label):
     def on_response(response):
         if not response.url.startswith(BASE) or response.status < 400:
             return
-        if response.request.resource_type in {'document', 'script', 'stylesheet'}:
+        if response.request.resource_type in {'document', 'script', 'stylesheet', 'image'}:
             errors.append(f'{label}: HTTP {response.status}: {response.url}')
 
     page.on('console', on_console)
@@ -37,6 +37,30 @@ def attach_monitor(page, label):
 def assert_clean(errors):
     if errors:
         raise AssertionError('\n'.join(errors))
+
+
+def assert_no_horizontal_overflow(page, label, tolerance=3):
+    metrics = page.evaluate(
+        """() => ({
+          html: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+          body: document.body ? document.body.scrollWidth - document.documentElement.clientWidth : 0
+        })"""
+    )
+    overflow = max(metrics['html'], metrics['body'])
+    assert overflow <= tolerance, f'{label}: overflow horizontal de {overflow}px'
+
+
+def normalize_fragment_page(page):
+    page.evaluate(
+        """() => {
+          document.documentElement.style.margin='0';
+          document.documentElement.style.overflowX='hidden';
+          if(document.body){
+            document.body.style.margin='0';
+            document.body.style.overflowX='hidden';
+          }
+        }"""
+    )
 
 
 def test_catalog_navigation(page):
@@ -65,6 +89,43 @@ def test_catalog_navigation(page):
         page.locator('#homeBtn').click()
         page.wait_for_function("location.hash === ''", timeout=3000)
         page.locator('.category-grid').wait_for(timeout=3000)
+
+
+def assert_detail_preview_stable(detail, mid):
+    iframe = detail.locator('.preview iframe')
+    iframe.wait_for(timeout=7000)
+    assert iframe.get_attribute('scrolling') == 'no', f'{mid}: iframe de preview voltou a permitir scroll próprio'
+    detail.wait_for_timeout(700)
+
+    child_frames = [frame for frame in detail.frames if frame != detail.main_frame]
+    assert len(child_frames) == 1, f'{mid}: esperado exatamente um iframe de preview'
+    preview = child_frames[0]
+    metrics = preview.evaluate(
+        """() => {
+          const root=document.documentElement;
+          const body=document.body;
+          const style=body?getComputedStyle(body):null;
+          return {
+            marginTop: style?.marginTop || '0px',
+            marginRight: style?.marginRight || '0px',
+            marginBottom: style?.marginBottom || '0px',
+            marginLeft: style?.marginLeft || '0px',
+            clientHeight: root.clientHeight,
+            scrollHeight: Math.max(root.scrollHeight,body?.scrollHeight||0),
+            clientWidth: root.clientWidth,
+            scrollWidth: Math.max(root.scrollWidth,body?.scrollWidth||0),
+            overflowY: getComputedStyle(root).overflowY
+          };
+        }"""
+    )
+    margins = {metrics['marginTop'], metrics['marginRight'], metrics['marginBottom'], metrics['marginLeft']}
+    assert margins == {'0px'}, f'{mid}: preview ainda possui margem padrão do navegador: {margins}'
+    assert metrics['scrollWidth'] <= metrics['clientWidth'] + 3, f'{mid}: preview possui overflow horizontal interno'
+    assert metrics['overflowY'] == 'hidden', f'{mid}: preview interno ainda pode criar barra vertical'
+    assert metrics['scrollHeight'] <= metrics['clientHeight'] + 6, (
+        f'{mid}: conteúdo interno excede iframe ({metrics["scrollHeight"]}>{metrics["clientHeight"]})'
+    )
+    assert_no_horizontal_overflow(detail, f'{mid} detail')
 
 
 def test_interaction(page, mid):
@@ -132,6 +193,38 @@ def test_interaction(page, mid):
         page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-login')", timeout=12000)
 
 
+def direct_path_for(model):
+    return model.get('template') if model['tipo'] == 'frontend' else 'backend/DB01-Banco-do-LG01/preview.html'
+
+
+def test_mobile_layout(browser):
+    context = browser.new_context(viewport={'width': 390, 'height': 844}, is_mobile=True)
+
+    root = context.new_page()
+    errors = attach_monitor(root, 'CATALOGO mobile')
+    response = root.goto(BASE + '/', wait_until='domcontentloaded', timeout=15000)
+    assert response and response.status == 200
+    root.locator('.category-grid').wait_for(timeout=5000)
+    assert root.locator('.category-card').count() == len(CATEGORIES)
+    assert_no_horizontal_overflow(root, 'CATALOGO mobile', tolerance=4)
+    assert_clean(errors)
+    root.close()
+
+    for mid, model in MODELS.items():
+        page = context.new_page()
+        errors = attach_monitor(page, f'{mid} mobile')
+        response = page.goto(web_url(direct_path_for(model)), wait_until='domcontentloaded', timeout=15000)
+        assert response and response.status == 200, f'{mid}: preview mobile indisponível'
+        normalize_fragment_page(page)
+        page.wait_for_timeout(180)
+        assert_no_horizontal_overflow(page, f'{mid} mobile', tolerance=5)
+        assert len(page.locator('body').inner_html()) > 60
+        assert_clean(errors)
+        page.close()
+
+    context.close()
+
+
 def main():
     checked = 0
     with sync_playwright() as p:
@@ -145,6 +238,7 @@ def main():
         assert response and response.status == 200
         assert 'Catálogo S' in (root.title() + root.locator('body').inner_text())
         assert len(root.locator('body').inner_text()) > 100
+        assert_no_horizontal_overflow(root, 'CATALOGO')
         test_catalog_navigation(root)
         assert_clean(root_errors)
         root.close()
@@ -168,25 +262,29 @@ def main():
             frame = detail.frame_locator('iframe')
             frame.locator('body').wait_for(state='attached', timeout=7000)
             assert len(frame.locator('body').inner_html()) > 60, f'{mid}: preview vazio'
+            assert_detail_preview_stable(detail, mid)
             assert_clean(errors)
             detail.close()
 
-            direct_path = model.get('template') if model['tipo'] == 'frontend' else 'backend/DB01-Banco-do-LG01/preview.html'
             direct = context.new_page()
             errors = attach_monitor(direct, f'{mid} preview')
-            response = direct.goto(web_url(direct_path), wait_until='domcontentloaded', timeout=15000)
+            response = direct.goto(web_url(direct_path_for(model)), wait_until='domcontentloaded', timeout=15000)
             assert response and response.status == 200, f'{mid}: preview direto indisponível'
+            normalize_fragment_page(direct)
             assert len(direct.locator('body').inner_html()) > 60, f'{mid}: demonstração sem conteúdo'
+            assert_no_horizontal_overflow(direct, f'{mid} preview', tolerance=4)
             test_interaction(direct, mid)
             direct.wait_for_timeout(150)
             assert_clean(errors)
             direct.close()
             checked += 1
 
+        context.close()
+        test_mobile_layout(browser)
         browser.close()
 
     assert checked == len(MODELS) == 21, f'esperados 21 modelos, validados {checked}'
-    print(f'Chromium: {checked} modelos, navegação, previews, cópia e interações críticas validados.')
+    print(f'Chromium: {checked} modelos, navegação, scroll único, responsividade, cópia e interações críticas validados.')
 
 
 if __name__ == '__main__':
