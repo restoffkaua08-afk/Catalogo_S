@@ -15,6 +15,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 jobs:
   migrate:
@@ -39,7 +40,18 @@ jobs:
           git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md README.md documentacao/COMO-ADICIONAR-UM-MODELO.md documentacao/ARQUITETURA-INSTALADOR-TERMINAL.md
           if git diff --cached --quiet; then
             echo "Nenhuma alteração pendente."
-            exit 0
+          else
+            git commit -m "Gera instaladores PowerShell autocontidos"
+            git push
           fi
-          git commit -m "Gera instaladores PowerShell autocontidos"
-          git push
+
+      - name: Dispara gate sobre o estado final
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          # Commits feitos pelo GITHUB_TOKEN não iniciam outros workflows de push.
+          # Por isso o gate é disparado explicitamente após a regeneração/publicação.
+          gh workflow run teste-instalador.yml --ref main --repo "$GITHUB_REPOSITORY"
+          echo "Gate de estabilidade solicitado para o main final."
