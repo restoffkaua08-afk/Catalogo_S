@@ -43,7 +43,6 @@ jobs:
           from pathlib import Path
           import json, html, re
 
-          root=Path('.')
           registry=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))
           models=registry['modelos']
           categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
@@ -158,7 +157,13 @@ jobs:
                 test -n "$arquivo"
                 grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
                 test -n "$template"
-                cmp -s "$arquivo" "$ROOT/$template"
+                python - "$arquivo" "$ROOT/$template" <<'PY'
+          from pathlib import Path
+          import sys
+          installed=Path(sys.argv[1]).read_text(encoding='utf-8').rstrip('\r\n')
+          source=Path(sys.argv[2]).read_text(encoding='utf-8').rstrip('\r\n')
+          assert installed==source, f'conteúdo instalado diverge de {sys.argv[2]}'
+          PY
                 ;;
               banco)
                 test -f "$projeto/database/schema.sql"
