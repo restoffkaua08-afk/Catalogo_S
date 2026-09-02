@@ -60,23 +60,7 @@ migration = migration.replace("    'A':('componente','efeito',''),\n", '')
 migration = migration.replace("for base in (ROOT/'frontend',ROOT/'efeitos'):", "for base in (ROOT/'frontend',):")
 migration_file.write_text(migration, encoding='utf-8')
 
-# 5) Workflows passam a validar somente os modelos que permanecem no catálogo.
-test_file = ROOT / '.github/workflows/teste-instalador.yml'
-test = test_file.read_text(encoding='utf-8')
-test = test.replace("roots=[Path('frontend'),Path('efeitos')]", "roots=[Path('frontend')]")
-test = test.replace('          node "$ROOT/instalador/catalogo-s.mjs" add A01\n', '')
-test = test.replace('          grep -q \'data-catalogo-s-model="A01"\' index.html\n', '')
-test_file.write_text(test, encoding='utf-8')
-
-migration_workflow = ROOT / '.github/workflows/migrate-terminal-catalog.yml'
-workflow = migration_workflow.read_text(encoding='utf-8')
-workflow = workflow.replace(
-    '          git add frontend efeitos backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md documentacao/COMO-ADICIONAR-UM-MODELO.md',
-    '          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md documentacao/COMO-ADICIONAR-UM-MODELO.md'
-)
-migration_workflow.write_text(workflow, encoding='utf-8')
-
-# 6) Documentação ativa acompanha a nova regra.
+# 5) Documentação ativa acompanha a nova regra.
 readme_file = ROOT / 'README.md'
 readme = readme_file.read_text(encoding='utf-8')
 readme = readme.replace(
@@ -88,19 +72,22 @@ readme_file.write_text(readme, encoding='utf-8')
 ids_file = ROOT / 'documentacao/CONVENCAO-DE-IDS.md'
 ids = ids_file.read_text(encoding='utf-8')
 ids = ids.replace('- `A` — animação ou efeito visual\n', '')
-ids += '\n## Prefixo A retirado\n\nA família `Axx` foi retirada do Catálogo S em 2026-09-02 por não corresponder ao padrão atual de construção composável de sites. IDs antigos continuam recuperáveis apenas pelo histórico Git e não devem ser reutilizados para outra finalidade.\n'
+if '## Prefixo A retirado' not in ids:
+    ids += '\n## Prefixo A retirado\n\nA família `Axx` foi retirada do Catálogo S em 2026-09-02 por não corresponder ao padrão atual de construção composável de sites. IDs antigos continuam recuperáveis apenas pelo histórico Git e não devem ser reutilizados para outra finalidade.\n'
 ids_file.write_text(ids, encoding='utf-8')
 
 arch_file = ROOT / 'documentacao/ARQUITETURA-INSTALADOR-TERMINAL.md'
 arch = arch_file.read_text(encoding='utf-8')
-arch = arch.replace('43 modelos', '21 modelos')
-arch += '\n\n## Remoção da família de efeitos\n\nEm 2026-09-02, a categoria `Fundos e telas` e toda a família `Axx` foram removidas do catálogo ativo, do registro do instalador e do código-fonte atual. Esses modelos não seguiam o padrão adotado de construção composável por páginas, seções, componentes funcionais e integrações. O histórico Git permanece como única fonte de recuperação.\n'
+arch = arch.replace('`Exx`, `Cxx`, `Pxx` e `Axx` são tratados como componentes repetíveis.', '`Exx`, `Cxx` e `Pxx` são tratados como componentes repetíveis.')
+if '## Remoção da família de efeitos' not in arch:
+    arch += '\n\n## Remoção da família de efeitos\n\nEm 2026-09-02, a categoria `Fundos e telas` e toda a família `Axx` foram removidas do catálogo ativo, do registro do instalador e do código-fonte atual. Esses modelos não seguiam o padrão adotado de construção composável por páginas, seções, componentes funcionais e integrações. O histórico Git permanece como única fonte de recuperação.\n'
 arch_file.write_text(arch, encoding='utf-8')
 
 report_file = ROOT / 'documentacao/RELATORIO-MIGRACAO-TERMINAL-2026-09-02.md'
 if report_file.exists():
     report = report_file.read_text(encoding='utf-8')
-    report += '\n\n## Ajuste posterior — família Axx removida\n\nApós a validação inicial de 43 modelos, os 22 modelos `Axx` de efeitos foram retirados por decisão de arquitetura. O registro operacional passa a conter 21 modelos. A categoria `Fundos e telas`, seus dados, documentação específica e fontes atuais foram removidos; o histórico Git preserva as versões anteriores.\n'
+    if '## Ajuste posterior — família Axx removida' not in report:
+        report += '\n\n## Ajuste posterior — família Axx removida\n\nApós a validação inicial de 43 modelos, os 22 modelos `Axx` de efeitos foram retirados por decisão de arquitetura. O registro operacional passa a conter 21 modelos. A categoria `Fundos e telas`, seus dados, documentação específica e fontes atuais foram removidos; o histórico Git preserva as versões anteriores.\n'
     report_file.write_text(report, encoding='utf-8')
 
 print(f"Categorias restantes: {len(categories['categorias'])}")
