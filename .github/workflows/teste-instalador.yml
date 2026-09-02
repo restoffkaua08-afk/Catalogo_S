@@ -1,5 +1,4 @@
 name: Teste integral do Catálogo S
-# A CI valida o mesmo PowerShell autocontido exibido ao usuário.
 
 on:
   push:
@@ -7,7 +6,10 @@ on:
       - 'instalador/**'
       - 'frontend/**'
       - 'backend/DB01-Banco-do-LG01/**'
-      - 'dados/categorias.*'
+      - 'dados/**'
+      - 'tests/**'
+      - 'tools/**'
+      - 'index.html'
       - 'package.json'
       - '.github/workflows/teste-instalador.yml'
   workflow_dispatch:
@@ -15,11 +17,25 @@ on:
 jobs:
   validar:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: catalogo
+          MYSQL_ROOT_HOST: '%'
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -uroot -pcatalogo"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Valida demonstrações e instaladores públicos
+      - name: Valida contrato, catálogo, demos e códigos copiáveis
         shell: bash
         run: |
           set -euo pipefail
@@ -27,10 +43,31 @@ jobs:
           from pathlib import Path
           import json, html, re
 
+          root=Path('.')
           registry=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))
           models=registry['modelos']
+          categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
+
           assert registry.get('instalacaoPublica')=='powershell-autocontido'
-          assert models, 'nenhum modelo registrado'
+          assert len(models)==21, f'esperados 21 modelos registrados, encontrados {len(models)}'
+          assert categories.get('quantidade')==len(categories.get('categorias',[])), 'quantidade de categorias divergente'
+
+          slugs=[c['slug'] for c in categories['categorias']]
+          assert len(slugs)==len(set(slugs)), 'slug de categoria duplicado'
+
+          catalog_items=[]
+          for category in categories['categorias']:
+              for item in category.get('itens',[]):
+                  catalog_items.append(item)
+                  assert Path(item['caminho']).exists(), f"{item['id']}: caminho público ausente: {item['caminho']}"
+
+          ids=[item['id'] for item in catalog_items]
+          assert len(ids)==len(set(ids)), 'ID duplicado no catálogo'
+          assert set(ids)==set(models), f'catálogo e registro divergem: catálogo={sorted(ids)} registro={sorted(models)}'
+
+          js=Path('dados/categorias.js').read_text(encoding='utf-8')
+          for item in catalog_items:
+              assert item['id'] in js and item['caminho'] in js, f"{item['id']}: categorias.js fora de sincronia"
 
           forbidden=[
               'npx ', 'github.com/', 'api.github.com', 'raw.githubusercontent.com',
@@ -55,9 +92,33 @@ jobs:
               assert match, f'{mid}: sem bloco PowerShell'
               visible=html.unescape(match.group(1))
               assert visible==script, f'{mid}: bloco exibido diverge de instalar.ps1'
+
+              iframe=re.search(r'<iframe[^>]+src="([^"]+)"',text,re.I)
+              assert iframe, f'{mid}: preview sem iframe'
+              preview=(demo.parent/iframe.group(1)).resolve()
+              assert preview.exists(), f'{mid}: arquivo de preview ausente: {iframe.group(1)}'
+
+              if model['tipo']=='frontend':
+                  template=Path(model['template'])
+                  assert template.exists(), f'{mid}: template ausente'
+                  txt=template.with_suffix('.txt')
+                  assert txt.exists(), f'{mid}: bloco-pronto.txt ausente'
+                  assert template.read_text(encoding='utf-8')==txt.read_text(encoding='utf-8'), f'{mid}: HTML e TXT divergentes'
+
               checked+=1
 
-          print(f'{checked} modelos com bloco PowerShell autocontido validados.')
+          schema=Path('backend/DB01-Banco-do-LG01/schema.sql').read_text(encoding='utf-8')
+          bloco=Path('backend/DB01-Banco-do-LG01/bloco-pronto.sql').read_text(encoding='utf-8')
+          db_installer=Path('backend/DB01-Banco-do-LG01/instalar.ps1').read_text(encoding='utf-8')
+          assert schema==bloco, 'DB01: schema.sql e bloco-pronto.sql divergentes'
+          for expected in ['/api/auth/login','/api/auth/cadastro']:
+              assert expected in schema and expected in db_installer, f'DB01: rota atual ausente: {expected}'
+          for obsolete in ["'/api/login'","'/api/cadastro'"]:
+              assert obsolete not in schema and obsolete not in db_installer, f'DB01: rota obsoleta ainda presente: {obsolete}'
+
+          assert 'COLOQUE_AQUI_A_URL_DA_IMAGEM' not in Path('frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html').read_text(encoding='utf-8'), 'E03 ainda possui imagens quebradas por placeholder de URL'
+
+          print(f'{checked} modelos: contrato, metadados, previews e blocos PowerShell sincronizados.')
           PY
 
       - name: Executa cada instalador PowerShell isoladamente
@@ -72,10 +133,10 @@ jobs:
           import json
           data=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))['modelos']
           for m in data.values():
-              print('|'.join([m['id'],m['modo'],m.get('target',''),m['instaladorPublico']]))
+              print('|'.join([m['id'],m['modo'],m.get('target',''),m.get('template',''),m['instaladorPublico']]))
           PY
 
-          while IFS='|' read -r id mode target script; do
+          while IFS='|' read -r id mode target template script; do
             projeto="$RUNNER_TEMP/publico-${id,,}"
             rm -rf "$projeto"
             mkdir -p "$projeto"
@@ -88,22 +149,29 @@ jobs:
               pagina)
                 test -n "$target"
                 test -f "$projeto/$target"
+                grep -qi '<html' "$projeto/$target"
+                grep -qi '<body' "$projeto/$target"
                 ;;
               componente)
                 test -f "$projeto/index.html"
-                find "$projeto/components/catalogo-s" -maxdepth 1 -type f -name "${id,,}-*.html" | grep -q .
+                arquivo="$(find "$projeto/components/catalogo-s" -maxdepth 1 -type f -name "${id,,}-*.html" | head -n 1)"
+                test -n "$arquivo"
                 grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
+                test -n "$template"
+                cmp -s "$arquivo" "$ROOT/$template"
                 ;;
               banco)
                 test -f "$projeto/database/schema.sql"
                 test -f "$projeto/api/auth/login.js"
                 test -f "$projeto/api/auth/cadastro.js"
                 test -f "$projeto/lib/catalogo-s-db.js"
+                grep -q "loginEndpoint:'/api/auth/login'" "$projeto/assets/js/catalogo-s.config.js"
+                grep -q "cadastroEndpoint:'/api/auth/cadastro'" "$projeto/assets/js/catalogo-s.config.js"
                 ;;
             esac
           done < "$RUNNER_TEMP/modelos.txt"
 
-      - name: Testa composição só com scripts copiados
+      - name: Testa composição e preservação entre modelos
         shell: bash
         env:
           CATALOGO_S_SKIP_DEPS: '1'
@@ -115,17 +183,6 @@ jobs:
           mkdir -p "$PROJETO"
           cd "$PROJETO"
 
-          check() {
-            local label="$1"
-            shift
-            echo "[CHECK] $label"
-            if ! "$@"; then
-              echo "[FALHA] $label"
-              exit 1
-            fi
-            echo "[OK] $label"
-          }
-
           pwsh -NoProfile -File "$ROOT/frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/C01-Carrossel-de-Destaques/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/frontend/E01-Secao-de-Navegacao-Visual/instalar.ps1"
@@ -134,20 +191,21 @@ jobs:
           pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
 
-          check 'C01 presente no index' grep -q 'data-catalogo-s-model="C01"' index.html
-          check 'E01 presente no index' grep -q 'data-catalogo-s-model="E01"' index.html
-          check 'P01 presente no index' grep -q 'data-catalogo-s-model="P01"' index.html
-          check 'produtos.html criado' test -f produtos.html
-          check 'login.html criado' test -f login.html
-          check 'database/schema.sql criado' test -f database/schema.sql
-          check 'endpoint de login conectado' grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
+          grep -q 'data-catalogo-s-model="C01"' index.html
+          grep -q 'data-catalogo-s-model="E01"' index.html
+          grep -q 'data-catalogo-s-model="P01"' index.html
+          test -f produtos.html
+          test -f login.html
+          test -f database/schema.sql
+          grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
+          grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
 
           pwsh -NoProfile -File "$ROOT/frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1"
-          check 'C01 preservado após I02' grep -q 'data-catalogo-s-model="C01"' index.html
-          check 'E01 preservado após I02' grep -q 'data-catalogo-s-model="E01"' index.html
-          check 'P01 preservado após I02' grep -q 'data-catalogo-s-model="P01"' index.html
+          grep -q 'data-catalogo-s-model="C01"' index.html
+          grep -q 'data-catalogo-s-model="E01"' index.html
+          grep -q 'data-catalogo-s-model="P01"' index.html
 
-      - name: Testa DB01 antes do LG01 sem GitHub
+      - name: Testa DB01 antes do LG01
         shell: bash
         env:
           CATALOGO_S_SKIP_DEPS: '1'
@@ -163,3 +221,36 @@ jobs:
           pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
           grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
           grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
+
+      - name: Instala Chromium para smoke tests
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Testa catálogo e todas as demonstrações em Chromium
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 >"$RUNNER_TEMP/catalogo-http.log" 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          python tests/browser_smoke.py
+
+      - name: Testa DB01 com MySQL real
+        shell: bash
+        env:
+          DATABASE_URL: mysql://root:catalogo@127.0.0.1:3306/catalogo_login_lg01
+          CATALOGO_S_SKIP_DEPS: '1'
+        run: |
+          set -euo pipefail
+          ROOT="$GITHUB_WORKSPACE"
+          PROJETO="$RUNNER_TEMP/db01-real"
+          rm -rf "$PROJETO"
+          mkdir -p "$PROJETO"
+          cd "$PROJETO"
+
+          pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
+          npm install --no-audit --no-fund mysql2 bcryptjs
+          cp "$ROOT/tests/db01_integration.mjs" ./db01_integration.mjs
+          node db01_integration.mjs
