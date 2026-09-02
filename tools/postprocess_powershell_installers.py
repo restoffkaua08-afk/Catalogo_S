@@ -23,8 +23,10 @@ HOST_IFRAME_OLD = 'loading=`"lazy`" style=`"display:block;width:100%;height:100v
 HOST_IFRAME_NEW = 'loading=`"lazy`" scrolling=`"no`" style=`"display:block;width:100%;height:100vh;border:0;overflow:hidden`"'
 
 PREVIEW_STYLE = '''<style id="catalogo-preview-stability">
-.preview{height:auto!important;min-height:100svh;overflow:visible!important}
-.preview iframe{display:block;width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
 </style>'''
 
 PREVIEW_SCRIPT = '''<script id="catalogo-preview-stability-script">
