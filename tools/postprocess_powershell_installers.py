@@ -76,9 +76,21 @@ PREVIEW_SCRIPT = '''<script id="catalogo-preview-stability-script">
 
 
 def stabilize_detail(text: str):
-    # Remove uma versão anterior da correção para manter o processo idempotente.
-    text = re.sub(r'<style id="catalogo-preview-stability">[\s\S]*?</style>', '', text, count=1)
-    text = re.sub(r'<script id="catalogo-preview-stability-script">[\s\S]*?</script>', '', text, count=1)
+    # Remove a versão anterior junto do espaço que ela própria introduziu.
+    # Os lookaheads limitam a limpeza ao bloco imediatamente antes do fechamento,
+    # tornando o pós-processamento byte-idempotente.
+    text = re.sub(
+        r'\s*<style id="catalogo-preview-stability">[\s\S]*?</style>\s*(?=</head>)',
+        '\n',
+        text,
+        count=1,
+    )
+    text = re.sub(
+        r'\s*<script id="catalogo-preview-stability-script">[\s\S]*?</script>\s*(?=</body>)',
+        '\n',
+        text,
+        count=1,
+    )
 
     # O iframe de preview nunca deve criar uma segunda barra de rolagem.
     text, count = re.subn(
