@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { criarUsuario, localizarUsuarioPorEmail } from '../../../lib/catalogo-s-db.js';
+import { criarUsuario, localizarUsuarioPorEmail } from '../../lib/catalogo-s-db.js';
 
 function json(data, status = 200) {
   return Response.json(data, {
