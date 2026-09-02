@@ -1,241 +1,95 @@
-# Convenções de ligação e novas categorias — Catálogo S
+# Convenções de ligação e categorias — Catálogo S
 
 ## Estado
 
 - Data: 2026-09-02
-- Status: arquitetura definida; categorias criadas; modelos ainda não adicionados
-- Objetivo: permitir que componentes do Catálogo S sejam combinados sem o usuário precisar descobrir manualmente onde alterar links, destinos, IDs e contratos de dados.
+- Status: integrado à arquitetura por terminal.
+- Fonte normativa principal: `ARQUITETURA-INSTALADOR-TERMINAL.md`.
 
-## 1. Novas categorias
+As antigas instruções de localizar manualmente `href`, endpoints, arquivos e blocos `EDITE AQUI` foram substituídas pelo instalador do Catálogo S.
 
-Foram adicionadas ao catálogo:
+## IDs e categorias
 
-- Login
-- Banco de dados
-- Rodapés
-- Tela Sobre
-- Tela Contato
-- Menus
-- Telas com botão
+Os IDs existentes são permanentes. Famílias atuais e reservadas incluem:
 
-IDs reservados para os futuros modelos:
+- `Ixx` — telas iniciais;
+- `Exx` — seções/telas reutilizáveis;
+- `Cxx` — carrosséis;
+- `Lxx` — listagens de produtos;
+- `Pxx` — pesquisas;
+- `Axx` — efeitos;
+- `LGxx` — login;
+- `DBxx` — banco/backend pareado;
+- `Nxx` — menus;
+- `Fxx` — rodapés;
+- `SOBxx` — Sobre;
+- `CTxx` — Contato;
+- `BTNxx` — telas/blocos com botão.
 
-- `LG01`, `LG02`... — telas de login
-- `DB01`, `DB02`... — banco/persistência relacionado ao login de mesmo número
-- `F01`, `F02`... — rodapés
-- `SOB01`, `SOB02`... — telas/seções Sobre
-- `CT01`, `CT02`... — telas/seções Contato
-- `N01`, `N02`... — menus e navegações
-- `BTN01`, `BTN02`... — telas com botão
+Categorias sem modelos ainda podem permanecer vazias; não são preenchidas com exemplos artificiais.
 
-Os IDs existentes continuam imutáveis.
+## Instalação
 
-## 2. Login como página separada
+A interface para o usuário é sempre um comando de terminal:
 
-Uma tela de login é diferente de uma seção comum. O usuário deve poder criar um arquivo separado, por exemplo:
+```bash
+npx --yes github:restoffkaua08-afk/Catalogo_S#main add <ID>
+```
+
+Os arquivos `bloco-pronto.*` são fontes internas do modelo. Não é necessário copiá-los manualmente.
+
+## Arquivos canônicos
+
+Modelos do mesmo papel convergem para nomes estáveis:
 
 ```text
-projeto/
-├─ login.html
-└─ index.html
+inicio    -> index.html
+produtos  -> produtos.html
+sobre     -> sobre.html
+contato   -> contato.html
+login     -> login.html
 ```
 
-O código pronto de cada `LGxx` deverá funcionar como uma página independente.
-
-Todo modelo de login deve destacar claramente, no código copiável, o destino após autenticação:
-
-```js
-// ===== EDITE AQUI: TELA APÓS O LOGIN =====
-const DESTINO_APOS_LOGIN = 'index.html';
-```
-
-Quando existir backend real, o endpoint também deve ficar destacado:
-
-```js
-// ===== EDITE AQUI: ENDPOINT DE LOGIN =====
-const ENDPOINT_LOGIN = '/api/login';
-```
-
-Nenhum modelo aprovado deve esconder esses pontos em lógica difícil de localizar.
-
-## 3. Pareamento Login ↔ Banco de dados
-
-A numeração será pareada:
+Arquivos técnicos são criados somente quando necessários, por exemplo:
 
 ```text
-LG01 ↔ DB01
-LG02 ↔ DB02
-LG03 ↔ DB03
+assets/js/catalogo-s.config.js
+api/auth/login.js
+api/auth/cadastro.js
+lib/catalogo-s-db.js
+database/schema.sql
 ```
 
-O `DB01`, por exemplo, será o schema de referência do `LG01`.
+## Manifesto e slots
 
-Cada par deve compartilhar o mesmo contrato lógico de campos. Exemplo:
+O instalador registra o projeto em `.catalogo-s/projeto.json` e usa marcadores `CATALOGO-S:SLOT:*` como áreas seguras de reconciliação. Antes de substituir conteúdo gerenciado, cria backup em `.catalogo-s/backups/`.
+
+Componentes repetíveis são registrados como instâncias e podem coexistir. Páginas singleton são substituídas por papel sem apagar as instâncias já registradas.
+
+## Login e banco
+
+O pareamento continua por número:
 
 ```text
-LG01
-- email
-- senha
-
-DB01
-- email
-- senha_hash
+LG01 <-> DB01
+LG02 <-> DB02
 ```
 
-A senha é a única exceção proposital à igualdade literal dos nomes: uma senha nunca deve ser armazenada em texto puro. O formulário recebe `senha`; o backend transforma essa senha em hash e persiste `senha_hash`.
+A ligação é automática pelo CLI. Para `LG01 + DB01`, o instalador cria a configuração compartilhada, schema, adaptador de banco e endpoints. A ordem de instalação não precisa ser fixa: se um dos dois estiver ausente, a integração fica pendente e é concluída na próxima reconciliação quando o par aparecer.
 
-O modelo de banco deve fornecer no mínimo:
+A senha nunca é persistida em texto puro. O formulário recebe `senha`; o backend gera hash e persiste `senha_hash`. Credenciais reais permanecem em variáveis de ambiente.
 
-```text
-backend/DB01-.../
-├─ schema.sql
-├─ bloco-pronto.sql
-└─ LEIA-ME.txt
-```
+## Menus, rodapés e páginas futuras
 
-O SQL cria a estrutura de persistência. Ele não substitui o backend de autenticação: validação de senha, hashing, sessão e acesso ao banco precisam ocorrer no servidor, nunca diretamente no JavaScript público do navegador.
+Quando modelos `Nxx`, `Fxx`, `SOBxx`, `CTxx` e `BTNxx` forem criados, devem declarar seus contratos no registro do instalador. O CLI deve resolver destinos usando o manifesto e os papéis canônicos, e não texto visual ou nomes de classes CSS.
 
-## 4. Regra global de IDs para seções
+## Demonstrações
 
-Para facilitar menus e botões, telas e seções reutilizáveis devem ter um `id` HTML simples, previsível e objetivo.
+Toda demonstração segue um único padrão:
 
-Exemplos preferidos:
+- preview do modelo;
+- título simplificado acima do bloco;
+- botão `Copiar`;
+- comando de terminal.
 
-```html
-<section id="inicio">...</section>
-<section id="sobre">...</section>
-<section id="servicos">...</section>
-<section id="produtos">...</section>
-<section id="galeria">...</section>
-<section id="contato">...</section>
-<footer id="rodape">...</footer>
-```
-
-A ligação deve usar o `id`, não o nome visual da classe CSS.
-
-Para seção na mesma página:
-
-```html
-<a href="#sobre">Sobre</a>
-<a href="#contato">Contato</a>
-```
-
-Para outra página:
-
-```html
-<a href="sobre.html">Sobre</a>
-<a href="contato.html">Contato</a>
-```
-
-Esta passa a ser uma convenção global para novos modelos. Os modelos antigos poderão ser revisados em lote antes da criação dos primeiros menus para receber âncoras coerentes sem quebrar o visual existente.
-
-## 5. Menus
-
-A categoria `Menus` poderá conter, entre outros:
-
-- barra fixa no topo;
-- barra superior normal;
-- menu lateral fixo;
-- menu lateral recolhível;
-- menu sanduíche;
-- menu fullscreen;
-- navegação por âncoras;
-- navegação entre páginas.
-
-Todo modelo `Nxx` deve destacar uma área simples para editar os itens:
-
-```html
-<!-- ===== EDITE AQUI: ITENS DO MENU ===== -->
-<a href="#inicio">Início</a>
-<a href="#sobre">Sobre</a>
-<a href="#contato">Contato</a>
-```
-
-O texto visível e o destino devem ficar lado a lado para reduzir erro de integração.
-
-## 6. Rodapés
-
-Os modelos `Fxx` poderão incluir diferentes combinações de:
-
-- navegação secundária;
-- contato;
-- redes sociais;
-- copyright;
-- endereço;
-- links legais;
-- CTA final.
-
-Quando o rodapé for linkável pelo menu, deve usar por padrão:
-
-```html
-<footer id="rodape">
-```
-
-## 7. Tela Sobre e Tela Contato
-
-`SOBxx` e `CTxx` podem existir tanto como seção copiável quanto como página completa, desde que o `LEIA-ME.txt` deixe claro o modo de uso.
-
-Âncoras padrão:
-
-```text
-SOBxx → id="sobre"
-CTxx  → id="contato"
-```
-
-Quando forem páginas separadas, os exemplos de nome serão `sobre.html` e `contato.html`.
-
-## 8. Telas com botão
-
-A categoria `Telas com botão` será destinada a composições nas quais o CTA é parte central do design.
-
-Poderá haver modelos com:
-
-- 1 botão;
-- 2 botões;
-- vários botões;
-- botão sobre imagem;
-- botão lateral;
-- botões de ação principal/secundária;
-- layouts editoriais e promocionais.
-
-Todo `BTNxx` deve destacar no código onde alterar o texto e o destino/ação.
-
-Exemplo por link:
-
-```html
-<!-- ===== EDITE AQUI: TEXTO E DESTINO DO BOTÃO ===== -->
-<a class="botao-principal" href="#contato">Falar conosco</a>
-```
-
-Exemplo por JavaScript:
-
-```js
-// ===== EDITE AQUI: AÇÃO DO BOTÃO =====
-const TEXTO_BOTAO = 'Ver projeto';
-const DESTINO_BOTAO = '#projetos';
-```
-
-A demonstração não deve esconder a ação em código minificado ou espalhado por vários arquivos.
-
-## 9. Regra para blocos prontos
-
-Além de serem autocontidos sempre que possível, os blocos futuros dessas categorias devem usar marcadores visíveis como:
-
-```text
-===== EDITE AQUI =====
-```
-
-Esses marcadores devem apontar para:
-
-- links entre páginas;
-- âncoras de seção;
-- destino após login;
-- endpoint de backend;
-- nome/texto de botão;
-- ação de botão;
-- campos esperados pelo banco;
-- outros valores que o usuário normalmente precise personalizar.
-
-## 10. Próxima etapa
-
-As categorias estão criadas vazias de propósito. A criação dos modelos será feita separadamente, categoria por categoria, para que cada candidato seja demonstrável, copiável e tecnicamente coerente antes de entrar no catálogo ativo.
+Não deve haver instruções extensas de integração na tela de demonstração. A complexidade fica no instalador e na documentação técnica.
