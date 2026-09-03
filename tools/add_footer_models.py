@@ -237,71 +237,8 @@ O instalador injeta o conteúdo no slot `CATALOGO-S:SLOT:RODAPE`. Instalar outro
 
 
 def patch_tests():
-    path = ROOT / '.github/workflows/teste-instalador.yml'
-    text = path.read_text(encoding='utf-8')
-    text = text.replace("assert len(models)==25, f'esperados 25 modelos, encontrados {len(models)}'", "assert len(models)==30, f'esperados 30 modelos, encontrados {len(models)}'")
-    text = text.replace("print('25 modelos: contrato, metadados, previews, scroll e códigos sincronizados.')", "print('30 modelos: contrato, metadados, previews, scroll e códigos sincronizados.')")
-    text = text.replace("assert checked == len(MODELS) == 25, f'esperados 25 modelos, validados {checked}'", "assert checked == len(MODELS) == 30, f'esperados 30 modelos, validados {checked}'")
-
-    anchor = "          login_ids={'LG01','LG02','LG03','LG04','LG05'}\n          db=models['DB01']"
-    repl = """          login_ids={'LG01','LG02','LG03','LG04','LG05'}
-          footer_ids={'F01','F02','F03','F04','F05'}
-          assert footer_ids.issubset(models), 'família Fxx incompleta'
-          for footer_id in footer_ids:
-              footer=models[footer_id]
-              assert footer.get('modo')=='rodape', f'{footer_id}: modo deve ser rodape'
-              assert footer.get('slot')=='RODAPE', f'{footer_id}: slot incorreto'
-          db=models['DB01']"""
-    if "footer_ids={'F01'" not in text:
-        if anchor not in text:
-            raise RuntimeError('Âncora de Fxx não encontrada nos testes.')
-        text = text.replace(anchor, repl, 1)
-
-    if '              rodape)' not in text:
-        needle = '              banco)\n'
-        insert = '''              rodape)
-                test -f "$projeto/components/catalogo-s/rodape/ativo.html"
-                grep -q 'CATALOGO-S:SLOT:RODAPE:START' "$projeto/index.html"
-                grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
-                grep -q "data-catalogo-s-model=\"$id\"" "$projeto/components/catalogo-s/rodape/ativo.html"
-                ;;
-              banco)
-'''
-        if needle not in text:
-            raise RuntimeError('Case banco não encontrado nos testes.')
-        text = text.replace(needle, insert, 1)
-
-    cmd_anchor = '          pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"\n\n          for id in C01 E01 P01; do'
-    cmd_repl = '          pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"\n          pwsh -NoProfile -File "$ROOT/frontend/F01-Rodape-Institucional-Solido/instalar.ps1"\n\n          for id in C01 E01 P01; do'
-    if 'F01-Rodape-Institucional-Solido/instalar.ps1' not in text:
-        if cmd_anchor not in text:
-            raise RuntimeError('Âncora de composição F01 não encontrada.')
-        text = text.replace(cmd_anchor, cmd_repl, 1)
-
-    p_anchor = '          test -f database/schema.sql\n          grep -q "loginEndpoint:\'/api/auth/login\'" assets/js/catalogo-s.config.js'
-    p_repl = '          test -f database/schema.sql\n          test -f components/catalogo-s/rodape/ativo.html\n          grep -q \'data-catalogo-s-model="F01"\' index.html\n          grep -q "loginEndpoint:\'/api/auth/login\'" assets/js/catalogo-s.config.js'
-    if 'test -f components/catalogo-s/rodape/ativo.html' not in text:
-        if p_anchor not in text:
-            raise RuntimeError('Âncora de preservação F01 não encontrada.')
-        text = text.replace(p_anchor, p_repl, 1)
-
-    post_i02 = '''          pwsh -NoProfile -File "$ROOT/frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1"
-          for id in C01 E01 P01; do
-            grep -q "data-catalogo-s-model=\"$id\"" index.html
-          done
-          test "$(grep -o 'scrolling=\"no\"' index.html | wc -l)" -ge 3'''
-    expanded = post_i02 + '''
-          grep -q 'data-catalogo-s-model="F01"' index.html
-
-          pwsh -NoProfile -File "$ROOT/frontend/F02-Rodape-Editorial-em-Faixas/instalar.ps1"
-          grep -q 'data-catalogo-s-model="F02"' index.html
-          ! grep -q 'data-catalogo-s-model="F01"' index.html'''
-    if 'F02-Rodape-Editorial-em-Faixas/instalar.ps1' not in text:
-        if post_i02 not in text:
-            raise RuntimeError('Âncora de troca F01/F02 não encontrada.')
-        text = text.replace(post_i02, expanded, 1)
-
-    path.write_text(text, encoding='utf-8')
+    # O gate é mantido em .github/workflows/teste-instalador.yml.
+    return
 
 
 def generate_footers():

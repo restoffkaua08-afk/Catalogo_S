@@ -1,19 +1,163 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F05 — Rodapé Utilitário de Aplicação</title><style>*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{min-height:100svh;background:#e8ebef}.preview iframe{display:block;width:100%;height:100svh;border:0;overflow:hidden}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid #ffffff14}.box{width:min(1180px,100%)}.head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif}button{border:1px solid #ffffff26;background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid #ffffff1a;border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#08090cb3;border:1px solid #ffffff24;color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}</style><style id="catalogo-preview-stability">.preview{height:auto!important;overflow:visible!important;max-width:100%}.preview iframe{max-width:100%;overflow:hidden}.install,.box,pre{min-width:0;max-width:100%}</style></head><body><a class="back" href="../../index.html#categoria=rodapes" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração F05" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>F05 — Rodapé Utilitário de Aplicação</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId=&#x27;F05&#x27;
-$ModeloNome=&#x27;Rodapé Utilitário de Aplicação&#x27;
-$Payload=&#x27;H4sIAAKKmWoC/5VWXW7jNhB+zykIGwvERRRLSvwTyjG63aJonzZocgFapGR2JVKgKNup4Wv0An0IeoK+9WFzk56kQ0p2JFlqUwRwRA458833zYy0iKTUTCFO7wch0SSRsXQidzJAFFbOaSt3UklZcj/4AWzLi0WunxO2vBjW7+wdZxXjYXQbTaN54DhcfMFDb+67PoFVWmhG8XA6nXlzF9YJFwwPacg8NoPlKilg6U+mN2wVrEj4JVayEBRviLo0fkdBKBOpqjW4HgWRFNqJSMqTZ/xRcZJc/ciSDdM8JFc5EbmTM8WjYCUVZcrRMsNetkO5TDhFpRuDYXRoZoG+2a/kzsn5r1zEuLoMO4fmKbIv8XCxhig60GynHcpCqYjmUmAhBWt7voYfZ6tItt9yqtc45eLSu/HdbHcVkiS89Fz3A3LQjZ/tRqMgJSrmApNCyyAjlBo4PpiQ2+lXye2e8jxLyDOOFaeB+XE0S2FHMwfQFqnIrTvkRQpZvyThsXA4nMpxyARUQhCTDPvzbBcAOmfNeLzWeAZhO4OuFBH0FDZK2K7PpQfcl4ptS593rluugWmGvRuI8OYS8Yoi/w6uVSjscyNFeApZM1YlmCKUFzk2edSK6ViNpXTDKIoqCKaaQTKVkqQOyu1JW5DNu5I20gbmgFUdm59Dt7tTPZWFaZtlVIfSpm/mur2u8FpumGo4NO016sxFS5nk78pm3sNGCLCUTK46THmRZVLpfaXgzbSm4H+EqpTs7tmWzHctmY2wx5ZxkeWukvx2MnEnrKVxg9i5291fx1T+vZwqXNVOae90lzJNmqz/UuSaR8+WTmAC55kp7hXTW8ZE2UOGliqvcp7NTjz1z7cjvBmbz+8mtdTvevTMNdHF+0piduza8s6pbWdvXVuDWKk1cT801PKjFZnSwE7dNaFyC5qZPxgJqDJ6814S0VkzWqom55138W3KKCeXKYFdCxO0hlG775mm3QP0ODt7uq+8VR7G3tjxyjkM/rB/0m4ltZapbagOVBO/D1Xt3VF/Yfi3cP7wf7M49A6DdiVaHkFhpd83zBoc2PfMiYNyZQQyA7+vL+rV1g5OuWKhfcWWAYDBxbj6HFlQvkFhQvL8fnDkC75WEGobAIrdP7fY189gueDLz4+LMV8uoA3F8rNacY0+SQHdxSCc2VuM4WrlxIzdmhNYgguC1opF94PhYPm9DIsUqCSvL6+/y8WYNKwfH35qb31aExEzoKZteLSNdnZcpoXglFBmLWMA0J2eFRiwtbarET5YPjw53/2M/v7trzK73nNPLCXo65/okeegEqlOk/rZamAOatgLs1FBrMh7e2iFMoVwDrScM1afN3Uemdrw1xeZI5kxRUIoDsJzA29zez2/9huCGa0a3D0ovoE7J/JqpiemUnlG9iOLC6iS1xdiLdb31z8QjPopsoVyimdDlQme/pUf3Mt/AG8Ja3N5CwAA&#x27;
-$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
-$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
-$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
-$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
-$ErrorActionPreference=&#x27;Stop&#x27;
-$Root=(Get-Location).Path
-$Utf8=New-Object System.Text.UTF8Encoding($false)
-function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
-function Put([string]$r,[string]$c){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force};[IO.File]::WriteAllText($p,$c,$Utf8)}
-function Slots([string]$h){$m=&quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;;$c=&quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;;$f=&quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;;if($h-notmatch&#x27;CATALOGO-S:SLOT:MENU:START&#x27;){$h=$h-replace&#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;,(&#x27;&lt;body$1&gt;&#x27;+&quot;`r`n&quot;+$m)};if($h-notmatch&#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($c+&quot;`r`n&lt;/body&gt;&quot;)};if($h-notmatch&#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($f+&quot;`r`n&lt;/body&gt;&quot;)};$h}
-function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);[Text.RegularExpressions.Regex]::Replace($h,&#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:END --&gt;&#x27;,&quot;&lt;!-- CATALOGO-S:SLOT:$n`:START --&gt;`r`n$c`r`n&lt;!-- CATALOGO-S:SLOT:$n`:END --&gt;&quot;)}
-$p=Full &#x27;index.html&#x27;;if(!(Test-Path -LiteralPath $p)){Put &#x27;index.html&#x27; (Slots &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;)};$h=Slots ([IO.File]::ReadAllText($p));Put &#x27;components/catalogo-s/rodape/ativo.html&#x27; $ConteudoModelo;Put &#x27;index.html&#x27; (SetSlot $h &#x27;RODAPE&#x27; $ConteudoModelo)
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F05 — Rodapé Utilitário de Aplicação</title><style>*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#e7eaee}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}</style><style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=rodapes" aria-label="Voltar">←</a><section class="preview"><iframe src="preview.html" title="Demonstração F05" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>F05 — Rodapé Utilitário de Aplicação</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;F05&#x27;
+$ModeloNome = &#x27;Rodapé Utilitário de Aplicação&#x27;
+$ConteudoModelo = @&#x27;
+&lt;footer id=&quot;catalogo-f05&quot; data-catalogo-s-model=&quot;F05&quot;&gt;
+&lt;style&gt;
+#catalogo-f05{--bg:#f4f6f8;--ink:#18202a;--muted:#667180;--line:#dce1e7;--blue:#2563eb;background:var(--bg);color:var(--ink);font-family:Arial,Helvetica,sans-serif;border-top:1px solid var(--line)}
+#catalogo-f05 *{box-sizing:border-box}#catalogo-f05 a{color:inherit;text-decoration:none}
+#catalogo-f05 .f05-wrap{width:min(1320px,calc(100% - 32px));margin:auto;padding:22px 0}
+#catalogo-f05 .f05-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:28px;min-height:72px}
+#catalogo-f05 .f05-brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:13px}.f05-brand i{width:29px;height:29px;display:grid;place-items:center;border-radius:8px;background:#18202a;color:#fff;font-style:normal;font-size:10px}
+#catalogo-f05 .f05-nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}#catalogo-f05 .f05-nav a{color:var(--muted);font-size:11px;font-weight:700}#catalogo-f05 .f05-nav a:hover{color:var(--blue)}
+#catalogo-f05 .f05-tools{display:flex;align-items:center;gap:8px}
+#catalogo-f05 .f05-control,#catalogo-f05 .f05-support{height:36px;display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:9px;background:#fff;padding:0 11px;color:#45505e;font-size:10px;font-weight:800}
+#catalogo-f05 .f05-support{background:#18202a;color:#fff;border-color:#18202a}
+#catalogo-f05 .f05-meta{display:flex;justify-content:space-between;gap:18px;padding-top:17px;border-top:1px solid var(--line);color:#7e8895;font-size:9px}
+#catalogo-f05 .f05-status{display:flex;align-items:center;gap:7px}.f05-status i{width:7px;height:7px;border-radius:50%;background:#2fba6d;box-shadow:0 0 0 3px #2fba6d18}
+#catalogo-f05 .f05-meta nav{display:flex;gap:15px;flex-wrap:wrap}
+@media(max-width:800px){#catalogo-f05 .f05-row{grid-template-columns:1fr auto}#catalogo-f05 .f05-nav{grid-column:1/-1;grid-row:2;padding-bottom:8px}}
+@media(max-width:520px){#catalogo-f05 .f05-wrap{width:calc(100% - 24px)}#catalogo-f05 .f05-row{grid-template-columns:1fr}#catalogo-f05 .f05-tools{justify-content:flex-start;flex-wrap:wrap}#catalogo-f05 .f05-nav{grid-column:auto;grid-row:auto;gap:13px}#catalogo-f05 .f05-meta{align-items:flex-start;flex-direction:column}}
+&lt;/style&gt;
+&lt;div class=&quot;f05-wrap&quot;&gt;&lt;div class=&quot;f05-row&quot;&gt;&lt;div class=&quot;f05-brand&quot;&gt;&lt;i&gt;OS&lt;/i&gt;&lt;span&gt;Orbit Console&lt;/span&gt;&lt;/div&gt;&lt;nav class=&quot;f05-nav&quot;&gt;&lt;a href=&quot;#&quot;&gt;Documentação&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;API&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Changelog&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Status&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Comunidade&lt;/a&gt;&lt;/nav&gt;&lt;div class=&quot;f05-tools&quot;&gt;&lt;div class=&quot;f05-control&quot;&gt;PT-BR ▾&lt;/div&gt;&lt;div class=&quot;f05-control&quot;&gt;Tema · Sistema&lt;/div&gt;&lt;a class=&quot;f05-support&quot; href=&quot;#&quot;&gt;Suporte&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;f05-meta&quot;&gt;&lt;div class=&quot;f05-status&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;span&gt;Serviços operacionais · v4.8.2&lt;/span&gt;&lt;/div&gt;&lt;nav&gt;&lt;a href=&quot;#&quot;&gt;Privacidade&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Termos&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Segurança&lt;/a&gt;&lt;span&gt;© 2026 Orbit&lt;/span&gt;&lt;/nav&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;/footer&gt;
+&#x27;@
+
+$ErrorActionPreference = &#x27;Stop&#x27;
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+    $backupDir = Get-FullPath &#x27;.catalogo-s/backups&#x27;
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+    $stamp = Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;
+    $safe = $Relative -replace &#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;, &#x27;__&#x27;
+    $destination = Join-Path $backupDir ($stamp + &#x27;__&#x27; + $safe + &#x27;.bak&#x27;)
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host &quot;[Catálogo S] backup: $Relative&quot;
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host &quot;[Catálogo S] gravado: $Relative&quot;
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = &quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;
+    $components = &quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;
+    $footer = &quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:MENU:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;, (&#x27;&lt;body$1&gt;&#x27; + &quot;`r`n&quot; + $menu)
+    }
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($components + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($footer + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = &#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:END --&gt;&#x27;
+    $replacement = &quot;&lt;!-- CATALOGO-S:SLOT:$Name`:START --&gt;`r`n$Content`r`n&lt;!-- CATALOGO-S:SLOT:$Name`:END --&gt;&quot;
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath &#x27;index.html&#x27;
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;
+        Write-TextFile &#x27;index.html&#x27; (Ensure-Slots $shell) -SemBackup
+        return
+    }
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile &#x27;index.html&#x27; $prepared
+    }
+}
+
+Ensure-HostPage
+$footerRelative = &#x27;components/catalogo-s/rodape/ativo.html&#x27;
+Write-TextFile $footerRelative $ConteudoModelo
+$index = Get-FullPath &#x27;index.html&#x27;
+$html = [System.IO.File]::ReadAllText($index)
+$html = Ensure-Slots $html
+$updated = Set-Slot $html &#x27;RODAPE&#x27; $ConteudoModelo
+Write-TextFile &#x27;index.html&#x27; $updated
+Write-Host &quot;&quot;
 Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado como rodapé ativo.&quot;
-Write-Host &#x27;[Catálogo S] Fxx é singleton: outro Fxx substitui somente o rodapé.&#x27;
-Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
-</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script><script id="catalogo-preview-stability-script">(()=>{const f=document.querySelector('.preview iframe'),p=document.querySelector('.preview');if(!f||!p)return;const fit=()=>{try{const d=f.contentDocument,r=d.documentElement,b=d.body;r.style.margin='0';r.style.overflow='hidden';if(b){b.style.margin='0';b.style.overflow='hidden'}const h=Math.min(Math.max(innerHeight,r.scrollHeight,b?.scrollHeight||0),12000);f.style.height=p.style.height=h+'px'}catch(_){}};f.addEventListener('load',()=>{fit();setTimeout(fit,100);setTimeout(fit,300)});addEventListener('resize',fit)})();</script></body></html>
+Write-Host &quot;[Catálogo S] Rodapés são singleton: instalar outro Fxx substitui apenas o rodapé.&quot;
+Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});</script><script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>

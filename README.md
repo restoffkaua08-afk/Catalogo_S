@@ -21,6 +21,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - arquivos substituídos recebem backup em `.catalogo-s/backups/`;
 - componentes repetíveis ficam em `components/catalogo-s/`;
 - ao trocar a tela inicial, os componentes locais existentes são recompostos;
+- o rodapé `Fxx` ativo é recomposto no slot `RODAPE` e não é perdido ao trocar `Ixx`;
 - `LG01`–`LG05` detectam o `DB01` pelos mesmos arquivos locais;
 - credenciais reais continuam fora do frontend.
 
@@ -29,7 +30,9 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - `Ixx` → tela inicial → `index.html`
 - `Lxx` → página de produtos → `produtos.html`
 - `LGxx` → login → `login.html`
+- `SOBxx` → página Sobre → `sobre.html`
 - `Exx`, `Cxx` e `Pxx` → componentes repetíveis
+- `Fxx` → rodapé singleton → slot `RODAPE`
 - `DB01` → backend de autenticação compartilhado por `LG01`–`LG05`
 
 ## Demonstrações

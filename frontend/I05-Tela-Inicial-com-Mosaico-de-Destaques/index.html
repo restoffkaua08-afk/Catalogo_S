@@ -151,6 +151,18 @@ Write-TextFile $ArquivoAlvo $ConteudoModelo
 
 if ($Papel -eq &#x27;inicio&#x27;) {
     Rebuild-Components
+
+    # CATALOGO-S:REBUILD-RODAPE
+    $footerRelative = &#x27;components/catalogo-s/rodape/ativo.html&#x27;
+    $footerFull = Get-FullPath $footerRelative
+    if (Test-Path -LiteralPath $footerFull) {
+        $footerContent = [System.IO.File]::ReadAllText($footerFull)
+        $index = Get-FullPath &#x27;index.html&#x27;
+        $html = [System.IO.File]::ReadAllText($index)
+        $html = Ensure-Slots $html
+        $updated = Set-Slot $html &#x27;RODAPE&#x27; $footerContent
+        Write-TextFile &#x27;index.html&#x27; $updated
+    }
 }
 
 if ($Papel -eq &#x27;login&#x27;) {

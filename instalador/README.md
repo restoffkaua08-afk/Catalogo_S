@@ -11,6 +11,7 @@ O script:
 - cria backups em `.catalogo-s/backups/` antes de substituir arquivos;
 - mantém componentes repetíveis em `components/catalogo-s/`;
 - recompõe os componentes ao trocar a tela inicial;
+- mantém um único `Fxx` ativo em `components/catalogo-s/rodape/ativo.html` e o recompõe no slot `RODAPE`;
 - conecta qualquer tela `LG01`–`LG05` ao mesmo `DB01` quando os arquivos de backend existem;
 - não baixa nenhum arquivo do repositório durante a instalação.
 

@@ -1,18 +1,115 @@
-$ModeloId='F02'
-$ModeloNome='Rodapé Editorial em Faixas'
-$Payload='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'
-$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
-$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
-$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
-$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
-$ErrorActionPreference='Stop'
-$Root=(Get-Location).Path
-$Utf8=New-Object System.Text.UTF8Encoding($false)
-function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
-function Put([string]$r,[string]$c){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};$bd=Full '.catalogo-s/backups';New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace'[\\/:*?"<>|]','__';Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format 'yyyyMMdd-HHmmssfff')+'__'+$safe+'.bak')) -Force};[IO.File]::WriteAllText($p,$c,$Utf8)}
-function Slots([string]$h){$m="<!-- CATALOGO-S:SLOT:MENU:START -->`r`n<!-- CATALOGO-S:SLOT:MENU:END -->";$c="<!-- CATALOGO-S:SLOT:COMPONENTES:START -->`r`n<!-- CATALOGO-S:SLOT:COMPONENTES:END -->";$f="<!-- CATALOGO-S:SLOT:RODAPE:START -->`r`n<!-- CATALOGO-S:SLOT:RODAPE:END -->";if($h-notmatch'CATALOGO-S:SLOT:MENU:START'){$h=$h-replace'(?i)<body([^>]*)>',('<body$1>'+"`r`n"+$m)};if($h-notmatch'CATALOGO-S:SLOT:COMPONENTES:START'){$h=$h-replace'(?i)</body>',($c+"`r`n</body>")};if($h-notmatch'CATALOGO-S:SLOT:RODAPE:START'){$h=$h-replace'(?i)</body>',($f+"`r`n</body>")};$h}
-function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);[Text.RegularExpressions.Regex]::Replace($h,'(?s)<!-- CATALOGO-S:SLOT:'+$e+':START -->.*?<!-- CATALOGO-S:SLOT:'+$e+':END -->',"<!-- CATALOGO-S:SLOT:$n`:START -->`r`n$c`r`n<!-- CATALOGO-S:SLOT:$n`:END -->")}
-$p=Full 'index.html';if(!(Test-Path -LiteralPath $p)){Put 'index.html' (Slots '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto</title></head><body></body></html>')};$h=Slots ([IO.File]::ReadAllText($p));Put 'components/catalogo-s/rodape/ativo.html' $ConteudoModelo;Put 'index.html' (SetSlot $h 'RODAPE' $ConteudoModelo)
+$ModeloId = 'F02'
+$ModeloNome = 'Rodapé Editorial em Faixas'
+$ConteudoModelo = @'
+<footer id="catalogo-f02" data-catalogo-s-model="F02">
+<style>
+#catalogo-f02{--ink:#11110f;--cream:#f1ebdf;--paper:#fbf7ef;--red:#9e2f25;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
+#catalogo-f02 *{box-sizing:border-box}#catalogo-f02 a{color:inherit;text-decoration:none}
+#catalogo-f02 .f02-hero{display:grid;grid-template-columns:1.25fr .75fr;min-height:300px;border-top:1px solid #11110f24;border-bottom:1px solid #11110f}
+#catalogo-f02 .f02-statement{padding:58px clamp(26px,6vw,92px);background:var(--cream);display:flex;flex-direction:column;justify-content:space-between}
+#catalogo-f02 .f02-kicker{font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+#catalogo-f02 .f02-statement h2{max-width:760px;margin:28px 0 0;font:500 clamp(42px,6vw,86px)/.92 Georgia,serif;letter-spacing:-.055em}
+#catalogo-f02 .f02-news{padding:58px clamp(26px,5vw,70px);background:#11110f;color:#f7f1e8;display:flex;flex-direction:column;justify-content:flex-end}
+#catalogo-f02 .f02-news h3{margin:0 0 9px;font:500 29px/1 Georgia,serif}#catalogo-f02 .f02-news p{margin:0 0 24px;color:#bcb6ae;font-size:13px;line-height:1.6}
+#catalogo-f02 .f02-form{display:flex;border-bottom:1px solid #f7f1e88c;padding-bottom:8px}#catalogo-f02 .f02-form input{min-width:0;flex:1;border:0;background:transparent;color:#fff;outline:none;padding:8px 0;font:14px Arial}
+#catalogo-f02 .f02-form button{border:0;background:transparent;color:#fff;cursor:pointer;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+#catalogo-f02 .f02-grid{display:grid;grid-template-columns:1.3fr repeat(3,1fr);gap:40px;padding:46px clamp(26px,6vw,92px);background:var(--paper)}
+#catalogo-f02 .f02-brand h3{margin:0 0 12px;font:500 32px/1 Georgia,serif}#catalogo-f02 .f02-brand p{max-width:32ch;margin:0;color:#655f56;font-size:12px;line-height:1.65}
+#catalogo-f02 .f02-col h4{margin:0 0 14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase}#catalogo-f02 .f02-col a{display:block;padding:6px 0;color:#423f39;font-size:13px}#catalogo-f02 .f02-col a:hover{color:var(--red)}
+#catalogo-f02 .f02-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(26px,6vw,92px);background:var(--red);color:#fff8ef;font-size:11px}
+#catalogo-f02 .f02-strip nav{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:820px){#catalogo-f02 .f02-hero{grid-template-columns:1fr}#catalogo-f02 .f02-news{min-height:250px}#catalogo-f02 .f02-grid{grid-template-columns:1fr 1fr}#catalogo-f02 .f02-brand{grid-column:1/-1}}
+@media(max-width:520px){#catalogo-f02 .f02-grid{grid-template-columns:1fr}#catalogo-f02 .f02-brand{grid-column:auto}#catalogo-f02 .f02-strip{align-items:flex-start;flex-direction:column}}
+</style>
+<div class="f02-hero"><section class="f02-statement"><span class="f02-kicker">O final também comunica</span><h2>Feito para continuar a conversa.</h2></section><section class="f02-news"><h3>Notas da marca</h3><p>Receba novidades, histórias e lançamentos diretamente no seu e-mail.</p><form class="f02-form"><input type="email" aria-label="Seu e-mail" placeholder="seu@email.com"><button type="button">Assinar →</button></form></section></div>
+<div class="f02-grid"><section class="f02-brand"><h3>Sua Marca®</h3><p>Design, produto e experiências construídas com intenção. Belo Horizonte · Brasil.</p></section><nav class="f02-col"><h4>Descubra</h4><a href="#">Manifesto</a><a href="#">Projetos</a><a href="#">Coleções</a><a href="#">Diário</a></nav><nav class="f02-col"><h4>Converse</h4><a href="#">Contato</a><a href="#">Parcerias</a><a href="#">Imprensa</a><a href="#">Instagram</a></nav><nav class="f02-col"><h4>Essencial</h4><a href="#">Termos</a><a href="#">Privacidade</a><a href="#">Cookies</a><a href="#">Acessibilidade</a></nav></div>
+<div class="f02-strip"><span>© 2026 Sua Marca — conteúdo e identidade protegidos.</span><nav><a href="#">PT-BR</a><a href="#">Mapa do site</a><a href="#">Voltar ao topo ↑</a></nav></div>
+</footer>
+'@
+
+$ErrorActionPreference = 'Stop'
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+    $backupDir = Get-FullPath '.catalogo-s/backups'
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmssfff'
+    $safe = $Relative -replace '[\\/:*?"<>|]', '__'
+    $destination = Join-Path $backupDir ($stamp + '__' + $safe + '.bak')
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host "[Catálogo S] backup: $Relative"
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host "[Catálogo S] gravado: $Relative"
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = "<!-- CATALOGO-S:SLOT:MENU:START -->`r`n<!-- CATALOGO-S:SLOT:MENU:END -->"
+    $components = "<!-- CATALOGO-S:SLOT:COMPONENTES:START -->`r`n<!-- CATALOGO-S:SLOT:COMPONENTES:END -->"
+    $footer = "<!-- CATALOGO-S:SLOT:RODAPE:START -->`r`n<!-- CATALOGO-S:SLOT:RODAPE:END -->"
+    if ($Html -notmatch 'CATALOGO-S:SLOT:MENU:START') {
+        $Html = $Html -replace '(?i)<body([^>]*)>', ('<body$1>' + "`r`n" + $menu)
+    }
+    if ($Html -notmatch 'CATALOGO-S:SLOT:COMPONENTES:START') {
+        $Html = $Html -replace '(?i)</body>', ($components + "`r`n</body>")
+    }
+    if ($Html -notmatch 'CATALOGO-S:SLOT:RODAPE:START') {
+        $Html = $Html -replace '(?i)</body>', ($footer + "`r`n</body>")
+    }
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = '(?s)<!-- CATALOGO-S:SLOT:' + $escaped + ':START -->.*?<!-- CATALOGO-S:SLOT:' + $escaped + ':END -->'
+    $replacement = "<!-- CATALOGO-S:SLOT:$Name`:START -->`r`n$Content`r`n<!-- CATALOGO-S:SLOT:$Name`:END -->"
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath 'index.html'
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto</title></head><body></body></html>'
+        Write-TextFile 'index.html' (Ensure-Slots $shell) -SemBackup
+        return
+    }
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile 'index.html' $prepared
+    }
+}
+
+Ensure-HostPage
+$footerRelative = 'components/catalogo-s/rodape/ativo.html'
+Write-TextFile $footerRelative $ConteudoModelo
+$index = Get-FullPath 'index.html'
+$html = [System.IO.File]::ReadAllText($index)
+$html = Ensure-Slots $html
+$updated = Set-Slot $html 'RODAPE' $ConteudoModelo
+Write-TextFile 'index.html' $updated
+Write-Host ""
 Write-Host "[Catálogo S] $ModeloId — $ModeloNome instalado como rodapé ativo."
-Write-Host '[Catálogo S] Fxx é singleton: outro Fxx substitui somente o rodapé.'
-Write-Host '[Catálogo S] Nenhum arquivo foi baixado do GitHub.'
+Write-Host "[Catálogo S] Rodapés são singleton: instalar outro Fxx substitui apenas o rodapé."
+Write-Host "[Catálogo S] Nenhum arquivo foi baixado do GitHub."

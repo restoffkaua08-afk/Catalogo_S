@@ -77,6 +77,16 @@ components/catalogo-s/<id>-<numero>.html
 
 O script recompõe o slot `COMPONENTES` usando os arquivos locais. Assim, substituir `I01` por `I02`, por exemplo, não exige consultar manifesto remoto nem recuperar componentes do GitHub.
 
+## Rodapés Fxx
+
+`Fxx` é uma família singleton. O rodapé ativo fica em:
+
+```text
+components/catalogo-s/rodape/ativo.html
+```
+
+O instalador injeta o conteúdo no slot `CATALOGO-S:SLOT:RODAPE`. Instalar outro `Fxx` substitui somente esse arquivo e esse slot. Ao trocar uma tela inicial `Ixx`, o instalador recompõe o rodapé ativo a partir do arquivo local, preservando-o sem acesso remoto.
+
 ## LG01–LG05 ↔ DB01
 
 Todas as telas `LGxx` usam:

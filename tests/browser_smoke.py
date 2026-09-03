@@ -292,7 +292,7 @@ def main():
         test_mobile_layout(browser)
         browser.close()
 
-    assert checked == len(MODELS) == 25, f'esperados 25 modelos, validados {checked}'
+    assert checked == len(MODELS) == 35, f'esperados 35 modelos, validados {checked}'
     print(f'Chromium: {checked} modelos, navegação, scroll único, responsividade, cópia e interações críticas validados.')
 
 

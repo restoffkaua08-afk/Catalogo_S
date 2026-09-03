@@ -23,6 +23,8 @@ O código copiado precisa continuar funcionando mesmo se o repositório do Catá
 ## Padrão de instalação
 
 - páginas canônicas escrevem seus arquivos (`index.html`, `produtos.html`, `login.html`);
+- telas `SOBxx` substituem a página canônica `sobre.html` e não exigem edição manual de links;
 - componentes repetíveis são criados em `components/catalogo-s/` e inseridos no slot de componentes;
+- rodapés `Fxx` são singleton, usam `components/catalogo-s/rodape/ativo.html` e ocupam o slot `RODAPE`;
 - arquivos existentes recebem backup antes da substituição;
 - integrações devem ser resolvidas por presença de arquivos/contratos locais, nunca por acesso ao GitHub.

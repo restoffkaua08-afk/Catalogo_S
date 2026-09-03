@@ -1,19 +1,168 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F02 — Rodapé Editorial em Faixas</title><style>*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{min-height:100svh;background:#e8ebef}.preview iframe{display:block;width:100%;height:100svh;border:0;overflow:hidden}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid #ffffff14}.box{width:min(1180px,100%)}.head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif}button{border:1px solid #ffffff26;background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid #ffffff1a;border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#08090cb3;border:1px solid #ffffff24;color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}</style><style id="catalogo-preview-stability">.preview{height:auto!important;overflow:visible!important;max-width:100%}.preview iframe{max-width:100%;overflow:hidden}.install,.box,pre{min-width:0;max-width:100%}</style></head><body><a class="back" href="../../index.html#categoria=rodapes" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração F02" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>F02 — Rodapé Editorial em Faixas</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId=&#x27;F02&#x27;
-$ModeloNome=&#x27;Rodapé Editorial em Faixas&#x27;
-$Payload=&#x27;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&#x27;
-$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
-$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
-$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
-$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
-$ErrorActionPreference=&#x27;Stop&#x27;
-$Root=(Get-Location).Path
-$Utf8=New-Object System.Text.UTF8Encoding($false)
-function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
-function Put([string]$r,[string]$c){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force};[IO.File]::WriteAllText($p,$c,$Utf8)}
-function Slots([string]$h){$m=&quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;;$c=&quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;;$f=&quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;;if($h-notmatch&#x27;CATALOGO-S:SLOT:MENU:START&#x27;){$h=$h-replace&#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;,(&#x27;&lt;body$1&gt;&#x27;+&quot;`r`n&quot;+$m)};if($h-notmatch&#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($c+&quot;`r`n&lt;/body&gt;&quot;)};if($h-notmatch&#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($f+&quot;`r`n&lt;/body&gt;&quot;)};$h}
-function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);[Text.RegularExpressions.Regex]::Replace($h,&#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:END --&gt;&#x27;,&quot;&lt;!-- CATALOGO-S:SLOT:$n`:START --&gt;`r`n$c`r`n&lt;!-- CATALOGO-S:SLOT:$n`:END --&gt;&quot;)}
-$p=Full &#x27;index.html&#x27;;if(!(Test-Path -LiteralPath $p)){Put &#x27;index.html&#x27; (Slots &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;)};$h=Slots ([IO.File]::ReadAllText($p));Put &#x27;components/catalogo-s/rodape/ativo.html&#x27; $ConteudoModelo;Put &#x27;index.html&#x27; (SetSlot $h &#x27;RODAPE&#x27; $ConteudoModelo)
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>F02 — Rodapé Editorial em Faixas</title><style>*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif}body{min-height:100svh}.preview{height:100svh;background:#e7eaee}.preview iframe{display:block;width:100%;height:100%;border:0}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid rgba(255,255,255,.08)}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif;letter-spacing:-.025em}button{border:1px solid rgba(255,255,255,.15);background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}button:hover{border-color:#d1ad73;color:#d1ad73}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,Monaco,monospace;white-space:pre;tab-size:2}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(8,9,12,.7);border:1px solid rgba(255,255,255,.14);color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}</style><style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=rodapes" aria-label="Voltar">←</a><section class="preview"><iframe src="preview.html" title="Demonstração F02" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>F02 — Rodapé Editorial em Faixas</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId = &#x27;F02&#x27;
+$ModeloNome = &#x27;Rodapé Editorial em Faixas&#x27;
+$ConteudoModelo = @&#x27;
+&lt;footer id=&quot;catalogo-f02&quot; data-catalogo-s-model=&quot;F02&quot;&gt;
+&lt;style&gt;
+#catalogo-f02{--ink:#11110f;--cream:#f1ebdf;--paper:#fbf7ef;--red:#9e2f25;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
+#catalogo-f02 *{box-sizing:border-box}#catalogo-f02 a{color:inherit;text-decoration:none}
+#catalogo-f02 .f02-hero{display:grid;grid-template-columns:1.25fr .75fr;min-height:300px;border-top:1px solid #11110f24;border-bottom:1px solid #11110f}
+#catalogo-f02 .f02-statement{padding:58px clamp(26px,6vw,92px);background:var(--cream);display:flex;flex-direction:column;justify-content:space-between}
+#catalogo-f02 .f02-kicker{font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}
+#catalogo-f02 .f02-statement h2{max-width:760px;margin:28px 0 0;font:500 clamp(42px,6vw,86px)/.92 Georgia,serif;letter-spacing:-.055em}
+#catalogo-f02 .f02-news{padding:58px clamp(26px,5vw,70px);background:#11110f;color:#f7f1e8;display:flex;flex-direction:column;justify-content:flex-end}
+#catalogo-f02 .f02-news h3{margin:0 0 9px;font:500 29px/1 Georgia,serif}#catalogo-f02 .f02-news p{margin:0 0 24px;color:#bcb6ae;font-size:13px;line-height:1.6}
+#catalogo-f02 .f02-form{display:flex;border-bottom:1px solid #f7f1e88c;padding-bottom:8px}#catalogo-f02 .f02-form input{min-width:0;flex:1;border:0;background:transparent;color:#fff;outline:none;padding:8px 0;font:14px Arial}
+#catalogo-f02 .f02-form button{border:0;background:transparent;color:#fff;cursor:pointer;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+#catalogo-f02 .f02-grid{display:grid;grid-template-columns:1.3fr repeat(3,1fr);gap:40px;padding:46px clamp(26px,6vw,92px);background:var(--paper)}
+#catalogo-f02 .f02-brand h3{margin:0 0 12px;font:500 32px/1 Georgia,serif}#catalogo-f02 .f02-brand p{max-width:32ch;margin:0;color:#655f56;font-size:12px;line-height:1.65}
+#catalogo-f02 .f02-col h4{margin:0 0 14px;font-size:10px;letter-spacing:.16em;text-transform:uppercase}#catalogo-f02 .f02-col a{display:block;padding:6px 0;color:#423f39;font-size:13px}#catalogo-f02 .f02-col a:hover{color:var(--red)}
+#catalogo-f02 .f02-strip{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px clamp(26px,6vw,92px);background:var(--red);color:#fff8ef;font-size:11px}
+#catalogo-f02 .f02-strip nav{display:flex;gap:18px;flex-wrap:wrap}
+@media(max-width:820px){#catalogo-f02 .f02-hero{grid-template-columns:1fr}#catalogo-f02 .f02-news{min-height:250px}#catalogo-f02 .f02-grid{grid-template-columns:1fr 1fr}#catalogo-f02 .f02-brand{grid-column:1/-1}}
+@media(max-width:520px){#catalogo-f02 .f02-grid{grid-template-columns:1fr}#catalogo-f02 .f02-brand{grid-column:auto}#catalogo-f02 .f02-strip{align-items:flex-start;flex-direction:column}}
+&lt;/style&gt;
+&lt;div class=&quot;f02-hero&quot;&gt;&lt;section class=&quot;f02-statement&quot;&gt;&lt;span class=&quot;f02-kicker&quot;&gt;O final também comunica&lt;/span&gt;&lt;h2&gt;Feito para continuar a conversa.&lt;/h2&gt;&lt;/section&gt;&lt;section class=&quot;f02-news&quot;&gt;&lt;h3&gt;Notas da marca&lt;/h3&gt;&lt;p&gt;Receba novidades, histórias e lançamentos diretamente no seu e-mail.&lt;/p&gt;&lt;form class=&quot;f02-form&quot;&gt;&lt;input type=&quot;email&quot; aria-label=&quot;Seu e-mail&quot; placeholder=&quot;seu@email.com&quot;&gt;&lt;button type=&quot;button&quot;&gt;Assinar →&lt;/button&gt;&lt;/form&gt;&lt;/section&gt;&lt;/div&gt;
+&lt;div class=&quot;f02-grid&quot;&gt;&lt;section class=&quot;f02-brand&quot;&gt;&lt;h3&gt;Sua Marca®&lt;/h3&gt;&lt;p&gt;Design, produto e experiências construídas com intenção. Belo Horizonte · Brasil.&lt;/p&gt;&lt;/section&gt;&lt;nav class=&quot;f02-col&quot;&gt;&lt;h4&gt;Descubra&lt;/h4&gt;&lt;a href=&quot;#&quot;&gt;Manifesto&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Projetos&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Coleções&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Diário&lt;/a&gt;&lt;/nav&gt;&lt;nav class=&quot;f02-col&quot;&gt;&lt;h4&gt;Converse&lt;/h4&gt;&lt;a href=&quot;#&quot;&gt;Contato&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Parcerias&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Imprensa&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Instagram&lt;/a&gt;&lt;/nav&gt;&lt;nav class=&quot;f02-col&quot;&gt;&lt;h4&gt;Essencial&lt;/h4&gt;&lt;a href=&quot;#&quot;&gt;Termos&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Privacidade&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Cookies&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Acessibilidade&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;
+&lt;div class=&quot;f02-strip&quot;&gt;&lt;span&gt;© 2026 Sua Marca — conteúdo e identidade protegidos.&lt;/span&gt;&lt;nav&gt;&lt;a href=&quot;#&quot;&gt;PT-BR&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Mapa do site&lt;/a&gt;&lt;a href=&quot;#&quot;&gt;Voltar ao topo ↑&lt;/a&gt;&lt;/nav&gt;&lt;/div&gt;
+&lt;/footer&gt;
+&#x27;@
+
+$ErrorActionPreference = &#x27;Stop&#x27;
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+    $backupDir = Get-FullPath &#x27;.catalogo-s/backups&#x27;
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+    $stamp = Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;
+    $safe = $Relative -replace &#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;, &#x27;__&#x27;
+    $destination = Join-Path $backupDir ($stamp + &#x27;__&#x27; + $safe + &#x27;.bak&#x27;)
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host &quot;[Catálogo S] backup: $Relative&quot;
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host &quot;[Catálogo S] gravado: $Relative&quot;
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = &quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;
+    $components = &quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;
+    $footer = &quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:MENU:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;, (&#x27;&lt;body$1&gt;&#x27; + &quot;`r`n&quot; + $menu)
+    }
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($components + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+    if ($Html -notmatch &#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;) {
+        $Html = $Html -replace &#x27;(?i)&lt;/body&gt;&#x27;, ($footer + &quot;`r`n&lt;/body&gt;&quot;)
+    }
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = &#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27; + $escaped + &#x27;:END --&gt;&#x27;
+    $replacement = &quot;&lt;!-- CATALOGO-S:SLOT:$Name`:START --&gt;`r`n$Content`r`n&lt;!-- CATALOGO-S:SLOT:$Name`:END --&gt;&quot;
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath &#x27;index.html&#x27;
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = &#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;/body&gt;&lt;/html&gt;&#x27;
+        Write-TextFile &#x27;index.html&#x27; (Ensure-Slots $shell) -SemBackup
+        return
+    }
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile &#x27;index.html&#x27; $prepared
+    }
+}
+
+Ensure-HostPage
+$footerRelative = &#x27;components/catalogo-s/rodape/ativo.html&#x27;
+Write-TextFile $footerRelative $ConteudoModelo
+$index = Get-FullPath &#x27;index.html&#x27;
+$html = [System.IO.File]::ReadAllText($index)
+$html = Ensure-Slots $html
+$updated = Set-Slot $html &#x27;RODAPE&#x27; $ConteudoModelo
+Write-TextFile &#x27;index.html&#x27; $updated
+Write-Host &quot;&quot;
 Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado como rodapé ativo.&quot;
-Write-Host &#x27;[Catálogo S] Fxx é singleton: outro Fxx substitui somente o rodapé.&#x27;
-Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
-</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script><script id="catalogo-preview-stability-script">(()=>{const f=document.querySelector('.preview iframe'),p=document.querySelector('.preview');if(!f||!p)return;const fit=()=>{try{const d=f.contentDocument,r=d.documentElement,b=d.body;r.style.margin='0';r.style.overflow='hidden';if(b){b.style.margin='0';b.style.overflow='hidden'}const h=Math.min(Math.max(innerHeight,r.scrollHeight,b?.scrollHeight||0),12000);f.style.height=p.style.height=h+'px'}catch(_){}};f.addEventListener('load',()=>{fit();setTimeout(fit,100);setTimeout(fit,300)});addEventListener('resize',fit)})();</script></body></html>
+Write-Host &quot;[Catálogo S] Rodapés são singleton: instalar outro Fxx substitui apenas o rodapé.&quot;
+Write-Host &quot;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&quot;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)});</script><script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>
