@@ -1,0 +1,21 @@
+SOB04 — Sobre Manifesto Tipográfico
+
+INSTALAÇÃO PÚBLICA
+Abra a demonstração do modelo, copie o bloco PowerShell completo e cole no PowerShell aberto na raiz do projeto.
+
+COMPORTAMENTO
+- instala/substitui a página canônica sobre.html;
+- cria backup antes de substituir um sobre.html existente;
+- não altera index.html, produtos.html, login.html nem componentes repetíveis;
+- outro SOBxx substitui somente sobre.html;
+- não usa npx, git clone nem consulta o GitHub.
+
+ARQUIVOS
+bloco-pronto.html
+bloco-pronto.txt
+index.html
+instalar.ps1
+LEIA-ME.txt
+
+MODO
+Página canônica — Sobre

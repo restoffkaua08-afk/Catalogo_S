@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sobre nós</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;background:#f3efe8;color:#171714}
+.sob01{min-height:100svh;display:grid;grid-template-columns:minmax(320px,44%) 1fr}
+.sob01-media{position:relative;overflow:hidden;min-height:100svh;background:linear-gradient(145deg,#222d2c,#687b70 55%,#cfb798)}
+.sob01-media:before,.sob01-media:after{content:"";position:absolute;border-radius:50%;filter:blur(2px)}
+.sob01-media:before{width:58vmin;height:58vmin;background:#d7c09b55;left:-10%;top:8%}
+.sob01-media:after{width:38vmin;height:38vmin;background:#10191888;right:-8%;bottom:10%}
+.sob01-frame{position:absolute;inset:8%;border:1px solid #ffffff70;display:flex;align-items:flex-end;padding:28px;color:#fff}
+.sob01-frame strong{font:600 12px/1 Arial;letter-spacing:.18em;text-transform:uppercase}.sob01-frame span{display:block;margin-top:9px;color:#ffffffb8;font-size:12px}
+.sob01-copy{display:flex;align-items:center;padding:clamp(44px,7vw,110px)}
+.sob01-inner{width:min(720px,100%)}.sob01-kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#657067}
+.sob01 h1{font:500 clamp(42px,6vw,88px)/.95 Georgia,serif;letter-spacing:-.055em;margin:20px 0 32px;max-width:680px}
+.sob01 p{margin:0;max-width:610px;font-size:clamp(17px,1.45vw,21px);line-height:1.75;color:#4f514d}
+.sob01-rule{width:86px;height:1px;background:#171714;margin:36px 0 20px}.sob01-note{font-size:12px;color:#77776f;letter-spacing:.04em}
+@media(max-width:760px){.sob01{grid-template-columns:1fr}.sob01-media{min-height:48svh}.sob01-copy{padding:48px 24px 64px}.sob01 h1{font-size:clamp(42px,13vw,68px)}}
+</style></head>
+<body><main class="sob01" data-catalogo-s-model="SOB01">
+<section class="sob01-media" aria-label="Espaço para imagem principal"><div class="sob01-frame"><div><strong>IMAGEM PRINCIPAL</strong><span>Troque este bloco por uma foto real da marca, equipe, espaço ou produto.</span></div></div></section>
+<section class="sob01-copy"><div class="sob01-inner"><div class="sob01-kicker">Sobre a marca</div><h1>Uma história curta merece espaço para respirar.</h1><p>Use este parágrafo para explicar, em poucas linhas, quem está por trás do site, por que o projeto existe e o que a pessoa pode esperar daqui. A estrutura deixa a narrativa em primeiro plano enquanto a imagem cria contexto e confiança.</p><div class="sob01-rule"></div><div class="sob01-note">Fundado com propósito · construído para durar</div></div></section>
+</main></body></html>

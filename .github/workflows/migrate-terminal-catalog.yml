@@ -5,6 +5,7 @@ on:
     paths:
       - 'tools/migrate_terminal_catalog.py'
       - 'tools/add_footer_models.py'
+      - 'tools/add_about_models.py'
       - 'tools/postprocess_powershell_installers.py'
       - 'frontend/**/bloco-pronto.html'
       - 'frontend/**/bloco-pronto.txt'
@@ -31,6 +32,7 @@ jobs:
         run: |
           python tools/migrate_terminal_catalog.py
           python tools/add_footer_models.py
+          python tools/add_about_models.py
           python tools/postprocess_powershell_installers.py
 
       - name: Publica arquivos gerados
@@ -39,11 +41,11 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md README.md documentacao .github/workflows/teste-instalador.yml
+          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md README.md documentacao .github/workflows/teste-instalador.yml tests/browser_smoke.py
           if git diff --cached --quiet; then
             echo "Nenhuma alteração pendente."
           else
-            git commit -m "Gera modelos de rodapé F01 a F05"
+            git commit -m "Gera catálogo PowerShell com Fxx e SOBxx"
             git push
           fi
 
@@ -53,9 +55,5 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          # Commits feitos pelo GITHUB_TOKEN não iniciam outros workflows de push.
-          # Por isso o gate é disparado explicitamente após a regeneração/publicação.
           gh workflow run teste-instalador.yml --ref "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY"
           echo "Gate de estabilidade solicitado para $GITHUB_REF_NAME."
-
-# trigger: geração dos rodapés F01-F05

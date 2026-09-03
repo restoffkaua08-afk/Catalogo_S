@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sobre</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#faf8f2;color:#161616;font-family:Arial,Helvetica,sans-serif}
+.sob02{min-height:100svh;padding:clamp(28px,4vw,64px);display:grid;grid-template-rows:auto 1fr auto}
+.sob02-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #1b1b1b;padding-bottom:16px;font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:800}
+.sob02-main{display:grid;place-items:center;padding:clamp(48px,8vw,120px) 0}
+.sob02-inner{width:min(1120px,100%)}.sob02 h1{font:500 clamp(52px,8.5vw,126px)/.84 Georgia,serif;letter-spacing:-.065em;margin:0 0 48px;text-align:center}
+.sob02-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:clamp(28px,7vw,110px);align-items:start;border-top:1px solid #c9c5bb;padding-top:28px}
+.sob02-label{font:700 11px/1.5 Arial;letter-spacing:.16em;text-transform:uppercase;color:#817b70}
+.sob02-text{font:400 clamp(18px,1.7vw,24px)/1.72 Georgia,serif;color:#2c2b28;text-align:justify;hyphens:auto}
+.sob02-bottom{border-top:1px solid #1b1b1b;padding-top:14px;display:flex;justify-content:space-between;gap:20px;color:#757168;font-size:11px;letter-spacing:.08em}
+@media(max-width:720px){.sob02{padding:24px}.sob02-grid{grid-template-columns:1fr;gap:20px}.sob02-text{text-align:left}.sob02-bottom{flex-direction:column}.sob02 h1{text-align:left}}
+</style></head><body><main class="sob02" data-catalogo-s-model="SOB02">
+<header class="sob02-top"><span>Nossa história</span><span>Desde 2026</span></header>
+<section class="sob02-main"><div class="sob02-inner"><h1>Sobre.</h1><div class="sob02-grid"><div class="sob02-label">Em poucas palavras</div><div class="sob02-text">Este espaço foi pensado para uma apresentação direta e elegante. Conte de onde veio a ideia, qual problema você decidiu resolver e qual princípio orienta o trabalho hoje. O texto pode ter apenas uma estrofe: a tipografia, o respiro e o alinhamento justificado dão a ele presença de editorial sem exigir fotografias ou elementos extras.</div></div></div></section>
+<footer class="sob02-bottom"><span>Clareza antes de excesso.</span><span>Texto substituível · estrutura responsiva</span></footer>
+</main></body></html>
