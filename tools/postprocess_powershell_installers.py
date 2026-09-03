@@ -78,9 +78,15 @@ PREVIEW_SCRIPT = '''<script id="catalogo-preview-stability-script">
 
 
 def stabilize_detail(text: str):
-    # Remove a versão anterior junto do espaço que ela própria introduziu.
-    # Os lookaheads limitam a limpeza ao bloco imediatamente antes do fechamento,
-    # tornando o pós-processamento byte-idempotente.
+    # Se os blocos canônicos já estão presentes e o iframe já está sem scroll,
+    # não reformatamos o documento. Isso torna o pós-processamento byte-idempotente
+    # mesmo quando o gerador original escolhe manter as tags na mesma linha.
+    if PREVIEW_STYLE in text and PREVIEW_SCRIPT in text:
+        iframe = re.search(r'<iframe\s+([^>]*?)>', text, flags=re.I)
+        if iframe and re.search(r'\bscrolling="no"', iframe.group(1), flags=re.I):
+            return text
+
+    # Remove versões antigas dos blocos para substituir por uma única versão canônica.
     text = re.sub(
         r'\s*<style id="catalogo-preview-stability">[\s\S]*?</style>\s*(?=</head>)',
         '\n',
