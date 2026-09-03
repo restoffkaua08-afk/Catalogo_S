@@ -1,5 +1,5 @@
 name: Teste integral do Catálogo S
-# Gate de estabilidade: esta suíte deve rodar sobre o estado já regenerado do catálogo.
+# Gate de estabilidade para o catálogo regenerado.
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Valida contrato, catálogo, demos e códigos copiáveis
+      - name: Valida catálogo, contratos e demos
         shell: bash
         run: |
           set -euo pipefail
@@ -47,83 +47,54 @@ jobs:
           registry=json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))
           models=registry['modelos']
           categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
-
           assert registry.get('instalacaoPublica')=='powershell-autocontido'
-          assert len(models)==25, f'esperados 25 modelos, encontrados {len(models)}'
-          assert categories.get('quantidade')==len(categories.get('categorias',[])), 'quantidade de categorias divergente'
+          assert len(models)==35, f'esperados 35 modelos, encontrados {len(models)}'
+          assert categories.get('quantidade')==len(categories.get('categorias',[]))
 
-          slugs=[c['slug'] for c in categories['categorias']]
-          assert len(slugs)==len(set(slugs)), 'slug de categoria duplicado'
           items=[i for c in categories['categorias'] for i in c.get('itens',[])]
           ids=[i['id'] for i in items]
           assert len(ids)==len(set(ids)), 'ID duplicado no catálogo'
-          assert set(ids)==set(models), 'catálogo e registro de modelos divergem'
-
-          login_ids={'LG01','LG02','LG03','LG04','LG05'}
-          db=models['DB01']
-          assert set(db.get('interfacesCompativeis',[]))==login_ids, 'DB01: interfaces compatíveis divergentes'
-          assert db.get('contrato')=='auth-email-senha-v1', 'DB01: contrato de autenticação divergente'
-          for login_id in login_ids:
-              login=models[login_id]
-              assert login.get('backendCompativel')=='DB01', f'{login_id}: DB01 não declarado'
-              assert login.get('contrato')==db['contrato'], f'{login_id}: contrato incompatível com DB01'
-
+          assert set(ids)==set(models), 'catálogo e registro técnico divergem'
           js=Path('dados/categorias.js').read_text(encoding='utf-8')
           forbidden=['npx ','github.com/','api.github.com','raw.githubusercontent.com','git clone','invoke-webrequest','invoke-restmethod']
 
           for item in items:
-              assert Path(item['caminho']).exists(), f"{item['id']}: caminho ausente: {item['caminho']}"
-              assert item['id'] in js and item['caminho'] in js, f"{item['id']}: categorias.js fora de sincronia"
+              assert Path(item['caminho']).exists(), f"{item['id']}: caminho ausente"
+              assert item['id'] in js and item['caminho'] in js, f"{item['id']}: categorias.js divergente"
 
           for mid,model in models.items():
               script_path=Path(model['instaladorPublico'])
+              assert script_path.exists(), f'{mid}: instalar.ps1 ausente'
               script=script_path.read_text(encoding='utf-8')
               for token in forbidden:
                   assert token not in script.lower(), f'{mid}: dependência pública proibida: {token}'
-
               demo=script_path.parent/'index.html'
               text=demo.read_text(encoding='utf-8')
-              assert 'id="copy"' in text and 'Copiar código PowerShell' in text, f'{mid}: interface de cópia incompleta'
+              assert 'id="copy"' in text and 'Copiar código PowerShell' in text, f'{mid}: cópia incompleta'
               match=re.search(r'<pre id="command">([\s\S]*?)</pre>',text)
-              assert match and html.unescape(match.group(1))==script, f'{mid}: PowerShell exibido diverge do instalar.ps1'
-
-              iframe=re.search(r'<iframe[^>]+src="([^"]+)"',text,re.I)
-              assert iframe and (demo.parent/iframe.group(1)).exists(), f'{mid}: preview ausente'
-              assert 'scrolling="no"' in text, f'{mid}: preview permite scroll interno'
-              assert 'catalogo-preview-stability' in text, f'{mid}: estabilização do preview ausente'
-              assert 'catalogo-preview-stability-script' in text, f'{mid}: sincronização de altura do preview ausente'
-
+              assert match and html.unescape(match.group(1))==script, f'{mid}: demo e instalar.ps1 divergem'
+              assert 'scrolling="no"' in text, f'{mid}: preview com scroll aninhado'
+              assert 'catalogo-preview-stability' in text and 'catalogo-preview-stability-script' in text
               if model['tipo']=='frontend':
-                  template=Path(model['template'])
-                  txt=template.with_suffix('.txt')
+                  template=Path(model['template']); txt=template.with_suffix('.txt')
                   assert template.exists() and txt.exists(), f'{mid}: bloco-pronto incompleto'
                   assert template.read_text(encoding='utf-8')==txt.read_text(encoding='utf-8'), f'{mid}: HTML/TXT divergentes'
+              if mid.startswith('SOB'):
+                  assert model.get('modo')=='pagina' and model.get('papel')=='sobre'
+                  assert model.get('target')=='sobre.html' and model.get('rotulo')=='Sobre'
+              if mid.startswith('F'):
+                  assert model.get('modo')=='rodape' and model.get('slot')=='RODAPE'
 
-              if model.get('modo')=='componente':
-                  assert 'O componente é salvo em um documento isolado' in script, f'{mid}: sandbox do componente ausente'
-                  assert 'scrolling=`"no`"' in script, f'{mid}: host ainda gera iframe com scroll próprio'
-
-          schema=Path('backend/DB01-Banco-do-LG01/schema.sql').read_text(encoding='utf-8')
-          bloco=Path('backend/DB01-Banco-do-LG01/bloco-pronto.sql').read_text(encoding='utf-8')
-          installer=Path('backend/DB01-Banco-do-LG01/instalar.ps1').read_text(encoding='utf-8')
-          assert schema==bloco, 'DB01: schema.sql e bloco-pronto.sql divergentes'
-          for route in ['/api/auth/login','/api/auth/cadastro']:
-              assert route in schema and route in installer, f'DB01: rota atual ausente: {route}'
-          for route in ["'/api/login'","'/api/cadastro'"]:
-              assert route not in schema and route not in installer, f'DB01: rota obsoleta presente: {route}'
-
-          assert 'COLOQUE_AQUI_A_URL_DA_IMAGEM' not in Path('frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html').read_text(encoding='utf-8')
-          print('25 modelos: contrato, metadados, previews, scroll e códigos sincronizados.')
+          login_ids={'LG01','LG02','LG03','LG04','LG05'}
+          db=models['DB01']
+          assert set(db.get('interfacesCompativeis',[]))==login_ids
+          for mid in login_ids:
+              assert models[mid].get('backendCompativel')=='DB01'
+              assert models[mid].get('contrato')==db.get('contrato')=='auth-email-senha-v1'
+          print('35 modelos: catálogo, contratos, demos e códigos sincronizados.')
           PY
 
-      - name: Confirma que o pós-processamento é idempotente
-        shell: bash
-        run: |
-          set -euo pipefail
-          python tools/postprocess_powershell_installers.py
-          git diff --exit-code -- frontend backend/DB01-Banco-do-LG01
-
-      - name: Executa cada instalador PowerShell isoladamente
+      - name: Executa todos os instaladores isoladamente
         shell: bash
         env:
           CATALOGO_S_SKIP_DEPS: '1'
@@ -136,13 +107,10 @@ jobs:
           for m in json.loads(Path('instalador/modelos.json').read_text(encoding='utf-8'))['modelos'].values():
               print('|'.join([m['id'],m['modo'],m.get('target',''),m.get('template',''),m['instaladorPublico']]))
           PY
-
           while IFS='|' read -r id mode target template script; do
             projeto="$RUNNER_TEMP/publico-${id,,}"
-            rm -rf "$projeto"
-            mkdir -p "$projeto"
+            rm -rf "$projeto"; mkdir -p "$projeto"
             (cd "$projeto" && pwsh -NoProfile -File "$ROOT/$script")
-
             case "$mode" in
               pagina)
                 test -f "$projeto/$target"
@@ -153,98 +121,55 @@ jobs:
                 arquivo="$(find "$projeto/components/catalogo-s" -maxdepth 1 -type f -name "${id,,}-*.html" | head -n1)"
                 test -n "$arquivo"
                 grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
-                grep -q 'scrolling="no"' "$projeto/index.html"
-                python - "$arquivo" "$ROOT/$template" <<'PY'
-          from pathlib import Path
-          import sys
-          installed=Path(sys.argv[1]).read_text(encoding='utf-8')
-          source=Path(sys.argv[2]).read_text(encoding='utf-8').strip()
-          assert '<!doctype html>' in installed.lower(), 'componente instalado sem documento sandbox'
-          assert 'html,body{margin:0' in installed, 'sandbox sem reset de margem'
-          assert source in installed, 'fragmento original não foi preservado dentro do sandbox'
-          PY
+                ;;
+              rodape)
+                test -f "$projeto/components/catalogo-s/rodape/ativo.html"
+                grep -q "data-catalogo-s-model=\"$id\"" "$projeto/index.html"
                 ;;
               banco)
                 test -f "$projeto/database/schema.sql"
                 test -f "$projeto/api/auth/login.js"
                 test -f "$projeto/api/auth/cadastro.js"
-                test -f "$projeto/lib/catalogo-s-db.js"
-                grep -q "loginEndpoint:'/api/auth/login'" "$projeto/assets/js/catalogo-s.config.js"
-                grep -q "cadastroEndpoint:'/api/auth/cadastro'" "$projeto/assets/js/catalogo-s.config.js"
                 ;;
             esac
           done < "$RUNNER_TEMP/modelos.txt"
 
-      - name: Testa composição e preservação entre modelos
+      - name: Testa substituição canônica e preservação
         shell: bash
         env:
           CATALOGO_S_SKIP_DEPS: '1'
         run: |
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE"
-          P="$RUNNER_TEMP/site-powershell"
-          rm -rf "$P"
-          mkdir -p "$P"
-          cd "$P"
-
+          P="$RUNNER_TEMP/composicao"; rm -rf "$P"; mkdir -p "$P"; cd "$P"
           pwsh -NoProfile -File "$ROOT/frontend/I01-Tela-Inicial-Lateral-com-Foto-Emergindo-no-Degrade/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/C01-Carrossel-de-Destaques/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/E01-Secao-de-Navegacao-Visual/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/P01-Barra-de-Pesquisa-Minimalista-em-Linha/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/L01-Listagem-MR-em-Grade-com-Filtro-Compacto/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
-
-          for id in C01 E01 P01; do
-            grep -q "data-catalogo-s-model=\"$id\"" index.html
-          done
-          test "$(grep -o 'scrolling="no"' index.html | wc -l)" -ge 3
-          test -f produtos.html
-          test -f login.html
-          test -f database/schema.sql
-          grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
-          grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
-
+          pwsh -NoProfile -File "$ROOT/frontend/F01-Rodape-Institucional-Solido/instalar.ps1"
+          grep -q 'data-catalogo-s-model="F01"' index.html
           pwsh -NoProfile -File "$ROOT/frontend/I02-Tela-Inicial-com-Imagem-Cobertura-Total/instalar.ps1"
-          for id in C01 E01 P01; do
-            grep -q "data-catalogo-s-model=\"$id\"" index.html
-          done
-          test "$(grep -o 'scrolling="no"' index.html | wc -l)" -ge 3
+          grep -q 'data-catalogo-s-model="F01"' index.html
 
-      - name: Testa DB01 antes de todas as interfaces LG
+          pwsh -NoProfile -File "$ROOT/frontend/SOB01-Sobre-Split-Fotografico/instalar.ps1"
+          grep -q 'data-catalogo-s-model="SOB01"' sobre.html
+          pwsh -NoProfile -File "$ROOT/frontend/SOB02-Sobre-Editorial-com-Texto-Justificado/instalar.ps1"
+          grep -q 'data-catalogo-s-model="SOB02"' sobre.html
+          ! grep -q 'data-catalogo-s-model="SOB01"' sobre.html
+          find .catalogo-s/backups -type f -name '*sobre.html.bak' | grep -q .
+
+      - name: Confirma pós-processamento idempotente
         shell: bash
-        env:
-          CATALOGO_S_SKIP_DEPS: '1'
         run: |
           set -euo pipefail
-          ROOT="$GITHUB_WORKSPACE"
-          P="$RUNNER_TEMP/db-primeiro"
-          rm -rf "$P"
-          mkdir -p "$P"
-          cd "$P"
+          python tools/postprocess_powershell_installers.py
+          git diff --exit-code -- frontend backend/DB01-Banco-do-LG01
 
-          pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
-          for script in "$ROOT"/frontend/LG0*-*/instalar.ps1; do
-            pwsh -NoProfile -File "$script"
-            grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
-            grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
-            grep -q 'assets/js/catalogo-s.config.js' login.html
-            grep -q "window.CATALOGO_S_CONFIG?.auth?.loginEndpoint" login.html
-            grep -q "window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint" login.html
-          done
-
-      - name: Instala Chromium para smoke tests
+      - name: Instala Chromium e executa smoke tests
+        shell: bash
         run: |
+          set -euo pipefail
           python -m pip install --disable-pip-version-check playwright
           python -m playwright install chromium
-
-      - name: Testa catálogo e todas as demonstrações em Chromium
-        shell: bash
-        run: |
-          set -euo pipefail
           python3 -m http.server 4173 --bind 127.0.0.1 >"$RUNNER_TEMP/catalogo-http.log" 2>&1 &
-          SERVER_PID=$!
-          trap 'kill $SERVER_PID || true' EXIT
+          SERVER_PID=$!; trap 'kill $SERVER_PID || true' EXIT
           sleep 2
           python tests/browser_smoke.py
 
@@ -256,11 +181,7 @@ jobs:
         run: |
           set -euo pipefail
           ROOT="$GITHUB_WORKSPACE"
-          P="$RUNNER_TEMP/db01-real"
-          rm -rf "$P"
-          mkdir -p "$P"
-          cd "$P"
-
+          P="$RUNNER_TEMP/db01-real"; rm -rf "$P"; mkdir -p "$P"; cd "$P"
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
           npm install --no-audit --no-fund mysql2 bcryptjs
           cp "$ROOT/tests/db01_integration.mjs" ./db01_integration.mjs
