@@ -1,0 +1,15 @@
+NL02 — Sidebar Técnica Compacta
+
+INSTALAÇÃO PÚBLICA
+Copie o PowerShell exibido na demonstração e cole na raiz do projeto.
+
+CONTRATO
+- família: menus;
+- papel: navegacao-lateral;
+- parte persistida: components/catalogo-s/menu/lateral.html;
+- slot: CATALOGO-S:SLOT:MENU;
+- NS02/NS03 podem acionar NL01/NL02 via data-catalogo-s-menu-toggle;
+- instalar outro NSxx substitui somente a barra superior;
+- instalar outro NLxx substitui somente a barra lateral;
+- links usam os nomes canônicos index.html, produtos.html, sobre.html, contato.html e login.html;
+- sem npx, git clone ou download remoto.

@@ -380,6 +380,108 @@
       "backendCompativel": "DB01",
       "contrato": "auth-email-senha-v1"
     },
+    "NL01": {
+      "id": "NL01",
+      "nome": "Sidebar Overlay em Vidro",
+      "tipo": "frontend",
+      "papel": "navegacao-lateral",
+      "modo": "menu",
+      "template": "frontend/NL01-Sidebar-Overlay-em-Vidro/bloco-pronto.html",
+      "instaladorPublico": "frontend/NL01-Sidebar-Overlay-em-Vidro/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "lateral",
+      "fusionavel": true,
+      "compativeisCom": [
+        "NS02",
+        "NS03"
+      ],
+      "altura": "100vh"
+    },
+    "NL02": {
+      "id": "NL02",
+      "nome": "Sidebar Técnica Compacta",
+      "tipo": "frontend",
+      "papel": "navegacao-lateral",
+      "modo": "menu",
+      "template": "frontend/NL02-Sidebar-Tecnica-Compacta/bloco-pronto.html",
+      "instaladorPublico": "frontend/NL02-Sidebar-Tecnica-Compacta/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "lateral",
+      "fusionavel": true,
+      "compativeisCom": [
+        "NS02",
+        "NS03"
+      ],
+      "altura": "100vh"
+    },
+    "NL03": {
+      "id": "NL03",
+      "nome": "Sidebar Fixa Profissional",
+      "tipo": "frontend",
+      "papel": "navegacao-lateral",
+      "modo": "menu",
+      "template": "frontend/NL03-Sidebar-Fixa-Profissional/bloco-pronto.html",
+      "instaladorPublico": "frontend/NL03-Sidebar-Fixa-Profissional/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "lateral",
+      "fusionavel": false,
+      "compativeisCom": [],
+      "altura": "100vh"
+    },
+    "NS01": {
+      "id": "NS01",
+      "nome": "Barra Superior Institucional Centralizada",
+      "tipo": "frontend",
+      "papel": "navegacao-superior",
+      "modo": "menu",
+      "template": "frontend/NS01-Barra-Superior-Institucional-Centralizada/bloco-pronto.html",
+      "instaladorPublico": "frontend/NS01-Barra-Superior-Institucional-Centralizada/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "superior",
+      "fusionavel": false,
+      "compativeisCom": [],
+      "altura": "100vh"
+    },
+    "NS02": {
+      "id": "NS02",
+      "nome": "Barra Superior Minimal com Drawer",
+      "tipo": "frontend",
+      "papel": "navegacao-superior",
+      "modo": "menu",
+      "template": "frontend/NS02-Barra-Superior-Minimal-com-Drawer/bloco-pronto.html",
+      "instaladorPublico": "frontend/NS02-Barra-Superior-Minimal-com-Drawer/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "superior",
+      "fusionavel": true,
+      "compativeisCom": [
+        "NL01",
+        "NL02"
+      ],
+      "altura": "100vh"
+    },
+    "NS03": {
+      "id": "NS03",
+      "nome": "Barra Superior Técnica de Aplicação",
+      "tipo": "frontend",
+      "papel": "navegacao-superior",
+      "modo": "menu",
+      "template": "frontend/NS03-Barra-Superior-Tecnica-de-Aplicacao/bloco-pronto.html",
+      "instaladorPublico": "frontend/NS03-Barra-Superior-Tecnica-de-Aplicacao/instalar.ps1",
+      "destino": "inicio",
+      "slot": "MENU",
+      "parteMenu": "superior",
+      "fusionavel": true,
+      "compativeisCom": [
+        "NL01",
+        "NL02"
+      ],
+      "altura": "100vh"
+    },
     "P01": {
       "id": "P01",
       "nome": "Barra de Pesquisa Minimalista em Linha",

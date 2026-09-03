@@ -1,0 +1,86 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS03 — Barra Superior Técnica de Aplicação</title><style>*{box-sizing:border-box}html,body{margin:0;background:#080a0d;color:#f3f6f9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{height:100svh;min-height:620px;background:linear-gradient(145deg,#171c24,#080a0d);position:relative;overflow:hidden}.preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#5368ff24,transparent 32%),linear-gradient(115deg,transparent 0 48%,#ffffff04 48% 49%,transparent 49%);pointer-events:none}iframe{position:relative;display:block;width:100%;height:100%;border:0;overflow:hidden}.install{min-height:70svh;padding:54px 22px;border-top:1px solid #ffffff13;display:grid;place-items:center}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3vw,40px)/1.05 Georgia,serif}button{border:1px solid #ffffff22;border-radius:10px;background:#151922;color:#fff;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:70svh;overflow:auto;padding:22px;border:1px solid #ffffff17;border-radius:15px;background:#0b0e13;color:#dfe6ee;font:12px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:9999;left:16px;bottom:16px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#080a0dc9;border:1px solid #ffffff20;color:#fff;text-decoration:none;backdrop-filter:blur(12px)}@media(max-width:620px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:10px}}</style>
+<style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=menus" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração NS03" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>NS03 — Barra Superior Técnica de Aplicação</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId=&#x27;NS03&#x27;
+$ModeloNome=&#x27;Barra Superior Técnica de Aplicação&#x27;
+$Parte=&#x27;superior&#x27;
+$Payload=&#x27;H4sIAKekmWoC/5VWzW7jNhC+5ylUG4XthWVLin8l2+h2u4eixW6BAC2KogdKHMlsZFJL0om9hi+9Fdhzu4deigIteus75E32STrUj+O/bNIEkCUO+fGbbzgznFB2YzE6rUVEk1QkwubKuaxZFD/t3ZiyF4JCOq29ukLj7GKi9DqF2cVcL9J2KOh6syAyYdx3tvUDoE0suLZjsmDp2v+Sa5Dt55KRtK0IV7YCyeIgEqmQfh1GQOPe0Xrr2SYUK1uxt4wnfigkBWnjyPE0silQGJ8jpg40rLRNIRKSaCa4zwWH7cXRok5I5CYTiuVTYrYCGry1Gaew8sdjxwlSiLXvBJIlc/OrRYbPOeSfg1G2CihTWUrWfiIZDczD1rDAEQ028lkuuPLJUgsrf7ixzF8CkrKE2wynKj8CI0qQkMx3PUTMCKXGVcdyzQYhia4TKZac+nXXdQcuDXYiaC0WvputLCVSRq16nP+5TpArNidU3BoYRLU8xLLqjuP0TkXQIklS2Nwyqud+z8FNSw/z92K3M9v0KiKSULZU/glb4jneuApuFNI+uEG0lAo/M8Fyr/PDgbEF3zi77YSScLqpRI1TWD2oleGWL78tyI76Jlwa7bbKSGQk7DiXsNh2jKuld97w3rv8/dCF4aELKeNApJ0YK+7cdC/7FJJ2vT+iXhy360M66MVx61Bux/KM4PV+REZx3Dujd4Ss8XRuFozbBS0neLLLpZyj8bhP+vv6uUa/EtoKy2yo0wj6EG87VOhSgsG9AoMTAfrOpwcx7A/p5Sg6dtAtHMxtp+6RyGSTelIU86AXCzYlqcvBYRJ4HzuD3mNncOhSr1+JFsbRmA6CJxI7Efc6pJuKmFGg/zFmo2Nl72M37I/ccW8PfozoJzLGJE2NKw/Wp9GoKEhDwzUvVLlW5UEfOXsyuv8rkQvJT+pO3Ds8B14PkQZOWVfGgTBZp9emTGIWq1jIhZ+/mWr4fdNGmq2gTHwbblBrlVflYnrhYsdT253nHZEB31Sw7h5svuwIyhTW+7XYD56cUjuV3LMFoYwagXAcDfcPhWcOxf2G/lzcgNzsC1cI7IwqDPzYXny2AMpIc0FWZfYPPWTR2jxQJtodhUUomttlmlRu5Q3tXD97Qhfa7pL0p6XSLF5jI05jHzjd7vhlEmKQypZAlxFQ7P95hIrPE7bPNntRNNQ+YYtMSE24RshJt7wuTOZAUF4rSolS0xrSrc0m4RIbGa/Gim5Us/Q6A5yR287cRoAv7WKqRfA+YackNNeT56Fk0uLkBhJy9/fdn6JWmGGVYWcBvOZgwBTUZh/e/zvpFuizCdkRMv2nZs3R92ktz7OOueEc7290tLE7XM8m2Gt21I0N/emasdmr11+87L6+mnTJbGKuWOWcMqq1w5VYnncLJ+HsOyGvTRMDpFhMnHUra/78Rgq6zP2rhru4x8FGZYRP9C3GrYNDdaT27POlioi0Dihi9UPV3r3/arfjiXoVWCEfqsH4I/K9QDVILlHBv1ucDzwoGMIKtkqx2kGkX93H2NJ3/0ScRaRmyDw9eB/e/Vz4OPuWKYOTgCTpzj9yj5YZvbVQjwH++lcJ+ILouz+M9RyaEqGEx6B++6WEujKzz8GYo0S0eAzo9x2nYv4+VBdlNpf5SLJMz5rN1nSGNweutCWnVERLTDPdebMEub6CFCItZLNxmPmNVjucyuM55Z0SjfEZYxXQBl6dOlh8X5oK/jVTGjigPUoZ2to5GRY3H+Lxw3FNoJLcgvyx0WpJ0EvJg8ITMY07+UkyO5TEmg3TW/L9FejnWkuGpxmHD4pFo32FBp40Rau1bQWnTK9hjb2QN9pQUIUOjkyn08ZLzJ8M3d/fWcICG0S18xb/m60Ag1Fof1FkwH8e/HQdjg0AAA==&#x27;
+$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
+$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
+$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
+$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
+$ErrorActionPreference=&#x27;Stop&#x27;
+$Root=(Get-Location).Path
+$Utf8=New-Object System.Text.UTF8Encoding($false)
+function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
+function Backup([string]$r){$p=Full $r;if(!(Test-Path -LiteralPath $p)){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force}
+function Put([string]$r,[string]$c,[switch]$NoBackup){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};if(!$NoBackup){Backup $r}};[IO.File]::WriteAllText($p,$c,$Utf8)}
+function Slots([string]$h){$menu=&quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;;$components=&quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;;$footer=&quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;;if($h-notmatch&#x27;CATALOGO-S:SLOT:MENU:START&#x27;){$h=$h-replace&#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;,(&#x27;&lt;body$1&gt;&#x27;+&quot;`r`n&quot;+$menu)};if($h-notmatch&#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($components+&quot;`r`n&lt;/body&gt;&quot;)};if($h-notmatch&#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($footer+&quot;`r`n&lt;/body&gt;&quot;)};return $h}
+function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);$p=&#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:END --&gt;&#x27;;$r=&quot;&lt;!-- CATALOGO-S:SLOT:$n`:START --&gt;`r`n$c`r`n&lt;!-- CATALOGO-S:SLOT:$n`:END --&gt;&quot;;return [Text.RegularExpressions.Regex]::Replace($h,$p,$r)}
+function EnsureHost{$p=Full &#x27;index.html&#x27;;if(!(Test-Path -LiteralPath $p)){$shell=&#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;style&gt;html,body{margin:0;min-height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main style=&quot;min-height:100vh&quot;&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;&#x27;;Put &#x27;index.html&#x27; (Slots $shell) -NoBackup}else{$h=[IO.File]::ReadAllText($p);$s=Slots $h;if($s-ne$h){Put &#x27;index.html&#x27; $s}}}
+function RebuildMenu{EnsureHost;$h=[IO.File]::ReadAllText((Full &#x27;index.html&#x27;));$h=Slots $h;$dir=Full &#x27;components/catalogo-s/menu&#x27;;$parts=@();foreach($f in @(&#x27;superior.html&#x27;,&#x27;lateral.html&#x27;)){$p=Join-Path $dir $f;if(Test-Path -LiteralPath $p){$parts+=[IO.File]::ReadAllText($p)}};$shared=@&#x27;
+&lt;style id=&quot;catalogo-s-menu-host&quot;&gt;[data-catalogo-auto-link][hidden]{display:none!important}&lt;/style&gt;
+&lt;script&gt;
+(()=&gt;{const links=[...document.querySelectorAll(&#x27;[data-catalogo-auto-link]&#x27;)];
+if(!/^https?:$/.test(location.protocol))return;
+links.forEach(async a=&gt;{try{const r=await fetch(a.getAttribute(&#x27;href&#x27;),{method:&#x27;HEAD&#x27;,cache:&#x27;no-store&#x27;});if(!r.ok)a.hidden=true}catch(_){}})})();
+&lt;/script&gt;
+&#x27;@;$content=$shared+&quot;`r`n&quot;+($parts-join&quot;`r`n&quot;);Put &#x27;index.html&#x27; (SetSlot $h &#x27;MENU&#x27; $content)}
+$dest=&#x27;components/catalogo-s/menu/&#x27;+$Parte+&#x27;.html&#x27;
+Put $dest $ConteudoModelo
+RebuildMenu
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado como navegação $Parte.&quot;
+Write-Host &#x27;[Catálogo S] NSxx/NLxx recompõem juntos somente o slot MENU.&#x27;
+Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script>
+<script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>

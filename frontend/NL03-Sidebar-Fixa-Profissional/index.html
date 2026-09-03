@@ -1,0 +1,86 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NL03 — Sidebar Fixa Profissional</title><style>*{box-sizing:border-box}html,body{margin:0;background:#080a0d;color:#f3f6f9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{height:100svh;min-height:620px;background:linear-gradient(145deg,#171c24,#080a0d);position:relative;overflow:hidden}.preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#5368ff24,transparent 32%),linear-gradient(115deg,transparent 0 48%,#ffffff04 48% 49%,transparent 49%);pointer-events:none}iframe{position:relative;display:block;width:100%;height:100%;border:0;overflow:hidden}.install{min-height:70svh;padding:54px 22px;border-top:1px solid #ffffff13;display:grid;place-items:center}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3vw,40px)/1.05 Georgia,serif}button{border:1px solid #ffffff22;border-radius:10px;background:#151922;color:#fff;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:70svh;overflow:auto;padding:22px;border:1px solid #ffffff17;border-radius:15px;background:#0b0e13;color:#dfe6ee;font:12px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:9999;left:16px;bottom:16px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#080a0dc9;border:1px solid #ffffff20;color:#fff;text-decoration:none;backdrop-filter:blur(12px)}@media(max-width:620px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:10px}}</style>
+<style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=menus" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração NL03" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>NL03 — Sidebar Fixa Profissional</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId=&#x27;NL03&#x27;
+$ModeloNome=&#x27;Sidebar Fixa Profissional&#x27;
+$Parte=&#x27;lateral&#x27;
+$Payload=&#x27;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&#x27;
+$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
+$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
+$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
+$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
+$ErrorActionPreference=&#x27;Stop&#x27;
+$Root=(Get-Location).Path
+$Utf8=New-Object System.Text.UTF8Encoding($false)
+function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
+function Backup([string]$r){$p=Full $r;if(!(Test-Path -LiteralPath $p)){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force}
+function Put([string]$r,[string]$c,[switch]$NoBackup){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};if(!$NoBackup){Backup $r}};[IO.File]::WriteAllText($p,$c,$Utf8)}
+function Slots([string]$h){$menu=&quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;;$components=&quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;;$footer=&quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;;if($h-notmatch&#x27;CATALOGO-S:SLOT:MENU:START&#x27;){$h=$h-replace&#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;,(&#x27;&lt;body$1&gt;&#x27;+&quot;`r`n&quot;+$menu)};if($h-notmatch&#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($components+&quot;`r`n&lt;/body&gt;&quot;)};if($h-notmatch&#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($footer+&quot;`r`n&lt;/body&gt;&quot;)};return $h}
+function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);$p=&#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:END --&gt;&#x27;;$r=&quot;&lt;!-- CATALOGO-S:SLOT:$n`:START --&gt;`r`n$c`r`n&lt;!-- CATALOGO-S:SLOT:$n`:END --&gt;&quot;;return [Text.RegularExpressions.Regex]::Replace($h,$p,$r)}
+function EnsureHost{$p=Full &#x27;index.html&#x27;;if(!(Test-Path -LiteralPath $p)){$shell=&#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;style&gt;html,body{margin:0;min-height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main style=&quot;min-height:100vh&quot;&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;&#x27;;Put &#x27;index.html&#x27; (Slots $shell) -NoBackup}else{$h=[IO.File]::ReadAllText($p);$s=Slots $h;if($s-ne$h){Put &#x27;index.html&#x27; $s}}}
+function RebuildMenu{EnsureHost;$h=[IO.File]::ReadAllText((Full &#x27;index.html&#x27;));$h=Slots $h;$dir=Full &#x27;components/catalogo-s/menu&#x27;;$parts=@();foreach($f in @(&#x27;superior.html&#x27;,&#x27;lateral.html&#x27;)){$p=Join-Path $dir $f;if(Test-Path -LiteralPath $p){$parts+=[IO.File]::ReadAllText($p)}};$shared=@&#x27;
+&lt;style id=&quot;catalogo-s-menu-host&quot;&gt;[data-catalogo-auto-link][hidden]{display:none!important}&lt;/style&gt;
+&lt;script&gt;
+(()=&gt;{const links=[...document.querySelectorAll(&#x27;[data-catalogo-auto-link]&#x27;)];
+if(!/^https?:$/.test(location.protocol))return;
+links.forEach(async a=&gt;{try{const r=await fetch(a.getAttribute(&#x27;href&#x27;),{method:&#x27;HEAD&#x27;,cache:&#x27;no-store&#x27;});if(!r.ok)a.hidden=true}catch(_){}})})();
+&lt;/script&gt;
+&#x27;@;$content=$shared+&quot;`r`n&quot;+($parts-join&quot;`r`n&quot;);Put &#x27;index.html&#x27; (SetSlot $h &#x27;MENU&#x27; $content)}
+$dest=&#x27;components/catalogo-s/menu/&#x27;+$Parte+&#x27;.html&#x27;
+Put $dest $ConteudoModelo
+RebuildMenu
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado como navegação $Parte.&quot;
+Write-Host &#x27;[Catálogo S] NSxx/NLxx recompõem juntos somente o slot MENU.&#x27;
+Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script>
+<script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>

@@ -9,7 +9,8 @@ README = '{mid} — {name}\n\nINSTALAÇÃO PÚBLICA\nCopie o PowerShell exibido 
 
 def installer(m, source):
     payload = base64.b64encode(gzip.compress(source.encode('utf-8'), 9)).decode()
-    return INSTALLER.format(mid=m['id'], name=m['nome'], part=m['parte'], payload=payload, autojs=AUTO_LINK_JS)
+    template = INSTALLER.replace('{{', '{').replace('}}', '}')
+    return template.replace('{mid}', m['id']).replace('{name}', m['nome']).replace('{part}', m['parte']).replace('{payload}', payload).replace('{autojs}', AUTO_LINK_JS)
 
 def generate_files():
     for m in MODELS:

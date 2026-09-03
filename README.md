@@ -45,3 +45,5 @@ Toda demonstração deve possuir preview, título, botão de cópia e script Pow
 Os seis modelos historicamente aprovados continuam: `E01`, `C01`, `E02`, `C02`, `C03` e `E03`. Os demais mantêm seus IDs e status anteriores.
 
 A interface pública continua hospedada na Vercel. O GitHub permanece como fonte de desenvolvimento do Catálogo S, mas não é dependência de execução dos scripts copiados pelo usuário.
+
+- `NSxx` / `NLxx` → navegação superior/lateral → slot `MENU`

@@ -1,0 +1,86 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NS01 — Barra Superior Institucional Centralizada</title><style>*{box-sizing:border-box}html,body{margin:0;background:#080a0d;color:#f3f6f9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{height:100svh;min-height:620px;background:linear-gradient(145deg,#171c24,#080a0d);position:relative;overflow:hidden}.preview:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#5368ff24,transparent 32%),linear-gradient(115deg,transparent 0 48%,#ffffff04 48% 49%,transparent 49%);pointer-events:none}iframe{position:relative;display:block;width:100%;height:100%;border:0;overflow:hidden}.install{min-height:70svh;padding:54px 22px;border-top:1px solid #ffffff13;display:grid;place-items:center}.box{width:min(1180px,100%)}.head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3vw,40px)/1.05 Georgia,serif}button{border:1px solid #ffffff22;border-radius:10px;background:#151922;color:#fff;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:70svh;overflow:auto;padding:22px;border:1px solid #ffffff17;border-radius:15px;background:#0b0e13;color:#dfe6ee;font:12px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:9999;left:16px;bottom:16px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#080a0dc9;border:1px solid #ffffff20;color:#fff;text-decoration:none;backdrop-filter:blur(12px)}@media(max-width:620px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:10px}}</style>
+<style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=menus" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração NS01" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>NS01 — Barra Superior Institucional Centralizada</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command">$ModeloId=&#x27;NS01&#x27;
+$ModeloNome=&#x27;Barra Superior Institucional Centralizada&#x27;
+$Parte=&#x27;superior&#x27;
+$Payload=&#x27;H4sIAKekmWoC/+VW3Y7iNhS+n6dIGVXAimQSyi6QAOpotdpW6lZVR30AJz4Bdxw7tQ0Di7jos/SiV73qI8yL9dhJ2AAznel1hQjEP+fn+75z7BllG4/ReScjhnC5lL7QYdTxKL76xzHtF5ICn3d+vMPJxdVMmx2HxdXKFHyQSrrbF0QtmYjDw/WJob3vM3EfX0dv7Sfx/ZKUoGK1TElvOJoOhqMxfqNBMB31k1wK4+ekYHwX3ypG+OA74BswLCMDTYT2NSiWJ5nkUsUbonrOeP9wderTe7NP5dbX7DMTyziVioLyceQsNI/sK0tMrNCuSQxsjU8hk4oYJkUspIAL20FK1L6UmrklOdsCTT5jGBS28XQahgmH3MRhothyZX+NLPG5Avc6npTbhDJdcrKLl4rRxD58AwWOGPAxnnUhdBzlyiNrIz38kxDOlsJnuEjHGQgDKikJpTa30Ms4KcrecFhuB6PNw+DdqNz2k5Rk90sl14LWKDnQcbyBwhhZxFG59bTkjHo1O9HE7aRKln7OODqKU75WvWjijFpIV4TKB3QboUPvm3f4uI7e2U+YPoGUIoLuLanxOMQ9Y1z+ESTqBOl0THIw6MXXJclsOkE4guIQcCRV7xuYcg7bpzBYkjKusw8x+2EwwfxHQxuq0xHSD7GNs3p9qBlwDD3h9SJ6FwVq5Mi1AuSIbeCI/nCKCZ0L/rgxJjl6QYlhtIhAp5McLZEUcV8bONVKFIZfJzU3ltBGNMhTm9GmlAyi20Rm13nBcKifDWYlN0hnFVItzcuU3cT+17U2LN9hsfE8BkGT1zBhgT4EmUG8anQiZMWL3trgnewu9dboURHK1hqrZ9qQVXEXnXE3CcNDUMiUcTiqw9Zo4yBsw+TgKYnCEJMHRs0qHrUwdf+ztdJY/qVkNo3GtIe7xNF+ymV2XxuwOnuBlLoLYtaufi8hrnxgQQrgp0k811Mm06lrIq53nDWXoxJHZ+Hk03ycRy8X/OEkoECW8CX1qj8ht2NLbXud12LZNoLRkeTnXQ3Py/Bw9W0BlJFeQbZ+BfB4ggj390913H/vk3XPGDgBtlG90Ivj81Ar3RmtbMXDQ92v2oNR1Z8V9rzocAy4VJCD0r4Cus6A4tFY9wf7ehH+m32rUm1MX7GilMoQYdDk7KY+SWcrIAigbehazzuYc8cjeAb6nKTu4CUbWJLHPx//kF6pmMhYSXhnMSPHHTb6jrfC4OYdp53Ans7nJ7mFy7doLe5+ub35dPvz+9vZDVnMBNk0lhyWzvTrjX0vHv/KmHSmmn2lkhQX6Be2/lQvO9mrZargpQTsmpNdttkSI1/Y975a5XbeYN6Lmb0D1ck7ZbRxRUk1qKIdJl4w/vi7AuJRiduZbY/OS7rGqhCNxUqSHc/sSkDe3Nwp2bepYsorQKzrcdhi4VHAa1pOuAaMz3YpDL/6OXm5qSziH0wLn5WwUGEtitvVfOr6Ezr1ise/N8D/JxIg/4HdDwKLWX1RDl6EM8VKs+j1+vOFPey18dScymyN7JngtzWo3R1wyIxUve5pa+j2B+lcna+pOxZOls9OVsR18VIWYB/+sEFXPzCN9wzANSi87L47aAUk52XgiLeLAiOXSw69rm32zoQGc2uMYqgbHD7RW3dwhxNi2ZP9/qGfXDq7hx3eCEV3AOiN5T0IcGQ+n3c/6Awvnd3+vu1aQYH3kNe67jqtd/uHA/ru9RMUeAX2VSXtfwCem0l2uwwAAA==&#x27;
+$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
+$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
+$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
+$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
+$ErrorActionPreference=&#x27;Stop&#x27;
+$Root=(Get-Location).Path
+$Utf8=New-Object System.Text.UTF8Encoding($false)
+function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
+function Backup([string]$r){$p=Full $r;if(!(Test-Path -LiteralPath $p)){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force}
+function Put([string]$r,[string]$c,[switch]$NoBackup){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};if(!$NoBackup){Backup $r}};[IO.File]::WriteAllText($p,$c,$Utf8)}
+function Slots([string]$h){$menu=&quot;&lt;!-- CATALOGO-S:SLOT:MENU:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:MENU:END --&gt;&quot;;$components=&quot;&lt;!-- CATALOGO-S:SLOT:COMPONENTES:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:COMPONENTES:END --&gt;&quot;;$footer=&quot;&lt;!-- CATALOGO-S:SLOT:RODAPE:START --&gt;`r`n&lt;!-- CATALOGO-S:SLOT:RODAPE:END --&gt;&quot;;if($h-notmatch&#x27;CATALOGO-S:SLOT:MENU:START&#x27;){$h=$h-replace&#x27;(?i)&lt;body([^&gt;]*)&gt;&#x27;,(&#x27;&lt;body$1&gt;&#x27;+&quot;`r`n&quot;+$menu)};if($h-notmatch&#x27;CATALOGO-S:SLOT:COMPONENTES:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($components+&quot;`r`n&lt;/body&gt;&quot;)};if($h-notmatch&#x27;CATALOGO-S:SLOT:RODAPE:START&#x27;){$h=$h-replace&#x27;(?i)&lt;/body&gt;&#x27;,($footer+&quot;`r`n&lt;/body&gt;&quot;)};return $h}
+function SetSlot([string]$h,[string]$n,[string]$c){$e=[Text.RegularExpressions.Regex]::Escape($n);$p=&#x27;(?s)&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:START --&gt;.*?&lt;!-- CATALOGO-S:SLOT:&#x27;+$e+&#x27;:END --&gt;&#x27;;$r=&quot;&lt;!-- CATALOGO-S:SLOT:$n`:START --&gt;`r`n$c`r`n&lt;!-- CATALOGO-S:SLOT:$n`:END --&gt;&quot;;return [Text.RegularExpressions.Regex]::Replace($h,$p,$r)}
+function EnsureHost{$p=Full &#x27;index.html&#x27;;if(!(Test-Path -LiteralPath $p)){$shell=&#x27;&lt;!doctype html&gt;&lt;html lang=&quot;pt-BR&quot;&gt;&lt;head&gt;&lt;meta charset=&quot;utf-8&quot;&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width,initial-scale=1&quot;&gt;&lt;title&gt;Projeto&lt;/title&gt;&lt;style&gt;html,body{margin:0;min-height:100%}&lt;/style&gt;&lt;/head&gt;&lt;body&gt;&lt;main style=&quot;min-height:100vh&quot;&gt;&lt;/main&gt;&lt;/body&gt;&lt;/html&gt;&#x27;;Put &#x27;index.html&#x27; (Slots $shell) -NoBackup}else{$h=[IO.File]::ReadAllText($p);$s=Slots $h;if($s-ne$h){Put &#x27;index.html&#x27; $s}}}
+function RebuildMenu{EnsureHost;$h=[IO.File]::ReadAllText((Full &#x27;index.html&#x27;));$h=Slots $h;$dir=Full &#x27;components/catalogo-s/menu&#x27;;$parts=@();foreach($f in @(&#x27;superior.html&#x27;,&#x27;lateral.html&#x27;)){$p=Join-Path $dir $f;if(Test-Path -LiteralPath $p){$parts+=[IO.File]::ReadAllText($p)}};$shared=@&#x27;
+&lt;style id=&quot;catalogo-s-menu-host&quot;&gt;[data-catalogo-auto-link][hidden]{display:none!important}&lt;/style&gt;
+&lt;script&gt;
+(()=&gt;{const links=[...document.querySelectorAll(&#x27;[data-catalogo-auto-link]&#x27;)];
+if(!/^https?:$/.test(location.protocol))return;
+links.forEach(async a=&gt;{try{const r=await fetch(a.getAttribute(&#x27;href&#x27;),{method:&#x27;HEAD&#x27;,cache:&#x27;no-store&#x27;});if(!r.ok)a.hidden=true}catch(_){}})})();
+&lt;/script&gt;
+&#x27;@;$content=$shared+&quot;`r`n&quot;+($parts-join&quot;`r`n&quot;);Put &#x27;index.html&#x27; (SetSlot $h &#x27;MENU&#x27; $content)}
+$dest=&#x27;components/catalogo-s/menu/&#x27;+$Parte+&#x27;.html&#x27;
+Put $dest $ConteudoModelo
+RebuildMenu
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado como navegação $Parte.&quot;
+Write-Host &#x27;[Catálogo S] NSxx/NLxx recompõem juntos somente o slot MENU.&#x27;
+Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script>
+<script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>
