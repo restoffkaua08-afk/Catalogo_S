@@ -1,5 +1,6 @@
 name: Geração PowerShell autocontida
 # SOBxx pipeline integrado em 2026-09-03
+# Gate de 35 modelos estabilizado.
 
 on:
   push:
