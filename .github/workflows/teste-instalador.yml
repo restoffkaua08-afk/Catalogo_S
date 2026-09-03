@@ -49,7 +49,7 @@ jobs:
           categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
 
           assert registry.get('instalacaoPublica')=='powershell-autocontido'
-          assert len(models)==21, f'esperados 21 modelos, encontrados {len(models)}'
+          assert len(models)==25, f'esperados 25 modelos, encontrados {len(models)}'
           assert categories.get('quantidade')==len(categories.get('categorias',[])), 'quantidade de categorias divergente'
 
           slugs=[c['slug'] for c in categories['categorias']]
@@ -58,6 +58,15 @@ jobs:
           ids=[i['id'] for i in items]
           assert len(ids)==len(set(ids)), 'ID duplicado no catálogo'
           assert set(ids)==set(models), 'catálogo e registro de modelos divergem'
+
+          login_ids={'LG01','LG02','LG03','LG04','LG05'}
+          db=models['DB01']
+          assert set(db.get('interfacesCompativeis',[]))==login_ids, 'DB01: interfaces compatíveis divergentes'
+          assert db.get('contrato')=='auth-email-senha-v1', 'DB01: contrato de autenticação divergente'
+          for login_id in login_ids:
+              login=models[login_id]
+              assert login.get('backendCompativel')=='DB01', f'{login_id}: DB01 não declarado'
+              assert login.get('contrato')==db['contrato'], f'{login_id}: contrato incompatível com DB01'
 
           js=Path('dados/categorias.js').read_text(encoding='utf-8')
           forbidden=['npx ','github.com/','api.github.com','raw.githubusercontent.com','git clone','invoke-webrequest','invoke-restmethod']
@@ -104,7 +113,7 @@ jobs:
               assert route not in schema and route not in installer, f'DB01: rota obsoleta presente: {route}'
 
           assert 'COLOQUE_AQUI_A_URL_DA_IMAGEM' not in Path('frontend/E03-Secao-de-Galeria-Sobreposta/bloco-pronto.html').read_text(encoding='utf-8')
-          print('21 modelos: contrato, metadados, previews, scroll e códigos sincronizados.')
+          print('25 modelos: contrato, metadados, previews, scroll e códigos sincronizados.')
           PY
 
       - name: Confirma que o pós-processamento é idempotente
@@ -202,7 +211,7 @@ jobs:
           done
           test "$(grep -o 'scrolling="no"' index.html | wc -l)" -ge 3
 
-      - name: Testa DB01 antes do LG01
+      - name: Testa DB01 antes de todas as interfaces LG
         shell: bash
         env:
           CATALOGO_S_SKIP_DEPS: '1'
@@ -215,9 +224,14 @@ jobs:
           cd "$P"
 
           pwsh -NoProfile -File "$ROOT/backend/DB01-Banco-do-LG01/instalar.ps1"
-          pwsh -NoProfile -File "$ROOT/frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1"
-          grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
-          grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
+          for script in "$ROOT"/frontend/LG0*-*/instalar.ps1; do
+            pwsh -NoProfile -File "$script"
+            grep -q "loginEndpoint:'/api/auth/login'" assets/js/catalogo-s.config.js
+            grep -q "cadastroEndpoint:'/api/auth/cadastro'" assets/js/catalogo-s.config.js
+            grep -q 'assets/js/catalogo-s.config.js' login.html
+            grep -q "window.CATALOGO_S_CONFIG?.auth?.loginEndpoint" login.html
+            grep -q "window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint" login.html
+          done
 
       - name: Instala Chromium para smoke tests
         run: |

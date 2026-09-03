@@ -243,7 +243,7 @@ async function doctor(){
   info(`doctor: ${issues.length} ponto(s):`);for(const issue of issues)console.log(`  - ${issue}`);process.exitCode=2;
 }
 
-function help(){console.log(`\nCatálogo S CLI v${CLI_VERSION}\n\nComandos:\n  catalogo-s init\n  catalogo-s add <ID>\n  catalogo-s list\n  catalogo-s reconcile\n  catalogo-s doctor\n\nUso público:\n  npx --yes github:restoffkaua08-afk/Catalogo_S#main add I01\n\nFlags:\n  --no-deps   não instala dependências de backend\n`)}
+function help(){console.log(`\nCatálogo S CLI v${CLI_VERSION}\n\nComandos internos:\n  catalogo-s init\n  catalogo-s add <ID>\n  catalogo-s list\n  catalogo-s reconcile\n  catalogo-s doctor\n\nUso público:\n  copie o bloco PowerShell autocontido exibido na demonstração do modelo.\n\nFlags:\n  --no-deps   não instala dependências de backend\n`)}
 
 try{
   if(command==='init'){await project();info('projeto inicializado.')}

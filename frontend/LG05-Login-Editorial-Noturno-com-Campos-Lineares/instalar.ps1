@@ -1,0 +1,251 @@
+$ModeloId = 'LG05'
+$ModeloNome = 'Login Editorial Noturno com Campos Lineares'
+$Papel = 'login'
+$ArquivoAlvo = 'login.html'
+$ConteudoModelo = @'
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Login editorial noturno</title>
+<style>
+:root{
+  --ink:#fff9ef;--muted:#c9c4bd;--gold:#dcb16d;--line:rgba(255,250,238,.72);
+  --photo:url('https://images.unsplash.com/photo-1587065324113-40b9611a50fb?auto=format&fit=crop&w=2500&q=90');
+  --ease:cubic-bezier(.16,1,.3,1)
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#05070a;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}body{min-height:100svh;overflow:hidden}
+.lg05{position:relative;isolation:isolate;min-height:100svh;overflow:hidden;background:#05070a}
+.lg05-city{position:absolute;z-index:-4;inset:-14px;background-image:linear-gradient(180deg,rgba(3,5,8,.2),rgba(3,5,8,.45)),var(--photo);background-size:cover;background-position:center;filter:blur(2.5px) saturate(.9);transform:scale(1.035);animation:lg05-city 20s ease-in-out infinite alternate}
+@keyframes lg05-city{to{transform:scale(1.065) translate3d(-.6%,0,0)}}
+.lg05::before{content:"";position:absolute;z-index:-3;inset:0;background:linear-gradient(90deg,#020305 0 19%,rgba(2,3,5,.96) 27%,rgba(2,3,5,.67) 42%,rgba(2,3,5,.16) 57%,transparent 70%),linear-gradient(180deg,rgba(1,2,4,.12),rgba(1,2,4,.4));pointer-events:none}
+.lg05::after{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(circle at 72% 80%,rgba(218,157,77,.15),transparent 28%),linear-gradient(105deg,transparent 0 50%,rgba(12,15,20,.13));box-shadow:inset 0 0 140px rgba(0,0,0,.42);pointer-events:none}
+.lg05-story{position:absolute;left:clamp(30px,7vw,110px);top:50%;width:min(39vw,590px);transform:translateY(-50%);z-index:2}
+.lg05-kicker{display:flex;align-items:center;gap:13px;margin-bottom:20px;color:#e3bf86;font-size:10px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}.lg05-kicker::before{content:"";width:45px;height:1px;background:var(--gold);box-shadow:0 0 12px rgba(220,177,109,.7)}
+.lg05-story h1{margin:0;font:500 clamp(49px,6.4vw,92px)/.89 Georgia,serif;letter-spacing:-.052em;text-wrap:balance;text-shadow:0 8px 40px rgba(0,0,0,.5)}
+.lg05-story p{margin:24px 0 0;max-width:40ch;color:#cac3b8;font-size:14px;line-height:1.75}
+.lg05-panel{position:absolute;z-index:3;right:0;top:0;width:50%;height:100%;display:grid;place-items:center;padding:34px clamp(28px,6vw,98px);border-left:1px solid rgba(255,255,255,.1);background:linear-gradient(125deg,rgba(18,21,27,.24),rgba(7,9,13,.5));box-shadow:-32px 0 90px rgba(0,0,0,.18);backdrop-filter:blur(10px) saturate(110%);-webkit-backdrop-filter:blur(10px) saturate(110%)}
+.lg05-access{position:relative;width:min(430px,100%);height:690px;text-align:center}
+.lg05-avatar{position:absolute;z-index:4;left:50%;top:0;width:106px;height:106px;display:grid;place-items:center;transform:translateX(-50%);border:1px solid rgba(255,245,226,.4);border-radius:50%;background:linear-gradient(145deg,rgba(255,244,224,.16),rgba(16,18,24,.28));box-shadow:0 20px 55px rgba(0,0,0,.35),inset 0 1px rgba(255,255,255,.36);backdrop-filter:blur(13px)}
+.lg05-avatar svg{width:56px;height:56px;fill:none;stroke:#fff5e7;stroke-width:1.3;filter:drop-shadow(0 4px 12px rgba(0,0,0,.4))}.lg05-avatar::after{content:"";position:absolute;inset:7px;border:1px solid rgba(255,255,255,.13);border-radius:50%}
+.lg05-view{position:absolute;inset:135px 0 0;display:flex;flex-direction:column;justify-content:flex-start;opacity:0;visibility:hidden;pointer-events:none;filter:blur(8px);transform:translate3d(24px,0,0);transition:opacity .5s ease,filter .7s ease,transform .7s var(--ease),visibility .5s}
+.lg05.show-login .lg05-login,.lg05.show-register .lg05-register{opacity:1;visibility:visible;pointer-events:auto;filter:none;transform:none}.lg05.show-register .lg05-login{transform:translate3d(-24px,0,0)}
+.lg05 h2{margin:0;font:500 clamp(36px,4.4vw,52px)/1 Georgia,serif;letter-spacing:-.035em}.lg05-lead{margin:10px auto 28px;color:var(--muted);font-size:12px;line-height:1.65}
+.lg05-form{display:grid;gap:18px;text-align:left}.lg05-field{position:relative;display:grid;gap:6px;padding:0 13px 11px}.lg05-field::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--line) 12%,var(--line) 88%,transparent);box-shadow:0 1px 7px rgba(255,220,165,.18);transition:filter .2s ease}.lg05-field:focus-within::after{height:2px;filter:drop-shadow(0 0 6px var(--gold))}
+.lg05-field span{font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;color:#fff3df;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.lg05-input{width:100%;height:28px;border:0;background:transparent;color:#fff;padding:0;outline:none;font-size:15px;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.lg05-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}.lg05-btn{min-height:50px;border:1px solid rgba(255,245,229,.28);border-radius:999px;cursor:pointer;font-size:12px;font-weight:900;transition:background .2s ease,border-color .2s ease,color .2s ease,transform .2s ease}.lg05-btn:active{transform:translateY(1px)}
+.lg05-primary{border-color:#f2dfc2;background:#f2dfc2;color:#19130c}.lg05-primary:hover{background:#fff}.lg05-secondary{background:rgba(5,7,10,.15);color:#fff5e6}.lg05-secondary:hover{border-color:var(--gold);color:#ffe0ae;background:rgba(5,7,10,.3)}
+.lg05-message{min-height:18px;margin-top:6px;color:#eee1cf;font-size:12px;text-align:center}.lg05-message.error{color:#ffd0d0}
+.lg05-note{position:absolute;z-index:4;right:20px;bottom:17px;color:rgba(255,255,255,.45);font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
+@media(max-height:770px) and (min-width:821px){.lg05-access{height:640px;transform:scale(.92)}}
+@media(max-width:820px){body{overflow:auto}.lg05{min-height:930px}.lg05-city{background-position:64% center}.lg05::before{background:linear-gradient(180deg,#030407 0 16%,rgba(3,4,7,.9) 29%,rgba(3,4,7,.42) 47%,rgba(3,4,7,.28))}.lg05-story{position:relative;left:auto;top:auto;width:auto;padding:58px 24px 22px;transform:none}.lg05-story h1{font-size:50px}.lg05-story p{margin-top:15px}.lg05-panel{position:relative;right:auto;top:auto;width:100%;height:690px;padding:22px;border-left:0;border-top:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(8,10,14,.23),rgba(8,10,14,.5))}.lg05-access{height:650px}.lg05-actions{grid-template-columns:1fr}.lg05-note{display:none}}
+@media(prefers-reduced-motion:reduce){.lg05-city{animation:none}.lg05-view{transition:none}}
+</style>
+<script src="assets/js/catalogo-s.config.js"></script>
+</head>
+<body>
+<main class="lg05 show-login" id="lg05">
+  <div class="lg05-city" aria-hidden="true"></div>
+  <section class="lg05-story" aria-labelledby="lg05-story-title">
+    <div class="lg05-kicker">Depois que a cidade acende</div>
+    <h1 id="lg05-story-title">Seu próximo capítulo começa aqui.</h1>
+    <p>Entre para acessar seu espaço ou crie uma conta sem sair desta paisagem noturna.</p>
+  </section>
+  <section class="lg05-panel" aria-label="Acesso à conta">
+    <div class="lg05-access">
+      <div class="lg05-avatar" aria-hidden="true"><svg viewBox="0 0 64 64"><circle cx="32" cy="23" r="12"></circle><path d="M12 56c2.2-12.2 9.8-19 20-19s17.8 6.8 20 19"></path></svg></div>
+      <div class="lg05-view lg05-login">
+        <h2>Bem-vindo.</h2>
+        <p class="lg05-lead">Use seus dados para continuar.</p>
+        <form class="lg05-form" id="lg05-login-form">
+          <label class="lg05-field"><span>E-mail</span><input class="lg05-input" name="email" type="email" autocomplete="email" required></label>
+          <label class="lg05-field"><span>Senha</span><input class="lg05-input" name="senha" type="password" autocomplete="current-password" required></label>
+          <div class="lg05-actions"><button class="lg05-btn lg05-primary" type="submit">Entrar</button><button class="lg05-btn lg05-secondary" id="lg05-open-register" type="button">Criar conta</button></div>
+          <div class="lg05-message" id="lg05-login-message" aria-live="polite"></div>
+        </form>
+      </div>
+      <div class="lg05-view lg05-register">
+        <h2>Crie seu acesso.</h2>
+        <p class="lg05-lead">Comece com seus dados essenciais.</p>
+        <form class="lg05-form" id="lg05-register-form">
+          <label class="lg05-field"><span>Nome</span><input class="lg05-input" name="nome" type="text" autocomplete="name" required></label>
+          <label class="lg05-field"><span>E-mail</span><input class="lg05-input" name="email" type="email" autocomplete="email" required></label>
+          <label class="lg05-field"><span>Senha</span><input class="lg05-input" name="senha" type="password" autocomplete="new-password" minlength="8" required></label>
+          <label class="lg05-field"><span>Confirmar senha</span><input class="lg05-input" name="confirmarSenha" type="password" autocomplete="new-password" minlength="8" required></label>
+          <div class="lg05-actions"><button class="lg05-btn lg05-primary" type="submit">Criar conta</button><button class="lg05-btn lg05-secondary" id="lg05-back-login" type="button">Já tenho conta</button></div>
+          <div class="lg05-message" id="lg05-register-message" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+  <div class="lg05-note">LG05 · Cidade editorial</div>
+</main>
+<script>
+// O instalador configura o destino e a integração automaticamente.
+const DESTINO_APOS_LOGIN=window.CATALOGO_S_CONFIG?.auth?.afterLogin||'index.html';
+const ENDPOINT_LOGIN=window.CATALOGO_S_CONFIG?.auth?.loginEndpoint||'';
+const ENDPOINT_CADASTRO=window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint||'';
+const MODO_DEMONSTRACAO=window.self!==window.top;
+const shell=document.getElementById('lg05');
+const loginForm=document.getElementById('lg05-login-form');
+const registerForm=document.getElementById('lg05-register-form');
+const loginMessage=document.getElementById('lg05-login-message');
+const registerMessage=document.getElementById('lg05-register-message');
+const esperar=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+function mudarModo(destino){const cadastro=destino==='register';loginMessage.textContent='';registerMessage.textContent='';shell.classList.toggle('show-register',cadastro);shell.classList.toggle('show-login',!cadastro);setTimeout(()=>document.querySelector(cadastro?'#lg05-register-form input':'#lg05-login-form input')?.focus(),220)}
+document.getElementById('lg05-open-register').addEventListener('click',()=>mudarModo('register'));
+document.getElementById('lg05-back-login').addEventListener('click',()=>mudarModo('login'));
+async function postJSON(url,payload){const r=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await r.json().catch(()=>({}));if(!r.ok)throw new Error(data.message||'Não foi possível concluir.');return data}
+loginForm.addEventListener('submit',async e=>{e.preventDefault();loginMessage.classList.remove('error');loginMessage.textContent='Entrando...';const payload=Object.fromEntries(new FormData(loginForm));try{if(ENDPOINT_LOGIN)await postJSON(ENDPOINT_LOGIN,payload);if(MODO_DEMONSTRACAO&&!ENDPOINT_LOGIN){loginMessage.textContent='Preview: o DB01 será conectado pelo instalador.';return}location.href=DESTINO_APOS_LOGIN}catch(err){loginMessage.classList.add('error');loginMessage.textContent=err.message}});
+registerForm.addEventListener('submit',async e=>{e.preventDefault();registerMessage.classList.remove('error');const payload=Object.fromEntries(new FormData(registerForm));if(payload.senha!==payload.confirmarSenha){registerMessage.classList.add('error');registerMessage.textContent='As senhas não coincidem.';return}registerMessage.textContent='Criando conta...';try{if(ENDPOINT_CADASTRO)await postJSON(ENDPOINT_CADASTRO,payload);registerForm.reset();registerMessage.textContent='Conta criada.';await esperar(900);mudarModo('login')}catch(err){registerMessage.classList.add('error');registerMessage.textContent=err.message}});
+</script>
+</body>
+</html>
+'@
+
+$ErrorActionPreference = 'Stop'
+$Root = (Get-Location).Path
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Get-FullPath([string]$Relative) {
+    return [System.IO.Path]::GetFullPath((Join-Path $Root $Relative))
+}
+
+function Backup-File([string]$Relative) {
+    $full = Get-FullPath $Relative
+    if (-not (Test-Path -LiteralPath $full)) { return }
+
+    $backupDir = Get-FullPath '.catalogo-s/backups'
+    if (-not (Test-Path -LiteralPath $backupDir)) {
+        New-Item -ItemType Directory -Force -Path $backupDir | Out-Null
+    }
+
+    $stamp = Get-Date -Format 'yyyyMMdd-HHmmssfff'
+    $safe = $Relative -replace '[\\/:*?"<>|]', '__'
+    $destination = Join-Path $backupDir ($stamp + '__' + $safe + '.bak')
+    Copy-Item -LiteralPath $full -Destination $destination -Force
+    Write-Host "[Catálogo S] backup: $Relative"
+}
+
+function Write-TextFile([string]$Relative, [string]$Content, [switch]$SemBackup) {
+    $full = Get-FullPath $Relative
+    $directory = Split-Path -Parent $full
+
+    if ($directory -and -not (Test-Path -LiteralPath $directory)) {
+        New-Item -ItemType Directory -Force -Path $directory | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $full) {
+        $current = [System.IO.File]::ReadAllText($full)
+        if ($current -eq $Content) { return }
+        if (-not $SemBackup) { Backup-File $Relative }
+    }
+
+    [System.IO.File]::WriteAllText($full, $Content, $Utf8NoBom)
+    Write-Host "[Catálogo S] gravado: $Relative"
+}
+
+function Ensure-Slots([string]$Html) {
+    $menu = "<!-- CATALOGO-S:SLOT:MENU:START -->`r`n<!-- CATALOGO-S:SLOT:MENU:END -->"
+    $components = "<!-- CATALOGO-S:SLOT:COMPONENTES:START -->`r`n<!-- CATALOGO-S:SLOT:COMPONENTES:END -->"
+    $footer = "<!-- CATALOGO-S:SLOT:RODAPE:START -->`r`n<!-- CATALOGO-S:SLOT:RODAPE:END -->"
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:MENU:START') {
+        $Html = $Html -replace '(?i)<body([^>]*)>', ('<body$1>' + "`r`n" + $menu)
+    }
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:COMPONENTES:START') {
+        $Html = $Html -replace '(?i)</body>', ($components + "`r`n</body>")
+    }
+
+    if ($Html -notmatch 'CATALOGO-S:SLOT:RODAPE:START') {
+        $Html = $Html -replace '(?i)</body>', ($footer + "`r`n</body>")
+    }
+
+    return $Html
+}
+
+function Set-Slot([string]$Html, [string]$Name, [string]$Content) {
+    $escaped = [System.Text.RegularExpressions.Regex]::Escape($Name)
+    $pattern = '(?s)<!-- CATALOGO-S:SLOT:' + $escaped + ':START -->.*?<!-- CATALOGO-S:SLOT:' + $escaped + ':END -->'
+    $replacement = "<!-- CATALOGO-S:SLOT:$Name`:START -->`r`n$Content`r`n<!-- CATALOGO-S:SLOT:$Name`:END -->"
+    return [System.Text.RegularExpressions.Regex]::Replace($Html, $pattern, $replacement)
+}
+
+function Ensure-HostPage {
+    $index = Get-FullPath 'index.html'
+    if (-not (Test-Path -LiteralPath $index)) {
+        $shell = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Projeto</title></head><body></body></html>'
+        Write-TextFile 'index.html' (Ensure-Slots $shell) -SemBackup
+        return
+    }
+
+    $html = [System.IO.File]::ReadAllText($index)
+    $prepared = Ensure-Slots $html
+    if ($prepared -ne $html) {
+        Write-TextFile 'index.html' $prepared
+    }
+}
+
+function Rebuild-Components {
+    Ensure-HostPage
+    $index = Get-FullPath 'index.html'
+    $html = [System.IO.File]::ReadAllText($index)
+    $html = Ensure-Slots $html
+
+    $componentDir = Get-FullPath 'components/catalogo-s'
+    $sections = @()
+
+    if (Test-Path -LiteralPath $componentDir) {
+        $files = Get-ChildItem -LiteralPath $componentDir -Filter '*.html' -File | Sort-Object LastWriteTime, Name
+
+        foreach ($file in $files) {
+            $key = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+            $parts = $key -split '-'
+            $id = $parts[0].ToUpperInvariant()
+            $relative = 'components/catalogo-s/' + $file.Name
+            $sections += "<section id=`"catalogo-s-$key`" data-catalogo-s-instance=`"$key`" data-catalogo-s-model=`"$id`" style=`"width:100%;min-height:100vh;overflow:hidden`"><iframe src=`"$relative`" title=`"$id`" loading=`"lazy`" scrolling=`"no`" style=`"display:block;width:100%;height:100vh;border:0;overflow:hidden`"></iframe></section>"
+        }
+    }
+
+    $updated = Set-Slot $html 'COMPONENTES' ($sections -join "`r`n")
+    Write-TextFile 'index.html' $updated
+}
+
+# Normaliza páginas que no catálogo são armazenadas como fragmentos visuais.
+# Isso garante um <body> real para receber os slots locais do Catálogo S.
+if ($ConteudoModelo -notmatch '(?i)<body(?:\s|>)') {
+    $tituloSeguro = [System.Net.WebUtility]::HtmlEncode($ModeloNome)
+    $ConteudoModelo = '<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + $tituloSeguro + '</title><style>html,body{margin:0;min-height:100%;overflow-x:hidden}</style></head><body>' + $ConteudoModelo + '</body></html>'
+}
+
+if ($Papel -eq 'inicio') {
+    $ConteudoModelo = Ensure-Slots $ConteudoModelo
+}
+
+Write-TextFile $ArquivoAlvo $ConteudoModelo
+
+if ($Papel -eq 'inicio') {
+    Rebuild-Components
+}
+
+if ($Papel -eq 'login') {
+    $loginApi = Test-Path -LiteralPath (Get-FullPath 'api/auth/login.js')
+    $cadastroApi = Test-Path -LiteralPath (Get-FullPath 'api/auth/cadastro.js')
+
+    $loginEndpoint = ''
+    $cadastroEndpoint = ''
+    if ($loginApi -and $cadastroApi) {
+        $loginEndpoint = '/api/auth/login'
+        $cadastroEndpoint = '/api/auth/cadastro'
+    }
+
+    $config = "// Gerado localmente pelo Catálogo S.`r`nwindow.CATALOGO_S_CONFIG={auth:{afterLogin:'index.html',loginEndpoint:'$loginEndpoint',cadastroEndpoint:'$cadastroEndpoint'}};`r`n"
+    Write-TextFile 'assets/js/catalogo-s.config.js' $config
+}
+
+Write-Host ""
+Write-Host "[Catálogo S] $ModeloId — $ModeloNome instalado com sucesso."
+Write-Host "[Catálogo S] Nenhum arquivo foi baixado do GitHub."

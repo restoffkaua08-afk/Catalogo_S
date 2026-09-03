@@ -75,9 +75,8 @@ $ConteudoModelo = @'
   <div class="lg01-note">LG01 · Login lateral</div>
 </main>
 <script>
-// ===== EDITE AQUI: TELA APÓS O LOGIN =====
+// O instalador configura o destino e a integração automaticamente.
 const DESTINO_APOS_LOGIN=window.CATALOGO_S_CONFIG?.auth?.afterLogin||'index.html';
-// ===== EDITE AQUI: ENDPOINTS DO SEU BACKEND =====
 const ENDPOINT_LOGIN=window.CATALOGO_S_CONFIG?.auth?.loginEndpoint||'';
 const ENDPOINT_CADASTRO=window.CATALOGO_S_CONFIG?.auth?.cadastroEndpoint||'';
 const MODO_DEMONSTRACAO=window.self!==window.top;

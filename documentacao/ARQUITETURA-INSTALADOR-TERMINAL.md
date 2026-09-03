@@ -2,7 +2,7 @@
 
 ## Estado
 
-- Data: 2026-09-02
+- Data: 2026-09-03
 - Status: arquitetura pública migrada para PowerShell autocontido.
 - Dependência pública do GitHub: nenhuma.
 - Dependência pública de `npx`: nenhuma.
@@ -77,15 +77,15 @@ components/catalogo-s/<id>-<numero>.html
 
 O script recompõe o slot `COMPONENTES` usando os arquivos locais. Assim, substituir `I01` por `I02`, por exemplo, não exige consultar manifesto remoto nem recuperar componentes do GitHub.
 
-## LG01 ↔ DB01
+## LG01–LG05 ↔ DB01
 
-`LG01` usa:
+Todas as telas `LGxx` usam:
 
 ```text
 assets/js/catalogo-s.config.js
 ```
 
-Ao instalar `LG01`, o script verifica se os endpoints do `DB01` já existem. Ao instalar `DB01`, o script grava a configuração com os endpoints. Portanto as duas ordens continuam possíveis.
+Ao instalar qualquer uma das telas `LG01`–`LG05`, o script verifica se os endpoints do `DB01` já existem. Ao instalar `DB01`, o script grava a configuração com os endpoints. Portanto as duas ordens continuam possíveis e trocar somente a interface de login não duplica o banco.
 
 O `DB01` inclui no próprio script:
 

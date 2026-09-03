@@ -24,6 +24,31 @@ ROLE_BY_PREFIX = {
     'P': ('componente', 'pesquisa', ''),
 }
 
+SHARED_AUTH_LOGINS = ['LG01', 'LG02', 'LG03', 'LG04', 'LG05']
+
+NEW_LOGIN_MODELS = [
+    {
+        'id': 'LG02',
+        'nome': 'Login Central em Vidro com Cidade Noturna',
+        'caminho': 'frontend/LG02-Login-Central-em-Vidro-com-Cidade-Noturna/index.html',
+    },
+    {
+        'id': 'LG03',
+        'nome': 'Login Lateral em Vidro com Horizonte Natural',
+        'caminho': 'frontend/LG03-Login-Lateral-em-Vidro-com-Horizonte-Natural/index.html',
+    },
+    {
+        'id': 'LG04',
+        'nome': 'Login Submerso com Campos Lineares',
+        'caminho': 'frontend/LG04-Login-Submerso-com-Campos-Lineares/index.html',
+    },
+    {
+        'id': 'LG05',
+        'nome': 'Login Editorial Noturno com Campos Lineares',
+        'caminho': 'frontend/LG05-Login-Editorial-Noturno-com-Campos-Lineares/index.html',
+    },
+]
+
 
 def model_id(folder: Path):
     return folder.name.split('-', 1)[0].upper()
@@ -450,6 +475,9 @@ def build_registry(folders):
         if mode == 'pagina':
             item['target'] = target
             item['rotulo'] = {'inicio': 'Início', 'produtos': 'Produtos', 'login': 'Login'}.get(role, name)
+            if role == 'login':
+                item['backendCompativel'] = 'DB01'
+                item['contrato'] = 'auth-email-senha-v1'
         else:
             item['destino'] = 'inicio'
             item['altura'] = '100vh'
@@ -464,6 +492,8 @@ def build_registry(folders):
             'papel': 'auth-db',
             'modo': 'banco',
             'pareadoCom': 'LG01',
+            'interfacesCompativeis': SHARED_AUTH_LOGINS,
+            'contrato': 'auth-email-senha-v1',
             'schemaTemplate': 'backend/DB01-Banco-do-LG01/schema.sql',
             'instaladorPublico': 'backend/DB01-Banco-do-LG01/instalar.ps1',
             'arquivos': [
@@ -475,7 +505,7 @@ def build_registry(folders):
 
     return {
         'schema': 3,
-        'geradoEm': '2026-09-02',
+        'geradoEm': '2026-09-03',
         'instalacaoPublica': 'powershell-autocontido',
         'modelos': dict(sorted(models.items())),
     }
@@ -484,11 +514,23 @@ def build_registry(folders):
 def update_categories():
     path = ROOT / 'dados/categorias.json'
     data = json.loads(path.read_text(encoding='utf-8'))
-    data['versao'] = '3.0.0'
-    data['atualizadoEm'] = '2026-09-02'
+    data['versao'] = '3.1.0'
+    data['atualizadoEm'] = '2026-09-03'
     data['quantidade'] = len(data.get('categorias', []))
 
     for category in data.get('categorias', []):
+        if category.get('slug') == 'login':
+            category['descricao'] = 'Telas de login e cadastro independentes, todas compatíveis com o contrato compartilhado do DB01.'
+            existing = {item['id'] for item in category.get('itens', [])}
+            for model in NEW_LOGIN_MODELS:
+                if model['id'] not in existing:
+                    category['itens'].append({
+                        **model,
+                        'situacao': 'Candidato',
+                        'instalacao': 'PowerShell autocontido na demonstração',
+                    })
+        if category.get('slug') == 'banco-de-dados':
+            category['descricao'] = 'Contratos de dados reutilizáveis. O DB01 atende todas as interfaces LG01–LG05.'
         for item in category.get('itens', []):
             item.pop('comando', None)
             item['instalacao'] = 'PowerShell autocontido na demonstração'
@@ -512,7 +554,7 @@ O script:
 - cria backups em `.catalogo-s/backups/` antes de substituir arquivos;
 - mantém componentes repetíveis em `components/catalogo-s/`;
 - recompõe os componentes ao trocar a tela inicial;
-- conecta `LG01` e `DB01` quando os dois existem;
+- conecta qualquer tela `LG01`–`LG05` ao mesmo `DB01` quando os arquivos de backend existem;
 - não baixa nenhum arquivo do repositório durante a instalação.
 
 Cada modelo também guarda a mesma versão auditável em `instalar.ps1`.
@@ -575,7 +617,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - arquivos substituídos recebem backup em `.catalogo-s/backups/`;
 - componentes repetíveis ficam em `components/catalogo-s/`;
 - ao trocar a tela inicial, os componentes locais existentes são recompostos;
-- `LG01` e `DB01` detectam um ao outro pelos arquivos locais;
+- `LG01`–`LG05` detectam o `DB01` pelos mesmos arquivos locais;
 - credenciais reais continuam fora do frontend.
 
 ## Convenções principais
@@ -584,7 +626,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - `Lxx` → página de produtos → `produtos.html`
 - `LGxx` → login → `login.html`
 - `Exx`, `Cxx` e `Pxx` → componentes repetíveis
-- `DB01` → backend/banco pareado ao `LG01`
+- `DB01` → backend de autenticação compartilhado por `LG01`–`LG05`
 
 ## Demonstrações
 
@@ -601,7 +643,7 @@ A interface pública continua hospedada na Vercel. O GitHub permanece como fonte
 
 ## Estado
 
-- Data: 2026-09-02
+- Data: 2026-09-03
 - Status: arquitetura pública migrada para PowerShell autocontido.
 - Dependência pública do GitHub: nenhuma.
 - Dependência pública de `npx`: nenhuma.
@@ -676,15 +718,15 @@ components/catalogo-s/<id>-<numero>.html
 
 O script recompõe o slot `COMPONENTES` usando os arquivos locais. Assim, substituir `I01` por `I02`, por exemplo, não exige consultar manifesto remoto nem recuperar componentes do GitHub.
 
-## LG01 ↔ DB01
+## LG01–LG05 ↔ DB01
 
-`LG01` usa:
+Todas as telas `LGxx` usam:
 
 ```text
 assets/js/catalogo-s.config.js
 ```
 
-Ao instalar `LG01`, o script verifica se os endpoints do `DB01` já existem. Ao instalar `DB01`, o script grava a configuração com os endpoints. Portanto as duas ordens continuam possíveis.
+Ao instalar qualquer uma das telas `LG01`–`LG05`, o script verifica se os endpoints do `DB01` já existem. Ao instalar `DB01`, o script grava a configuração com os endpoints. Portanto as duas ordens continuam possíveis e trocar somente a interface de login não duplica o banco.
 
 O `DB01` inclui no próprio script:
 
@@ -748,6 +790,7 @@ for base in (ROOT / 'frontend',):
         name = ACTIVE_NAMES.get(mid, human_name(folder))
         mode, role, target = ROLE_BY_PREFIX[pref]
         source = block.read_text(encoding='utf-8')
+        (folder / 'bloco-pronto.txt').write_text(source, encoding='utf-8')
 
         if mode == 'pagina':
             install_script = page_ps_script(mid, name, role, target, source)
@@ -774,7 +817,7 @@ if db.exists():
         encoding='utf-8',
     )
     (db / 'LEIA-ME.txt').write_text(
-        readme('DB01', 'Banco do LG01', 'Backend pareado ao LG01'),
+        readme('DB01', 'Banco do LG01', 'Backend de autenticação compartilhado por LG01–LG05'),
         encoding='utf-8',
     )
 

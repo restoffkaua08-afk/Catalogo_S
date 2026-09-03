@@ -1,4 +1,4 @@
-DB01 — Banco do LG01
+LG05 — Login Editorial Noturno com Campos Lineares
 
 INSTALAÇÃO PÚBLICA
 Abra a demonstração do modelo, copie o bloco PowerShell completo e cole no PowerShell aberto na raiz do projeto.
@@ -14,4 +14,4 @@ ARQUIVO AUDITÁVEL
 instalar.ps1
 
 MODO
-Backend de autenticação compartilhado por LG01–LG05
+Página canônica

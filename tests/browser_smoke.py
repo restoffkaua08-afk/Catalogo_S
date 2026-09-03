@@ -179,18 +179,27 @@ def test_interaction(page, mid):
         page.wait_for_function("!document.querySelector('#l04-drawer').classList.contains('open')")
         return
 
-    if mid == 'LG01':
-        page.locator('#lg01-open-register').click()
-        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-register')", timeout=12000)
-        form = page.locator('#lg01-register-form')
+    if mid.startswith('LG'):
+        prefix = mid.lower()
+        page.locator(f'#{prefix}-open-register').click()
+        page.wait_for_function(
+            "selector => document.querySelector(selector)?.classList.contains('show-register')",
+            arg=f'#{prefix}',
+            timeout=12000,
+        )
+        form = page.locator(f'#{prefix}-register-form')
         form.locator('input[name="nome"]').fill('Pessoa Teste')
         form.locator('input[name="email"]').fill('teste@example.com')
         form.locator('input[name="senha"]').fill('SenhaTeste123')
         form.locator('input[name="confirmarSenha"]').fill('SenhaTeste456')
         form.locator('button[type="submit"]').click()
-        assert (page.locator('#lg01-register-message').text_content() or '').strip() == 'As senhas não coincidem.'
-        page.locator('#lg01-back-login').click()
-        page.wait_for_function("document.querySelector('#lg01')?.classList.contains('show-login')", timeout=12000)
+        assert (page.locator(f'#{prefix}-register-message').text_content() or '').strip() == 'As senhas não coincidem.'
+        page.locator(f'#{prefix}-back-login').click()
+        page.wait_for_function(
+            "selector => document.querySelector(selector)?.classList.contains('show-login')",
+            arg=f'#{prefix}',
+            timeout=12000,
+        )
 
 
 def direct_path_for(model):
@@ -283,7 +292,7 @@ def main():
         test_mobile_layout(browser)
         browser.close()
 
-    assert checked == len(MODELS) == 21, f'esperados 21 modelos, validados {checked}'
+    assert checked == len(MODELS) == 25, f'esperados 25 modelos, validados {checked}'
     print(f'Chromium: {checked} modelos, navegação, scroll único, responsividade, cópia e interações críticas validados.')
 
 

@@ -21,7 +21,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - arquivos substituídos recebem backup em `.catalogo-s/backups/`;
 - componentes repetíveis ficam em `components/catalogo-s/`;
 - ao trocar a tela inicial, os componentes locais existentes são recompostos;
-- `LG01` e `DB01` detectam um ao outro pelos arquivos locais;
+- `LG01`–`LG05` detectam o `DB01` pelos mesmos arquivos locais;
 - credenciais reais continuam fora do frontend.
 
 ## Convenções principais
@@ -30,7 +30,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - `Lxx` → página de produtos → `produtos.html`
 - `LGxx` → login → `login.html`
 - `Exx`, `Cxx` e `Pxx` → componentes repetíveis
-- `DB01` → backend/banco pareado ao `LG01`
+- `DB01` → backend de autenticação compartilhado por `LG01`–`LG05`
 
 ## Demonstrações
 

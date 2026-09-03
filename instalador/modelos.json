@@ -1,6 +1,6 @@
 {
   "schema": 3,
-  "geradoEm": "2026-09-02",
+  "geradoEm": "2026-09-03",
   "instalacaoPublica": "powershell-autocontido",
   "modelos": {
     "C01": {
@@ -43,6 +43,14 @@
       "papel": "auth-db",
       "modo": "banco",
       "pareadoCom": "LG01",
+      "interfacesCompativeis": [
+        "LG01",
+        "LG02",
+        "LG03",
+        "LG04",
+        "LG05"
+      ],
+      "contrato": "auth-email-senha-v1",
       "schemaTemplate": "backend/DB01-Banco-do-LG01/schema.sql",
       "instaladorPublico": "backend/DB01-Banco-do-LG01/instalar.ps1",
       "arquivos": [
@@ -201,7 +209,61 @@
       "template": "frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/bloco-pronto.html",
       "instaladorPublico": "frontend/LG01-Login-Lateral-com-Transicao-de-Cadastro/instalar.ps1",
       "target": "login.html",
-      "rotulo": "Login"
+      "rotulo": "Login",
+      "backendCompativel": "DB01",
+      "contrato": "auth-email-senha-v1"
+    },
+    "LG02": {
+      "id": "LG02",
+      "nome": "Login Central em Vidro com Cidade Noturna",
+      "tipo": "frontend",
+      "papel": "login",
+      "modo": "pagina",
+      "template": "frontend/LG02-Login-Central-em-Vidro-com-Cidade-Noturna/bloco-pronto.html",
+      "instaladorPublico": "frontend/LG02-Login-Central-em-Vidro-com-Cidade-Noturna/instalar.ps1",
+      "target": "login.html",
+      "rotulo": "Login",
+      "backendCompativel": "DB01",
+      "contrato": "auth-email-senha-v1"
+    },
+    "LG03": {
+      "id": "LG03",
+      "nome": "Login Lateral em Vidro com Horizonte Natural",
+      "tipo": "frontend",
+      "papel": "login",
+      "modo": "pagina",
+      "template": "frontend/LG03-Login-Lateral-em-Vidro-com-Horizonte-Natural/bloco-pronto.html",
+      "instaladorPublico": "frontend/LG03-Login-Lateral-em-Vidro-com-Horizonte-Natural/instalar.ps1",
+      "target": "login.html",
+      "rotulo": "Login",
+      "backendCompativel": "DB01",
+      "contrato": "auth-email-senha-v1"
+    },
+    "LG04": {
+      "id": "LG04",
+      "nome": "Login Submerso com Campos Lineares",
+      "tipo": "frontend",
+      "papel": "login",
+      "modo": "pagina",
+      "template": "frontend/LG04-Login-Submerso-com-Campos-Lineares/bloco-pronto.html",
+      "instaladorPublico": "frontend/LG04-Login-Submerso-com-Campos-Lineares/instalar.ps1",
+      "target": "login.html",
+      "rotulo": "Login",
+      "backendCompativel": "DB01",
+      "contrato": "auth-email-senha-v1"
+    },
+    "LG05": {
+      "id": "LG05",
+      "nome": "Login Editorial Noturno com Campos Lineares",
+      "tipo": "frontend",
+      "papel": "login",
+      "modo": "pagina",
+      "template": "frontend/LG05-Login-Editorial-Noturno-com-Campos-Lineares/bloco-pronto.html",
+      "instaladorPublico": "frontend/LG05-Login-Editorial-Noturno-com-Campos-Lineares/instalar.ps1",
+      "target": "login.html",
+      "rotulo": "Login",
+      "backendCompativel": "DB01",
+      "contrato": "auth-email-senha-v1"
     },
     "P01": {
       "id": "P01",

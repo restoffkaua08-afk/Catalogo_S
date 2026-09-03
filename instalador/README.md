@@ -11,7 +11,7 @@ O script:
 - cria backups em `.catalogo-s/backups/` antes de substituir arquivos;
 - mantém componentes repetíveis em `components/catalogo-s/`;
 - recompõe os componentes ao trocar a tela inicial;
-- conecta `LG01` e `DB01` quando os dois existem;
+- conecta qualquer tela `LG01`–`LG05` ao mesmo `DB01` quando os arquivos de backend existem;
 - não baixa nenhum arquivo do repositório durante a instalação.
 
 Cada modelo também guarda a mesma versão auditável em `instalar.ps1`.
