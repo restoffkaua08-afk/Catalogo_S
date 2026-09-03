@@ -34,7 +34,7 @@
 .lg02-message{min-height:18px;margin-top:7px;color:#f1dfc9;font-size:12px;text-align:center}.lg02-message.error{color:#ffd0d0}
 .lg02-note{position:absolute;right:20px;bottom:17px;color:rgba(255,255,255,.5);font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
 @media(max-height:820px) and (min-width:701px){.lg02{padding:12px}.lg02-card{transform:scale(.88)}}
-@media(max-width:700px){html,body{overflow:auto}.lg02{min-height:800px;padding:18px;overflow:visible}.lg02-card{min-height:760px;padding:28px 22px;border-radius:24px}.lg02-stage{min-height:640px}.lg02 h1{font-size:39px}}
+@media(max-width:700px){html,body{overflow:auto}.lg02{min-height:800px;padding:18px;overflow:hidden}.lg02-card{min-height:760px;padding:28px 22px;border-radius:24px}.lg02-stage{min-height:640px}.lg02 h1{font-size:39px}}
 @media(prefers-reduced-motion:reduce){.lg02-bg{animation:none}.lg02-view{transition:none}}
 </style>
 </head>
