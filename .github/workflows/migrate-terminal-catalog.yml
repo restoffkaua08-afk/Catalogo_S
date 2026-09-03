@@ -29,6 +29,28 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Corrige idempotência do gerador Fxx
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('tools/add_footer_models.py')
+          text=p.read_text(encoding='utf-8')
+          old="""    if 'F02-Rodape-Editorial-em-Faixas/instalar.ps1' not in text:
+                  if post_i02 not in text:
+                      raise RuntimeError('Âncora de troca F01/F02 não encontrada.')
+                  text = text.replace(post_i02, expanded, 1)
+          """
+          new="""    if 'F02-Rodape-Editorial-em-Faixas/instalar.ps1' not in text and post_i02 in text:
+                  text = text.replace(post_i02, expanded, 1)
+          """
+          if old in text:
+              p.write_text(text.replace(old,new,1),encoding='utf-8')
+              print('Gerador Fxx tornado idempotente.')
+          else:
+              print('Gerador Fxx já está idempotente ou não precisa de ajuste.')
+          PY
+
       - name: Gera modelos e instaladores
         run: |
           python tools/migrate_terminal_catalog.py
@@ -42,7 +64,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md README.md documentacao .github/workflows/teste-instalador.yml tests/browser_smoke.py
+          git add frontend backend/DB01-Banco-do-LG01 dados instalador/modelos.json instalador/README.md README.md documentacao .github/workflows/teste-instalador.yml tests/browser_smoke.py tools/add_footer_models.py
           if git diff --cached --quiet; then
             echo "Nenhuma alteração pendente."
           else
