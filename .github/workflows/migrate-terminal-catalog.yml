@@ -25,31 +25,22 @@ jobs:
   migrate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Corrige idempotência do gerador Fxx
+      - name: Torna o gerador Fxx independente do gate
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('tools/add_footer_models.py')
           text=p.read_text(encoding='utf-8')
-          old="""    if 'F02-Rodape-Editorial-em-Faixas/instalar.ps1' not in text:
-                  if post_i02 not in text:
-                      raise RuntimeError('Âncora de troca F01/F02 não encontrada.')
-                  text = text.replace(post_i02, expanded, 1)
-          """
-          new="""    if 'F02-Rodape-Editorial-em-Faixas/instalar.ps1' not in text and post_i02 in text:
-                  text = text.replace(post_i02, expanded, 1)
-          """
-          if old in text:
-              p.write_text(text.replace(old,new,1),encoding='utf-8')
-              print('Gerador Fxx tornado idempotente.')
+          pattern=r"def patch_tests\(\):\n[\s\S]*?\n\ndef generate_footers\(\):"
+          replacement="def patch_tests():\n    # O gate é mantido em .github/workflows/teste-instalador.yml.\n    return\n\n\ndef generate_footers():"
+          updated,count=re.subn(pattern,replacement,text,count=1)
+          if count:
+              p.write_text(updated,encoding='utf-8')
+              print('Responsabilidade de testes removida do gerador Fxx.')
           else:
-              print('Gerador Fxx já está idempotente.')
+              print('Gerador Fxx já não edita o gate.')
           PY
 
       - name: Gera modelos e instaladores
