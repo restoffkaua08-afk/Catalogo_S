@@ -1,0 +1,32 @@
+<footer id="catalogo-f01" data-catalogo-s-model="F01">
+<style>
+#catalogo-f01{--bg:#0b0d11;--panel:#11151b;--text:#f4f1e9;--muted:#9ba2ad;--line:#ffffff18;--accent:#d9b779;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+#catalogo-f01 *{box-sizing:border-box}#catalogo-f01 a{color:inherit;text-decoration:none}#catalogo-f01 a:hover{color:var(--accent)}
+#catalogo-f01 .f01-wrap{width:min(1240px,calc(100% - 40px));margin:auto;padding:64px 0 26px}
+#catalogo-f01 .f01-main{display:grid;grid-template-columns:minmax(250px,1.35fr) repeat(4,minmax(120px,.7fr));gap:42px;padding-bottom:46px;border-bottom:1px solid var(--line)}
+#catalogo-f01 .f01-brand{max-width:330px}#catalogo-f01 .f01-logo{display:flex;align-items:center;gap:12px;margin-bottom:18px;font:600 24px/1 Georgia,serif;letter-spacing:-.02em}
+#catalogo-f01 .f01-mark{width:36px;height:36px;display:grid;place-items:center;border:1px solid #d9b77966;border-radius:10px;background:linear-gradient(145deg,#d9b7791c,#ffffff08);color:var(--accent);font:bold 13px Arial;box-shadow:inset 0 1px #ffffff1f}
+#catalogo-f01 .f01-brand p{margin:0;color:var(--muted);font-size:13px;line-height:1.75}
+#catalogo-f01 .f01-col h3{margin:2px 0 17px;color:#fff;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+#catalogo-f01 .f01-col ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}#catalogo-f01 .f01-col a{color:#b8bec7;font-size:13px;transition:color .2s ease}
+#catalogo-f01 .f01-contact{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;padding:22px 0;border-bottom:1px solid var(--line)}
+#catalogo-f01 .f01-contact strong{font-size:12px}#catalogo-f01 .f01-contact span{color:var(--muted);font-size:12px}
+#catalogo-f01 .f01-social{display:flex;gap:8px}#catalogo-f01 .f01-social a{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;color:#dfe3e8;font-size:10px;font-weight:900;transition:.2s ease}
+#catalogo-f01 .f01-social a:hover{transform:translateY(-2px);border-color:#d9b77977}
+#catalogo-f01 .f01-bottom{display:flex;justify-content:space-between;gap:20px;padding-top:24px;color:#727985;font-size:11px}
+#catalogo-f01 .f01-bottom nav{display:flex;flex-wrap:wrap;gap:20px}
+@media(max-width:900px){#catalogo-f01 .f01-main{grid-template-columns:1.2fr 1fr 1fr}#catalogo-f01 .f01-brand{grid-column:1/-1;max-width:540px}}
+@media(max-width:620px){#catalogo-f01 .f01-wrap{width:min(100% - 28px,1240px);padding-top:44px}#catalogo-f01 .f01-main{grid-template-columns:1fr 1fr;gap:32px 22px}#catalogo-f01 .f01-brand{grid-column:1/-1}#catalogo-f01 .f01-bottom{flex-direction:column}}
+</style>
+<div class="f01-wrap">
+  <div class="f01-main">
+    <section class="f01-brand"><div class="f01-logo"><span class="f01-mark">S</span><span>Sua Marca</span></div><p>Uma descrição curta e profissional da empresa, produto ou projeto. Use este espaço para reforçar posicionamento e confiança.</p></section>
+    <nav class="f01-col"><h3>Empresa</h3><ul><li><a href="#">Sobre</a></li><li><a href="#">Carreiras</a></li><li><a href="#">Imprensa</a></li><li><a href="#">Contato</a></li></ul></nav>
+    <nav class="f01-col"><h3>Produto</h3><ul><li><a href="#">Recursos</a></li><li><a href="#">Integrações</a></li><li><a href="#">Preços</a></li><li><a href="#">Atualizações</a></li></ul></nav>
+    <nav class="f01-col"><h3>Suporte</h3><ul><li><a href="#">Central de ajuda</a></li><li><a href="#">Documentação</a></li><li><a href="#">Status</a></li><li><a href="#">Comunidade</a></li></ul></nav>
+    <nav class="f01-col"><h3>Legal</h3><ul><li><a href="#">Privacidade</a></li><li><a href="#">Termos</a></li><li><a href="#">Cookies</a></li><li><a href="#">Licenças</a></li></ul></nav>
+  </div>
+  <div class="f01-contact"><div><strong>Atendimento</strong> <span>contato@suaempresa.com · +55 (31) 0000-0000</span></div><div class="f01-social"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="LinkedIn">IN</a><a href="#" aria-label="YouTube">YT</a><a href="#" aria-label="GitHub">GH</a></div></div>
+  <div class="f01-bottom"><span>© 2026 Sua Marca. Todos os direitos reservados.</span><nav><a href="#">Acessibilidade</a><a href="#">Preferências</a><a href="#">Mapa do site</a></nav></div>
+</div>
+</footer>

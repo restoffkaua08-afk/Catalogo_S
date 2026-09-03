@@ -1,0 +1,22 @@
+F01 — Rodapé Institucional Sólido
+
+INSTALAÇÃO PÚBLICA
+Abra index.html no Catálogo S, clique em “Copiar código PowerShell” e cole o bloco inteiro no PowerShell aberto na raiz do projeto.
+
+O instalador:
+- é autocontido;
+- não usa npx, git clone ou GitHub;
+- grava o rodapé ativo em components/catalogo-s/rodape/ativo.html;
+- injeta o modelo no slot CATALOGO-S:SLOT:RODAPE;
+- cria backup antes de substituir arquivo existente;
+- mantém apenas um Fxx ativo por site.
+
+ARQUIVOS
+bloco-pronto.html
+bloco-pronto.txt
+index.html
+instalar.ps1
+LEIA-ME.txt
+
+STATUS
+Candidato — aguarda aprovação explícita de Kauã.
