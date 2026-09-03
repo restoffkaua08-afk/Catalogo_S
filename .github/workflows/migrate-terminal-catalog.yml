@@ -1,6 +1,5 @@
 name: Geração PowerShell autocontida
-# SOBxx pipeline integrado em 2026-09-03
-# Gate de 35 modelos estabilizado.
+# Pipeline integrado para Fxx, SOBxx e CTxx.
 
 on:
   push:
@@ -8,6 +7,7 @@ on:
       - 'tools/migrate_terminal_catalog.py'
       - 'tools/add_footer_models.py'
       - 'tools/add_about_models.py'
+      - 'tools/add_contact_models.py'
       - 'tools/postprocess_powershell_installers.py'
       - 'frontend/**/bloco-pronto.html'
       - 'frontend/**/bloco-pronto.txt'
@@ -53,6 +53,7 @@ jobs:
           python tools/migrate_terminal_catalog.py
           python tools/add_footer_models.py
           python tools/add_about_models.py
+          python tools/add_contact_models.py
           python tools/postprocess_powershell_installers.py
 
       - name: Publica arquivos gerados
@@ -65,7 +66,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nenhuma alteração pendente."
           else
-            git commit -m "Gera catálogo PowerShell com Fxx e SOBxx"
+            git commit -m "Gera catálogo PowerShell com Fxx, SOBxx e CTxx"
             git push
           fi
 
