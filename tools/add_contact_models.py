@@ -11,7 +11,9 @@ CONTACTS = [
 ]
 FORBIDDEN=['npx ','github.com/','api.github.com','raw.githubusercontent.com','git clone','invoke-webrequest','invoke-restmethod']
 
-INSTALLER_TEMPLATE = '''$ModeloId='{mid}'
+INSTALLER_TEMPLATE = '''# Normaliza páginas que no catálogo são armazenadas como fragmentos visuais.
+# CTxx já fornece um documento HTML completo para a página canônica contato.html.
+$ModeloId='{mid}'
 $ModeloNome='{name}'
 $Payload='{payload}'
 $ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
