@@ -31,7 +31,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Torna o gerador Fxx independente do gate
+      - name: Torna geradores idempotentes
         shell: bash
         run: |
           python - <<'PY'
@@ -44,9 +44,16 @@ jobs:
           updated,count=re.subn(pattern,replacement,text,count=1)
           if count:
               p.write_text(updated,encoding='utf-8')
-              print('Responsabilidade de testes removida do gerador Fxx.')
+
+          p=Path('tools/add_menu_models.py')
+          text=p.read_text(encoding='utf-8')
+          old="""def installer(m, source):\n    payload = base64.b64encode(gzip.compress(source.encode('utf-8'), 9)).decode()\n    return INSTALLER.format(mid=m['id'], name=m['nome'], part=m['parte'], payload=payload, autojs=AUTO_LINK_JS)\n"""
+          new="""def installer(m, source):\n    payload = base64.b64encode(gzip.compress(source.encode('utf-8'), 9)).decode()\n    template = INSTALLER.replace('{{', '{').replace('}}', '}')\n    return template.replace('{mid}', m['id']).replace('{name}', m['nome']).replace('{part}', m['parte']).replace('{payload}', payload).replace('{autojs}', AUTO_LINK_JS)\n"""
+          if old in text:
+              p.write_text(text.replace(old,new,1),encoding='utf-8')
+              print('Gerador NSxx/NLxx corrigido para tokens explícitos.')
           else:
-              print('Gerador Fxx já não edita o gate.')
+              print('Gerador NSxx/NLxx já usa tokens explícitos.')
           PY
 
       - name: Gera modelos e instaladores
