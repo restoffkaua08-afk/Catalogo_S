@@ -15,7 +15,7 @@ $ConteudoModelo = @'
   --photo:url('https://images.unsplash.com/photo-1674759690830-4d6013da1449?auto=format&fit=crop&w=2400&q=88');
   --ease:cubic-bezier(.16,1,.3,1)
 }
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#07090d;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}body{min-height:100svh}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;overflow:hidden;background:#07090d;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}body{min-height:100svh}
 .lg02{position:relative;isolation:isolate;min-height:100svh;display:grid;place-items:center;overflow:hidden;padding:32px}
 .lg02-bg{position:absolute;z-index:-3;inset:-24px;background-image:linear-gradient(180deg,rgba(4,7,13,.16),rgba(4,7,13,.5)),var(--photo);background-position:center;background-size:cover;filter:saturate(.92) contrast(1.03);transform:scale(1.03);animation:lg02-drift 18s ease-in-out infinite alternate}
 .lg02::before{content:"";position:absolute;z-index:-2;inset:0;background:radial-gradient(circle at 22% 78%,rgba(255,169,75,.22),transparent 27%),radial-gradient(circle at 78% 24%,rgba(255,205,132,.12),transparent 24%),linear-gradient(90deg,rgba(3,5,9,.28),transparent 45%,rgba(3,5,9,.24))}
@@ -39,7 +39,7 @@ $ConteudoModelo = @'
 .lg02-message{min-height:18px;margin-top:7px;color:#f1dfc9;font-size:12px;text-align:center}.lg02-message.error{color:#ffd0d0}
 .lg02-note{position:absolute;right:20px;bottom:17px;color:rgba(255,255,255,.5);font-size:9px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
 @media(max-height:820px) and (min-width:701px){.lg02{padding:12px}.lg02-card{transform:scale(.88)}}
-@media(max-width:700px){.lg02{min-height:800px;padding:18px;overflow:visible}.lg02-card{min-height:760px;padding:28px 22px;border-radius:24px}.lg02-stage{min-height:640px}.lg02 h1{font-size:39px}}
+@media(max-width:700px){html,body{overflow:auto}.lg02{min-height:800px;padding:18px;overflow:visible}.lg02-card{min-height:760px;padding:28px 22px;border-radius:24px}.lg02-stage{min-height:640px}.lg02 h1{font-size:39px}}
 @media(prefers-reduced-motion:reduce){.lg02-bg{animation:none}.lg02-view{transition:none}}
 </style>
 <script src="assets/js/catalogo-s.config.js"></script>
