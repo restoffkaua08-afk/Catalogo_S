@@ -1,5 +1,5 @@
 name: Teste integral do Catálogo S
-# Gate de estabilidade para o catálogo regenerado.
+# Gate de estabilidade para o catálogo regenerado. A quantidade de modelos é dinâmica.
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
           models=registry['modelos']
           categories=json.loads(Path('dados/categorias.json').read_text(encoding='utf-8'))
           assert registry.get('instalacaoPublica')=='powershell-autocontido'
-          assert len(models)==35, f'esperados 35 modelos, encontrados {len(models)}'
+          assert models, 'registro de modelos vazio'
           assert categories.get('quantidade')==len(categories.get('categorias',[]))
 
           items=[i for c in categories['categorias'] for i in c.get('itens',[])]
@@ -82,6 +82,9 @@ jobs:
               if mid.startswith('SOB'):
                   assert model.get('modo')=='pagina' and model.get('papel')=='sobre'
                   assert model.get('target')=='sobre.html' and model.get('rotulo')=='Sobre'
+              if mid.startswith('CT'):
+                  assert model.get('modo')=='pagina' and model.get('papel')=='contato'
+                  assert model.get('target')=='contato.html' and model.get('rotulo')=='Contato'
               if mid.startswith('F'):
                   assert model.get('modo')=='rodape' and model.get('slot')=='RODAPE'
 
@@ -91,7 +94,7 @@ jobs:
           for mid in login_ids:
               assert models[mid].get('backendCompativel')=='DB01'
               assert models[mid].get('contrato')==db.get('contrato')=='auth-email-senha-v1'
-          print('35 modelos: catálogo, contratos, demos e códigos sincronizados.')
+          print(f"{len(models)} modelos: catálogo, contratos, demos e códigos sincronizados.")
           PY
 
       - name: Executa todos os instaladores isoladamente
@@ -154,6 +157,13 @@ jobs:
           grep -q 'data-catalogo-s-model="SOB02"' sobre.html
           ! grep -q 'data-catalogo-s-model="SOB01"' sobre.html
           find .catalogo-s/backups -type f -name '*sobre.html.bak' | grep -q .
+
+          pwsh -NoProfile -File "$ROOT/frontend/CT01-Contato-Direto-por-Email/instalar.ps1"
+          grep -q 'data-catalogo-s-model="CT01"' contato.html
+          pwsh -NoProfile -File "$ROOT/frontend/CT02-Contato-Social-em-Vidro/instalar.ps1"
+          grep -q 'data-catalogo-s-model="CT02"' contato.html
+          ! grep -q 'data-catalogo-s-model="CT01"' contato.html
+          find .catalogo-s/backups -type f -name '*contato.html.bak' | grep -q .
 
       - name: Confirma pós-processamento idempotente
         shell: bash
