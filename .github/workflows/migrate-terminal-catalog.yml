@@ -57,3 +57,5 @@ jobs:
           # Por isso o gate é disparado explicitamente após a regeneração/publicação.
           gh workflow run teste-instalador.yml --ref "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY"
           echo "Gate de estabilidade solicitado para $GITHUB_REF_NAME."
+
+# trigger: geração dos rodapés F01-F05
