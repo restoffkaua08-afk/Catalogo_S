@@ -15,7 +15,7 @@ $ConteudoModelo = @'
   --photo:url('https://images.unsplash.com/photo-1579970521525-188aaf56351c?auto=format&fit=crop&w=2400&q=90');
   --move:1.7s;--ease:cubic-bezier(.62,0,.14,1)
 }
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#dfe5e7;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}body{min-height:100svh;overflow:hidden}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;overflow:hidden;background:#dfe5e7;color:var(--ink);font-family:Arial,Helvetica,sans-serif}button,input{font:inherit}body{min-height:100svh}
 .lg03{position:relative;isolation:isolate;min-height:100svh;overflow:hidden;background:#dfe4e6}
 .lg03-landscape{position:absolute;z-index:-3;inset:0;background-image:linear-gradient(180deg,#dfe4e6 0 24%,rgba(223,228,230,.9) 32%,rgba(223,228,230,.3) 47%,rgba(223,228,230,0) 61%),linear-gradient(180deg,transparent 52%,rgba(3,30,37,.16)),var(--photo);background-size:cover;background-position:center 56%;transform:scale(1.035);transition:transform var(--move) var(--ease)}
 .lg03.register-side .lg03-landscape{transform:scale(1.07) translate3d(-1.5%,0,0)}
@@ -36,7 +36,7 @@ $ConteudoModelo = @'
 .lg03-message{min-height:18px;margin-top:8px;color:#3f6168;font-size:12px}.lg03-message.error{color:#8f2430}
 .lg03-note{position:absolute;z-index:3;right:28px;bottom:23px;color:rgba(255,255,255,.76);text-shadow:0 1px 14px rgba(0,0,0,.32);font-size:9px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}
 @media(max-height:760px) and (min-width:821px){.lg03-glass{top:3vh;bottom:3vh}.lg03-view{inset:26px 46px}.lg03 h1{font-size:45px}.lg03-lead{margin-bottom:17px}.lg03-form{gap:9px}.lg03-input,.lg03-btn{height:46px;min-height:46px}}
-@media(max-width:820px){body{overflow:auto}.lg03{min-height:820px}.lg03-landscape{background-position:62% center}.lg03-glass,.lg03.register-side .lg03-glass{position:relative;top:auto;bottom:auto;left:auto;width:calc(100% - 28px);min-height:770px;margin:14px;transform:none;border-radius:28px}.lg03-view{inset:38px 24px}.lg03-actions{grid-template-columns:1fr}.lg03 h1{font-size:46px}.lg03-note{right:24px;bottom:24px}}
+@media(max-width:820px){html,body{overflow:auto}.lg03{min-height:820px}.lg03-landscape{background-position:62% center}.lg03-glass,.lg03.register-side .lg03-glass{position:relative;top:auto;bottom:auto;left:auto;width:calc(100% - 28px);min-height:770px;margin:14px;transform:none;border-radius:28px}.lg03-view{inset:38px 24px}.lg03-actions{grid-template-columns:1fr}.lg03 h1{font-size:46px}.lg03-note{right:24px;bottom:24px}}
 @media(prefers-reduced-motion:reduce){.lg03-landscape,.lg03-glass,.lg03-view{transition:none}}
 </style>
 <script src="assets/js/catalogo-s.config.js"></script>
