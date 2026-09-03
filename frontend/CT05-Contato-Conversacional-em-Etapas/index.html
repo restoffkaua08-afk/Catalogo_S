@@ -1,0 +1,79 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CT05 — Contato Conversacional em Etapas</title><style>*{box-sizing:border-box}html,body{margin:0;background:#08090c;color:#f7f3e9;font-family:Arial,Helvetica,sans-serif;overflow-x:hidden}.preview{min-height:100svh;background:#e8ebef}.preview iframe{display:block;width:100%;height:100svh;border:0;overflow:hidden}.install{min-height:70svh;display:grid;place-items:center;padding:54px 22px;border-top:1px solid #ffffff14}.box{width:min(1180px,100%)}.head{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:15px}h1{margin:0;font:500 clamp(25px,3.4vw,42px)/1.05 Georgia,serif}button{border:1px solid #ffffff26;background:#15181e;color:#f7f3e9;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}pre{margin:0;max-height:72svh;overflow:auto;border:1px solid #ffffff1a;border-radius:16px;background:#0b0d11;padding:22px;color:#ece8dd;font:13px/1.58 Consolas,monospace;white-space:pre}.back{position:fixed;z-index:50;left:16px;top:16px;width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:#08090cb3;border:1px solid #ffffff24;color:#fff;text-decoration:none;font-size:21px;backdrop-filter:blur(12px)}@media(max-width:600px){.head{align-items:flex-start;flex-direction:column}button{width:100%}pre{font-size:11px}}</style>
+<style id="catalogo-preview-stability">
+html,body{overflow-x:hidden!important}
+.preview{height:auto!important;min-height:100svh;overflow:visible!important;max-width:100%}
+.preview iframe{display:block;width:100%;max-width:100%;height:100svh;border:0;overflow:hidden;background:#050607}
+.install,.box,pre{min-width:0;max-width:100%}
+</style>
+</head><body><a class="back" href="../../index.html#categoria=tela-contato" aria-label="Voltar">←</a><section class="preview"><iframe src="bloco-pronto.html" title="Demonstração CT05" scrolling="no"></iframe></section><section class="install"><div class="box"><div class="head"><h1>CT05 — Contato Conversacional em Etapas</h1><button id="copy" type="button">Copiar código PowerShell</button></div><pre id="command"># Normaliza páginas que no catálogo são armazenadas como fragmentos visuais.
+# CTxx já fornece um documento HTML completo para a página canônica contato.html.
+$ModeloId=&#x27;CT05&#x27;
+$ModeloNome=&#x27;Contato Conversacional em Etapas&#x27;
+$Payload=&#x27;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&#x27;
+$ms=New-Object IO.MemoryStream(,[Convert]::FromBase64String($Payload))
+$gz=New-Object IO.Compression.GzipStream($ms,[IO.Compression.CompressionMode]::Decompress)
+$sr=New-Object IO.StreamReader($gz,[Text.Encoding]::UTF8)
+$ConteudoModelo=$sr.ReadToEnd();$sr.Dispose();$gz.Dispose();$ms.Dispose()
+$ErrorActionPreference=&#x27;Stop&#x27;
+$Root=(Get-Location).Path
+$Utf8=New-Object System.Text.UTF8Encoding($false)
+function Full([string]$r){[IO.Path]::GetFullPath((Join-Path $Root $r))}
+function Backup([string]$r){$p=Full $r;if(!(Test-Path -LiteralPath $p)){return};$bd=Full &#x27;.catalogo-s/backups&#x27;;New-Item -ItemType Directory -Force -Path $bd|Out-Null;$safe=$r-replace&#x27;[\/:*?&quot;&lt;&gt;|]&#x27;,&#x27;__&#x27;;Copy-Item -LiteralPath $p -Destination (Join-Path $bd ((Get-Date -Format &#x27;yyyyMMdd-HHmmssfff&#x27;)+&#x27;__&#x27;+$safe+&#x27;.bak&#x27;)) -Force}
+function Put([string]$r,[string]$c){$p=Full $r;$d=Split-Path -Parent $p;if($d-and!(Test-Path -LiteralPath $d)){New-Item -ItemType Directory -Force -Path $d|Out-Null};if(Test-Path -LiteralPath $p){$old=[IO.File]::ReadAllText($p);if($old-eq$c){return};Backup $r};[IO.File]::WriteAllText($p,$c,$Utf8)}
+if($env:CATALOGO_S_CONTACT_EMAIL){$e=$env:CATALOGO_S_CONTACT_EMAIL.Trim();if($e){$ConteudoModelo=[Text.RegularExpressions.Regex]::Replace($ConteudoModelo,&#x27;[A-Za-z]+@empresa\.com&#x27;,[Text.RegularExpressions.MatchEvaluator]{param($m)$e})}}
+if($env:CATALOGO_S_CONTACT_ENDPOINT){$e=$env:CATALOGO_S_CONTACT_ENDPOINT.Trim();if($e){$s=[System.Net.WebUtility]::HtmlEncode($e);$ConteudoModelo=$ConteudoModelo.Replace(&#x27;data-contact-endpoint=&quot;&quot;&#x27;,&#x27;data-contact-endpoint=&quot;&#x27;+$s+&#x27;&quot;&#x27;)}}
+if($env:CATALOGO_S_WHATSAPP){$ConteudoModelo=$ConteudoModelo.Replace(&#x27;https://wa.me/5500000000000&#x27;,$env:CATALOGO_S_WHATSAPP.Trim())}
+if($env:CATALOGO_S_INSTAGRAM){$ConteudoModelo=$ConteudoModelo.Replace(&#x27;https://instagram.com/&#x27;,$env:CATALOGO_S_INSTAGRAM.Trim())}
+if($env:CATALOGO_S_FACEBOOK){$ConteudoModelo=$ConteudoModelo.Replace(&#x27;https://facebook.com/&#x27;,$env:CATALOGO_S_FACEBOOK.Trim())}
+Put &#x27;contato.html&#x27; $ConteudoModelo
+Write-Host &quot;[Catálogo S] $ModeloId — $ModeloNome instalado em contato.html.&quot;
+Write-Host &#x27;[Catálogo S] CTxx substitui somente contato.html e cria backup quando necessário.&#x27;
+Write-Host &#x27;[Catálogo S] Nenhum arquivo foi baixado do GitHub.&#x27;
+</pre></div></section><script>const b=document.getElementById('copy'),c=document.getElementById('command');b.onclick=async()=>{try{await navigator.clipboard.writeText(c.textContent)}catch{const r=document.createRange();r.selectNodeContents(c);const s=getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges()}b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar código PowerShell',1200)}</script>
+<script id="catalogo-preview-stability-script">
+(()=>{
+  const preview=document.querySelector('.preview');
+  const frame=preview?.querySelector('iframe');
+  if(!preview||!frame)return;
+  frame.setAttribute('scrolling','no');
+  let resizeTimer=0;
+  const fit=()=>{
+    try{
+      const doc=frame.contentDocument;
+      if(!doc)return;
+      const root=doc.documentElement;
+      const body=doc.body;
+      root.style.margin='0';
+      root.style.width='100%';
+      root.style.overflowX='hidden';
+      if(body){
+        body.style.margin='0';
+        body.style.width='100%';
+        body.style.overflowX='hidden';
+      }
+      const viewport=Math.max(window.innerHeight||0,document.documentElement.clientHeight||0,1);
+      frame.style.height=viewport+'px';
+      preview.style.height=viewport+'px';
+      requestAnimationFrame(()=>{
+        const natural=Math.max(viewport,root.scrollHeight,body?.scrollHeight||0);
+        const height=Math.min(natural,12000);
+        frame.style.height=height+'px';
+        preview.style.height=height+'px';
+        root.style.overflowY='hidden';
+        if(body)body.style.overflowY='hidden';
+      });
+    }catch(_error){}
+  };
+  frame.addEventListener('load',()=>{
+    fit();
+    setTimeout(fit,80);
+    setTimeout(fit,320);
+  });
+  window.addEventListener('resize',()=>{
+    clearTimeout(resizeTimer);
+    resizeTimer=setTimeout(fit,100);
+  });
+  if(frame.contentDocument?.readyState==='complete')fit();
+})();
+</script>
+</body></html>

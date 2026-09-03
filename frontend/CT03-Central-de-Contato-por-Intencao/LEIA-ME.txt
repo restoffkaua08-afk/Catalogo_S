@@ -1,0 +1,17 @@
+CT03 — Central de Contato por Intenção
+
+INSTALAÇÃO PÚBLICA
+Copie o PowerShell exibido na demonstração e cole na raiz do projeto.
+
+COMPORTAMENTO
+- instala/substitui contato.html;
+- cria backup antes de substituir;
+- outro CTxx substitui apenas contato.html;
+- sem npx, git clone ou download remoto.
+
+CONFIGURAÇÃO OPCIONAL SEM EDITAR HTML
+CATALOGO_S_CONTACT_EMAIL
+CATALOGO_S_CONTACT_ENDPOINT
+CATALOGO_S_WHATSAPP
+CATALOGO_S_INSTAGRAM
+CATALOGO_S_FACEBOOK

@@ -179,6 +179,37 @@ def test_interaction(page, mid):
         page.wait_for_function("!document.querySelector('#l04-drawer').classList.contains('open')")
         return
 
+    if mid == 'CT01':
+        page.locator('#ct01-name').fill('Pessoa Teste')
+        page.locator('#ct01-email').fill('teste@example.com')
+        page.locator('#ct01-message').fill('Mensagem de teste')
+        page.locator('#ct01-form button[type="submit"]').click()
+        page.wait_for_function("document.querySelector('#ct01-status')?.textContent.length > 0")
+        return
+    if mid == 'CT02':
+        assert page.locator('.stack .card').count() == 4
+        return
+    if mid == 'CT03':
+        page.locator('.route').nth(1).click()
+        page.wait_for_function("document.querySelector('#ct03-panel h2')?.textContent.includes('Suporte')")
+        return
+    if mid == 'CT04':
+        page.locator('#ct04-name').fill('Pessoa Teste')
+        page.locator('#ct04-email').fill('teste@example.com')
+        page.locator('#ct04-message').fill('Mensagem de teste')
+        page.locator('#ct04-form button[type="submit"]').click()
+        page.wait_for_function("document.querySelector('#ct04-state')?.textContent.includes('preparada')")
+        return
+    if mid == 'CT05':
+        page.locator('.choice').first.click()
+        page.locator('#ct05-name').fill('Pessoa Teste')
+        page.locator('#ct05-email').fill('teste@example.com')
+        page.locator('.step.active .next').click()
+        page.locator('#ct05-message').fill('Mensagem de teste')
+        page.locator('.step.active .next').click()
+        page.locator('.step[data-step="3"].active').wait_for(timeout=3000)
+        return
+
     if mid.startswith('LG'):
         prefix = mid.lower()
         page.locator(f'#{prefix}-open-register').click()
@@ -292,7 +323,7 @@ def main():
         test_mobile_layout(browser)
         browser.close()
 
-    assert checked == len(MODELS) == 35, f'esperados 35 modelos, validados {checked}'
+    assert checked == len(MODELS), f'validados {checked} de {len(MODELS)} modelos'
     print(f'Chromium: {checked} modelos, navegação, scroll único, responsividade, cópia e interações críticas validados.')
 
 

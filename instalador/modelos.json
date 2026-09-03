@@ -36,6 +36,61 @@
       "destino": "inicio",
       "altura": "100vh"
     },
+    "CT01": {
+      "id": "CT01",
+      "nome": "Contato Direto por E-mail",
+      "tipo": "frontend",
+      "papel": "contato",
+      "modo": "pagina",
+      "template": "frontend/CT01-Contato-Direto-por-Email/bloco-pronto.html",
+      "instaladorPublico": "frontend/CT01-Contato-Direto-por-Email/instalar.ps1",
+      "target": "contato.html",
+      "rotulo": "Contato"
+    },
+    "CT02": {
+      "id": "CT02",
+      "nome": "Contato Social em Vidro",
+      "tipo": "frontend",
+      "papel": "contato",
+      "modo": "pagina",
+      "template": "frontend/CT02-Contato-Social-em-Vidro/bloco-pronto.html",
+      "instaladorPublico": "frontend/CT02-Contato-Social-em-Vidro/instalar.ps1",
+      "target": "contato.html",
+      "rotulo": "Contato"
+    },
+    "CT03": {
+      "id": "CT03",
+      "nome": "Central de Contato por Intenção",
+      "tipo": "frontend",
+      "papel": "contato",
+      "modo": "pagina",
+      "template": "frontend/CT03-Central-de-Contato-por-Intencao/bloco-pronto.html",
+      "instaladorPublico": "frontend/CT03-Central-de-Contato-por-Intencao/instalar.ps1",
+      "target": "contato.html",
+      "rotulo": "Contato"
+    },
+    "CT04": {
+      "id": "CT04",
+      "nome": "Contato Bento com Disponibilidade",
+      "tipo": "frontend",
+      "papel": "contato",
+      "modo": "pagina",
+      "template": "frontend/CT04-Contato-Bento-com-Disponibilidade/bloco-pronto.html",
+      "instaladorPublico": "frontend/CT04-Contato-Bento-com-Disponibilidade/instalar.ps1",
+      "target": "contato.html",
+      "rotulo": "Contato"
+    },
+    "CT05": {
+      "id": "CT05",
+      "nome": "Contato Conversacional em Etapas",
+      "tipo": "frontend",
+      "papel": "contato",
+      "modo": "pagina",
+      "template": "frontend/CT05-Contato-Conversacional-em-Etapas/bloco-pronto.html",
+      "instaladorPublico": "frontend/CT05-Contato-Conversacional-em-Etapas/instalar.ps1",
+      "target": "contato.html",
+      "rotulo": "Contato"
+    },
     "DB01": {
       "id": "DB01",
       "nome": "Banco do LG01",

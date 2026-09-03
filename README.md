@@ -31,6 +31,7 @@ O script é autocontido: o payload necessário do modelo já está dentro dele. 
 - `Lxx` → página de produtos → `produtos.html`
 - `LGxx` → login → `login.html`
 - `SOBxx` → página Sobre → `sobre.html`
+- `CTxx` → página Contato → `contato.html`
 - `Exx`, `Cxx` e `Pxx` → componentes repetíveis
 - `Fxx` → rodapé singleton → slot `RODAPE`
 - `DB01` → backend de autenticação compartilhado por `LG01`–`LG05`
